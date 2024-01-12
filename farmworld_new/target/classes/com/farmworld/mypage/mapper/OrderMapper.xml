@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.farmworld.mypage.mapper.OrderMapper">
+
+
+	<!-- 구매내역 조회 -->
+	<select id="buylist1" resultType="OrderVO">
+		SELECT order_num, order_date
+		FROM myfarmproject_db.order
+		WHERE buyer_num = 9999
+	</select>
+	<select id="buylist2" resultType="GoodsVO">
+		SELECT goods_title, goods_price
+		FROM myfarmproject_db.goods
+		WHERE goods_num in (SELECT goods_num FROM myfarmproject_db.order
+							WHERE buyer_num = 9999)	
+	</select>
+	<select id="buylist3" resultType="MyFarmVO">
+		SELECT  mf.farm_name, mf.user_num
+		FROM myfarmproject_db.myfarm mf
+		JOIN myfarmproject_db.order o ON mf.user_num = o.seller_num
+		WHERE o.buyer_num = 9999;
+	</select>
+	<select id="buylist4" resultType="OrderVO">
+		SELECT farm_name
+		FROM myfarmproject_db.myfarm
+		WHERE user_num in (SELECT seller_num FROM myfarmproject_db.order
+							WHERE buyer_num = 9999)
+	</select>
+	
+	<!-- 판매내역 조회 -->
+	<select id="sellist" resultType="OrderVO" parameterType="OrderVO">
+		select * from order
+		WHERE seller_num = #{seller_num}
+	</select>
+
+	<!-- 구매 -->
+	<insert id="purchase" parameterType="OrderVO">
+		insert into order
+		(goods_num,buyer_num,수량)
+		values (#{goods_num}, #{buyer_num}, #{수량})
+	</insert>
+	
+	<!-- 반품 -->	
+	<delete id="refund" parameterType="OrderVO">
+		DELETE FROM order
+		WHERE order_num = #{order_num}
+	</delete>
+
+
+</mapper>
+	
