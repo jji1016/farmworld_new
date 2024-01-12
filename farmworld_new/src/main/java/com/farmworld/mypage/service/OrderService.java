@@ -14,7 +14,9 @@ import com.farmworld.shop.domain.GoodsVO;
 
 public interface OrderService extends Generic<OrderVO, Integer> {
 
-	public List<OrderVO> sellList();
+	public List<OrderVO> sellList1();
+	public List<GoodsVO> sellList2();
+	public List<MyFarmVO> sellList3();
 	
 	public List<OrderVO> buyList1();
 	public List<GoodsVO> buyList2();

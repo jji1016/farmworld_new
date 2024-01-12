@@ -16,7 +16,9 @@ public interface OrderMapper {
 	public List<GoodsVO> buylist2();
 	public List<MyFarmVO> buylist3();
 	
-	public List<OrderVO> sellist();
+	public List<OrderVO> selllist1();
+	public List<GoodsVO> selllist2();
+	public List<MyFarmVO> selllist3();
 	
 	public void purchase(OrderVO vo);
 

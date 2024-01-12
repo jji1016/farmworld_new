@@ -24,17 +24,24 @@
 		JOIN myfarmproject_db.order o ON mf.user_num = o.seller_num
 		WHERE o.buyer_num = 9999;
 	</select>
-	<select id="buylist4" resultType="OrderVO">
-		SELECT farm_name
-		FROM myfarmproject_db.myfarm
-		WHERE user_num in (SELECT seller_num FROM myfarmproject_db.order
-							WHERE buyer_num = 9999)
-	</select>
 	
 	<!-- 판매내역 조회 -->
-	<select id="sellist" resultType="OrderVO" parameterType="OrderVO">
-		select * from order
-		WHERE seller_num = #{seller_num}
+	<select id="selllist1" resultType="OrderVO">
+		SELECT order_num, order_date, order_price
+		FROM myfarmproject_db.order
+		WHERE seller_num = 8888
+	</select>
+	<select id="selllist2" resultType="GoodsVO">
+		SELECT goods_title, goods_price
+		FROM myfarmproject_db.goods
+		WHERE goods_num in (SELECT goods_num FROM myfarmproject_db.order
+							WHERE seller_num = 8888)	
+	</select>
+	<select id="selllist3" resultType="MyFarmVO">
+		SELECT  mf.farm_name, mf.user_num
+		FROM myfarmproject_db.myfarm mf
+		JOIN myfarmproject_db.order o ON mf.user_num = o.seller_num
+		WHERE o.seller_num = 8888;
 	</select>
 
 	<!-- 구매 -->

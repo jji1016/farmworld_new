@@ -64,4 +64,35 @@ public class MyPageController {
 		log.info("Ajax : loadTableData");
 		return orderService.buyList3();
 	}
+	
+	@GetMapping("/selllist")
+	public String sellList() {
+		System.out.println("판매내역");
+		log.info("판매내역");
+		return "sale";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/getselllist1", method = RequestMethod.POST)
+	public List<OrderVO> getsellList1() {
+		System.out.println("Ajax : loadTableData1");
+		log.info("Ajax : loadTableData");
+		return orderService.sellList1();
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/getselllist2", method = RequestMethod.POST)
+	public List<GoodsVO> getsellList2() {
+		System.out.println("Ajax : loadTableData2");
+		log.info("Ajax : loadTableData");
+		return orderService.sellList2();
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/getselllist3", method = RequestMethod.POST)
+	public List<MyFarmVO> getsellList3() {
+		System.out.println("Ajax : loadTableData3");
+		log.info("Ajax : loadTableData");
+		return orderService.sellList3();
+	}
 }

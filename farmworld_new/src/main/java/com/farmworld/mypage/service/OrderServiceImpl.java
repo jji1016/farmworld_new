@@ -36,12 +36,25 @@ public class OrderServiceImpl implements OrderService {
 		
 	}
 
+	/*판매내역*/
 	@Override
-	public List<OrderVO> sellList() {
-		log.info("sellist()");
-		return mapper.sellist();
+	public List<OrderVO> sellList1() {
+		log.info("selllist()");
+		return mapper.selllist1();
+	}
+	@Override
+	public List<GoodsVO> sellList2() {
+		log.info("selllist()");
+		return mapper.selllist2();
+	}
+	@Override
+	public List<MyFarmVO> sellList3() {
+		log.info("selllist()");
+		return mapper.selllist3();
 	}
 
+	
+	/*구매내역*/
 	@Override
 	public List<OrderVO> buyList1() {
 		log.info("buylist()");
