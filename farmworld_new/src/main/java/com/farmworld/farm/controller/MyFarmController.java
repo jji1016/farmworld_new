@@ -34,33 +34,44 @@ public class MyFarmController {
 	
 	@GetMapping("/checkSession")
     @ResponseBody
-    public ResponseEntity<Map<String, Boolean>> checkSession(HttpSession session) {
-        Map<String, Boolean> response = new HashMap<>();
-        Boolean hasUserNum = session.getAttribute("user_num") != null;
-        response.put("hasUserNum", hasUserNum);
-        return ResponseEntity.ok(response);
-    }
+    public ResponseEntity<Map<String, Object>> checkSession(HttpSession session) {
+	    Map<String, Object> response = new HashMap<>();
+	    Boolean hasUserNum = session.getAttribute("user_num") != null;
+	    
+	    response.put("hasUserNum", hasUserNum);
+	    
+	    if (hasUserNum) {
+	        // 세션에 user_num이 있다면 응답에 user_num 추가
+	        String userNum = (String) session.getAttribute("user_num");
+	        response.put("userNum", userNum);
+	    }
+
+	    return ResponseEntity.ok(response);
+	}
 	@GetMapping("/register")
 	public void registerget() {}
+	
 	@GetMapping("/main")
-	public void myfarmMain() {}
+	public void myfarmMain(Criteria cri, Model model) {
+		cri.setAmount(6);
+		int total = myFarmService.getTotal(cri);
+		pageDTO pageResult = new pageDTO(cri, total);
+		model.addAttribute("pageMaker", pageResult);
+	}
 	
 	@PostMapping("/register")
 	public String register(HttpSession session, MyFarmVO myFarmVO) {
 		Integer userNum = (Integer) session.getAttribute("user_num");
 		myFarmService.add(myFarmVO);
-	    return "redirect:/myfarm/farmlist";    
+	    return "redirect:/myfarm/main";    
 	}
-	
+		
 	@GetMapping("/farmlist")
-	public String farmlist(Criteria cri, Model model) {
+	public void farmlist(Criteria cri, Model model) {
+		cri.setAmount(6);
 		int total = myFarmService.getTotal(cri);
-		log.info(total);
 		pageDTO pageResult = new pageDTO(cri, total);
-		pageResult.getCri().setAmount(6);
-		log.info(pageResult);
 		model.addAttribute("pageMaker", pageResult);
-		return "redirect:/myfarm/main";
 	}
 	
 	@ResponseBody
@@ -75,10 +86,8 @@ public class MyFarmController {
 			cri.setType("user_num");
 			break;		
 		}
-		
-		cri.setAmount(6);
+
 		List<MyFarmVO> list = myFarmService.farmAll(cri);
-		log.info(list);
 		
 		return list;
 	}

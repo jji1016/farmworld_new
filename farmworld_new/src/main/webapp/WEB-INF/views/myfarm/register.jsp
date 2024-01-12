@@ -40,20 +40,18 @@
     <!--Start Hedaer Section-->
         <jsp:include page="../includes/header.jsp"></jsp:include>
     <!--End of Hedaer Section-->
-<div id="page-wrapper">
+<div id="page-wrapper mx-auto" class="mx-auto">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-md-6 text-center mx-auto">
                     <h1 class="page-header">내 농장 만들기</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-md-6 mx-auto">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                     		 농장 정보
-                        </div>
+
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                            <form action="/myfarm/register" method="post" role="form">
