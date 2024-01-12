@@ -42,6 +42,8 @@ public class MyFarmController {
     }
 	@GetMapping("/register")
 	public void registerget() {}
+	@GetMapping("/main")
+	public void myfarmMain() {}
 	
 	@PostMapping("/register")
 	public String register(HttpSession session, MyFarmVO myFarmVO) {
@@ -51,13 +53,14 @@ public class MyFarmController {
 	}
 	
 	@GetMapping("/farmlist")
-	public void farmlist(Criteria cri, Model model) {
+	public String farmlist(Criteria cri, Model model) {
 		int total = myFarmService.getTotal(cri);
 		log.info(total);
 		pageDTO pageResult = new pageDTO(cri, total);
 		pageResult.getCri().setAmount(6);
 		log.info(pageResult);
 		model.addAttribute("pageMaker", pageResult);
+		return "redirect:/myfarm/main";
 	}
 	
 	@ResponseBody
