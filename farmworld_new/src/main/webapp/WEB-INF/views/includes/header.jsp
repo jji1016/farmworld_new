@@ -10,6 +10,9 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
+    
+    <!-- board css -->
+    <link href="/resources/css/board/board.css" rel="stylesheet">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -62,7 +65,7 @@
             </div>
             <div class="container px-0">
                 <nav class="navbar navbar-light bg-white navbar-expand-xl">
-                    <a href="../home.jsp" class="navbar-brand"><h1 class="text-primary display-6">Fruitables</h1></a>
+                    <a href="../" class="navbar-brand"><h1 class="text-primary display-6">Fruitables</h1></a>
                     <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                         <span class="fa fa-bars text-primary"></span>
                     </button>
@@ -72,7 +75,7 @@
                             <a href="../shopmain" class="nav-item nav-link">Shop</a>
                             <a href="../shopdetail" class="nav-item nav-link">Shop Detail</a>
                             <a href="../myfarmMain" class="nav-item nav-link">My Farm</a>
-                            <a href="../board" class="nav-item nav-link">Board</a>
+                            <a href="../board/list" class="nav-item nav-link">Board</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu m-0 bg-secondary rounded-0">
@@ -90,7 +93,7 @@
                                 <i class="fa fa-shopping-bag fa-2x"></i>
                                 <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
                             </a>
-                            <a href="#" class="my-auto">
+                            <a href="../mypage" class="my-auto">
                                 <i class="fas fa-user fa-2x"></i>
                             </a>
                         </div>
