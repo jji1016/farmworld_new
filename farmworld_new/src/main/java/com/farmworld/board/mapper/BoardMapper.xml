@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.farmworld.board.mapper.BoardMapper">
+	<sql id=""></sql>
+
+	<insert id="insert" parameterType="BoardVO">
+		insert into board
+		(board_title,board_content,user_nickname)
+		values (#{board_title}, #{board_content}, #{user_nickname})
+	</insert>
+
+	<insert id="insertSelectBno" parameterType="BoardVO"
+		keyColumn="board_num" keyProperty="board_num" useGeneratedKeys="true">
+		insert into board
+		(board_title,board_content,user_nickname)
+		values (#{board_title}, #{board_content}, #{user_nickname})
+	</insert>
+
+	<select id="selectAll" resultType="BoardVO">
+		select * from board
+	</select>
+
+	<select id="getListWithSearch" resultType="BoardVO"
+		parameterType="com.farmworld.all.domain.Criteria">
+		SELECT * FROM board
+		<if
+			test="type != null and type != '' and keyword != null and keyword != ''">
+			<where>
+				AND ${type} LIKE CONCAT('%',#{keyword},'%')
+			</where>
+		</if>
+		ORDER BY board_num DESC
+	</select>
+
+	<update id="update" parameterType="BoardVO">
+		UPDATE board
+		SET board_title = #{board_title}, board_content = #{board_content}
+		WHERE board_num = #{board_num}
+	</update>
+
+	<delete id="delete" parameterType="BoardVO">
+		DELETE FROM board WHERE board_num =	#{board_num}
+	</delete>
+
+	<select id="select" resultType="BoardVO" parameterType="BoardVO">
+		SELECT *
+		FROM board WHERE board_num = #{board_num}
+	</select>
+
+	<select id="getTotalCount" resultType="int" parameterType="com.farmworld.all.domain.Criteria">
+		SELECT COUNT(board_num) FROM board
+				<if test="type != null and type != '' and keyword != null and keyword != ''">
+			<where>
+				<choose>
+					<when test="type == 'TC'">
+						AND board_title LIKE CONCAT('%',#{keyword},'%') OR 
+						board_content LIKE CONCAT('%',#{keyword},'%')
+					</when>
+					<when test="type == 'TCW'">
+					    AND (board_title LIKE CONCAT('%',#{keyword},'%') OR board_content LIKE CONCAT('%',#{keyword},'%') OR user_nickname LIKE CONCAT('%',#{keyword},'%'))
+					</when>
+					<when test='type == "T"'>
+						AND board_title LIKE CONCAT('%',#{keyword},'%') 
+					</when>
+					<when test='type == "C"'>
+						AND board_content LIKE CONCAT('%',#{keyword},'%')
+					</when>
+					<when test='type == "W"'>
+						AND user_nickname LIKE CONCAT('%',#{keyword},'%') 
+					</when>
+				</choose>
+			</where>
+		</if>
+		
+	</select>
+
+
+	<select id="getListWithPaging" resultType="BoardVO"
+		parameterType="com.farmworld.all.domain.Criteria">
+		SELECT * FROM board
+		<if test="type != null and type != '' and keyword != null and keyword != ''">
+			<where>
+				<choose>
+					<when test="type == 'TC'">
+						AND board_title LIKE CONCAT('%',#{keyword},'%') OR 
+						board_content LIKE CONCAT('%',#{keyword},'%')
+					</when>
+					<when test='type == "T"'>
+						AND board_title LIKE CONCAT('%',#{keyword},'%') 
+					</when>
+					<when test='type == "C"'>
+						AND board_content LIKE CONCAT('%',#{keyword},'%')
+					</when>
+					<when test='type == "W"'>
+						AND user_nickname LIKE CONCAT('%',#{keyword},'%') 
+					</when>
+					
+					<otherwise>
+						AND ${type} LIKE CONCAT('%',#{keyword},'%')
+					</otherwise>
+				</choose>
+			</where>
+		</if>
+		ORDER BY board_num DESC
+		LIMIT #{start}, #{amount}
+	</select>
+</mapper>
+	

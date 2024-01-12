@@ -12,6 +12,7 @@ public class BoardVO {
 	private Timestamp board_date;
 	private int board_view;
 	private int user_num;
+	private String user_nickname;
 	private int image_folder_num;
 	private String board_category;
 }
