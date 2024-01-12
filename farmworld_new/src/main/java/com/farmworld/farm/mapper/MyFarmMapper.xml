@@ -3,15 +3,14 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.spring.mapper.MyFarmMapper">
+<mapper namespace="com.farmworld.farm.mapper.MyFarmMapper">
 	<sql id="myfarmColumns">
     farm_num, farm_name, farm_intro, user_num, image_folder_num, myfarm_view
 	</sql>
 
 	<insert id="insert" parameterType="MyFarmVO">
-		insert into myfarm
-		(farm_name, farm_intro)
-		values (#{farm_name}, #{farm_intro})
+		insert into myfarm(farm_name,farm_intro,user_num,image_folder_num) values
+		(#{farm_name}, #{farm_intro}, 1, 1)
 	</insert>
 
 	<insert id="insertSelectBno" parameterType="MyFarmVO"
@@ -25,23 +24,18 @@
 		select * from myfarm
 	</select>
 
-	<select id="getListWithSearch" resultType="MyFarmVO"
-		parameterType="org.spring.domain.Criteria">
-		SELECT * FROM myfarm
-		<if
-			test="type != null and type != '' and keyword != null and keyword != ''">
-			<where>
-				AND ${type} LIKE CONCAT('%',#{keyword},'%')
-			</where>
-		</if>
-		ORDER BY bno DESC
-	</select>
 
 	<update id="update" parameterType="MyFarmVO">
 		UPDATE myfarm
 		SET farm_name =
 		#{farm_name},
 		farm_intro = #{farm_intro}
+		WHERE farm_num = #{farm_num}
+	</update>
+	
+	<update id="viewCount" parameterType="MyFarmVO">
+		UPDATE myfarm
+		SET farm_view = +1
 		WHERE farm_num = #{farm_num}
 	</update>
 
@@ -55,24 +49,20 @@
 		FROM myfarm WHERE farm_num = #{farm_num}
 	</select>
 
-	<select id="getTotalCount" resultType="int" parameterType="org.spring.domain.Criteria">
+	<select id="getTotalCount" resultType="int" parameterType="com.farmworld.all.domain.Criteria">
 		SELECT COUNT(farm_num) FROM myfarm
 				<if test="type != null and type != '' and keyword != null and keyword != ''">
 			<where>
 				<choose>
-					<when test="type == 'TC'">
+					<when test="type == 'TW'">
 						AND farm_name LIKE CONCAT('%',#{keyword},'%') OR 
-						content LIKE CONCAT('%',#{keyword},'%')
+						user_num LIKE CONCAT('%',#{keyword},'%')
 					</when>
-					<when test="type == 'TCW'">
-					    AND (farm_name LIKE CONCAT('%',#{keyword},'%') OR farm_intro LIKE CONCAT('%',#{keyword},'%') OR user_num LIKE CONCAT('%',#{keyword},'%'))
-					</when>
+					
 					<when test='type == "T"'>
 						AND farm_name LIKE CONCAT('%',#{keyword},'%') 
 					</when>
-					<when test='type == "C"'>
-						AND farm_intro LIKE CONCAT('%',#{keyword},'%')
-					</when>
+
 					<when test='type == "W"'>
 						AND user_num LIKE CONCAT('%',#{keyword},'%') 
 					</when>
@@ -84,17 +74,14 @@
 
 
 	<select id="getListWithPaging" resultType="MyFarmVO"
-		parameterType="org.spring.domain.Criteria">
+		parameterType="com.farmworld.all.domain.Criteria">
 		SELECT * FROM myfarm
 		<if test="type != null and type != '' and keyword != null and keyword != ''">
 			<where>
 				<choose>
-					<when test="type == 'TC'">
+					<when test="type == 'TW'">
 						AND farm_name LIKE CONCAT('%',#{keyword},'%') OR 
-						farm_intro LIKE CONCAT('%',#{keyword},'%')
-					</when>
-					<when test="type == 'TCW'">
-					    AND (farm_name LIKE CONCAT('%',#{keyword},'%') OR farm_intro LIKE CONCAT('%',#{keyword},'%') OR user_num LIKE CONCAT('%',#{keyword},'%'))
+						user_num LIKE CONCAT('%',#{keyword},'%')
 					</when>
 					<otherwise>
 						AND ${type} LIKE CONCAT('%',#{keyword},'%')
@@ -102,7 +89,7 @@
 				</choose>
 			</where>
 		</if>
-		ORDER BY bno DESC
+		ORDER BY myfarm_view DESC
 		LIMIT #{start}, #{amount}
 	</select>
 

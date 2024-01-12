@@ -15,15 +15,16 @@ public interface MyFarmMapper {
 
 	public int update(MyFarmVO vo);
 
-	public int delete(int bno);
+	public int delete(int myfarm_num);
 
 	public MyFarmVO select(Integer key);
 
-	public List<MyFarmVO> getListWithSearch(Criteria cri);
-	
+
 	public int getTotalCount(Criteria cri);
 	
 	public List<MyFarmVO> getListWithPaging(Criteria cri);
+	
+	public void viewCount(MyFarmVO vo);
 
 
 }

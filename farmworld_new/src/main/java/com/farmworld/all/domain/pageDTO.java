@@ -1,6 +1,8 @@
 package com.farmworld.all.domain;
 
+import lombok.Data;
 
+@Data
 public class pageDTO {
 	// 페이징 처리에서 표시될 시작 페이지
 		private int startPage;

@@ -24,10 +24,5 @@ public class ImageServiceImpl implements ImageService {
 		
 	}
 
-	@Override
-	public int login(String id, String pw) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 }

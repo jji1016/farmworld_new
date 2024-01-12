@@ -21,7 +21,7 @@ public interface GrowUpMapper {
 
 	public List<GrowUpVO> getListWithSearch(Criteria cri);
 	
-	public int getTotlaCount(Criteria cri);
+	public int getTotalCount(Criteria cri);
 	
 	public List<GrowUpVO> getListWithPaging(Criteria cri);
 

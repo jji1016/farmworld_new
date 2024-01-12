@@ -3,14 +3,14 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.spring.mapper.GrowUpMapper">
+<mapper namespace="com.farmworld.farm.mapper.GrowUpMapper">
 	<sql id="growupColumns">
         grow_num, grow_title, grow_content, grow_date, farm_num, user_num, image_folder_num, growup_category
     </sql>
 
 	<insert id="insert" parameterType="GrowUpVO">
 		insert into GrowUp
-		(far, grow_content)
+		(grow_title, grow_content)
 		values (#{grow_title}, #{grow_content})
 	</insert>
 
@@ -26,7 +26,7 @@
 	</select>
 
 	<select id="getListWithSearch" resultType="GrowUpVO"
-		parameterType="org.spring.domain.Criteria">
+		parameterType="com.farmworld.all.domain.Criteria">
 		SELECT * FROM GrowUp
 		<if
 			test="type != null and type != '' and keyword != null and keyword != ''">
@@ -55,7 +55,7 @@
 		FROM GrowUp WHERE grow_num = #{grow_num}
 	</select>
 
-	<select id="getTotalCount" resultType="int" parameterType="org.spring.domain.Criteria">
+	<select id="getTotalCount" resultType="int" parameterType="com.farmworld.all.domain.Criteria">
 		SELECT COUNT(grow_num) FROM GrowUp
 				<if test="type != null and type != '' and keyword != null and keyword != ''">
 			<where>
@@ -84,7 +84,7 @@
 
 
 	<select id="getListWithPaging" resultType="GrowUpVO"
-		parameterType="org.spring.domain.Criteria">
+		parameterType="com.farmworld.all.domain.Criteria">
 		SELECT * FROM GrowUp
 		<if test="type != null and type != '' and keyword != null and keyword != ''">
 			<where>

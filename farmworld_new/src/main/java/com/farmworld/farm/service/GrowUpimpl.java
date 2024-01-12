@@ -49,10 +49,4 @@ public class GrowUpimpl implements GrowUp {
 		return 0;
 	}
 
-	@Override
-	public int login(String id, String pw) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 }

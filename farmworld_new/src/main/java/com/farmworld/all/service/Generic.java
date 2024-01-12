@@ -1,6 +1,5 @@
 package com.farmworld.all.service;
 
-import com.farmworld.login.domain.UserVO;
 
 public interface Generic<VO, K> {
 	

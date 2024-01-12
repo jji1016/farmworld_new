@@ -8,9 +8,11 @@ import com.farmworld.farm.domain.MyFarmVO;
 
 public interface MyFarm extends Generic<MyFarmVO, Integer> {
 	
-	public List<MyFarmVO> farmAll();
+	public List<MyFarmVO> farmAll(Criteria cri);
 	
 	public List<MyFarmVO> searchFarm(Criteria cri);
 	
 	public int getTotal(Criteria cri);
+	
+	public void view(MyFarmVO vo);
 }
