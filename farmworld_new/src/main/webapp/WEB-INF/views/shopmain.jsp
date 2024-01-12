@@ -12,7 +12,7 @@
 <!-- 페이지 왼쪽 -->        
 <div class="container-fluid fruite py-5">
 	<div class="container py-5">
-	    <h1 class="mb-4">Fresh fruits shop</h1>
+	    <h1 class="mb-4">작물샵</h1>
 	    <div class="row g-4">
 	        <div class="col-lg-12">
 	            <div class="row g-4">
@@ -50,34 +50,47 @@
 	                               <ul class="list-unstyled fruite-categorie">
 	                                   <li>
 	                                       <div class="d-flex justify-content-between fruite-name">
-	                                           <a href="#"><i class="fas fa-apple-alt me-2"></i>Apples</a>
+	                                           <a href="#"><i class="fas fa-apple-alt me-2"></i>과일</a>
 	                                           <span>(3)</span>
 	                                       </div>
 	                                   </li>
 	                                   <li>
 	                                       <div class="d-flex justify-content-between fruite-name">
-	                                           <a href="#"><i class="fas fa-apple-alt me-2"></i>Oranges</a>
+	                                           <a href="#"><i class="fas fa-apple-alt me-2"></i>야채</a>
 	                                           <span>(5)</span>
 	                                       </div>
 	                                   </li>
 	                                   <li>
 	                                       <div class="d-flex justify-content-between fruite-name">
-	                                           <a href="#"><i class="fas fa-apple-alt me-2"></i>Strawbery</a>
+	                                           <a href="#"><i class="fas fa-apple-alt me-2"></i>채소</a>
 	                                           <span>(2)</span>
 	                                       </div>
 	                                   </li>
 	                                   <li>
 	                                       <div class="d-flex justify-content-between fruite-name">
-	                                           <a href="#"><i class="fas fa-apple-alt me-2"></i>Banana</a>
+	                                           <a href="#"><i class="fas fa-apple-alt me-2"></i>견과류</a>
 	                                           <span>(8)</span>
 	                                       </div>
 	                                   </li>
 	                                   <li>
 	                                       <div class="d-flex justify-content-between fruite-name">
-	                                           <a href="#"><i class="fas fa-apple-alt me-2"></i>Pumpkin</a>
+	                                           <a href="#"><i class="fas fa-apple-alt me-2"></i>곡물</a>
 	                                           <span>(5)</span>
 	                                       </div>
 	                                   </li>
+	                               		<li>
+	                                       <div class="d-flex justify-content-between fruite-name">
+	                                           <a href="#"><i class="fas fa-apple-alt me-2"></i>씨앗</a>
+	                                           <span>(5)</span>
+                                            </div>
+                                        </li>	
+                                   	   <li>
+	                                       <div class="d-flex justify-content-between fruite-name">
+	                                           <a href="#"><i class="fas fa-apple-alt me-2"></i>농기구</a>
+	                                           <span>(5)</span>
+                                            </div>
+                                        </li>	
+	                               		
 	                               </ul>
 	                           </div>
 	                       </div>
@@ -94,13 +107,13 @@
 				                            <div class="vesitable-img">
 				                                <img src="/resources/img/vegetable-item-6.jpg" class="img-fluid w-100 rounded-top" alt="">
 				                            </div>
-				                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
+				                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">채소</div>
 				                            <div class="p-4 pb-0 rounded-bottom">
-				                                <h4>Parsely</h4>
-				                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+				                                <h4>파슬리</h4>
+				                                <p>파슬리는 맛있다.</p>
 				                                <div class="d-flex justify-content-between flex-lg-wrap">
-				                                    <p class="text-dark fs-5 fw-bold">$4.99 / kg</p>
-				                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+				                                    <p class="text-dark fs-5 fw-bold">1kg / 100원</p>
+				                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니 담기</a>
 				                                </div>
 				                            </div>
 				                        </div>
@@ -108,13 +121,13 @@
 				                            <div class="vesitable-img">
 				                                <img src="/resources/img/vegetable-item-1.jpg" class="img-fluid w-100 rounded-top" alt="">
 				                            </div>
-				                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
+				                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">과일</div>
 				                            <div class="p-4 pb-0 rounded-bottom">
-				                                <h4>Parsely</h4>
-				                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+				                                <h4>방울토마토</h4>
+				                                <p>방울토마토는 맛있다.</p>
 				                                <div class="d-flex justify-content-between flex-lg-wrap">
-				                                    <p class="text-dark fs-5 fw-bold">$4.99 / kg</p>
-				                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+				                                    <p class="text-dark fs-5 fw-bold">2kg / 200원</p>
+				                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니 담기</a>
 				                                </div>
 				                            </div>
 				                        </div>
@@ -122,13 +135,13 @@
 				                            <div class="vesitable-img">
 				                                <img src="/resources/img/vegetable-item-3.png" class="img-fluid w-100 rounded-top bg-light" alt="">
 				                            </div>
-				                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
+				                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">과일</div>
 				                            <div class="p-4 pb-0 rounded-bottom">
-				                                <h4>Banana</h4>
-				                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+				                                <h4>바나나</h4>
+				                                <p>바나나는 맛있다.</p>
 				                                <div class="d-flex justify-content-between flex-lg-wrap">
-				                                    <p class="text-dark fs-5 fw-bold">$7.99 / kg</p>
-				                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+				                                    <p class="text-dark fs-5 fw-bold">3kg / 300원</p>
+				                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니 담기</a>
 				                                </div>
 				                            </div>
 				                        </div>
@@ -136,13 +149,13 @@
 				                            <div class="vesitable-img">
 				                                <img src="/resources/img/vegetable-item-4.jpg" class="img-fluid w-100 rounded-top" alt="">
 				                            </div>
-				                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
+				                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">과일</div>
 				                            <div class="p-4 pb-0 rounded-bottom">
-				                                <h4>Bell Papper</h4>
-				                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+				                                <h4>파프리카</h4>
+				                                <p>파프리카는 싫어싫어</p>
 				                                <div class="d-flex justify-content-between flex-lg-wrap">
-				                                    <p class="text-dark fs-5 fw-bold">$7.99 / kg</p>
-				                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+				                                    <p class="text-dark fs-5 fw-bold">4kg / 400원</p>
+				                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니 담기</a>
 				                                </div>
 				                            </div>
 				                        </div>
@@ -150,13 +163,13 @@
 				                            <div class="vesitable-img">
 				                                <img src="/resources/img/vegetable-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
 				                            </div>
-				                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
+				                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">채소</div>
 				                            <div class="p-4 pb-0 rounded-bottom">
-				                                <h4>Potatoes</h4>
-				                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+				                                <h4>감자</h4>
+				                                <p>감자는 왕감자 왕감자</p>
 				                                <div class="d-flex justify-content-between flex-lg-wrap">
-				                                    <p class="text-dark fs-5 fw-bold">$7.99 / kg</p>
-				                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+				                                    <p class="text-dark fs-5 fw-bold">5kg / 500원</p>
+				                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니 담기</a>
 				                                </div>
 				                            </div>
 				                        </div>
@@ -164,13 +177,13 @@
 				                            <div class="vesitable-img">
 				                                <img src="/resources/img/vegetable-item-6.jpg" class="img-fluid w-100 rounded-top" alt="">
 				                            </div>
-				                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
+				                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">채소</div>
 				                            <div class="p-4 pb-0 rounded-bottom">
-				                                <h4>Parsely</h4>
-				                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+				                                <h4>당근</h4>
+				                                <p>바니바니바니바니</p>
 				                                <div class="d-flex justify-content-between flex-lg-wrap">
-				                                    <p class="text-dark fs-5 fw-bold">$7.99 / kg</p>
-				                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+				                                    <p class="text-dark fs-5 fw-bold">6kg / 600원</p>
+				                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니 담기</a>
 				                                </div>
 				                            </div>
 				                        </div>
@@ -178,13 +191,13 @@
 				                            <div class="vesitable-img">
 				                                <img src="/resources/img/vegetable-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
 				                            </div>
-				                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
+				                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">채소</div>
 				                            <div class="p-4 pb-0 rounded-bottom">
-				                                <h4>Potatoes</h4>
-				                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+				                                <h4>양파</h4>
+				                                <p>까면 눈물나는 양파</p>
 				                                <div class="d-flex justify-content-between flex-lg-wrap">
-				                                    <p class="text-dark fs-5 fw-bold">$7.99 / kg</p>
-				                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+				                                    <p class="text-dark fs-5 fw-bold">7kg / 700원</p>
+				                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니 담기</a>
 				                                </div>
 				                            </div>
 				                        </div>
@@ -192,13 +205,13 @@
 				                            <div class="vesitable-img">
 				                                <img src="/resources/img/vegetable-item-6.jpg" class="img-fluid w-100 rounded-top" alt="">
 				                            </div>
-				                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
+				                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">곡물</div>
 				                            <div class="p-4 pb-0 rounded-bottom">
-				                                <h4>Parsely</h4>
-				                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+				                                <h4>쌀</h4>
+				                                <p>쌀쌀 이천쌀</p>
 				                                <div class="d-flex justify-content-between flex-lg-wrap">
-				                                    <p class="text-dark fs-5 fw-bold">$7.99 / kg</p>
-				                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+				                                    <p class="text-dark fs-5 fw-bold">8kg / 800원</p>
+				                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니 담기</a>
 				                                </div>
 				                            </div>
 				                        </div>
@@ -213,13 +226,13 @@
                                             <div class="fruite-img">
                                                 <img src="/resources/img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
                                             </div>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
+                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">과일</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Grapes</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                                <h4>포도</h4>
+                                                <p>나는 씨없는 거봉이 좋더라</p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                    <p class="text-dark fs-5 fw-bold mb-0">1kg / 100원</p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니 담기</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -229,13 +242,13 @@
                                             <div class="fruite-img">
                                                 <img src="/resources/img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
                                             </div>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
+                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">과일</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Grapes</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                                <h4>사과</h4>
+                                                <p>아침은 금사과 저녁은 독사과</p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                    <p class="text-dark fs-5 fw-bold mb-0">200원 / 2kg</p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니 담기</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -245,13 +258,13 @@
                                             <div class="fruite-img">
                                                 <img src="/resources/img/fruite-item-2.jpg" class="img-fluid w-100 rounded-top" alt="">
                                             </div>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
+                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">과일</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Raspberries</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                                <h4>블루베리</h4>
+                                                <p>나는 몽골인이 될거야</p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                    <p class="text-dark fs-5 fw-bold mb-0">3kg / 300원</p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니 담기</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -261,13 +274,13 @@
                                             <div class="fruite-img">
                                                 <img src="/resources/img/fruite-item-4.jpg" class="img-fluid w-100 rounded-top" alt="">
                                             </div>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
+                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">과일</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Apricots</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                                <h4>감</h4>
+                                                <p>감감감감감감감감~</p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                    <p class="text-dark fs-5 fw-bold mb-0">4kg / 400원</p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니 담기</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -277,13 +290,13 @@
                                             <div class="fruite-img">
                                                 <img src="/resources/img/fruite-item-3.jpg" class="img-fluid w-100 rounded-top" alt="">
                                             </div>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
+                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">과일</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Banana</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                                <h4>바나나</h4>
+                                                <p>바나나는 맛있어</p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                    <p class="text-dark fs-5 fw-bold mb-0">1kg / 100원</p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니 담기</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -293,13 +306,13 @@
                                             <div class="fruite-img">
                                                 <img src="/resources/img/fruite-item-1.jpg" class="img-fluid w-100 rounded-top" alt="">
                                             </div>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
+                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">과일</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Oranges</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                                <h4>오렌지</h4>
+                                                <p>오렌지오렌지오!</p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                    <p class="text-dark fs-5 fw-bold mb-0">2kg / 200원</p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니 담기</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -309,13 +322,13 @@
                                             <div class="fruite-img">
                                                 <img src="/resources/img/fruite-item-2.jpg" class="img-fluid w-100 rounded-top" alt="">
                                             </div>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
+                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">과일</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Raspberries</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                                <h4>앵두</h4>
+                                                <p>앵두같은종인이</p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                    <p class="text-dark fs-5 fw-bold mb-0">3kg / 300원</p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니 담기</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -325,13 +338,13 @@
                                             <div class="fruite-img">
                                                 <img src="/resources/img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
                                             </div>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
+                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">곡물</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Grapes</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                                <h4>쌀</h4>
+                                                <p>이천쌀은 맛있어</p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                    <p class="text-dark fs-5 fw-bold mb-0">10kg / 79000원</p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니 담기</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -341,13 +354,13 @@
                                             <div class="fruite-img">
                                                 <img src="/resources/img/fruite-item-1.jpg" class="img-fluid w-100 rounded-top" alt="">
                                             </div>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
+                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">견과류</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>Oranges</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                                <h4>호두</h4>
+                                                <p>머리가좋아지는 호두</p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                    <p class="text-dark fs-5 fw-bold mb-0">2kg / 200원</p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니 담기</a>
                                                 </div>
                                             </div>
                                         </div>
