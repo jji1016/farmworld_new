@@ -10,6 +10,9 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
+    
+    <!-- board css -->
+    <link href="/resources/css/board/board.css" rel="stylesheet">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -72,7 +75,7 @@
                             <a href="../shopmain" class="nav-item nav-link">Shop</a>
                             <a href="../shopdetail" class="nav-item nav-link">Shop Detail</a>
                             <a href="../myfarmMain" class="nav-item nav-link">My Farm</a>
-                            <a href="../board" class="nav-item nav-link">Board</a>
+                            <a href="../board/list" class="nav-item nav-link">Board</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu m-0 bg-secondary rounded-0">
