@@ -24,7 +24,7 @@
 
 <div class="container-fluid fruite py-5">
     <div class="container py-5">
-        <h1 class="mb-4">판매내역</h1>                     
+        <h1 class="mb-4">구매내역</h1>                     
          <div id="tablesize" class="col-lg-9">
          	<!-- 보드 -->
          	<div class="table-responsive">
