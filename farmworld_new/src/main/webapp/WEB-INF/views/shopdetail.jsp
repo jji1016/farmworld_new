@@ -118,66 +118,14 @@
                        <div class="col-lg-12">
                            <nav>
                                <div class="nav nav-tabs mb-3">
-                                   <button class="nav-link active border-white border-bottom-0" type="button" role="tab"
-                                       id="nav-about-tab" data-bs-toggle="tab" data-bs-target="#nav-about"
-                                       aria-controls="nav-about" aria-selected="true">Description</button>
                                    <button class="nav-link border-white border-bottom-0" type="button" role="tab"
                                        id="nav-mission-tab" data-bs-toggle="tab" data-bs-target="#nav-mission"
                                        aria-controls="nav-mission" aria-selected="false">리뷰</button>
                                </div>
                            </nav>
                            <div class="tab-content mb-5">
-                               <div class="tab-pane active" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
-                                   <p>설명 </p>
-                                   <p>재배한 브로콜리</p>
-                                   <div class="px-2">
-                                       <div class="row g-4">
-                                           <div class="col-6">
-                                               <div class="row bg-light align-items-center text-center justify-content-center py-2">
-                                                   <div class="col-6">
-                                                       <p class="mb-0">무게</p>
-                                                   </div>
-                                                   <div class="col-6">
-                                                       <p class="mb-0">1 kg</p>
-                                                   </div>
-                                               </div>
-                                               <div class="row text-center align-items-center justify-content-center py-2">
-                                                   <div class="col-6">
-                                                       <p class="mb-0">어디농장</p>
-                                                   </div>
-                                                   <div class="col-6">
-                                                       <p class="mb-0">종인이네</p>
-                                                   </div>
-                                               </div>
-                                               <div class="row bg-light text-center align-items-center justify-content-center py-2">
-                                                   <div class="col-6">
-                                                       <p class="mb-0">품질</p>
-                                                   </div>
-                                                   <div class="col-6">
-                                                       <p class="mb-0">최상</p>
-                                                   </div>
-                                               </div>
-                                               <div class="row text-center align-items-center justify-content-center py-2">
-                                                   <div class="col-6">
-                                                       <p class="mb-0">Сheck</p>
-                                                   </div>
-                                                   <div class="col-6">
-                                                       <p class="mb-0">건강음식</p>
-                                                   </div>
-                                               </div>
-                                               <div class="row bg-light text-center align-items-center justify-content-center py-2">
-                                                   <div class="col-6">
-                                                       <p class="mb-0">최소무게</p>
-                                                   </div>
-                                                   <div class="col-6">
-                                                       <p class="mb-0">250 Kg</p>
-                                                   </div>
-                                               </div>
-                                           </div>
-                                       </div>
-                                   </div>
-                               </div>
                                
+                               	
                                <!-- 리뷰 -->
                                <div class="tab-pane" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
                                    <div class="d-flex">               
