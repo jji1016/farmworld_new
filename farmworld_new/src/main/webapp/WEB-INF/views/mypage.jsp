@@ -158,7 +158,7 @@
 	                        <i class="flaticon-food display-1 text-primary me-4"></i>
 	                        <div>
 	                            <h5 class="text-uppercase mb-3">리뷰관리</h5>
-	                            <a class="text-primary text-uppercase" href="">More<i class="bi bi-chevron-right"></i></a>
+	                            <a class="text-primary text-uppercase" href="/mypage/review">More<i class="bi bi-chevron-right"></i></a>
 	                        </div>
 	                    </div>
 	                </div>
