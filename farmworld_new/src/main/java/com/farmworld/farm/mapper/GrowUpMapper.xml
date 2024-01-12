@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.spring.mapper.GrowUpMapper">
+	<sql id="growupColumns">
+        grow_num, grow_title, grow_content, grow_date, farm_num, user_num, image_folder_num, growup_category
+    </sql>
+
+	<insert id="insert" parameterType="GrowUpVO">
+		insert into GrowUp
+		(far, grow_content)
+		values (#{grow_title}, #{grow_content})
+	</insert>
+
+	<insert id="insertSelectBno" parameterType="GrowUpVO"
+		keyColumn="grow_num" keyProperty="grow_num" useGeneratedKeys="true">
+		insert into GrowUp
+		(grow_title, grow_content)
+		values (#{grow_title}, #{grow_content})
+	</insert>
+
+	<select id="selectAll" resultType="GrowUpVO">
+		select * from GrowUp
+	</select>
+
+	<select id="getListWithSearch" resultType="GrowUpVO"
+		parameterType="org.spring.domain.Criteria">
+		SELECT * FROM GrowUp
+		<if
+			test="type != null and type != '' and keyword != null and keyword != ''">
+			<where>
+				AND ${type} LIKE CONCAT('%',#{keyword},'%')
+			</where>
+		</if>
+		ORDER BY bno DESC
+	</select>
+
+	<update id="update" parameterType="GrowUpVO">
+		UPDATE GrowUp
+		SET grow_title =
+		#{grow_title},
+		grow_content = #{grow_content}
+		WHERE grow_num = #{grow_num}
+	</update>
+
+	<delete id="delete" parameterType="GrowUpVO">
+		DELETE FROM GrowUp WHERE grow_num =
+		#{grow_num}
+	</delete>
+
+	<select id="select" resultType="GrowUpVO" parameterType="GrowUpVO">
+		SELECT *
+		FROM GrowUp WHERE grow_num = #{grow_num}
+	</select>
+
+	<select id="getTotalCount" resultType="int" parameterType="org.spring.domain.Criteria">
+		SELECT COUNT(grow_num) FROM GrowUp
+				<if test="type != null and type != '' and keyword != null and keyword != ''">
+			<where>
+				<choose>
+					<when test="type == 'TC'">
+						AND grow_title LIKE CONCAT('%',#{keyword},'%') OR 
+						content LIKE CONCAT('%',#{keyword},'%')
+					</when>
+					<when test="type == 'TCW'">
+					    AND (grow_title LIKE CONCAT('%',#{keyword},'%') OR grow_content LIKE CONCAT('%',#{keyword},'%') OR grow_category LIKE CONCAT('%',#{keyword},'%'))
+					</when>
+					<when test='type == "T"'>
+						AND grow_title LIKE CONCAT('%',#{keyword},'%') 
+					</when>
+					<when test='type == "C"'>
+						AND grow_content LIKE CONCAT('%',#{keyword},'%')
+					</when>
+					<when test='type == "W"'>
+						AND grow_category LIKE CONCAT('%',#{keyword},'%') 
+					</when>
+				</choose>
+			</where>
+		</if>
+		
+	</select>
+
+
+	<select id="getListWithPaging" resultType="GrowUpVO"
+		parameterType="org.spring.domain.Criteria">
+		SELECT * FROM GrowUp
+		<if test="type != null and type != '' and keyword != null and keyword != ''">
+			<where>
+				<choose>
+					<when test="type == 'TC'">
+						AND grow_title LIKE CONCAT('%',#{keyword},'%') OR 
+						grow_content LIKE CONCAT('%',#{keyword},'%')
+					</when>
+					<when test="type == 'TCW'">
+					    AND (grow_title LIKE CONCAT('%',#{keyword},'%') OR grow_content LIKE CONCAT('%',#{keyword},'%') OR grow_category LIKE CONCAT('%',#{keyword},'%'))
+					</when>
+					<otherwise>
+						AND ${type} LIKE CONCAT('%',#{keyword},'%')
+					</otherwise>
+				</choose>
+			</where>
+		</if>
+		ORDER BY bno DESC
+		LIMIT #{start}, #{amount}
+	</select>
+
+</mapper>
+	

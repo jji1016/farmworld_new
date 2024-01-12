@@ -1,0 +1,29 @@
+package com.farmworld.farm.mapper;
+
+import java.util.List;
+
+import com.farmworld.all.domain.Criteria;
+import com.farmworld.farm.domain.MyFarmVO;
+
+public interface MyFarmMapper {
+	
+	public void insert(MyFarmVO vo);
+
+	public void insertSelectBno(MyFarmVO vo);
+
+	public List<MyFarmVO> selectAll();
+
+	public int update(MyFarmVO vo);
+
+	public int delete(int bno);
+
+	public MyFarmVO select(Integer key);
+
+	public List<MyFarmVO> getListWithSearch(Criteria cri);
+	
+	public int getTotalCount(Criteria cri);
+	
+	public List<MyFarmVO> getListWithPaging(Criteria cri);
+
+
+}
