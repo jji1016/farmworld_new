@@ -57,4 +57,9 @@ public class HomeController {
 		return "/board";
 	}
 	
+	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
+	public String mypage() {
+		return "/mypage";
+	}
+	
 }

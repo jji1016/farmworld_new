@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+.pull-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.pagination{
+	display: flex !important;
+}
