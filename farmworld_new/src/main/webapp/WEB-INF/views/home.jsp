@@ -3,7 +3,7 @@
 
 <%@include file="includes/header.jsp" %>
     
-<!-- Hero Start -->
+<!-- Hero Start --><!-- 박사라 깃 테스트 -->
         <div class="container-fluid py-5 mb-5 hero-header">
             <div class="container py-5">
                 <div class="row g-5 align-items-center">
