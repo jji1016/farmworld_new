@@ -29,22 +29,22 @@ public class userController {
 	@Autowired
 	private final UserService userService;
 	
-	@GetMapping("/mypage") //·Î±×ÀÎ o/x »óÅÂ È®ÀÎ
+	@GetMapping("/mypage") //ï¿½Î±ï¿½ï¿½ï¿½ o/x ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 	public String loginCheck(HttpSession session) {
 		log.info("controller loginCheck");
 		System.out.println("controller loginCheck");
 		
-		//¼¼¼Ç¿¡ ÀúÀåµÇ¾î ÀÖ´Â user_num°ª ¹Þ¾Æ¿À±â
+		//ï¿½ï¿½ï¿½Ç¿ï¿½ ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ ï¿½Ö´ï¿½ user_numï¿½ï¿½ ï¿½Þ¾Æ¿ï¿½ï¿½ï¿½
 		Integer user_num = (int) session.getAttribute("user_num"); 
 		
-		if(user_num != null && user_num !=0 ) { //·Î±×ÀÎ µÈ »óÅÂ
-			return "redirect:"+"/"; //ÈÄ¿¡ ¸¶ÀÌÆäÀÌÁö ÀÌµ¿À¸·Î °íÃÄ¾ßÇÔ
+		if(user_num != null && user_num !=0 ) { //ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			return "redirect:"+"/"; //ï¿½Ä¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½
 		}
-		return "/user/login"; //·Î±×ÀÎ ¾È µÈ »óÅÂ
+		return "/user/login"; //ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	}
 	
 	@PostMapping("/mypage")
-	public void getMyPage() { //¸¶ÀÌÆäÀÌÁö ÀÌµ¿
+	public void getMyPage() { //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 		
 	}
 	
@@ -58,33 +58,33 @@ public class userController {
 		
 	}
 	
-	@ResponseBody //¾ÆÀÌµð Áßº¹ Ã¼Å©
+	@ResponseBody //ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ßºï¿½ Ã¼Å©
 	@RequestMapping(value = "/idCheck", method = RequestMethod.POST)
 	public boolean idCheck(UserVO vo) {
 		System.out.println("controller idCheck"+vo);
-		if(userService.idCheck(vo) == null) { //»ç¿ë °¡´É
+		if(userService.idCheck(vo) == null) { //ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			return true;
 		}
 		return false;
 	}
 	
-	@ResponseBody //´Ð³×ÀÓ Áßº¹ Ã¼Å©
+	@ResponseBody //ï¿½Ð³ï¿½ï¿½ï¿½ ï¿½ßºï¿½ Ã¼Å©
 	@RequestMapping(value = "/nickCheck", method = RequestMethod.POST)
 	public boolean nickCheck(UserVO vo) {
 		System.out.println("controller nickCheck"+vo);
-		if(userService.nickCheck(vo) == null) { //»ç¿ë °¡´É
+		if(userService.nickCheck(vo) == null) { //ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			return true;
 		}
 		return false;
 	}
 	
-	@GetMapping("/login") //·Î±×ÀÎ Ã¢ ÀÌµ¿
+	@GetMapping("/login") //ï¿½Î±ï¿½ï¿½ï¿½ Ã¢ ï¿½Ìµï¿½
 	public String getLogin() {
 		System.out.println("controller getLogin");
 		return "/user/login";
 	}
 	
-	@ResponseBody //·Î±×ÀÎ Á¤º¸ È®ÀÎ
+	@ResponseBody //ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 	@RequestMapping(value = "/login", method = RequestMethod.POST) 
 	public String postLogin(UserVO vo, HttpSession session) {
 		log.info("controller postLogin: "+vo);
@@ -92,12 +92,12 @@ public class userController {
 		
 		UserVO userInfo  = userService.login(vo);
 		
-		if((vo.getUser_id()).equals(userInfo.getUser_id()){
+		if((vo.getUser_id()).equals(userInfo.getUser_id())){
 			
 		}
 		
-		//·Î±×ÀÎ ¼º°ø = null
-		//user_num°ª Á¸ÀçÇÏ¸é ¼¼¼Ç¿¡ ÀúÀå
+		//ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ = null
+		//user_numï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½Ç¿ï¿½ ï¿½ï¿½ï¿½ï¿½
 		session.setAttribute("user_num", userInfo.getUser_num());
 		
 		return null;
