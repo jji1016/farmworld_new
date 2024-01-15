@@ -26,5 +26,7 @@ public interface MyFarmMapper {
 	
 	public void viewCount(MyFarmVO vo);
 
+	public void FarmCreate(MyFarmVO vo);
+
 
 }

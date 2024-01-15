@@ -67,13 +67,14 @@
                                    name="farm_intro" maxlength="50" 
                                    placeholder="농장 소개를 입력해주세요 (최대 50자)"></textarea>
                                </div>
-                               <input type="file" name="image1">
-                                   <% if (request.getAttribute("filePath") != null) { %>
-								        <h2>Uploaded Image Preview:</h2>
-								        <img src="${filePath}" alt="Uploaded Image" width="300">
-								    <% } %>
-                    
-	                            
+                                <div class="form-group">
+					                <label for="image1">이미지 업로드</label>
+					                <input type="file" name="image1" id="image1" class="form-control-file" onchange="previewImage(this)">
+					            </div>
+					
+					            <!-- 미리보기를 표시할 DIV -->
+					            <div id="imagePreview" class="mt-3"></div>
+                            
 	                            <button type="submit" class="btn btn-success">농장 등록</button>
 	                            <button type="reset" class="btn btn-secondary">리셋</button>
 	                       </form>
@@ -93,7 +94,23 @@
        	
        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
        <script type="text/javascript">
-		
+	       function previewImage(input) {
+	           var preview = document.getElementById('imagePreview');
+	           preview.innerHTML = ''; // 미리보기를 초기화
+	
+	           if (input.files && input.files[0]) {
+	               var reader = new FileReader();
+	
+	               reader.onload = function (e) {
+	                   var img = document.createElement('img');
+	                   img.src = e.target.result;
+	                   img.className = 'img-fluid rounded';
+	                   preview.appendChild(img);
+	               };
+	
+	               reader.readAsDataURL(input.files[0]); // 파일을 읽어 data URL로 변환
+	           }
+	       }
     	</script>
     			
     			

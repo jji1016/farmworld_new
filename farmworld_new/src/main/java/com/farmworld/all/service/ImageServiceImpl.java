@@ -20,18 +20,23 @@ public class ImageServiceImpl implements ImageService {
 
 	@Override
 	public void add(ImageVO vo) {
-		mapper.insert(vo);
-		
+		mapper.insertReturn(vo);
 	}
 
 	@Override
 	public void modify(ImageVO vo) {
-		
+		mapper.update(vo);
 	}
 
 	@Override
 	public void delete(Integer k) {
-		
+		mapper.delete(k);
+	}
+
+	@Override
+	public Integer addGetNum(ImageVO vo) {
+		mapper.insertReturn(vo);
+		return vo.getImage_folder_num();
 	}
 
 

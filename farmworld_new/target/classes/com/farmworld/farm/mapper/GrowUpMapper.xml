@@ -27,7 +27,9 @@
 
 	<select id="getListWithSearch" resultType="GrowUpVO"
 		parameterType="com.farmworld.all.domain.Criteria">
-		SELECT * FROM GrowUp
+		        SELECT f.*, i.image1
+        FROM myfarm f
+        LEFT JOIN image i ON f.image_folder_num = i.image_folder_num
 		<if
 			test="type != null and type != '' and keyword != null and keyword != ''">
 			<where>
@@ -85,7 +87,9 @@
 
 	<select id="getListWithPaging" resultType="GrowUpVO"
 		parameterType="com.farmworld.all.domain.Criteria">
-		SELECT * FROM GrowUp
+		SELECT f.*, i.image1
+        FROM myfarm f
+        LEFT JOIN image i ON f.image_folder_num = i.image_folder_num
 		<if test="type != null and type != '' and keyword != null and keyword != ''">
 			<where>
 				<choose>
