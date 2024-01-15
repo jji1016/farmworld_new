@@ -54,7 +54,7 @@
 
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                           <form action="/myfarm/register" method="post" role="form">
+                           <form action="/myfarm/register" method="post" role="form" enctype="multipart/form-data">
 	                           
 	                            <div class="form-group">
 	                                <label>농장 이름</label>
@@ -67,6 +67,11 @@
                                    name="farm_intro" maxlength="50" 
                                    placeholder="농장 소개를 입력해주세요 (최대 50자)"></textarea>
                                </div>
+                               <input type="file" name="image1">
+                                   <% if (request.getAttribute("filePath") != null) { %>
+								        <h2>Uploaded Image Preview:</h2>
+								        <img src="${filePath}" alt="Uploaded Image" width="300">
+								    <% } %>
                     
 	                            
 	                            <button type="submit" class="btn btn-success">농장 등록</button>

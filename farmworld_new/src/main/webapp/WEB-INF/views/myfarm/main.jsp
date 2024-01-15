@@ -173,7 +173,7 @@
 	
 						let row ="";
 						row+=("<div class='col-md-6 col-lg-6 col-xl-4'>");
-						row+=("<div class='rounded position-relative fruite-item'>");
+						row+=("<div class='rounded position-relative fruite-item' onclick='redirectToFarm(" + myfarm.user_num + ")'>");
 						row+=("<div class='row g-0'>");
 						row+=("<div class='col-10'>");
 						row+=("<div class='position-relative'>");
@@ -216,6 +216,16 @@
 		}
 
 		}); // -- $(document).ready 함수 선언 종료
+		
+		function redirectToFarm(userNum) {
+		    // userNum을 사용하여 /myfarm/farm으로 이동
+		    if (userNum) {
+		        window.location.href = '/myfarm/farm?user_num=' + userNum;
+		    } else {
+		        alert('로그인을 해주세요!');
+		        window.location.href = '/login';
+		    }
+		}
 </script>
                         
                         
