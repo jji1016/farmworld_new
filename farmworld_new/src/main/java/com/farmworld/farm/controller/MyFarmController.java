@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.farmworld.all.domain.Criteria;
 import com.farmworld.all.domain.ImageVO;
@@ -57,21 +59,24 @@ public class MyFarmController {
 	    return ResponseEntity.ok(response);
 	}
 	
-	@GetMapping("/register")
-	public void registerget() {}
+
 	
 	@GetMapping("/farm")
-	public void moveFarm(MyFarmVO myFarmVO) {
+	public void moveFarm(MyFarmVO myFarmVO, Model model) {
 		myFarmService.view(myFarmVO);
+		model.addAttribute("vo", myFarmService.get(myFarmVO.getFarm_num()));
 	}
 	
-	@GetMapping("/main")
+	@GetMapping({"/main", "/"})
 	public void myfarmMain(Criteria cri, Model model) {
 		cri.setAmount(6);
 		int total = myFarmService.getTotal(cri);
 		pageDTO pageResult = new pageDTO(cri, total);
 		model.addAttribute("pageMaker", pageResult);
 	}
+	
+	@GetMapping("/register")
+	public void registerget() {}
 	
 	@PostMapping("/register")
 	public String register(@RequestParam("image1") MultipartFile file, Model model, HttpSession session, MyFarmVO myFarmVO) {
@@ -142,5 +147,20 @@ public class MyFarmController {
 		
 		return list;
 	}
+	
+	@PostMapping("/searchFarm")
+	@ResponseBody
+	public ResponseEntity<String> searchFarm(Criteria cri, RedirectAttributes rttr) {
+	    Integer farmNum = myFarmService.searchFarmKeyword(cri);
+
+	    if (farmNum == null) {
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("fail");
+	    } else {
+	        return ResponseEntity.ok(farmNum.toString());
+	    }
+	}
+	
+	
+
 
 }

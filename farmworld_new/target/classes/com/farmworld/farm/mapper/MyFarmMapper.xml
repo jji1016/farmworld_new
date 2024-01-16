@@ -45,8 +45,9 @@
 	</delete>
 
 	<select id="select" resultType="MyFarmVO" parameterType="MyFarmVO">
-		SELECT *
-		FROM myfarm WHERE farm_num = #{farm_num}
+		SELECT f.*, i.image1
+        FROM myfarm f
+        LEFT JOIN image i ON f.image_folder_num = i.image_folder_num WHERE f.farm_num = #{farm_num}
 	</select>
 
 	<select id="getTotalCount" resultType="int" parameterType="com.farmworld.all.domain.Criteria">
@@ -106,6 +107,10 @@
 	SET user_isFarm = 0
 	WHERE user_num = #{user_num}
 	</update>
+	
+	<select id="selectFarmKeyword" parameterType="com.farmworld.all.domain.Criteria" resultType="Integer">
+	SELECT farm_num FROM myfarm WHERE farm_name = #{keyword}
+	</select>
 
 </mapper>
 	

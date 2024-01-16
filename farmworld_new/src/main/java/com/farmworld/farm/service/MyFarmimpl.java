@@ -62,4 +62,9 @@ public class MyFarmimpl implements MyFarm {
 		mapper.viewCount(vo);
 	}
 
+	@Override
+	public Integer searchFarmKeyword(Criteria cri) {
+		return mapper.selectFarmKeyword(cri);
+	}
+
 }

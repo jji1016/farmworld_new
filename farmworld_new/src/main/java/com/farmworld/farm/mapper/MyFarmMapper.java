@@ -28,5 +28,7 @@ public interface MyFarmMapper {
 
 	public void FarmCreate(MyFarmVO vo);
 
+	public Integer selectFarmKeyword(Criteria cri);
+
 
 }

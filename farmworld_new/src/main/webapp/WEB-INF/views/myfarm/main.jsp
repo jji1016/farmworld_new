@@ -116,10 +116,10 @@
         <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 		<script>
 		
-		function redirectToFarm(userNum) {
+		function redirectToFarm(farmNum) {
 		    // userNum을 사용하여 해당 유저의 팜으로 이동
-		    if (userNum) {
-		        window.location.href = '/myfarm/farm?user_num=' + userNum;
+		    if (farmNum) {
+		        window.location.href = '/myfarm/farm?farm_num=' + farmNum;
 		    } else {
 		        alert('로그인을 해주세요!');
 		        window.location.href = '/login';
@@ -155,18 +155,18 @@
 		
 							let row ="";
 							row+=("<div class='col-md-6 col-lg-6 col-xl-4'>");
-							row+=("<div class='rounded position-relative fruite-item' onclick='redirectToFarm(" + myfarm.user_num + ")'>");
+							row+=("<div class='rounded position-relative fruite-item' onclick='redirectToFarm(" + myfarm.farm_num + ")'>");
 							row+=("<div class='row g-0'>");
 							row+=("<div class='col-10'>");
 							row+=("<div class='position-relative'>");
-							row+=("<img src='/resources/upload/" + myfarm.image_folder_num + "/"+ myfarm.image1 + "' class='card-img-top fixed-size-image' alt='농장 이미지'>");
+							row+=("<input type='hidden' name='farm_num' value='"+myfarm.farm_num+"'>")
+							row+=("<img src='/resources/upload/" + myfarm.image_folder_num + "/"+ myfarm.image1 + "' class='card-img-top fixed-size-image' alt='농장 이미지' style='width:100%; height:280px'>");
 							row+=("<div class='position-absolute start-0 bottom-0 w-100 py-3 px-4' style='background: rgba(52, 173, 84, .85);'>");
 							row+=("<h4 class='text-white text-truncate'>"+myfarm.farm_name+"</h4>");
 							let intro = myfarm.farm_intro;
 							row+=("<div class='text-truncate'>")
 							 for (let i = 0; i < intro.length; i++) {
-		                            row += intro[i]
-
+		                            row += intro[i];
 		                        }
 							row+=("</div></div></div></div></div></div></div>");
 
@@ -221,15 +221,6 @@
 		});
 		</script>
 		
-<script type="text/javascript">
-	$(document).ready(function() {
-		
-		
-
-		}); // -- $(document).ready 함수 선언 종료
-		
-
-</script>
                         
                         
 <%@include file="../includes/footer.jsp" %>
