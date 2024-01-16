@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -150,9 +151,10 @@ public class MyFarmController {
 	
 	@PostMapping("/searchFarm")
 	@ResponseBody
-	public ResponseEntity<String> searchFarm(Criteria cri, RedirectAttributes rttr) {
+	public ResponseEntity<String> searchFarm(@RequestParam("keyword") String keyword) {
+		Criteria cri = new Criteria();
+		cri.setKeyword(keyword);
 	    Integer farmNum = myFarmService.searchFarmKeyword(cri);
-
 	    if (farmNum == null) {
 	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("fail");
 	    } else {
