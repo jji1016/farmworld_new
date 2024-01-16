@@ -83,7 +83,7 @@
 			                        <div class="team-item border-top border-5 border-primary rounded shadow overflow-hidden">
 			                            <div class="text-center p-4" id="myFarmLink">
 			                                <img class="img-fluid rounded-circle mb-4" src="/resources/img/cart-page-header-img.jpg" alt="">
-			                                <h5 class="fw-bold mb-1">내 농장 <br>바로가기</h5>
+			                                <h5 class="fw-bold mb-1">내 농장 <br><span>바로가기</span></h5>
 			                            </div>
 
 			                        </div>
@@ -115,6 +115,16 @@
         <!-- Fruits Shop End-->
         <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 		<script>
+		
+		function redirectToFarm(userNum) {
+		    // userNum을 사용하여 해당 유저의 팜으로 이동
+		    if (userNum) {
+		        window.location.href = '/myfarm/farm?user_num=' + userNum;
+		    } else {
+		        alert('로그인을 해주세요!');
+		        window.location.href = '/login';
+		    }
+		}
 		function validateKeyword() {
 	        var keyword = document.forms["searchForm"]["keyword"].value;
 	        if (keyword.length === 1) {
@@ -124,12 +134,74 @@
 	        return true;
 	    }
 		$(document).ready(function() {
-		    // 클릭 이벤트 처리
+			loadTableData(); // Ajax 실행 함수 호출
+			
+			function loadTableData() {
+
+				$.ajax({
+					url: "/myfarm/getlist", 
+					type: "POST", 
+					dataType : "json",
+					data:{
+						type : $("#type").val(),
+						keyword : $("#searchForm").find("input[name='keyword']").val(),
+						pageNum: $("#actionForm").find("input[name='pageNum']").val(),
+						amount: $("#actionForm").find("input[name='amount']").val()
+					},
+					success: function(data){
+						let myFarmBody = $("#myfarminput1");
+						console.log(data)
+						$.each(data, function(index,myfarm){
+		
+							let row ="";
+							row+=("<div class='col-md-6 col-lg-6 col-xl-4'>");
+							row+=("<div class='rounded position-relative fruite-item' onclick='redirectToFarm(" + myfarm.user_num + ")'>");
+							row+=("<div class='row g-0'>");
+							row+=("<div class='col-10'>");
+							row+=("<div class='position-relative'>");
+							row+=("<img src='/resources/upload/" + myfarm.image_folder_num + "/"+ myfarm.image1 + "' class='card-img-top fixed-size-image' alt='농장 이미지'>");
+							row+=("<div class='position-absolute start-0 bottom-0 w-100 py-3 px-4' style='background: rgba(52, 173, 84, .85);'>");
+							row+=("<h4 class='text-white text-truncate'>"+myfarm.farm_name+"</h4>");
+							let intro = myfarm.farm_intro;
+							row+=("<div class='text-truncate'>")
+							 for (let i = 0; i < intro.length; i++) {
+		                            row += intro[i]
+
+		                        }
+							row+=("</div></div></div></div></div></div></div>");
+
+							
+							myFarmBody.append(row);
+							
+						});
+					},
+					error: function(e){
+						console.log(e);
+					}
+
+				});
+			
+				let actionForm = $("#actionForm");
+				var searchForm = $("#searchForm");
+				
+				$(".paginate_button a").on("click", function(e) {
+					e.preventDefault(); // 기존에 가진 이벤트를 중단
+					actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+					actionForm.submit();
+				});
+				
+				$("#searchForm button").on("click", function(e) {
+				searchForm.find("input[name='pageNum']").val("1");
+					e.preventDefault();
+					searchForm.submit();
+				});
+			}
+		    
 		    $('#myFarmLink').click(function() {
 		        // jQuery를 사용하여 /myfarm/farm로 이동
 		        // 이동하기 전에 세션에 user_num이 있는지 확인
 		        $.ajax({
-		            url: '/myfarm/checkSession',  // 세션 체크를 처리하는 컨트롤러 엔드포인트
+		            url: '/myfarm/checkSession',  // 세션 체크
 		            type: 'GET',
 		            success: function(response) {
 		                if (response.hasUserNum) {
@@ -152,70 +224,11 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		
-		loadTableData(); // Ajax 실행 함수 호출
 		
-		function loadTableData() {
-
-			$.ajax({
-				url: "/myfarm/getlist", 
-				type: "POST", 
-				dataType : "json",
-				data:{
-					type : $("#type").val(),
-					keyword : $("#searchForm").find("input[name='keyword']").val(),
-					pageNum: $("#actionForm").find("input[name='pageNum']").val(),
-					amount: $("#actionForm").find("input[name='amount']").val()
-				},
-				success: function(data){
-					let myFarmBody = $("#myfarminput1");
-					console.log(data)
-					$.each(data, function(index,myfarm){
-	
-						let row ="";
-						row+=("<div class='col-md-6 col-lg-6 col-xl-4'>");
-						row+=("<div class='rounded position-relative fruite-item'>");
-						row+=("<div class='row g-0'>");
-						row+=("<div class='col-10'>");
-						row+=("<div class='position-relative'>");
-						row+=("<img src='/resources/img/team-1.jpg' class='card-img-top fixed-size-image' alt='농장 이미지'>");
-						row+=("<div class='position-absolute start-0 bottom-0 w-100 py-3 px-4' style='background: rgba(52, 173, 84, .85);'>");
-						row+=("<h4 class='text-white text-truncate'>"+myfarm.farm_name+"</h4>");
-						let intro = myfarm.farm_intro;
-						row+=("<div class='text-truncate'>")
-						 for (let i = 0; i < intro.length; i++) {
-	                            row += intro[i]
-
-	                        }
-						row+=("</div></div></div></div></div></div></div>");
-
-						
-						myFarmBody.append(row);
-						
-					});
-				},
-				error: function(e){
-					console.log(e);
-				}
-
-			});
-		
-			let actionForm = $("#actionForm");
-			var searchForm = $("#searchForm");
-			
-			$(".paginate_button a").on("click", function(e) {
-				e.preventDefault(); // 기존에 가진 이벤트를 중단
-				actionForm.find("input[name='pageNum']").val($(this).attr("href"));
-				actionForm.submit();
-			});
-			
-			$("#searchForm button").on("click", function(e) {
-			searchForm.find("input[name='pageNum']").val("1");
-				e.preventDefault();
-				searchForm.submit();
-			});
-		}
 
 		}); // -- $(document).ready 함수 선언 종료
+		
+
 </script>
                         
                         

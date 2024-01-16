@@ -26,6 +26,7 @@ public class MyFarmimpl implements MyFarm {
 	@Override
 	public void add(MyFarmVO vo) {
 		mapper.insert(vo);
+		mapper.FarmCreate(vo);
 	}
 
 	@Override

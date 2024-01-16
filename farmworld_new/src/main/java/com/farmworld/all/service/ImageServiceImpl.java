@@ -1,27 +1,42 @@
 package com.farmworld.all.service;
 
-import com.farmworld.all.domain.ImageVO;
+import org.springframework.stereotype.Service;
 
+import com.farmworld.all.domain.ImageVO;
+import com.farmworld.all.mapper.ImageMapper;
+
+import lombok.AllArgsConstructor;
+
+@Service
+@AllArgsConstructor
 public class ImageServiceImpl implements ImageService {
 
+	private ImageMapper mapper;
+	
 	@Override
 	public ImageVO get(Integer k) {
-		return null;
+		return mapper.select(k);
 	}
 
 	@Override
 	public void add(ImageVO vo) {
-		
+		mapper.insertReturn(vo);
 	}
 
 	@Override
 	public void modify(ImageVO vo) {
-		
+		mapper.update(vo);
 	}
 
 	@Override
 	public void delete(Integer k) {
-		
+		mapper.delete(k);
+	}
+
+	@Override
+	public Integer addGetNum(ImageVO vo) {
+		mapper.insertReturn(vo);
+		return vo.getImage_folder_num();
 	}
 
 
