@@ -9,3 +9,7 @@
 .pagination{
 	display: flex !important;
 }
+
+.category-link{
+	cursor: pointer;
+}

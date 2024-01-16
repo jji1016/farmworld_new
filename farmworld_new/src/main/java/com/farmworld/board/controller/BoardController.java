@@ -30,13 +30,11 @@ public class BoardController {
 	@GetMapping("/list")
 	public String listAll(Criteria cri, Model model) {
 		System.out.println("시작");
-		log.info("---- controller in list -----");
 		System.out.println(cri);
 		
 		int total = boardService.getTotal(cri);
 		pageDTO pageResult = new pageDTO(cri, total);
 		model.addAttribute("pageMaker",pageResult);
-		log.info("---- controller out list -----");
 		System.out.println(total);
 		System.out.println(pageResult);
 
@@ -46,10 +44,13 @@ public class BoardController {
 	@ResponseBody
 	@RequestMapping(value="/searchList", method = RequestMethod.POST)
 	public List<BoardVO> searchList(Criteria cri){
-		System.out.println("searchList -> Type : "+ cri.getType());
-		System.out.println("searchList -> Keyword : "+ cri.getKeyword());
-		System.out.println("searchList리턴값:  "+boardService.searchList(cri));
-		return boardService.searchList(cri);
+		return boardService.searchNotice(cri);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/searchList2", method = RequestMethod.POST)
+	public List<BoardVO> searchList2(Criteria cri){
+		return boardService.searchFree(cri);
 	}
 	
 	// board/register.jsp로 화면 이동

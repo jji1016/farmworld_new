@@ -44,19 +44,20 @@
 								<div class="mb-3">
 
 									<h4>Categories</h4>
-									<ul class="list-unstyled fruite-categorie">
-										<li>
-											<div class="d-flex justify-content-between fruite-name">
-												<a href="#"><i class="fas fa-apple-alt me-2"></i>공지사항</a>
-											</div>
-										</li>
-										<li>
-											<div class="d-flex justify-content-between fruite-name">
-												<a href="#"><i class="fas fa-apple-alt me-2"></i>자유게시판</a>
-											</div>
-										</li>
-										
-									</ul>
+										<ul class="list-unstyled fruite-categorie">
+											<li>
+												<div class="d-flex justify-content-between fruite-name">
+													<a class="category-link notice" ><i class="fas fa-apple-alt me-2"></i>공지사항</a>
+												</div>
+											</li>
+											<li>
+												<div class="d-flex justify-content-between fruite-name">
+													<a class="category-link free_board" ><i class="fas fa-apple-alt me-2"></i>자유게시판</a>
+												</div>
+											</li>
+											<!-- 다른 항목들도 유사하게 추가할 수 있습니다. -->
+										</ul>
+
 								</div>
 							</div>
 						</div>
@@ -66,7 +67,7 @@
 					<div class="col-lg-9">
 						<!-- 보드 -->
 						<div class="table-responsive">
-							
+
 							<table class="table">
 								<thead>
 									<tr>
@@ -79,38 +80,39 @@
 								</thead>
 								<tbody></tbody>
 							</table>
-							
-							<div class = "pull-right">
-                            	<ul class="pagination">
-                            		<c:if test="${pageMaker.prev }">
-	                            		<li class="paginate_button previous">
-	                            			<a href="${pageMaker.startPage -1 }">이전</a>
-	                            		</li>
-	                            	</c:if>
-	                            	<c:forEach var="num" begin="${pageMaker.startPage }"
-	                            		end="${pageMaker.endPage }">
-	                            		<li class="paginate_button ${pageMaker.cri.pageNum ==num?'active':'' }">
-	                            			<a href="${num }">${num }</a>
-	                            		</li>
-	                            	</c:forEach>
-	                            	<c:if test="${pageMaker.next }">
-	                            		<li class="paginate_button next">
-	                            			<a href="${pageMaker.endPage +1 }">다음</a>
-	                            		</li>
-                            		</c:if>
-                            	</ul>
-                            </div>
-                            
-                            <form id="actionForm" action="/board/list" method="get">
-                            	<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
-                            	<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
-                            	<input type="hidden" name="type" value="${pageMaker.cri.type }">
-                            	<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
-                            </form>
+
+							<div class="pull-right">
+								<ul class="pagination">
+									<c:if test="${pageMaker.prev }">
+										<li class="paginate_button previous"><a
+											href="${pageMaker.startPage -1 }">이전</a></li>
+									</c:if>
+									<c:forEach var="num" begin="${pageMaker.startPage }"
+										end="${pageMaker.endPage }">
+										<li
+											class="paginate_button ${pageMaker.cri.pageNum ==num?'active':'' }">
+											<a href="${num }">${num }</a>
+										</li>
+									</c:forEach>
+									<c:if test="${pageMaker.next }">
+										<li class="paginate_button next"><a
+											href="${pageMaker.endPage +1 }">다음</a></li>
+									</c:if>
+								</ul>
+							</div>
+
+							<form id="actionForm" action="/board/list" method="get">
+								<input type="hidden" name="pageNum"
+									value="${pageMaker.cri.pageNum }"> <input type="hidden"
+									name="amount" value="${pageMaker.cri.amount }"> <input
+									type="hidden" name="type" value="${pageMaker.cri.type }">
+								<input type="hidden" name="keyword"
+									value="${pageMaker.cri.keyword }">
+							</form>
 						</div>
 					</div>
 					<!-- col-lg-9 끝 -->
-					
+
 				</div>
 			</div>
 		</div>
@@ -118,7 +120,6 @@
 </div>
 <!--End-->
 
-
-
-
+ <!-- board js -->
+    <script src="/resources/js/board/board.js" type="text/javascript"></script>
 <%@include file="../includes/footer.jsp"%>

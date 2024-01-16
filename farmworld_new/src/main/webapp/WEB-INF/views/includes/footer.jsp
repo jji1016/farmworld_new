@@ -106,8 +106,7 @@
     <script src="/resources/lib/lightbox/js/lightbox.min.js"></script>
     <script src="/resources/lib/owlcarousel/owl.carousel.min.js"></script>
     
-    <!-- board js -->
-    <script src="/resources/js/board/board.js" type="text/javascript"></script>
+   
 
     <!-- Template Javascript -->
     <script src="/resources/js/main.js"></script>

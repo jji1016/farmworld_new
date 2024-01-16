@@ -54,10 +54,19 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<BoardVO> searchList(Criteria cri) {
+	public List<BoardVO> searchNotice(Criteria cri) {
 		log.info("----service in getList -----");
 		log.info(cri);
-		List<BoardVO> result = mapper.getListWithPaging(cri);
+		List<BoardVO> result = mapper.getNoticeWithPaging(cri);
+		log.info("----service out getList----");
+		return result;
+	}
+	
+	@Override
+	public List<BoardVO> searchFree(Criteria cri) {
+		log.info("----service in getList -----");
+		log.info(cri);
+		List<BoardVO> result = mapper.getFreeWithPaging(cri);
 		log.info("----service out getList----");
 		return result;
 	}

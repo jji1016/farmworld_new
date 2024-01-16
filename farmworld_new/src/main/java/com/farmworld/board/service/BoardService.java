@@ -12,5 +12,7 @@ public interface BoardService extends Generic<BoardVO, Integer>{
 	
 	public int getTotal(Criteria cri);
 	
-	public List<BoardVO> searchList(Criteria cri);
+	public List<BoardVO> searchNotice(Criteria cri);
+
+	public List<BoardVO> searchFree(Criteria cri);
 }

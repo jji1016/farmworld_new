@@ -1,6 +1,16 @@
 $(document).ready(function() {
+	let categorie = "/board/searchList" 
 	loadTableData();
 	
+	$(".notice").on("click",function(){
+		loadTableData();
+	});
+	
+	$(".free_board").on("click",function(){
+		categorie = "/board/searchList2"
+		loadTableData();
+	});
+
 	let result = '${alert}';
 	console.log(result);
 	checkModal(result);
@@ -23,7 +33,7 @@ $(document).ready(function() {
 	
 	function loadTableData(){
 		$.ajax({
-			url: "/board/searchList",
+			url: categorie,
 			type: "POST",
 			dataType : "json",
 			data: {
@@ -36,6 +46,7 @@ $(document).ready(function() {
 				
 				// 아래에 $("tbody") 부분에 원래 #boardTbody있었는데 일단 안나와서 지움
 				let boardTbody = $("tbody");
+				boardTbody.empty();
 				// for( let item of items) -> 여기서 items 은 data와 같고 item은 board와 같음
 				$.each(data, function(index,board){
 					console.log(board);
@@ -102,7 +113,7 @@ $(document).ready(function() {
 
 			});
 			
-	
+	// 카테고리 기능
 	
 	}// loadTableData 함수 선언 종료
 	
