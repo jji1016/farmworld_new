@@ -62,4 +62,9 @@ public class HomeController {
 		return "/mypage";
 	}
 	
+	@RequestMapping(value = "/checkout", method = RequestMethod.GET)
+	public String checkOut() {
+		return "/checkout";
+	}
+	
 }
