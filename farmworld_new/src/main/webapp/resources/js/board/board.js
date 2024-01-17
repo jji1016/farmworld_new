@@ -1,15 +1,16 @@
 $(document).ready(function() {
-	let categorie = "/board/searchList" 
 	loadTableData();
+	boardName();
 	
-	$(".notice").on("click",function(){
-		loadTableData();
-	});
-	
-	$(".free_board").on("click",function(){
-		categorie = "/board/searchList2"
-		loadTableData();
-	});
+	function boardName(){
+		console.log($("#board_ENname").val());
+		if($("#board_ENname").val() == "notice"){
+			$(".board_name").text("공지사항");
+			
+		}else if($("#board_ENname").val() == "free_board"){
+			$(".board_name").text("자유게시판");
+		};
+	};
 
 	let result = '${alert}';
 	console.log(result);
@@ -33,14 +34,15 @@ $(document).ready(function() {
 	
 	function loadTableData(){
 		$.ajax({
-			url: categorie,
+			url: "/board/searchList",
 			type: "POST",
 			dataType : "json",
 			data: {
 				pageNum : $("#actionForm").find("input[name='pageNum']").val(),
 				amount : $("#actionForm").find("input[name='amount']").val(),
 				type : $("#type").val(),
-				keyword : $("#searchForm").find("input[name='keyword']").val()
+				keyword : $("#searchForm").find("input[name='keyword']").val(),
+				board_category : $("#actionForm").find("input[name='board_category']").val()
 			},
 			success:function(data){
 				
@@ -49,7 +51,7 @@ $(document).ready(function() {
 				boardTbody.empty();
 				// for( let item of items) -> 여기서 items 은 data와 같고 item은 board와 같음
 				$.each(data, function(index,board){
-					console.log(board);
+					console.log("검색결과: "+board);
 					let board_date = new Date(board.board_date);
 					let options = {year:"numeric",month:"2-digit", day:"2-digit", hour:"2-digit",minute:"2-digit"}
 					let formatDate = board_date.toLocaleString("ko-KR",options);
@@ -72,48 +74,6 @@ $(document).ready(function() {
 				console.log(e);
 			}
 		});
-	
-	let actionForm = $("#actionForm");
-	$(".paginate_button a").on("click",function(e){
-		e.preventDefault(); // 이벤트 초기화
-		// pageNum값을 사용자가 누른 a태그의 href속성값으로 변경
-		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
-		actionForm.submit();
-	});
-	
-	var searchForm = $("#searchForm");
-
-	$("#searchForm button").on(
-			"click",
-			function(e) {
-
-				if (!searchForm.find("option:selected")
-						.val()) {
-					if(searchForm.find("option:selected")
-							.val()=""){
-						return true;
-					}
-					alert("검색종류를 선택하세요");
-					return false;
-				}
-
-				if (!searchForm.find(
-						"input[name='keyword']").val()) {
-					if(searchForm.find("option:selected")
-							.val()=""){
-						return true;
-					}
-					alert("키워드를 입력하세요");
-					return false;
-				}
-
-				e.preventDefault();
-
-				searchForm.submit();
-
-			});
-			
-	// 카테고리 기능
 	
 	}// loadTableData 함수 선언 종료
 	

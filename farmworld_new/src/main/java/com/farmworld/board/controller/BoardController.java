@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -28,29 +29,37 @@ public class BoardController {
 	private final BoardService boardService;
 	
 	@GetMapping("/list")
-	public String listAll(Criteria cri, Model model) {
+	public String listAll(@RequestParam(name = "board_category", required = false) String boardCategory, Criteria cri, Model model) {
+        // board_category 값이 있으면 cri에 설정
+		System.out.println("넘어온 카테고리:"+boardCategory);
+        if (boardCategory != null && !boardCategory.isEmpty()) {
+            cri.setBoard_category(boardCategory);
+            System.out.println("설정한 카테고리:"+boardCategory);
+        }
 		System.out.println("시작");
-		System.out.println(cri);
+		System.out.println("넘길것"+cri);
+		//board main 들어갔을 때 카테고리 default=notice 설정
+		if(cri.getBoard_category() == null) {
+			System.out.println("메인 카테고리 설정");
+			cri.setBoard_category("notice");
+			System.out.println("if절 통과");
+		}
 		
 		int total = boardService.getTotal(cri);
 		pageDTO pageResult = new pageDTO(cri, total);
 		model.addAttribute("pageMaker",pageResult);
 		System.out.println(total);
-		System.out.println(pageResult);
-
+		System.out.println("---------------결과"+pageResult);
+		
 		return "board/board";
 	}
+	
 	
 	@ResponseBody
 	@RequestMapping(value="/searchList", method = RequestMethod.POST)
 	public List<BoardVO> searchList(Criteria cri){
-		return boardService.searchNotice(cri);
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="/searchList2", method = RequestMethod.POST)
-	public List<BoardVO> searchList2(Criteria cri){
-		return boardService.searchFree(cri);
+		System.out.println("ajax 실행"+cri);
+		return boardService.searchList(cri);
 	}
 	
 	// board/register.jsp로 화면 이동
