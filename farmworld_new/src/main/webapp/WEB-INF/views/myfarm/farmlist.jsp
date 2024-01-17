@@ -69,7 +69,7 @@
                         
                         	<form id="searchForm" action="/myfarm/farmlist" method="get" onsubmit="return validateKeyword()">
 	                        	<div class="form-group col-xs-6">
-	                                 <select id="type" class="form-control" name="type">
+	                                 <select id="type" class="border-0 form-select-sm bg-light me-3" name="type">
 	                                     <option value="TW" 
 	                                     	<c:out value="${pageMaker.cri.type == 'TW'?'selected':''}"/>>전체</option>
 	                                     <option value="T" 
@@ -150,7 +150,7 @@
         <script src="/resources/js/waypoints.min.js"></script>
         <!--Counter UP-->
         <script src="/resources/js/jquery.counterup.min.js"></script>
-        
+        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 		<script>
 		function validateKeyword() {
 	        var keyword = document.forms["searchForm"]["keyword"].value;
@@ -208,10 +208,14 @@
 					$.each(data, function(index,myfarm){
 
 						let row ="";
-						row+=("<div class='g-col-4 card'>");
-						row+=("<img src='/resources/img/popfarm.png' class='card-img-top fixed-size-image' alt='농장 이미지'>");
-						row+=("<div class='card-body' style='margin-top:4%'>");
-						row+=("<h4 class='card-title'>"+myfarm.farm_name+"</h4>");
+						row+=("<div class='col-md-6 col-lg-6 col-xl-4'>");
+						row+=("<div class='rounded position-relative fruite-item'>");
+						row+=("<div class='row g-0'>");
+						row+=("<div class='col-10'>");
+						row+=("<div class='position-relative'>");
+						row+=("<img src='/resources/img/team-2.jpg' class='card-img-top fixed-size-image' alt='농장 이미지'>");
+						row+=("<div class='position-absolute start-0 bottom-0 w-100 py-3 px-4' style='background: rgba(52, 173, 84, .85);'>");
+						row+=("<h4 class='text-white'>"+myfarm.farm_name+"</h4>");
 						let intro = myfarm.farm_intro;
 	                        for (let i = 0; i < intro.length; i++) {
 	                            row += intro[i];
@@ -219,7 +223,7 @@
 	                                row += "<br>";
 	                            }
 	                        }
-						row+=("</div></div>");
+						row+=("</div></div></div></div></div></div>");
 
 						
 						myFarmBody.append(row);

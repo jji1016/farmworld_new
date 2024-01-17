@@ -26,6 +26,7 @@ public class MyFarmimpl implements MyFarm {
 	@Override
 	public void add(MyFarmVO vo) {
 		mapper.insert(vo);
+		mapper.FarmCreate(vo);
 	}
 
 	@Override
@@ -59,6 +60,11 @@ public class MyFarmimpl implements MyFarm {
 	@Override
 	public void view(MyFarmVO vo) {
 		mapper.viewCount(vo);
+	}
+
+	@Override
+	public Integer searchFarmKeyword(Criteria cri) {
+		return mapper.selectFarmKeyword(cri);
 	}
 
 }

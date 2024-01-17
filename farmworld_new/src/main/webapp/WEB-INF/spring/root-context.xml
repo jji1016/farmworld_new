@@ -36,5 +36,6 @@
 	<mybatis-spring:scan base-package="com.farmworld.board.mapper"/>
 	<mybatis-spring:scan base-package="com.farmworld.all.mapper"/>
 	<mybatis-spring:scan base-package="com.farmworld.mypage.mapper"/>
+
 		
 </beans>

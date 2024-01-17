@@ -40,23 +40,21 @@
     <!--Start Hedaer Section-->
         <jsp:include page="../includes/header.jsp"></jsp:include>
     <!--End of Hedaer Section-->
-<div id="page-wrapper">
+<div id="page-wrapper mx-auto" class="mx-auto">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-md-6 text-center mx-auto">
                     <h1 class="page-header">내 농장 만들기</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-md-6 mx-auto">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                     		 농장 정보
-                        </div>
+
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                           <form action="/myfarm/register" method="post" role="form">
+                           <form action="/myfarm/register" method="post" role="form" enctype="multipart/form-data">
 	                           
 	                            <div class="form-group">
 	                                <label>농장 이름</label>
@@ -69,8 +67,14 @@
                                    name="farm_intro" maxlength="50" 
                                    placeholder="농장 소개를 입력해주세요 (최대 50자)"></textarea>
                                </div>
-                    
-	                            
+                                <div class="form-group">
+					                <label for="image1">이미지 업로드</label>
+					                <input type="file" name="image1" id="image1" class="form-control-file" onchange="previewImage(this)">
+					            </div>
+					
+					            <!-- 미리보기를 표시할 DIV -->
+					            <div id="imagePreview" class="mt-3"></div>
+                            
 	                            <button type="submit" class="btn btn-success">농장 등록</button>
 	                            <button type="reset" class="btn btn-secondary">리셋</button>
 	                       </form>
@@ -90,7 +94,23 @@
        	
        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
        <script type="text/javascript">
-		
+	       function previewImage(input) {
+	           var preview = document.getElementById('imagePreview');
+	           preview.innerHTML = ''; // 미리보기를 초기화
+	
+	           if (input.files && input.files[0]) {
+	               var reader = new FileReader();
+	
+	               reader.onload = function (e) {
+	                   var img = document.createElement('img');
+	                   img.src = e.target.result;
+	                   img.className = 'img-fluid rounded';
+	                   preview.appendChild(img);
+	               };
+	
+	               reader.readAsDataURL(input.files[0]); // 파일을 읽어 data URL로 변환
+	           }
+	       }
     	</script>
     			
     			

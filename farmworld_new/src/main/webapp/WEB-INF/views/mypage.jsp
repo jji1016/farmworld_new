@@ -123,7 +123,7 @@
 											              </div>
 											            </div>
 											            <div class="btn-box">
-											              <button type="submit" class="btn ">Submit Now</button>
+											              <button type="submit" class="btn ">회원정보 수정</button>
 											            </div>
 											          </form>
 											        </div>
@@ -148,9 +148,8 @@
 	                    <div class="service-item bg-light d-flex p-4">
 	                        <i class="flaticon-house display-1 text-primary me-4"></i>
 	                        <div>
-	                            <h5 class="text-uppercase mb-3">Pet Boarding</h5>
-	                            <p>Kasd dolor no lorem sit tempor at justo rebum rebum stet justo elitr dolor amet sit</p>
-	                            <a class="text-primary text-uppercase" href="">Read More<i class="bi bi-chevron-right"></i></a>
+	                            <h5 class="text-uppercase mb-3">구매내역</h5>
+	                            <a class="text-primary text-uppercase" href="/mypage/buylist">More<i class="bi bi-chevron-right"></i></a>
 	                        </div>
 	                    </div>
 	                </div>
@@ -158,9 +157,8 @@
 	                    <div class="service-item bg-light d-flex p-4">
 	                        <i class="flaticon-food display-1 text-primary me-4"></i>
 	                        <div>
-	                            <h5 class="text-uppercase mb-3">Pet Feeding</h5>
-	                            <p>Kasd dolor no lorem sit tempor at justo rebum rebum stet justo elitr dolor amet sit</p>
-	                            <a class="text-primary text-uppercase" href="">Read More<i class="bi bi-chevron-right"></i></a>
+	                            <h5 class="text-uppercase mb-3">리뷰관리</h5>
+	                            <a class="text-primary text-uppercase" href="/mypage/review">More<i class="bi bi-chevron-right"></i></a>
 	                        </div>
 	                    </div>
 	                </div>
@@ -168,9 +166,8 @@
 	                    <div class="service-item bg-light d-flex p-4">
 	                        <i class="flaticon-grooming display-1 text-primary me-4"></i>
 	                        <div>
-	                            <h5 class="text-uppercase mb-3">Pet Grooming</h5>
-	                            <p>Kasd dolor no lorem sit tempor at justo rebum rebum stet justo elitr dolor amet sit</p>
-	                            <a class="text-primary text-uppercase" href="">Read More<i class="bi bi-chevron-right"></i></a>
+	                            <h5 class="text-uppercase mb-3">판매내역</h5>
+	                            <a class="text-primary text-uppercase" href="/mypage/selllist">More<i class="bi bi-chevron-right"></i></a>
 	                        </div>
 	                    </div>
 	                </div>
@@ -178,9 +175,8 @@
 	                    <div class="service-item bg-light d-flex p-4">
 	                        <i class="flaticon-cat display-1 text-primary me-4"></i>
 	                        <div>
-	                            <h5 class="text-uppercase mb-3">Pet Training</h5>
-	                            <p>Kasd dolor no lorem sit tempor at justo rebum rebum stet justo elitr dolor amet sit</p>
-	                            <a class="text-primary text-uppercase" href="">Read More<i class="bi bi-chevron-right"></i></a>
+	                            <h5 class="text-uppercase mb-3">취소/반품</h5>
+	                            <a class="text-primary text-uppercase" href="">More<i class="bi bi-chevron-right"></i></a>
 	                        </div>
 	                    </div>
 	                </div>
