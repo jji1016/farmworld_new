@@ -13,4 +13,5 @@ public interface BoardService extends Generic<BoardVO, Integer>{
 	public int getTotal(Criteria cri);
 	
 	public List<BoardVO> searchList(Criteria cri);
+
 }
