@@ -5,6 +5,9 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<link rel="stylesheet" href="/resources/editor/summernote-lite.css">
+<script src="/resources/editor/summernote-ko-KR.js"> </script>
+<script src="/resources/editor/summernote-lite.js"> </script>
 
 <div class="container-fluid fruite py-5">
 	<div class="container py-5">
@@ -34,8 +37,7 @@
 								</div>
 								<div class="form-group">
 									<label>내용</label>
-									<textarea class="form-control" rows="5" cols="40"
-										name="board_content"></textarea>
+									<textarea name="board_content" id="BOARDCONT" maxlength="10000" cols="30" rows="5" placeholder="내용을 입력해주세요" class="with-border"></textarea>
 								</div>
 								
 								<button type="submit" class="btn btn-default">등록하기</button>
@@ -46,8 +48,11 @@
 				</div>
 			</div>
 			<!-- /.row -->
+				
+			
 		</div>
 		<!-- /#page-wrapper -->
 	</div>
 </div>
+<script src="/resources/js/board/board.js" type="text/javascript"></script>
 <%@include file="../includes/footer.jsp"%>
