@@ -75,6 +75,14 @@ $(document).ready(function() {
 			}
 		});
 	
+	let actionForm = $("#actionForm");
+	$(".paginate_button a").on("click",function(e){
+		e.preventDefault(); // 이벤트 초기화
+		// pageNum값을 사용자가 누른 a태그의 href속성값으로 변경
+		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+		actionForm.submit();
+	});
+	
 	}// loadTableData 함수 선언 종료
 	
 }); // $(document).ready 함수 선언 종료

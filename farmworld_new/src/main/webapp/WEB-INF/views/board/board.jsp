@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@include file="../includes/header.jsp"%>
-
+<link href="/resources/css/board/board.css" rel="stylesheet">
 <!-- 상단 공백 추가 끝 -->
 <div class="container-fluid py-5"></div>
 <!-- 상단 공백 추가 끝 -->

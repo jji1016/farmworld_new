@@ -80,7 +80,7 @@
                             <a href="../shopmain" class="nav-item nav-link">Shop</a>
                             <a href="../shopdetail" class="nav-item nav-link">Shop Detail</a>
                             <a href="myfarm/main" class="nav-item nav-link">My Farm</a>
-                            <a href="../board" class="nav-item nav-link">Board</a>
+                            <a href="../board/list" class="nav-item nav-link">Board</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu m-0 bg-secondary rounded-0">
