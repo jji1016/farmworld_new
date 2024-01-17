@@ -43,7 +43,7 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public BoardVO get(Integer key) {
-		log.info("get실행");
+		System.out.println("get실행"+key);
 		return mapper.select(key);
 	}
 

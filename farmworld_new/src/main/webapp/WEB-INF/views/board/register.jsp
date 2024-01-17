@@ -39,6 +39,11 @@
 									<label>내용</label>
 									<textarea name="board_content" id="BOARDCONT" maxlength="10000" cols="30" rows="5" placeholder="내용을 입력해주세요" class="with-border"></textarea>
 								</div>
+								<div class="form-group">
+					                <label for="image1">이미지 업로드</label>
+					                <input type="file" name="image" id="image" class="form-control-file" onchange="previewImage(this)">
+					            </div>
+					            <div id="imagePreview" class="mt-3"></div>
 								
 								<button type="submit" class="btn btn-default">등록하기</button>
 								<button type="reset" class="btn btn-default">리셋</button>

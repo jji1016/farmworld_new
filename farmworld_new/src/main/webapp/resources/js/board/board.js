@@ -89,6 +89,41 @@ $(document).ready(function() {
 					fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
 					fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
 		          
+	});
+	
+    function previewImage(input) {
+        var preview = document.getElementById('imagePreview');
+        preview.innerHTML = ''; // 미리보기를 초기화
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                var img = document.createElement('img');
+                img.src = e.target.result;
+                img.className = 'img-fluid rounded';
+                preview.appendChild(img);
+            };
+
+            reader.readAsDataURL(input.files[0]); // 파일을 읽어 data URL로 변환
+        }
+   	}
+   	
+   	//get.jsp에서 submit 용도로 사용
+   	$(document).ready(function() {
+		let formObj = $("form");
+		$(".btn").click(function() {
+			let operation = $(this).data("oper");
+			console.log(operation);
+			if(operation == "list"){
+				formObj.attr("action","/board/list")
+				.attr("method","get");
+			}else if(operation == "modify"){
+				formObj.attr("action","/board/modify")
+				.attr("method","get");
+			}
+			formObj.submit();
 		});
+	});
 	
 }); // $(document).ready 함수 선언 종료

@@ -80,9 +80,10 @@ public class BoardController {
 		}
 		
 		@GetMapping({"/get","/modify"})
-		public void get(Integer bno , Model model) {
-			log.info("get실행 bno: "+bno);
+		public void get(@RequestParam(name = "board_num", required = false) Integer bno , Model model) {
+			System.out.println("get실행 bno: "+bno);
 			BoardVO board = boardService.get(bno);
+			System.out.println(board);
 			model.addAttribute("board",board);
 		}
 		
