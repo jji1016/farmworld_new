@@ -25,7 +25,7 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public void add(BoardVO vo) {
-		log.info("register()실행 vo: "+vo);
+		System.out.println("add()실행 vo: "+vo);
 		mapper.insert(vo);
 	}
 

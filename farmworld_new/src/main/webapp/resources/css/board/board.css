@@ -23,3 +23,15 @@
 	width: 150px !important;
 	margin-right: 10px;
 }
+
+.pagingBtn{
+	width:100px;
+}
+
+.btnRight{
+	margin-left:auto;
+}
+
+.btnLeft{
+	margin-right:auto
+}
