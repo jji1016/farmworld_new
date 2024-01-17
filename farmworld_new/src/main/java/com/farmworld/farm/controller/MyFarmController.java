@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.farmworld.all.domain.Criteria;
 import com.farmworld.all.domain.ImageVO;
@@ -60,6 +59,10 @@ public class MyFarmController {
 	    return ResponseEntity.ok(response);
 	}
 	
+	@GetMapping("/modify")
+	public void modifyFarm(Model model, MyFarmVO myFarmVO) {
+		model.addAttribute("vo",myFarmService.get(myFarmVO.getFarm_num()));
+	}
 
 	
 	@GetMapping("/farm")
@@ -119,6 +122,12 @@ public class MyFarmController {
 		myFarmService.add(myFarmVO);
 	    return "redirect:/myfarm/main";    
 	}
+	@PostMapping("/modify")
+	public String modify(@RequestParam("image1") MultipartFile file, Model model, HttpSession session, MyFarmVO myFarmVO) {
+		
+		return "redirect:/myfarm/farm?farm_num="+myFarmVO.getFarm_num();
+	}
+	
 		
 	@GetMapping("/farmlist")
 	public void farmlist(Criteria cri, Model model) {
@@ -162,7 +171,26 @@ public class MyFarmController {
 	    }
 	}
 	
+	@PostMapping("/remove")
+	public String deleteFarm(MyFarmVO vo) {
+		myFarmService.delete(vo.getFarm_num());
+		return "redirect:/myfarm/main";
+	}
 	
+	@GetMapping("/growlist")
+	public void growlist(MyFarmVO vo, Criteria cri, Model model) {
+		
+		cri.setAmount(6);
+		int total = myFarmService.getTotal(cri);
+		pageDTO pageResult = new pageDTO(cri, total);
+		model.addAttribute("pageMaker", pageResult);
+		model.addAttribute("vo", myFarmService.get(vo.getFarm_num()));
+	}
+	
+	@GetMapping("/growregister")
+	public void growregister(MyFarmVO vo, Model model) {
+		model.addAttribute("vo", myFarmService.get(vo.getFarm_num()));
+	}
 
 
 }

@@ -1,9 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     isELIgnored="false"%>
+    
+    <!-- include libraries(jQuery, bootstrap) -->
+
+
 
 <%@include file="../includes/header.jsp" %>
 
+
+<link rel="stylesheet" href="/resources/editor/summernote-lite.css">
+<script src="/resources/editor/summernote-ko-KR.js"> </script>
+<script src="/resources/editor/summernote-lite.js"> </script>	
 <!-- 상단 공백 추가 끝 -->
 <div class="container-fluid py-5">
 </div>
@@ -19,6 +27,7 @@
 	            <div class="mx-auto text-center mb-5" style="max-width: 500px;">
 	                <h1 class="display-5" id="headName">${vo.farm_name }</h1>
 	                <input type="hidden" value="${vo.user_num }" name="user_num" id="userNum">
+	                <input type="hidden" value="${vo.farm_num }" name="farm_num" id="farmNum">
 	            </div>
             </div>
             <div class="col-lg-3">	
@@ -44,26 +53,19 @@
             <div class="col-lg-9">
                     <div class="bg-primary h-100 p-5">
 
+
                             <div class="row g-3">
 
-                                <div class="col-4">
-                                <a href="/myfarm/farm?farm_num=<c:out value='${vo.farm_num}'/>"style="color:black;">HOME</a>
-                                </div>
-                                <div class="col-4">
-                                <a href="/myfarm/growlist?farm_num=<c:out value='${vo.farm_num}'/>" style="color:black;">성장일기</a>
-                                </div>
-                                <div class="col-4">
-                                <a href="/myfarm/growlist?farm_num=<c:out value='${vo.farm_num}'/>" style="color:black;">판매상품</a>
+                                
+                                <div class="col-12">
+                                <textarea name="BOARDCONT" id="BOARDCONT" maxlength="10000" cols="30" rows="5" placeholder="내용을 입력해주세요" class="with-border"></textarea>
                                 </div>
                                 
-                                
-                                <div class="row g-4 justify-content-center" id="growupinput1">
-                                    
+                                <div class="col-12">
 
-                                    
-   
-                                </div>>
+                                </div>
                                 
+
                                 
                             </div>
 
@@ -75,9 +77,30 @@
 </div>
 <!-- join End -->
 
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
 <script type="text/javascript">
     $(document).ready(function () {
+    	$('#BOARDCONT').summernote({
+			  height: 300,                 // 에디터 높이
+			  minHeight: null,             // 최소 높이
+			  maxHeight: null,             // 최대 높이
+			  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
+			  lang: "ko-KR",					// 한글 설정
+			  placeholder: '최대3000자까지 쓸 수 있습니다'	,//placeholder 설정
+			  toolbar: [
+					    // [groupName, [list of button]]
+					    ['fontname', ['fontname']],
+					    ['fontsize', ['fontsize']],
+					    ['color', ['color']],
+					    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+					    ['para', ['ul', 'ol', 'paragraph']],
+					    ['height', ['height']]
+					  ],
+					fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
+					fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
+		          
+		});
+
     	
         $("#keyword").keypress(function(event) {
             if (event.which === 13) {

@@ -14,4 +14,7 @@ public class GrowUpVO {
 	private int user_num;
 	private int image_folder_num;
 	private String growup_category;
+	private String image1;
+	private String image2;
+	private String image3;
 }
