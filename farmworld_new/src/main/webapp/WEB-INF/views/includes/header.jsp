@@ -33,9 +33,8 @@
     <link href="/resources/css/style.css" rel="stylesheet">
     
     <!-- jQuery 변경 : 반응형 버전이 최적화 / jsp에서 jQuery 사용이 필요하므로 header에 -->
-	<script src="https://code.jquery.com/jquery-3.7.1.min.js" 
-	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" 
-	crossorigin="anonymous"></script>
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 	
 	<!-- 캐시 비활성화 -->
 	<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, post-check=0, pre-check=0">
@@ -79,7 +78,7 @@
                             <a href="../home" class="nav-item nav-link active">Home</a>
                             <a href="../shopmain" class="nav-item nav-link">Shop</a>
                             <a href="../shopdetail" class="nav-item nav-link">Shop Detail</a>
-                            <a href="myfarm/main" class="nav-item nav-link">My Farm</a>
+                            <a href="../myfarm/main" class="nav-item nav-link">My Farm</a>
                             <a href="../board" class="nav-item nav-link">Board</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>

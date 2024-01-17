@@ -19,6 +19,7 @@
 	            <div class="mx-auto text-center mb-5" style="max-width: 500px;">
 	                <h1 class="display-5" id="headName">${vo.farm_name }</h1>
 	                <input type="hidden" value="${vo.user_num }" name="user_num" id="userNum">
+	                <input type="hidden" value="${vo.farm_num }" name="farm_num" id="farmNum">
 	            </div>
             </div>
             <div class="col-lg-3">	
@@ -44,8 +45,12 @@
             <div class="col-lg-9">
                     <div class="bg-primary h-100 p-5">
 
-                            <div class="row g-3">
 
+                            <div class="row g-3">
+                            	<div class="col-12">
+								
+                                </div>
+                            
                                 <div class="col-4">
                                 <a href="/myfarm/farm?farm_num=<c:out value='${vo.farm_num}'/>"style="color:black;">HOME</a>
                                 </div>
@@ -57,13 +62,31 @@
                                 </div>
                                 
                                 
-                                <div class="row g-4 justify-content-center" id="growupinput1">
-                                    
 
-                                    
-   
-                                </div>>
                                 
+                                <div class="col-12">
+
+                                </div>
+                                
+                                <div class="col-12">
+
+                                </div>
+                                
+                                <div class="col-12">
+
+                                </div>
+                                
+                                <div class="col-12">
+
+                                </div>
+                                
+                                <div class="col-12">
+
+                                </div>
+                                
+                                <div class="col-12">
+                                <a href="/myfarm/growregister?farm_num=<c:out value="${vo.farm_num}"/>">성장일기 등록</a>
+                                </div>
                                 
                             </div>
 
@@ -78,7 +101,25 @@
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-    	
+		
+		function loadGrowUpData() {
+
+			$.ajax({
+				url: "/myfarm/growlist", 
+				type: "POST", 
+				dataType : "json",
+				data:{
+					farm_num : $("#farmNum").val();
+
+				},
+				success: function(data){
+					
+				},
+				error:function(e){
+					console.log(e);
+					}
+				});
+    	}
         $("#keyword").keypress(function(event) {
             if (event.which === 13) {
                 // 엔터 키가 눌렸을 때 실행할 코드
