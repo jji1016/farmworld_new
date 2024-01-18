@@ -8,7 +8,7 @@ import com.farmworld.farm.domain.GrowUpVO;
 
 public interface GrowUp extends Generic<GrowUpVO, Integer> {
 
-	public List<GrowUpVO> growAll();
+	public List<GrowUpVO> growAll(GrowUpVO vo);
 	
 	public List<GrowUpVO> searchGrow(Criteria cri);
 	

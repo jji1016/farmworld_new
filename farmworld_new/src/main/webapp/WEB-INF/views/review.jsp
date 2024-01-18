@@ -28,6 +28,7 @@
          <div id="tablesize" class="col-lg-9">
          	<!-- 보드 -->
          	<div class="table-responsive">
+         	
      			<table class="table">
          			<thead>
 		              <tr>
@@ -43,6 +44,7 @@
 		       		<!-- AJAX 작동 -->
 		            </tbody>
         		</table>
+        		
     		</div>
     	</div>
 	</div>
@@ -56,9 +58,11 @@
 
 <script>
 
+let data3; // 전역 변수로 선언
+
 $(document).ready(function () {
     loadTableData();
-
+	let testNum = "";
     function loadTableData() {
         $.ajax({
             url: "/mypage/getreviewlist1",
@@ -74,21 +78,40 @@ $(document).ready(function () {
                             url: "/mypage/getreviewlist3",
                             type: "POST",
                             dataType: "json",
-                            success: function (data3) {
+                            success: function (data) {
+                                data3 = data; // 전역 변수에 저장
+
                                 // Assuming data1, data2, and data3 have the same length
                                 for (let i = 0; i < data1.length; i++) {
-
                                     let options = { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" };
-                                	
                                     let orderdate = new Date(data1[i].order_date);
                                     let orderformatDate = orderdate.toLocaleString("ko-KR", options);
-                                    
-                                    let reviewdate = new Date(data3[i].review_date);
+
+                                    let reviewdate = new Date(data[i].review_date);
+                                    console.log(data);
                                     let reviewformatDate = reviewdate.toLocaleString("ko-KR", options);
 
                                     let row = $("<tr>");
-                                    row.html("<td>이미지</td><td>" + orderformatDate + "</td><td>" + data1[i].order_num + "</td><td>" + data2[i].goods_title + "</td><td>" + reviewformatDate + "<br>" + data3[i].review_score + "<br>" + data3[i].review_content + "</td><td><button class='btn btn-primary middlebutton deliveryBtn'>수정</button><button class='btn btn-primary middlebutton purchaseViewBtn'>삭제</button></td>");
+                                    row.html(
+                                    	    "<td>이미지</td>" +
+                                    	    "<td>" + orderformatDate + "</td>" +
+                                    	    "<td>" + data1[i].order_num + "</td>" +
+                                    	    "<td>" + data2[i].goods_title + "</td>" +
+                                    	    "<td>" + reviewformatDate + "<br>" + data3[i].review_score + "<br>" + data3[i].review_content + "</td>" +
+                                    	    
+                                    	        "<td>" +
+                                    	            "<form name='review1' action='/mypage/reviewupdate' method='post'>"+
+                                        	        "<input type='hidden' class='review_num' id='review_num' name='review_num' value='" + data3[i].review_num + "'>" +
+													"<button type='submit' class='btn btn-primary middlebutton deliveryBtn'>수정</button></form>" +
+                                    	            "<form name='review2' action='/mypage/reviewdelete'  method='post'>" +
+                                        	        "<input type='hidden' class='review_num' id='review_num' name='review_num' value='" + data3[i].review_num + "'>" +
+                                    	            "<button name='review_num3' onclick='reviewdelete(" + i + ")' class='btn btn-primary middlebutton purchaseViewBtn'>삭제</button></form>" +
+                                    	        "</td>"
+                                    	    
+                                    	);                                    
                                     console.log(row);
+                                    testNum=data3[i].review_num;
+                                    console.log(testNum);
                                     $("tbody").append(row);
                                 }
                             },
@@ -108,6 +131,49 @@ $(document).ready(function () {
         });
     }
 });
+
+/* function reviewupdate(index) {
+	let test = $("#review_num").val();
+    let review_number1 = $(this).closest('tr').find('[name="review_num"]').val();
+    alert("리뷰수정여기여기"+ review_number1);
+
+    console.log("reviewupdate"+data3[index].review_num);
+    
+      $.ajax({
+        url: "/mypage/reviewup",
+        type: "GET", // POST 메서드로 요청 보내기
+        data: { review_num: review_num },
+        success: function(response) {
+        	window.location.href="/mypage/reviewup";
+        },
+        error: function(e) {
+        	 console.log(e);
+        }
+    });  
+    
+    let formObj = $("form[name='review']");
+	formObj.attr("action", "/mypage/reviewup").attr("method", "post");
+    formObj.submit(); 
+} */
+
+function reviewdelete(index) {
+    alert("리뷰가 삭제되었습니다");
+    let review_number2 = data3[index].review_num;
+    console.log(data3[index].review_num);
+    $.ajax({
+        url: "/mypage/reviewdelete",
+        type: "POST", // POST 메서드로 요청 보내기
+        data: { review_number2: review_number2 },
+        success: function(response) {
+        	window.location.href="/mypage/review";
+        },
+        error: function(e) {
+        	 console.log(e);
+        }
+    });
+}
+
 </script>
+
 
 </html>

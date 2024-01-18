@@ -11,4 +11,6 @@ public interface ImageMapper {
 	public void update(ImageVO vo);
 	
 	public void delete(int image_folder_num);
+	
+	public Integer maxNum();
 }
