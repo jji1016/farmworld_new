@@ -95,6 +95,7 @@
 							</table>
 
 							<div class="pull-right">
+								<div class="pagingBtn btnLeft"></div>
 								<ul class="pagination">
 									<c:if test="${pageMaker.prev }">
 										<li class="paginate_button previous"><a
@@ -112,6 +113,8 @@
 											href="${pageMaker.endPage +1 }">다음</a></li>
 									</c:if>
 								</ul>
+								
+								<button id="regBtn" class="pagingBtn btnRight">글쓰기</button>
 							</div>
 
 							<form id="actionForm" action="/board/list" method="get">

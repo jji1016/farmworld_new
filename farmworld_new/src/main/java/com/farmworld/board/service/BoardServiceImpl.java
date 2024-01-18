@@ -25,13 +25,13 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public void add(BoardVO vo) {
-		log.info("register()실행 vo: "+vo);
+		System.out.println("add()실행 vo: "+vo);
 		mapper.insert(vo);
 	}
 
 	@Override
 	public void modify(BoardVO vo) {
-		log.info("modify실행");
+		System.out.println("modify()실행: "+vo);
 		mapper.update(vo);
 	}
 
@@ -43,7 +43,7 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public BoardVO get(Integer key) {
-		log.info("get실행");
+		System.out.println("get실행"+key);
 		return mapper.select(key);
 	}
 
@@ -55,12 +55,7 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public List<BoardVO> searchList(Criteria cri) {
-		System.out.println("----service in getList -----");
-		log.info("----service in getList -----");
-		log.info(cri);
 		List<BoardVO> result = mapper.getListWithPaging(cri);
-		System.out.println("----service out getList----");
-		log.info("----service out getList----");
 		return result;
 	}
 	

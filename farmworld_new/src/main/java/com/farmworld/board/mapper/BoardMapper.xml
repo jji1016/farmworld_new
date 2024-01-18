@@ -8,8 +8,8 @@
 
 	<insert id="insert" parameterType="BoardVO">
 		insert into board
-		(board_title,board_content,user_nickname)
-		values (#{board_title}, #{board_content}, #{user_nickname})
+		(board_title,board_content,user_nickname,board_category)
+		values (#{board_title}, #{board_content}, #{user_nickname}, #{board_category})
 	</insert>
 
 	<insert id="insertSelectBno" parameterType="BoardVO"
@@ -51,60 +51,56 @@
 	</select>
 
 	<select id="getTotalCount" resultType="int" parameterType="com.farmworld.all.domain.Criteria">
-    SELECT COUNT(board_num) FROM board WHERE board_category = #{board_category}
-    <if test="type != null and type != '' and keyword != null and keyword != ''">
-        <choose>
-            <when test="type == 'TC'">
-                AND (board_title LIKE CONCAT('%',#{keyword},'%') OR board_content LIKE CONCAT('%',#{keyword},'%'))
-            </when>
-            <when test='type == "T"'>
-                AND board_title LIKE CONCAT('%',#{keyword},'%') 
-            </when>
-            <when test='type == "C"'>
-                AND board_content LIKE CONCAT('%',#{keyword},'%')
-            </when>
-            <when test='type == "W"'>
-                AND user_nickname LIKE CONCAT('%',#{keyword},'%') 
-            </when>
-        </choose>
-    </if>
-</select>
-
-
-
-
+	    SELECT COUNT(board_num) FROM board WHERE board_category = #{board_category}
+	    <if test="type != null and type != '' and keyword != null and keyword != ''">
+	        <choose>
+	            <when test="type == 'TC'">
+	                AND (board_title LIKE CONCAT('%',#{keyword},'%') OR board_content LIKE CONCAT('%',#{keyword},'%'))
+	            </when>
+	            <when test='type == "T"'>
+	                AND board_title LIKE CONCAT('%',#{keyword},'%') 
+	            </when>
+	            <when test='type == "C"'>
+	                AND board_content LIKE CONCAT('%',#{keyword},'%')
+	            </when>
+	            <when test='type == "W"'>
+	                AND user_nickname LIKE CONCAT('%',#{keyword},'%') 
+	            </when>
+	        </choose>
+	    </if>
+	</select>
+	
 	<select id="getListWithPaging" resultType="BoardVO"
-        parameterType="com.farmworld.all.domain.Criteria">
-    SELECT * FROM board WHERE board_category = #{board_category}
-    <if test="type != null and type != '' and keyword != null and keyword != ''">
-        <choose>
-            <when test="type == 'TC'">
-                AND (board_title LIKE CONCAT('%',#{keyword},'%') OR 
-                board_content LIKE CONCAT('%',#{keyword},'%'))
-                AND board_category LIKE #{board_category}
-            </when>
-            <when test='type == "T"'>
-                AND board_title LIKE CONCAT('%',#{keyword},'%') 
-                AND board_category LIKE #{board_category}
-            </when>
-            <when test='type == "C"'>
-                AND board_content LIKE CONCAT('%',#{keyword},'%')
-                AND board_category LIKE #{board_category}
-            </when>
-            <when test='type == "W"'>
-                AND user_nickname LIKE CONCAT('%',#{keyword},'%') 
-                AND board_category LIKE #{board_category}
-            </when>
-            <otherwise>
-                AND ${type} LIKE CONCAT('%',#{keyword},'%')
-                AND board_category LIKE #{board_category}
-            </otherwise>
-        </choose>
-    </if>
-    ORDER BY board_num DESC
-    LIMIT #{start}, #{amount}
-</select>
-
+	    parameterType="com.farmworld.all.domain.Criteria">
+	    SELECT * FROM board WHERE board_category = #{board_category}
+	    <if test="type != null and type != '' and keyword != null and keyword != ''">
+	        <choose>
+	            <when test="type == 'TC'">
+	                AND (board_title LIKE CONCAT('%',#{keyword},'%') OR 
+	                board_content LIKE CONCAT('%',#{keyword},'%'))
+	                AND board_category LIKE #{board_category}
+	            </when>
+	            <when test='type == "T"'>
+	                AND board_title LIKE CONCAT('%',#{keyword},'%') 
+	                AND board_category LIKE #{board_category}
+	            </when>
+	            <when test='type == "C"'>
+	                AND board_content LIKE CONCAT('%',#{keyword},'%')
+	                AND board_category LIKE #{board_category}
+	            </when>
+	            <when test='type == "W"'>
+	                AND user_nickname LIKE CONCAT('%',#{keyword},'%') 
+	                AND board_category LIKE #{board_category}
+	            </when>
+	            <otherwise>
+	                AND ${type} LIKE CONCAT('%',#{keyword},'%')
+	                AND board_category LIKE #{board_category}
+	            </otherwise>
+	        </choose>
+	    </if>
+	    ORDER BY board_num DESC
+	    LIMIT #{start}, #{amount}
+	</select>
 	
 </mapper>
 	

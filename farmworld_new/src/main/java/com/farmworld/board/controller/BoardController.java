@@ -31,18 +31,13 @@ public class BoardController {
 	@GetMapping("/list")
 	public String listAll(@RequestParam(name = "board_category", required = false) String boardCategory, Criteria cri, Model model) {
         // board_category 값이 있으면 cri에 설정
-		System.out.println("넘어온 카테고리:"+boardCategory);
         if (boardCategory != null && !boardCategory.isEmpty()) {
             cri.setBoard_category(boardCategory);
-            System.out.println("설정한 카테고리:"+boardCategory);
         }
 		System.out.println("시작");
-		System.out.println("넘길것"+cri);
 		//board main 들어갔을 때 카테고리 default=notice 설정
 		if(cri.getBoard_category() == null) {
-			System.out.println("메인 카테고리 설정");
 			cri.setBoard_category("notice");
-			System.out.println("if절 통과");
 		}
 		
 		int total = boardService.getTotal(cri);
@@ -58,7 +53,6 @@ public class BoardController {
 	@ResponseBody
 	@RequestMapping(value="/searchList", method = RequestMethod.POST)
 	public List<BoardVO> searchList(Criteria cri){
-		System.out.println("ajax 실행"+cri);
 		return boardService.searchList(cri);
 	}
 	
@@ -69,40 +63,29 @@ public class BoardController {
 		// Ajax, Form으로 controller접근 : 데이터 이동
 		@PostMapping("/register")
 		public String register(BoardVO board, RedirectAttributes rttr) {
-			
-//			int num = boardService.add(board);
-			log.info("board: "+board);
-//			rttr.addFlashAttribute("alert",num);
-			
-			// redirect : 클라이언트의 브라우저에게 다른 URL이동하라는 명령
-			//			  새로고침으로 인한 중복 요청 방지
+			boardService.add(board);
+			System.out.println("board: "+board);
 			return "redirect:/board/list";
 		}
 		
 		@GetMapping("/remove")
-		public String remove(Integer bno,RedirectAttributes rttr) {
+		public String remove(@RequestParam(name = "board_num", required = false) Integer bno,RedirectAttributes rttr) {
 			log.info("remove실행 bno: "+bno);
-//			int count = boardService.delete(bno);
-//			if(count==1) {
-//				rttr.addFlashAttribute("alert", "success");
-//			}
+				boardService.delete(bno);
 			return "redirect:/board/list";
 		}
 		
 		@GetMapping({"/get","/modify"})
-		public void get(Integer bno , Model model) {
-			log.info("get실행 bno: "+bno);
+		public void get(@RequestParam(name = "board_num", required = false) Integer bno, Model model) {
+			System.out.println("get실행 bno: "+bno);
 			BoardVO board = boardService.get(bno);
+			System.out.println(board);
 			model.addAttribute("board",board);
 		}
 		
 		@PostMapping("/modify")
 		public String modify(BoardVO board , RedirectAttributes rttr) {
-			log.info("modify실행");
-//			int count = boardService.modify(board);
-//			if(count==1) {
-//				rttr.addFlashAttribute("alert", "success");
-//			}
+			boardService.modify(board);
 			return "redirect:/board/list";
 		}
 		
