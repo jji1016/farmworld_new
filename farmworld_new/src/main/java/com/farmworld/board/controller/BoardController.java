@@ -1,6 +1,5 @@
 package com.farmworld.board.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -49,53 +48,49 @@ public class BoardController {
 		return "board/board";
 	}
 	
-	
 	@ResponseBody
 	@RequestMapping(value="/searchList", method = RequestMethod.POST)
 	public List<BoardVO> searchList(Criteria cri){
 		return boardService.searchList(cri);
 	}
 	
-	// board/register.jsp로 화면 이동
-		@GetMapping("/register")
-		public void registerGet() {}
-		
-		// Ajax, Form으로 controller접근 : 데이터 이동
-		@PostMapping("/register")
-		public String register(BoardVO board, RedirectAttributes rttr) {
-			boardService.add(board);
-			System.out.println("board: "+board);
-			return "redirect:/board/list";
-		}
-		
-		@GetMapping("/remove")
-		public String remove(@RequestParam(name = "board_num", required = false) Integer bno,RedirectAttributes rttr) {
-			log.info("remove실행 bno: "+bno);
-				boardService.delete(bno);
-			return "redirect:/board/list";
-		}
-		
-		@GetMapping({"/get","/modify"})
-		public void get(@RequestParam(name = "board_num", required = false) Integer bno, Model model) {
-			System.out.println("get실행 bno: "+bno);
-			BoardVO board = boardService.get(bno);
-			System.out.println(board);
-			model.addAttribute("board",board);
-		}
-		
-		@PostMapping("/modify")
-		public String modify(BoardVO board , RedirectAttributes rttr) {
-			boardService.modify(board);
-			return "redirect:/board/list";
-		}
-		
-		@PostMapping("/list")
-		public void list(Integer bno,Model model) {
-			log.info("해당 번호 회원 목록");
-			List<BoardVO> listb = new ArrayList<BoardVO>();
-			listb.add(boardService.get(bno));
-			model.addAttribute("boardList",listb);
-			log.info(model);
-		}
+	@GetMapping("/register")
+	public void registerGet() {}
 	
+	@PostMapping("/register")
+	public String register(BoardVO board, RedirectAttributes rttr) {
+		boardService.add(board);
+		System.out.println("board: "+board);
+		return "redirect:/board/list";
+	}
+	
+	@GetMapping("/remove")
+	public String remove(@RequestParam(name = "board_num", required = false) Integer bno,RedirectAttributes rttr) {
+		log.info("remove실행 bno: "+bno);
+			boardService.delete(bno);
+		return "redirect:/board/list";
+	}
+	
+	@GetMapping({"/get","/modify"})
+	public void get(@RequestParam(name = "board_num", required = false) Integer bno, Model model) {
+		System.out.println("get실행 bno: "+bno);
+		BoardVO board = boardService.get(bno);
+		System.out.println(board);
+		model.addAttribute("board",board);
+	}
+	
+	@PostMapping("/modify")
+	public String modify(@RequestParam(name = "board_category", required = false) String boardCategory, BoardVO board , RedirectAttributes rttr) {
+		boardService.modify(board);
+		return "redirect:/board/list?board_category="+boardCategory;
+	}
+	
+	@PostMapping("/increaseViewCount")
+	@ResponseBody
+	public String increaseViewCount(@RequestParam("board_num") int boardNum) {
+	    // 게시물 조회수 증가 로직을 처리하는 서비스 메서드 호출
+	    boardService.increaseViewCount(boardNum);
+	    return "success";
+	}
+		
 }

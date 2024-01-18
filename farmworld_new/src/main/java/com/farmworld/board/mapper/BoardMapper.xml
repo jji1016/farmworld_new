@@ -102,5 +102,13 @@
 	    LIMIT #{start}, #{amount}
 	</select>
 	
+	<!-- 조회수 증가 -->
+	<update id="increaseViewCount">
+	    UPDATE board
+	    SET board_view = board_view + 1
+	    WHERE board_num = #{boardNum}
+	</update>
+	
+	
 </mapper>
 	

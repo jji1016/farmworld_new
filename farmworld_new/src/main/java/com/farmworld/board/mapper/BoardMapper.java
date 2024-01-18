@@ -26,5 +26,7 @@ public interface BoardMapper {
 	
 	public List<BoardVO> getListWithPaging(Criteria cri);
 
+	public void increaseViewCount(int boardNum);
+
 
 }
