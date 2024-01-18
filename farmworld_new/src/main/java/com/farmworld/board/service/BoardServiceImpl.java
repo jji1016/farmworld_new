@@ -59,4 +59,9 @@ public class BoardServiceImpl implements BoardService{
 		return result;
 	}
 	
+	@Override
+	public void increaseViewCount(int boardNum) {
+	    mapper.increaseViewCount(boardNum);
+	}
+
 }

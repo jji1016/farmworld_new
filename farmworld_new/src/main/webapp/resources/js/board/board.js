@@ -43,7 +43,9 @@ $(document).ready(function() {
 					let row = $("<tr>");
 					row.append($("<td>").text(board.board_num));
 					
-					let titleLink = $("<a>").attr("href","/board/get?board_num="+board.board_num+"&board_category="+board.board_category).text(board.board_title);
+					let titleLink = $("<a>").attr("href","/board/get?board_num="+board.board_num+"&board_category="+board.board_category)
+						.text(board.board_title).on("click",function(){clickBoard(board.board_num, board.board_category);
+				    	});
 					let titleTd = $("<td>").append(titleLink);
 					row.append(titleTd);
 					row.append($("<td>").text(board.user_nickname));
@@ -59,15 +61,31 @@ $(document).ready(function() {
 			}
 		});
 	
-	let actionForm = $("#actionForm");
-	$(".paginate_button a").on("click",function(e){
-		e.preventDefault(); // 이벤트 초기화
-		// pageNum값을 사용자가 누른 a태그의 href속성값으로 변경
-		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
-		actionForm.submit();
-	});
+		let actionForm = $("#actionForm");
+		$(".paginate_button a").on("click",function(e){
+			e.preventDefault(); // 이벤트 초기화
+			// pageNum값을 사용자가 누른 a태그의 href속성값으로 변경
+			actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+			actionForm.submit();
+		});
 	
 	}// loadTableData 함수 선언 종료
+	
+	// 클릭한 게시물의 조회수를 증가시키는 Ajax 요청
+	function clickBoard(boardNum, boardCategory) {
+        $.ajax({
+            type: "POST",
+            url: "/board/increaseViewCount",
+            data: {
+                board_num: boardNum
+            },
+            success: function(result) {
+            },
+            error: function(error) {
+                console.log("Error: " + error);
+            }
+        });
+    };
 	
 	// summernote 사용
 	$('#BOARDCONT').summernote({
@@ -92,6 +110,7 @@ $(document).ready(function() {
 	});
 	
 	let formObj = $("#modify_form");
+	let category = $("#category").val();
 		$(".btn").click(function() {
 			let operation = $(this).data("oper");
 			console.log(operation);

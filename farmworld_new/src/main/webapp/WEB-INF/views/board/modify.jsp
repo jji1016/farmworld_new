@@ -26,7 +26,7 @@
 						<div class="panel-body">
 							<form id="modify_form" role="form">
 								<input name="board_num" type="hidden" value="${board.board_num }">
-								<input name="board_category" type="hidden" value="${board.board_category }">
+								<input id="category" name="board_category" type="hidden" value="${board.board_category }">
 								<div class="form-group">
 									<label>제목</label><input class="form-control" name="board_title" required="required" value="${board.board_title}">
 								</div>
