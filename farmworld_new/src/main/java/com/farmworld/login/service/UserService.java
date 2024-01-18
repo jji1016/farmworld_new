@@ -7,7 +7,7 @@ public interface UserService extends Generic<UserVO, Integer> {
 
 	public String idCheck(UserVO vo);
 	
-	public String nickCheck(UserVO vo); //ÀÎÅÍÆäÀÌ½º ´ÙÀÌ¾î±×·¥¿¡ Ãß°¡ÇØ¾ß ÇÔ
+	public String nickCheck(UserVO vo); //ì¸í„°í˜ì´ìŠ¤ ë‹¤ì´ì–´ê·¸ë¨ì— ì¶”ê°€í•´ì•¼ í•¨
 	
 	public String findId(UserVO vo);
 	

@@ -34,30 +34,30 @@ public class userController {
 	private final UserService userService;
 	private final MailSendService mailService;
 	
-//	@GetMapping("/mypage") //·Î±×ÀÎ o/x »óÅÂ È®ÀÎ
+//	@GetMapping("/mypage") //ë¡œê·¸ì¸ o/x ìƒíƒœ í™•ì¸
 //	public String loginCheck(HttpSession session) {
 //		log.info("controller loginCheck");
 //		System.out.println("controller loginCheck");
 //		
-//		//¼¼¼Ç¿¡ ÀúÀåµÇ¾î ÀÖ´Â user_num°ª ¹Ş¾Æ¿À±â
+//		//ì„¸ì…˜ì— ì €ì¥ë˜ì–´ ìˆëŠ” user_numê°’ ë°›ì•„ì˜¤ê¸°
 //		Integer user_num = (int) session.getAttribute("user_num"); 
 //		
-//		if(user_num != null && user_num !=0 ) { //·Î±×ÀÎ µÈ »óÅÂ
-//			return "redirect:"+"/"; //ÈÄ¿¡ ¸¶ÀÌÆäÀÌÁö ÀÌµ¿À¸·Î °íÃÄ¾ßÇÔ
+//		if(user_num != null && user_num !=0 ) { //ë¡œê·¸ì¸ ëœ ìƒíƒœ
+//			return "redirect:"+"/"; //í›„ì— ë§ˆì´í˜ì´ì§€ ì´ë™ìœ¼ë¡œ ê³ ì³ì•¼í•¨
 //		}
-//		return "/user/login"; //·Î±×ÀÎ ¾È µÈ »óÅÂ
+//		return "/user/login"; //ë¡œê·¸ì¸ ì•ˆ ëœ ìƒíƒœ
 //	}
 //	
 //	@PostMapping("/mypage")
-//	public void getMyPage() { //¸¶ÀÌÆäÀÌÁö ÀÌµ¿
+//	public void getMyPage() { //ë§ˆì´í˜ì´ì§€ ì´ë™
 //		
 //	}
 	
-/*** È¸¿ø°¡ÀÔ
- * ¾ÆÀÌµğ/´Ğ³×ÀÓ Áßº¹ Ã¼Å©
- * ÇÚµåÆù ¹øÈ£ µî Å¸ÀÔ/±ÛÀÚ Á¦ÇÑ
- * ÀÌ¸ŞÀÏ ÀÎÁõ
- * ÁÖ¼Ò API »ç¿ë
+/*** íšŒì›ê°€ì…
+ * ì•„ì´ë””/ë‹‰ë„¤ì„ ì¤‘ë³µ ì²´í¬
+ * í•¸ë“œí° ë²ˆí˜¸ ë“± íƒ€ì…/ê¸€ì ì œí•œ
+ * ì´ë©”ì¼ ì¸ì¦
+ * ì£¼ì†Œ API ì‚¬ìš©
  *  ***/	
 	
 	@GetMapping("/join")
@@ -65,110 +65,110 @@ public class userController {
 		return "/user/join";
 	}
 	
-	//È¸¿ø°¡ÀÔ ¿Ï·á
+	//íšŒì›ê°€ì… ì™„ë£Œ
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String join(UserVO userVo) {
 		userService.add(userVo);
 		return "redirect:/";
 	}
 	
-	@ResponseBody //¾ÆÀÌµğ Áßº¹ Ã¼Å©
+	@ResponseBody //ì•„ì´ë”” ì¤‘ë³µ ì²´í¬
 	@RequestMapping(value = "/idCheck", method = RequestMethod.POST)
 	public boolean idCheck(UserVO vo) {
 		System.out.println("controller idCheck"+vo);
-		if(userService.idCheck(vo) == null) { //»ç¿ë °¡´É
+		if(userService.idCheck(vo) == null) { //ì‚¬ìš© ê°€ëŠ¥
 			System.out.println("controller idCheck");
 			return true;
 		}
 		return false;
 	}
 	
-	@ResponseBody //´Ğ³×ÀÓ Áßº¹ Ã¼Å©
+	@ResponseBody //ë‹‰ë„¤ì„ ì¤‘ë³µ ì²´í¬
 	@RequestMapping(value = "/nickCheck", method = RequestMethod.POST)
 	public boolean nickCheck(UserVO vo) {
 		System.out.println("controller nickCheck"+vo);
 		String user_nickname = userService.nickCheck(vo);
-		if(user_nickname == null) { //»ç¿ë °¡´É
+		if(user_nickname == null) { //ì‚¬ìš© ê°€ëŠ¥
 			return true;
 		}
 		return false;
 	}
 
 
-/*** ·Î±×ÀÎ 
- * ¼¼¼Ç¿¡ user_num ÀúÀå
- * ´Ğ³×ÀÓ °¡Á®¿À±â
- * °ü¸®ÀÚ ¿©ºÎ Ã¼Å©
+/*** ë¡œê·¸ì¸ 
+ * ì„¸ì…˜ì— user_num ì €ì¥
+ * ë‹‰ë„¤ì„ ê°€ì ¸ì˜¤ê¸°
+ * ê´€ë¦¬ì ì—¬ë¶€ ì²´í¬
  * ***/
 	
-	@GetMapping("/login") //·Î±×ÀÎ Ã¢ ÀÌµ¿
+	@GetMapping("/login") //ë¡œê·¸ì¸ ì°½ ì´ë™
 	public String getLogin() {
 		System.out.println("controller getLogin");
 		return "/user/login";
 	}
 	
-	//·Î±×ÀÎ Á¤º¸ È®ÀÎ
+	//ë¡œê·¸ì¸ ì •ë³´ í™•ì¸
 	@RequestMapping(value = "/login", method = RequestMethod.POST) 
 	public String postLogin(UserVO vo, HttpSession session, Model model) {
 		log.info("controller postLogin: "+vo);
-		System.out.println("controller postLogin »ç¿ëÀÚ ÀÔ·Â: "+vo);
+		System.out.println("controller postLogin ì‚¬ìš©ì ì…ë ¥: "+vo);
 		
 		UserVO userInfo  = userService.login(vo);
-		System.out.println("controller postLogin db°ª: "+userInfo);
+		System.out.println("controller postLogin dbê°’: "+userInfo);
 		
-		if(userInfo != null) {//·Î±×ÀÎ ¼º°ø
-			//user_num/nickname ¼¼¼Ç¿¡ ÀúÀå
+		if(userInfo != null) {//ë¡œê·¸ì¸ ì„±ê³µ
+			//user_num/nickname ì„¸ì…˜ì— ì €ì¥
 			session.setAttribute("user_num", userInfo.getUser_num());
 			session.setAttribute("user_nickname", userInfo.getUser_nickname());
 			
-			System.out.println("·Î±×ÀÎ ¼º°ø");
+			System.out.println("ë¡œê·¸ì¸ ì„±ê³µ");
 			return "redirect:/";
 		}else {
-			model.addAttribute("loginError", "¾ÆÀÌµğ ¶Ç´Â ºñ¹Ğ¹øÈ£°¡ Àß¸øµÇ¾ú½À´Ï´Ù.");
-			System.out.println("¸ğµ¨ ½ÇÇà");
+			model.addAttribute("loginError", "ì•„ì´ë”” ë˜ëŠ” ë¹„ë°€ë²ˆí˜¸ê°€ ì˜ëª»ë˜ì—ˆìŠµë‹ˆë‹¤.");
+			System.out.println("ëª¨ë¸ ì‹¤í–‰");
 			return "/user/login";
 		}
 	}
 
 	
-/*** ·Î±×ÀÎ »óÅÂÀÎÁö È®ÀÎ 
- * ¼¼¼Ç¿¡ user_num°ª ÀÖ´ÂÁö È®ÀÎ
- * (¼¼¼Ç¿¡ ÀúÀåÇÒ±î¸»±î) user_nickname°ª header¿¡ Àü´Ş 
+/*** ë¡œê·¸ì¸ ìƒíƒœì¸ì§€ í™•ì¸ 
+ * ì„¸ì…˜ì— user_numê°’ ìˆëŠ”ì§€ í™•ì¸
+ * (ì„¸ì…˜ì— ì €ì¥í• ê¹Œë§ê¹Œ) user_nicknameê°’ headerì— ì „ë‹¬ 
  * ***/
 	@ResponseBody
 	@RequestMapping(value = "/checkLogin", method = RequestMethod.POST)
 	public boolean checkLogin(HttpSession session) {
-		System.out.println("ajax checkLogin ½ÇÇà");
+		System.out.println("ajax checkLogin ì‹¤í–‰");
 		
 		Integer user_num = null;
 		String user_nickname = null;
 		
-		//¼¼¼Ç¿¡ ÀúÀåµÇ¾î ÀÖ´Â user_num°ª ¹Ş¾Æ¿À±â
+		//ì„¸ì…˜ì— ì €ì¥ë˜ì–´ ìˆëŠ” user_numê°’ ë°›ì•„ì˜¤ê¸°
 		if(session.getAttribute("user_num") != null) {
 			user_num = (int) session.getAttribute("user_num");
 			user_nickname = (String) session.getAttribute("user_nickname");
-			System.out.println("¼¼¼Ç ¼³Á¤: "+user_num+user_nickname);
-			System.out.println("È¸¿ø ¸ŞÀÎ");
+			System.out.println("ì„¸ì…˜ ì„¤ì •: "+user_num+user_nickname);
+			System.out.println("íšŒì› ë©”ì¸");
 		}else {
-			System.out.println("ºñÈ¸¿ø ¸ŞÀÎ");
+			System.out.println("ë¹„íšŒì› ë©”ì¸");
 		}
 			
-		// ·Î±×ÀÎ ¿©ºÎ È®ÀÎ: true,false ¹İÈ¯
+		// ë¡œê·¸ì¸ ì—¬ë¶€ í™•ì¸: true,false ë°˜í™˜
 	    return user_num != null;
 	}
 	
 	
-/*** ·Î±×¾Æ¿ô ***/	
+/*** ë¡œê·¸ì•„ì›ƒ ***/	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) {
-		System.out.println("ajax logout ½ÇÇà");
-		session.invalidate(); //¼¼¼Ç Á¤º¸ ÃÊ±âÈ­
-		System.out.println("¼¼¼Ç ÃÊ±âÈ­");
+		System.out.println("ajax logout ì‹¤í–‰");
+		session.invalidate(); //ì„¸ì…˜ ì •ë³´ ì´ˆê¸°í™”
+		System.out.println("ì„¸ì…˜ ì´ˆê¸°í™”");
 		return "redirect:/";
 	}
 
 	
-/*** ¾ÆÀÌµğ Ã£±â ***/
+/*** ì•„ì´ë”” ì°¾ê¸° ***/
 	@GetMapping("/findId")
 	public String getFindId() {
 		System.out.println("getFindId");
@@ -181,17 +181,17 @@ public class userController {
 		Map<String, String> resultMap = new HashMap<String, String>();
 		System.out.println("ajax findId");
 		String user_id = userService.findId(vo);
-		if(user_id != null) { //¾ÆÀÌµğ Ã£¾ÒÀ» ¶§
-			System.out.println("¾ÆÀÌµğ Ã£¾Ò´Ù:"+user_id);
-			resultMap.put("result","°í°´´ÔÀÇ ¾ÆÀÌµğ´Â "+user_id+ "ÀÔ´Ï´Ù.");
+		if(user_id != null) { //ì•„ì´ë”” ì°¾ì•˜ì„ ë•Œ
+			System.out.println("ì•„ì´ë”” ì°¾ì•˜ë‹¤:"+user_id);
+			resultMap.put("result","ê³ ê°ë‹˜ì˜ ì•„ì´ë””ëŠ” "+user_id+ "ì…ë‹ˆë‹¤.");
 		}else {
-			resultMap.put("result", "ÀÌ¸§ ¶Ç´Â ÀüÈ­¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+			resultMap.put("result", "ì´ë¦„ ë˜ëŠ” ì „í™”ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 		}
 		return resultMap;
 	}
 	
-/*** ºñ¹Ğ¹øÈ£ ¼öÁ¤ ***/
-	@GetMapping("/changePw") //ºñ¹ø¼öÁ¤ jps ¿­±â
+/*** ë¹„ë°€ë²ˆí˜¸ ìˆ˜ì • ***/
+	@GetMapping("/changePw") //ë¹„ë²ˆìˆ˜ì • jps ì—´ê¸°
 	public String getChangePw() {
 		System.out.println("changePw");
 		return "/user/changePw";
@@ -207,34 +207,34 @@ public class userController {
 		return false;
 	}
 	
-	//ºñ¹ø ¼öÁ¤À» À§ÇÑ º»ÀÎ ÀÎÁõ ¹øÈ£ Àü´Ş
+	//ë¹„ë²ˆ ìˆ˜ì •ì„ ìœ„í•œ ë³¸ì¸ ì¸ì¦ ë²ˆí˜¸ ì „ë‹¬
 	@ResponseBody
 	@RequestMapping(value = "/sendMail", method = RequestMethod.POST)
 	public String sendMail(String user_id, Model model) {
-		System.out.println("ºñ¹ø ÀÎÁõ ¿äÃ»"+user_id);
+		System.out.println("ë¹„ë²ˆ ì¸ì¦ ìš”ì²­"+user_id);
 		return mailService.mailSender(user_id);
 	}
 		
-	//¸ŞÀÏ Àü¼Û test
+	//ë©”ì¼ ì „ì†¡ test
 	@RequestMapping(value = "/testest", method = RequestMethod.GET)
 	public String test () {
 		return mailService.mailSender("zzazza1226@gmail.com");
 	}
 	
-	//ºñ¹ø ¼öÁ¤
+	//ë¹„ë²ˆ ìˆ˜ì •
 	@ResponseBody
 	@RequestMapping(value = "/modPw", method = RequestMethod.POST)
 	public Map<String, Object> modPw (UserVO vo) {
-		System.out.println("ºñ¹ø ¼öÁ¤"+vo);
+		System.out.println("ë¹„ë²ˆ ìˆ˜ì •"+vo);
 		Map<String, Object> response = new HashMap<>();
 		
 		try {
 	        userService.modify(vo);
 	        response.put("success", true);
-	        response.put("message", "ºñ¹Ğ¹øÈ£°¡ ¼º°øÀûÀ¸·Î ¼öÁ¤µÇ¾ú½À´Ï´Ù.");
+	        response.put("message", "ë¹„ë°€ë²ˆí˜¸ê°€ ì„±ê³µì ìœ¼ë¡œ ìˆ˜ì •ë˜ì—ˆìŠµë‹ˆë‹¤.");
 	    } catch (Exception e) {
 	        response.put("success", false);
-	        response.put("message", "ºñ¹Ğ¹øÈ£ ¼öÁ¤¿¡ ½ÇÆĞÇß½À´Ï´Ù.");
+	        response.put("message", "ë¹„ë°€ë²ˆí˜¸ ìˆ˜ì •ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
 	    }
 
 	    return response;

@@ -21,13 +21,13 @@ public class UserServiceImpl implements UserService{
 		return mapper.select(k);
 	}
 
-	@Override //È¸¿ø°¡ÀÔ
+	@Override //íšŒì›ê°€ì…
 	public void add(UserVO vo) {
 		System.out.println("service add vo: " + vo);
 		mapper.insert(vo);
 	}
 
-	@Override //ºñ¹ø ¼öÁ¤
+	@Override //ë¹„ë²ˆ ìˆ˜ì •
 	public void modify(UserVO vo) {
 		mapper.modPw(vo);
 	}
@@ -38,17 +38,17 @@ public class UserServiceImpl implements UserService{
 		
 	}
 
-	@Override // È¸¿ø°¡ÀÔ½Ã ¾ÆÀÌµğ Áßº¹ Ã¼Å©
+	@Override // íšŒì›ê°€ì…ì‹œ ì•„ì´ë”” ì¤‘ë³µ ì²´í¬
 	public String idCheck(UserVO vo) {
 		return mapper.idCheck(vo); 
 	}
 	
-	@Override // È¸¿ø°¡ÀÔ½Ã ´Ğ³×ÀÓ Áßº¹ Ã¼Å©
+	@Override // íšŒì›ê°€ì…ì‹œ ë‹‰ë„¤ì„ ì¤‘ë³µ ì²´í¬
 	public String nickCheck(UserVO vo) {
 		return mapper.nickCheck(vo);
 	}
 
-	@Override //¾ÆÀÌµğ Ã£±â
+	@Override //ì•„ì´ë”” ì°¾ê¸°
 	public String findId(UserVO vo) {
 		System.out.println("service findId: "+mapper.findId(vo));
 		return mapper.findId(vo);
@@ -60,31 +60,31 @@ public class UserServiceImpl implements UserService{
 		
 	}
 	
-	@Override //·Î±×ÀÎ
+	@Override //ë¡œê·¸ì¸
 	public UserVO login(UserVO vo) {
 		System.out.println("service login: "+mapper.getUserInfo(vo));
 		return mapper.getUserInfo(vo);	
 	}
 	
-	@Override //·Î±×¾Æ¿ô
+	@Override //ë¡œê·¸ì•„ì›ƒ
 	public void logout() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override //¼¼¼Ç¿¡ ÀúÀåµÈ user_numÀ¸·Î È®ÀÎÇØ¾ßÇÔ
+	@Override //ì„¸ì…˜ì— ì €ì¥ëœ user_numìœ¼ë¡œ í™•ì¸í•´ì•¼í•¨
 	public boolean isAdmin(UserVO vo) {
 		System.out.println("service isAdmin");
 		
 		UserVO isAdmin = mapper.isAdmin(vo);
 		
-		if(isAdmin.getUser_num()==1) { //°ü¸®ÀÚÀÎ °æ¿ì
+		if(isAdmin.getUser_num()==1) { //ê´€ë¦¬ìì¸ ê²½ìš°
 			return true;
 		}
-		return false; //°ü¸®ÀÚx °æ¿ì
+		return false; //ê´€ë¦¬ìx ê²½ìš°
 	}
 
-	@Override //ºñ¹ø ¼öÁ¤ À§ÇÑ º»ÀÎ È®ÀÎ
+	@Override //ë¹„ë²ˆ ìˆ˜ì • ìœ„í•œ ë³¸ì¸ í™•ì¸
 	public String infoCheckForPw(UserVO vo) {
 		String id = mapper.getIdForPw(vo);
 		System.out.println("service infoCheckForPw:"+id);

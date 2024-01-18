@@ -20,13 +20,13 @@ import lombok.extern.log4j.Log4j;
 @Service
 @Log4j
 public class MailSendService {
-	JavaMailSenderImpl mailSender = new JavaMailSenderImpl(); //½ºÇÁ¸µ¿¡¼­ Á¦°øÇÏ´Â ¸ŞÀÏ Àü¼ÛÀ» À§ÇÑ Å¬·¡½º 
-	private int authNumber; //³­¼ö ¹ß»ı
+	JavaMailSenderImpl mailSender = new JavaMailSenderImpl(); //ìŠ¤í”„ë§ì—ì„œ ì œê³µí•˜ëŠ” ë©”ì¼ ì „ì†¡ì„ ìœ„í•œ í´ë˜ìŠ¤ 
+	private int authNumber; //ë‚œìˆ˜ ë°œìƒ
 	
 	
-	//ÀÎÁõ¹øÈ£ ¸¸µé±â
+	//ì¸ì¦ë²ˆí˜¸ ë§Œë“¤ê¸°
 	public void makeRandomNum() {
-		//³­¼ö ¹üÀ§ 111111~999999(6ÀÚ¸®)
+		//ë‚œìˆ˜ ë²”ìœ„ 111111~999999(6ìë¦¬)
 		Random r = new Random();
 		int checkNum = r.nextInt(888888)+111111;
 		System.out.println("service makeRandomNum"+checkNum);
@@ -41,7 +41,7 @@ public class MailSendService {
         sender.setHost("smtp.gmail.com");
         sender.setPort(587);
         sender.setUsername("0farmworld0@gmail.com");
-        sender.setPassword("mmjo sawm dgbp gtnx"); ///2´Ü°è ÀÎÁõ ¾Û ºñ¹Ğ¹øÈ£
+        sender.setPassword("mmjo sawm dgbp gtnx"); ///2ë‹¨ê³„ ì¸ì¦ ì•± ë¹„ë°€ë²ˆí˜¸
 
         Properties javaMailProperties = new Properties();
         javaMailProperties.put("mail.transport.protocol", "smtp");
@@ -57,19 +57,19 @@ public class MailSendService {
         MimeMessage mailContent = sender.createMimeMessage();
         MimeMessageHelper helper;
 
-        //¸ŞÀÏ ³»¿ë: html Çü½ÄÀ¸·Î ÀÛ¼º
-        String content= "ÆÊ¿ùµå" + "<br>" 
-        				+ "º»ÀÎ ÀÎÁõ ¹øÈ£´Â ["+ code + "]ÀÔ´Ï´Ù." + "<br><br>"
-        				+ "ÇØ´ç ÀÎÁõ ¹øÈ£¸¦ ÀÎÁõ ¹øÈ£ È®ÀÎ¶õ¿¡ ±âÀÔÇÏ¿© ÁÖ¼¼¿ä.";
+        //ë©”ì¼ ë‚´ìš©: html í˜•ì‹ìœ¼ë¡œ ì‘ì„±
+        String content= "íŒœì›”ë“œ" + "<br>" 
+        				+ "ë³¸ì¸ ì¸ì¦ ë²ˆí˜¸ëŠ” ["+ code + "]ì…ë‹ˆë‹¤." + "<br><br>"
+        				+ "í•´ë‹¹ ì¸ì¦ ë²ˆí˜¸ë¥¼ ì¸ì¦ ë²ˆí˜¸ í™•ì¸ë€ì— ê¸°ì…í•˜ì—¬ ì£¼ì„¸ìš”.";
 
         try {
             helper = new MimeMessageHelper(mailContent, true, "UTF-8");
             helper.setTo(email);
-            helper.setSubject("<ÆÊ¿ùµå>º»ÀÎ ÀÎÁõ ÀÌ¸ŞÀÏÀÔ´Ï´Ù."); //¸ŞÀÏÁ¦¸ñ
+            helper.setSubject("<íŒœì›”ë“œ>ë³¸ì¸ ì¸ì¦ ì´ë©”ì¼ì…ë‹ˆë‹¤."); //ë©”ì¼ì œëª©
             helper.setText(content,true);
             sender.send(mailContent);
         } catch (MessagingException e) {
-            code="À¯È¿ÇÏÁö ¾ÊÀº ÀÌ¸ŞÀÏÀÔ´Ï´Ù.";
+            code="ìœ íš¨í•˜ì§€ ì•Šì€ ì´ë©”ì¼ì…ë‹ˆë‹¤.";
             e.printStackTrace();
         }
         return code;
