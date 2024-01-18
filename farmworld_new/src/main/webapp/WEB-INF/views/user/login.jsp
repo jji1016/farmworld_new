@@ -53,7 +53,7 @@
                 </div>
                 
                  <div class="col-4">
-                    <button class="btn btn-secondary w-100 py-3" type="button"><a href="/user/findPw">비밀번호 찾기</a></button>
+                    <button class="btn btn-secondary w-100 py-3" type="button"><a href="/user/changePw">비밀번호 찾기</a></button>
                 </div>
                 
                  <div class="col-4">
@@ -74,8 +74,8 @@
 //로그인 버튼 누르면 form 제출
 $("#loginBtn").on("click", function () {
 	$("#login_form").submit();
-	if(${result} != null){
-		alert("${result}");		
+	if(result != null){
+		alert("${result}");
 	}
 });
 
