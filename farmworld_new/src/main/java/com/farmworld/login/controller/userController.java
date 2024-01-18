@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,79 +30,139 @@ public class userController {
 	@Autowired
 	private final UserService userService;
 	
-	@GetMapping("/mypage") //ï¿½Î±ï¿½ï¿½ï¿½ o/x ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
-	public String loginCheck(HttpSession session) {
-		log.info("controller loginCheck");
-		System.out.println("controller loginCheck");
-		
-		//ï¿½ï¿½ï¿½Ç¿ï¿½ ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ ï¿½Ö´ï¿½ user_numï¿½ï¿½ ï¿½Þ¾Æ¿ï¿½ï¿½ï¿½
-		Integer user_num = (int) session.getAttribute("user_num"); 
-		
-		if(user_num != null && user_num !=0 ) { //ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-			return "redirect:"+"/"; //ï¿½Ä¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½
-		}
-		return "/user/login"; //ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-	}
+//	@GetMapping("/mypage") //·Î±×ÀÎ o/x »óÅÂ È®ÀÎ
+//	public String loginCheck(HttpSession session) {
+//		log.info("controller loginCheck");
+//		System.out.println("controller loginCheck");
+//		
+//		//¼¼¼Ç¿¡ ÀúÀåµÇ¾î ÀÖ´Â user_num°ª ¹Þ¾Æ¿À±â
+//		Integer user_num = (int) session.getAttribute("user_num"); 
+//		
+//		if(user_num != null && user_num !=0 ) { //·Î±×ÀÎ µÈ »óÅÂ
+//			return "redirect:"+"/"; //ÈÄ¿¡ ¸¶ÀÌÆäÀÌÁö ÀÌµ¿À¸·Î °íÃÄ¾ßÇÔ
+//		}
+//		return "/user/login"; //·Î±×ÀÎ ¾È µÈ »óÅÂ
+//	}
+//	
+//	@PostMapping("/mypage")
+//	public void getMyPage() { //¸¶ÀÌÆäÀÌÁö ÀÌµ¿
+//		
+//	}
 	
-	@PostMapping("/mypage")
-	public void getMyPage() { //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
-		
-	}
+/*** È¸¿ø°¡ÀÔ
+ * ¾ÆÀÌµð/´Ð³×ÀÓ Áßº¹ Ã¼Å©
+ * ÇÚµåÆù ¹øÈ£ µî Å¸ÀÔ/±ÛÀÚ Á¦ÇÑ
+ * ÀÌ¸ÞÀÏ ÀÎÁõ
+ * ÁÖ¼Ò API »ç¿ë
+ *  ***/	
 	
 	@GetMapping("/join")
 	public String getJoin() {
 		return "/user/join";
 	}
 	
-	@PostMapping("/join")
-	public void join() {
-		
+	//È¸¿ø°¡ÀÔ ¿Ï·á
+	@RequestMapping(value = "/join", method = RequestMethod.POST)
+	public String join(UserVO userVo, HttpSession session) {
+		userService.add(userVo);
+		return "redirect:/";
 	}
 	
-	@ResponseBody //ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ßºï¿½ Ã¼Å©
+	@ResponseBody //¾ÆÀÌµð Áßº¹ Ã¼Å©
 	@RequestMapping(value = "/idCheck", method = RequestMethod.POST)
 	public boolean idCheck(UserVO vo) {
 		System.out.println("controller idCheck"+vo);
-		if(userService.idCheck(vo) == null) { //ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		if(userService.idCheck(vo) == null) { //»ç¿ë °¡´É
+			System.out.println("controller idCheck");
 			return true;
 		}
 		return false;
 	}
 	
-	@ResponseBody //ï¿½Ð³ï¿½ï¿½ï¿½ ï¿½ßºï¿½ Ã¼Å©
+	@ResponseBody //´Ð³×ÀÓ Áßº¹ Ã¼Å©
 	@RequestMapping(value = "/nickCheck", method = RequestMethod.POST)
 	public boolean nickCheck(UserVO vo) {
 		System.out.println("controller nickCheck"+vo);
-		if(userService.nickCheck(vo) == null) { //ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		String user_nickname = userService.nickCheck(vo);
+		if(user_nickname == null) { //»ç¿ë °¡´É
 			return true;
 		}
 		return false;
 	}
+
+
+/*** ·Î±×ÀÎ 
+ * ¼¼¼Ç¿¡ user_num ÀúÀå
+ * ´Ð³×ÀÓ °¡Á®¿À±â
+ * °ü¸®ÀÚ ¿©ºÎ Ã¼Å©
+ * ***/
 	
-	@GetMapping("/login") //ï¿½Î±ï¿½ï¿½ï¿½ Ã¢ ï¿½Ìµï¿½
+	@GetMapping("/login") //·Î±×ÀÎ Ã¢ ÀÌµ¿
 	public String getLogin() {
 		System.out.println("controller getLogin");
 		return "/user/login";
 	}
 	
-	@ResponseBody //ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
+	//·Î±×ÀÎ Á¤º¸ È®ÀÎ
 	@RequestMapping(value = "/login", method = RequestMethod.POST) 
-	public String postLogin(UserVO vo, HttpSession session) {
+	public String postLogin(UserVO vo, HttpSession session, Model model) {
 		log.info("controller postLogin: "+vo);
-		System.out.println("controller postLogin: "+vo);
+		System.out.println("controller postLogin »ç¿ëÀÚ ÀÔ·Â: "+vo);
 		
 		UserVO userInfo  = userService.login(vo);
+		System.out.println("controller postLogin db°ª: "+userInfo);
 		
-		if((vo.getUser_id()).equals(userInfo.getUser_id())){
+		if(userInfo != null) {//·Î±×ÀÎ ¼º°ø
+			//user_num/nickname ¼¼¼Ç¿¡ ÀúÀå
+			session.setAttribute("user_num", userInfo.getUser_num());
+			session.setAttribute("user_nickname", userInfo.getUser_nickname());
 			
+			System.out.println("·Î±×ÀÎ ¼º°ø");
+			return "redirect:/";
+		}else {
+			model.addAttribute("loginError", "¾ÆÀÌµð ¶Ç´Â ºñ¹Ð¹øÈ£°¡ Àß¸øµÇ¾ú½À´Ï´Ù.");
+			System.out.println("¸ðµ¨ ½ÇÇà");
+			return "/user/login";
 		}
+	}
+
+	
+/*** ·Î±×ÀÎ »óÅÂÀÎÁö È®ÀÎ 
+ * ¼¼¼Ç¿¡ user_num°ª ÀÖ´ÂÁö È®ÀÎ
+ * (¼¼¼Ç¿¡ ÀúÀåÇÒ±î¸»±î) user_nickname°ª header¿¡ Àü´Þ 
+ * ***/
+	@ResponseBody
+	@RequestMapping(value = "/checkLogin", method = RequestMethod.POST)
+	public boolean checkLogin(HttpSession session) {
+		System.out.println("ajax checkLogin ½ÇÇà");
 		
-		//ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ = null
-		//user_numï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½Ç¿ï¿½ ï¿½ï¿½ï¿½ï¿½
-		session.setAttribute("user_num", userInfo.getUser_num());
+		Integer user_num = null;
+		String user_nickname = null;
 		
-		return null;
-		
-	} 
+		//¼¼¼Ç¿¡ ÀúÀåµÇ¾î ÀÖ´Â user_num°ª ¹Þ¾Æ¿À±â
+		if(session.getAttribute("user_num") != null) {
+			user_num = (int) session.getAttribute("user_num");
+			user_nickname = (String) session.getAttribute("user_nickname");
+			System.out.println("¼¼¼Ç ¼³Á¤: "+user_num+user_nickname);
+			System.out.println("È¸¿ø ¸ÞÀÎ");
+		}else {
+			System.out.println("ºñÈ¸¿ø ¸ÞÀÎ");
+		}
+			
+		// ·Î±×ÀÎ ¿©ºÎ È®ÀÎ: true,false ¹ÝÈ¯
+	    return user_num != null;
+	}
+	
+	
+/*** ·Î±×¾Æ¿ô ***/	
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(HttpSession session) {
+		System.out.println("ajax logout ½ÇÇà");
+		session.invalidate(); //¼¼¼Ç Á¤º¸ ÃÊ±âÈ­
+		System.out.println("¼¼¼Ç ÃÊ±âÈ­");
+		return "redirect:/";
+	}
+	
+	
 	
 }

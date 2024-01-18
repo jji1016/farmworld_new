@@ -15,4 +15,6 @@ public interface MyFarm extends Generic<MyFarmVO, Integer> {
 	public int getTotal(Criteria cri);
 	
 	public void view(MyFarmVO vo);
+
+	public Integer searchFarmKeyword(Criteria cri);
 }

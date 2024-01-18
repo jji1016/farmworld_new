@@ -10,4 +10,5 @@ public class MyFarmVO {
 	private int user_num;
 	private int image_folder_num;
 	private int myfarm_view;
+	private String image1;
 }

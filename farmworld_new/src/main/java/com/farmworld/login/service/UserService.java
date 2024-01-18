@@ -19,6 +19,6 @@ public interface UserService extends Generic<UserVO, Integer> {
 	
 	public boolean isAdmin(UserVO vo);
 
-	
+//	public UserVO join(UserVO vo);
 
 }

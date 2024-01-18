@@ -1,6 +1,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
@@ -11,9 +12,6 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
-    
-    <!-- board css -->
-    <link href="/resources/css/board/board.css" rel="stylesheet">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,9 +33,13 @@
     <link href="/resources/css/style.css" rel="stylesheet">
     
     <!-- jQuery 변경 : 반응형 버전이 최적화 / jsp에서 jQuery 사용이 필요하므로 header에 -->
-	<script src="https://code.jquery.com/jquery-3.7.1.min.js" 
-	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" 
-	crossorigin="anonymous"></script>
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+	
+	<!-- 캐시 비활성화 -->
+	<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, post-check=0, pre-check=0">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Expires" content="0">
 </head>
 
 <body>
@@ -55,18 +57,19 @@
                 <div class="d-flex justify-content-between">
                     <div class="top-info ps-2">
                         <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#" class="text-white">123 Street, New York</a></small>
-                        <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#" class="text-white">Email@Example.com</a></small>
+                        <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a id="user_nickname" href="#" class="text-white"><c:out value="${user_nickname}"/></a></small>
                     </div>
                     <div class="top-link pe-2">
                         <a href="#" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
-                        <a href="../user/login" class="text-white"><small class="text-white mx-2">로그인</small>/</a>
-                        <a href="../user/join" class="text-white"><small class="text-white ms-2">회원가입</small></a>
+                        <a href="../user/login" id="loginBtn" class="text-white"><small class="text-white mx-2">로그인</small>/</a>
+                        <a href="../user/logout" id="logoutBtn" class="text-white" style="display: none;"><small class="text-white ms-2">로그아웃</small></a>
+                        <a href="../user/join" id="joinBtn" class="text-white"><small class="text-white ms-2">회원가입</small></a>
                     </div>
                 </div>
             </div>
             <div class="container px-0">
                 <nav class="navbar navbar-light bg-white navbar-expand-xl">
-                    <a href="../" class="navbar-brand"><h1 class="text-primary display-6">Fruitables</h1></a>
+                    <a href="../home.jsp" class="navbar-brand"><h1 class="text-primary display-6">Fruitables</h1></a>
                     <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                         <span class="fa fa-bars text-primary"></span>
                     </button>
@@ -75,8 +78,9 @@
                             <a href="../home" class="nav-item nav-link active">Home</a>
                             <a href="../shopmain" class="nav-item nav-link">Shop</a>
                             <a href="../shopdetail" class="nav-item nav-link">Shop Detail</a>
-                            <a href="../myfarmMain" class="nav-item nav-link">My Farm</a>
+                            <a href="../myfarm/main" class="nav-item nav-link">My Farm</a>
                             <a href="../board/list" class="nav-item nav-link">Board</a>
+
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu m-0 bg-secondary rounded-0">
@@ -94,7 +98,7 @@
                                 <i class="fa fa-shopping-bag fa-2x"></i>
                                 <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
                             </a>
-                            <a href="../mypage" class="my-auto">
+                            <a href="#" class="my-auto">
                                 <i class="fas fa-user fa-2x"></i>
                             </a>
                         </div>
@@ -125,5 +129,53 @@
         <!-- Modal Search End -->
 
 </body>
->>>>>>> branch 'main' of https://github.com/jji1016/farmworld_new.git
 </html>
+
+<script type="text/javascript">
+	var isLoggedIn = false;
+
+	//로그인 상태인지 확인
+	function checkLoginStatus() {
+		$.ajax({
+			url: "/user/checkLogin",
+			type: "POST",
+			dataType: "json",
+			success: function (result) {
+				console.log(result);
+				if(result){ //user_num 있으면 로그인 상태로 간주
+					isLoggedIn = true;
+					toggleBtn();
+				}
+			},
+			error: function (e) {
+				console.log(e);
+			}
+		});
+	};
+	
+	//버튼 바꾸기
+	function toggleBtn() {
+		if (isLoggedIn) { //로그인 상태
+	        $("#loginBtn, #joinBtn").hide();
+	        $("#logoutBtn").show();
+	    } else {
+	        $("#loginBtn, #joinBtn").show();
+	        $("#logoutBtn").hide();
+	    }
+	}
+
+	$(document).ready(function () {
+	    // 페이지 로드 시 로그인 상태 확인
+	    checkLoginStatus();
+
+	    // 로그아웃 버튼 클릭 시 처리
+	    $("#logoutBtn").on("click", function () {
+	    	alert("로그아웃 성공");
+	        // 로그아웃이 성공하면 버튼 갱신
+	        checkLoginStatus();
+	        toggleBtn();
+	    });
+	});
+
+
+</script>

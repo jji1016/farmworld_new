@@ -1,5 +1,7 @@
 package com.farmworld.farm.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,30 +9,37 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.farmworld.all.domain.Criteria;
+import com.farmworld.all.domain.ImageVO;
 import com.farmworld.all.domain.pageDTO;
+import com.farmworld.all.service.ImageService;
 import com.farmworld.farm.domain.MyFarmVO;
 import com.farmworld.farm.service.MyFarm;
 
 import lombok.AllArgsConstructor;
-import lombok.extern.log4j.Log4j;
 
 @Controller
 @RequestMapping("/myfarm")
-@Log4j
 @AllArgsConstructor
 public class MyFarmController {
 	
 	@Autowired
 	private MyFarm myFarmService;
+	
+	@Autowired
+	private ImageService imageService; 
 	
 	@GetMapping("/checkSession")
     @ResponseBody
@@ -43,15 +52,26 @@ public class MyFarmController {
 	    if (hasUserNum) {
 	        // 세션에 user_num이 있다면 응답에 user_num 추가
 	        String userNum = (String) session.getAttribute("user_num");
+	        System.out.println("usernum:"+userNum);
 	        response.put("userNum", userNum);
 	    }
-
+	    
 	    return ResponseEntity.ok(response);
 	}
-	@GetMapping("/register")
-	public void registerget() {}
 	
-	@GetMapping("/main")
+	@GetMapping("/modify")
+	public void modifyFarm(Model model, MyFarmVO myFarmVO) {
+		model.addAttribute("vo",myFarmService.get(myFarmVO.getFarm_num()));
+	}
+
+	
+	@GetMapping("/farm")
+	public void moveFarm(MyFarmVO myFarmVO, Model model) {
+		myFarmService.view(myFarmVO);
+		model.addAttribute("vo", myFarmService.get(myFarmVO.getFarm_num()));
+	}
+	
+	@GetMapping({"/main", "/"})
 	public void myfarmMain(Criteria cri, Model model) {
 		cri.setAmount(6);
 		int total = myFarmService.getTotal(cri);
@@ -59,15 +79,59 @@ public class MyFarmController {
 		model.addAttribute("pageMaker", pageResult);
 	}
 	
+	@GetMapping("/register")
+	public void registerget() {}
+	
 	@PostMapping("/register")
-	public String register(HttpSession session, MyFarmVO myFarmVO) {
-		Integer userNum = (Integer) session.getAttribute("user_num");
+	public String register(@RequestParam("image1") MultipartFile file, Model model, HttpSession session, MyFarmVO myFarmVO) {
+	    Integer userNum = (Integer) session.getAttribute("user_num");
+	    Integer imageNum = 0; 
+	    String folderPath = "";  // 폴더 경로
+
+	    if (!file.isEmpty()) {
+	        try {
+	            // 저장 경로 설정    
+	            String uploadDir = "C:\\Users\\keduit\\git\\farmworld_new\\farmworld_new\\src\\main\\webapp\\resources\\upload\\";
+	            String fileName = file.getOriginalFilename();
+
+	            // 폴더 생성
+	            ImageVO vo = new ImageVO();
+	            vo.setImage1(fileName);
+	            imageNum = imageService.addGetNum(vo);
+	            System.out.println(imageNum);
+	            
+	            folderPath = uploadDir + imageNum + "/";
+	            
+	            File folder = new File(folderPath);
+	            if (!folder.exists()) {
+	                folder.mkdirs();  // 디렉터리가 없으면 생성
+	            }
+
+	            // 파일 저장
+	            String filePath = folderPath + fileName;
+	            File dest = new File(filePath);
+	            file.transferTo(dest);
+
+	            // 모델에 파일 경로 추가
+	            model.addAttribute("filePath", filePath);
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+		myFarmVO.setImage_folder_num(imageNum);
 		myFarmService.add(myFarmVO);
 	    return "redirect:/myfarm/main";    
 	}
+	@PostMapping("/modify")
+	public String modify(@RequestParam("image1") MultipartFile file, Model model, HttpSession session, MyFarmVO myFarmVO) {
+		
+		return "redirect:/myfarm/farm?farm_num="+myFarmVO.getFarm_num();
+	}
+	
 		
 	@GetMapping("/farmlist")
 	public void farmlist(Criteria cri, Model model) {
+		//6개 설정
 		cri.setAmount(6);
 		int total = myFarmService.getTotal(cri);
 		pageDTO pageResult = new pageDTO(cri, total);
@@ -78,6 +142,7 @@ public class MyFarmController {
 	@PostMapping("/getlist")
 	public List<MyFarmVO> getlist(Criteria cri){
 		
+		//타입 설정
 		switch (cri.getType()) {
 		case "T":
 			cri.setType("farm_name");
@@ -89,7 +154,43 @@ public class MyFarmController {
 
 		List<MyFarmVO> list = myFarmService.farmAll(cri);
 		
+		
 		return list;
 	}
+	
+	@PostMapping("/searchFarm")
+	@ResponseBody
+	public ResponseEntity<String> searchFarm(@RequestParam("keyword") String keyword) {
+		Criteria cri = new Criteria();
+		cri.setKeyword(keyword);
+	    Integer farmNum = myFarmService.searchFarmKeyword(cri);
+	    if (farmNum == null) {
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("fail");
+	    } else {
+	        return ResponseEntity.ok(farmNum.toString());
+	    }
+	}
+	
+	@PostMapping("/remove")
+	public String deleteFarm(MyFarmVO vo) {
+		myFarmService.delete(vo.getFarm_num());
+		return "redirect:/myfarm/main";
+	}
+	
+	@GetMapping("/growlist")
+	public void growlist(MyFarmVO vo, Criteria cri, Model model) {
+		
+		cri.setAmount(6);
+		int total = myFarmService.getTotal(cri);
+		pageDTO pageResult = new pageDTO(cri, total);
+		model.addAttribute("pageMaker", pageResult);
+		model.addAttribute("vo", myFarmService.get(vo.getFarm_num()));
+	}
+	
+	@GetMapping("/growregister")
+	public void growregister(MyFarmVO vo, Model model) {
+		model.addAttribute("vo", myFarmService.get(vo.getFarm_num()));
+	}
+
 
 }

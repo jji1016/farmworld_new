@@ -9,3 +9,29 @@
 .pagination{
 	display: flex !important;
 }
+
+.category-link{
+	cursor: pointer;
+}
+
+.col-xs-4{
+	display:flex;
+	justify-content: flex-end;
+}
+
+.board_type{
+	width: 150px !important;
+	margin-right: 10px;
+}
+
+.pagingBtn{
+	width:100px;
+}
+
+.btnRight{
+	margin-left:auto;
+}
+
+.btnLeft{
+	margin-right:auto
+}

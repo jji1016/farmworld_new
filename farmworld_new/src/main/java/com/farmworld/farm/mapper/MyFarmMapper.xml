@@ -10,7 +10,7 @@
 
 	<insert id="insert" parameterType="MyFarmVO">
 		insert into myfarm(farm_name,farm_intro,user_num,image_folder_num) values
-		(#{farm_name}, #{farm_intro}, 1, 1)
+		(#{farm_name}, #{farm_intro}, 1, #{image_folder_num})
 	</insert>
 
 	<insert id="insertSelectBno" parameterType="MyFarmVO"
@@ -35,7 +35,7 @@
 	
 	<update id="viewCount" parameterType="MyFarmVO">
 		UPDATE myfarm
-		SET farm_view = +1
+		SET myfarm_view = +1
 		WHERE farm_num = #{farm_num}
 	</update>
 
@@ -45,8 +45,9 @@
 	</delete>
 
 	<select id="select" resultType="MyFarmVO" parameterType="MyFarmVO">
-		SELECT *
-		FROM myfarm WHERE farm_num = #{farm_num}
+		SELECT f.*, i.image1
+        FROM myfarm f
+        LEFT JOIN image i ON f.image_folder_num = i.image_folder_num WHERE f.farm_num = #{farm_num}
 	</select>
 
 	<select id="getTotalCount" resultType="int" parameterType="com.farmworld.all.domain.Criteria">
@@ -75,7 +76,9 @@
 
 	<select id="getListWithPaging" resultType="MyFarmVO"
 		parameterType="com.farmworld.all.domain.Criteria">
-		SELECT * FROM myfarm
+		SELECT f.*, i.image1
+        FROM myfarm f
+        LEFT JOIN image i ON f.image_folder_num = i.image_folder_num
 		<if test="type != null and type != '' and keyword != null and keyword != ''">
 			<where>
 				<choose>
@@ -91,6 +94,22 @@
 		</if>
 		ORDER BY myfarm_view DESC
 		LIMIT #{start}, #{amount}
+	</select>
+	
+	<update id="FarmCreate" parameterType="MyFarmVO">
+	UPDATE user
+	SET user_isFarm = 1
+	WHERE user_num = #{user_num}
+	</update>
+	
+	<update id="FarmDelete" parameterType="MyFarmVO">
+	UPDATE user
+	SET user_isFarm = 0
+	WHERE user_num = #{user_num}
+	</update>
+	
+	<select id="selectFarmKeyword" parameterType="com.farmworld.all.domain.Criteria" resultType="Integer">
+	SELECT farm_num FROM myfarm WHERE farm_name = #{keyword}
 	</select>
 
 </mapper>

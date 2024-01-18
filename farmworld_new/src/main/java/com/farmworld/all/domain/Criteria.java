@@ -13,6 +13,7 @@ public class Criteria {
 	// 한 페이지에 표시될 게시물의 갯수
 	// 페이지 이동 시 첫 글에 대해 필요한 변수(LIMIT) 
 	private int start;
+	private String board_category;
 
 	public Criteria() {
 		this(1, 10);

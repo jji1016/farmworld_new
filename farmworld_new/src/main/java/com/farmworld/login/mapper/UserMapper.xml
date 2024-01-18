@@ -5,7 +5,7 @@
     
 <mapper namespace="com.farmworld.login.mapper.UserMapper">
 
-	<insert id="insert" parameterType="UserVO">
+	<insert id="insert" parameterType="UserVO" >
 		INSERT INTO user
 		(user_id, user_pw, user_name, 
 			user_nickname, user_address, user_phone)
@@ -27,12 +27,13 @@
 	
 	<!-- 1. 회원가입 시 아이디 중복 체크 
 		 2. 로그인 시 아이디 맞는지 확인 -->
-	<select id="idCheck" parameterType="UserVO" resultType="UserVO">
+	<select id="idCheck" parameterType="UserVO" resultType="String">
 		SELECT user_id FROM user WHERE user_id=#{user_id}
 	</select>
 	
-	<select id="nickCheck" parameterType="UserVO" resultType="UserVO">
+	<select id="nickCheck" parameterType="UserVO" resultType="String">
 		SELECT user_nickname FROM user WHERE user_nickname=#{user_nickname}
 	</select>
+	
 
 </mapper>

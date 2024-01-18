@@ -27,7 +27,9 @@
 
 	<select id="getListWithSearch" resultType="GrowUpVO"
 		parameterType="com.farmworld.all.domain.Criteria">
-		SELECT * FROM GrowUp
+		        SELECT f.*, i.image1
+        FROM myfarm f
+        LEFT JOIN image i ON f.image_folder_num = i.image_folder_num
 		<if
 			test="type != null and type != '' and keyword != null and keyword != ''">
 			<where>
@@ -85,23 +87,10 @@
 
 	<select id="getListWithPaging" resultType="GrowUpVO"
 		parameterType="com.farmworld.all.domain.Criteria">
-		SELECT * FROM GrowUp
-		<if test="type != null and type != '' and keyword != null and keyword != ''">
-			<where>
-				<choose>
-					<when test="type == 'TC'">
-						AND grow_title LIKE CONCAT('%',#{keyword},'%') OR 
-						grow_content LIKE CONCAT('%',#{keyword},'%')
-					</when>
-					<when test="type == 'TCW'">
-					    AND (grow_title LIKE CONCAT('%',#{keyword},'%') OR grow_content LIKE CONCAT('%',#{keyword},'%') OR grow_category LIKE CONCAT('%',#{keyword},'%'))
-					</when>
-					<otherwise>
-						AND ${type} LIKE CONCAT('%',#{keyword},'%')
-					</otherwise>
-				</choose>
-			</where>
-		</if>
+		SELECT g.*, i.image1, i.image2, i.image3
+        FROM growup g
+        LEFT JOIN image i ON g.image_folder_num = i.image_folder_num
+        WHERE farm_num = #{farm_num}
 		ORDER BY bno DESC
 		LIMIT #{start}, #{amount}
 	</select>

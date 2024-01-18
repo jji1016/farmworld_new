@@ -21,9 +21,9 @@ public class UserServiceImpl implements UserService{
 		return mapper.select(k);
 	}
 
-	@Override
+	@Override //회원가입
 	public void add(UserVO vo) {
-		log.info("vo: " + vo);
+		System.out.println("service add vo: " + vo);
 		mapper.insert(vo);
 	}
 
@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService{
 		return mapper.idCheck(vo); 
 	}
 	
-	@Override // 회원가입시 아이디 중복 체크
+	@Override // 회원가입시 닉네임 중복 체크
 	public String nickCheck(UserVO vo) {
 		return mapper.nickCheck(vo);
 	}
@@ -62,11 +62,9 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
-	public int login(UserVO vo) {
-		//아이디 체크
-		String db_id = mapper.idCheck(vo);
-		//비번 체크
-		
+	public UserVO login(UserVO vo) {
+		System.out.println("service login: "+mapper.getUserInfo(vo));
+		return mapper.getUserInfo(vo);	
 	}
 	
 	@Override
@@ -86,6 +84,15 @@ public class UserServiceImpl implements UserService{
 		}
 		return false; //관리자x 경우
 	}
+
+
+//	@Override
+//	public int join(UserVO vo) { //회원가입
+//		log.info("service join vo: " + vo);
+//		
+//		System.out.println("mapper joinVo: "+ joinVo);
+//		return joinVo;
+//	}
 
 
 }

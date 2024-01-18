@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -28,27 +29,30 @@ public class BoardController {
 	private final BoardService boardService;
 	
 	@GetMapping("/list")
-	public String listAll(Criteria cri, Model model) {
+	public String listAll(@RequestParam(name = "board_category", required = false) String boardCategory, Criteria cri, Model model) {
+        // board_category 값이 있으면 cri에 설정
+        if (boardCategory != null && !boardCategory.isEmpty()) {
+            cri.setBoard_category(boardCategory);
+        }
 		System.out.println("시작");
-		log.info("---- controller in list -----");
-		System.out.println(cri);
+		//board main 들어갔을 때 카테고리 default=notice 설정
+		if(cri.getBoard_category() == null) {
+			cri.setBoard_category("notice");
+		}
 		
 		int total = boardService.getTotal(cri);
 		pageDTO pageResult = new pageDTO(cri, total);
 		model.addAttribute("pageMaker",pageResult);
-		log.info("---- controller out list -----");
 		System.out.println(total);
-		System.out.println(pageResult);
-
+		System.out.println("---------------결과"+pageResult);
+		
 		return "board/board";
 	}
+	
 	
 	@ResponseBody
 	@RequestMapping(value="/searchList", method = RequestMethod.POST)
 	public List<BoardVO> searchList(Criteria cri){
-		System.out.println("searchList -> Type : "+ cri.getType());
-		System.out.println("searchList -> Keyword : "+ cri.getKeyword());
-		System.out.println("searchList리턴값:  "+boardService.searchList(cri));
 		return boardService.searchList(cri);
 	}
 	
@@ -60,12 +64,8 @@ public class BoardController {
 		@PostMapping("/register")
 		public String register(BoardVO board, RedirectAttributes rttr) {
 			
-//			int num = boardService.add(board);
-			log.info("board: "+board);
-//			rttr.addFlashAttribute("alert",num);
-			
-			// redirect : 클라이언트의 브라우저에게 다른 URL이동하라는 명령
-			//			  새로고침으로 인한 중복 요청 방지
+			 boardService.add(board);
+			System.out.println("board: "+board);
 			return "redirect:/board/list";
 		}
 		
@@ -80,9 +80,10 @@ public class BoardController {
 		}
 		
 		@GetMapping({"/get","/modify"})
-		public void get(Integer bno , Model model) {
-			log.info("get실행 bno: "+bno);
+		public void get(@RequestParam(name = "board_num", required = false) Integer bno , Model model) {
+			System.out.println("get실행 bno: "+bno);
 			BoardVO board = boardService.get(bno);
+			System.out.println(board);
 			model.addAttribute("board",board);
 		}
 		
