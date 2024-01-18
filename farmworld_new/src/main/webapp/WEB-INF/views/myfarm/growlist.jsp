@@ -64,7 +64,7 @@
                                 
 
                                 
-                                <div class="col-12">
+                                <div class="col-12" id="growInput">
 
                                 </div>
                                 
@@ -102,23 +102,45 @@
 <script type="text/javascript">
     $(document).ready(function () {
 		
-		function loadGrowUpData() {
-
+    	loadTableData(); // Ajax 실행 함수 호출
+		
+		function loadTableData() {
+			let farmNum = $("#farm_num").val();
 			$.ajax({
-				url: "/myfarm/growlist", 
+				url: "/myfarm/getlist", 
 				type: "POST", 
 				dataType : "json",
 				data:{
-					farm_num : $("#farmNum").val()
-
+					farm_num : farmNum
 				},
 				success: function(data){
-					
+					let growBody = $("#growInput");
+					console.log(data)
+					$.each(data, function(index,grow){
+	
+						let row ="";
+						row+=("<div class='col-md-6 col-lg-6 col-xl-4'>");
+						row+=("<div class='rounded position-relative fruite-item' onclick='redirectToFarm(" + grow.grow_num + ")'>");
+						row+=("<div class='row g-0'>");
+						row+=("<div class='col-10'>");
+						row+=("<div class='position-relative'>");
+						row+=("<input type='hidden' name='farm_num' value='"+grow.farm_num+"'>")
+						row+=("<img src='/resources/upload/" + grow.image_folder_num + "/"+ grow.image1 + "' class='card-img-top fixed-size-image' alt='농장 이미지' style='width:100%; height:280px'>");
+						row+=("<div class='position-absolute start-0 bottom-0 w-100 py-3 px-4' style='background: rgba(52, 173, 84, .85);'>");
+						row+=("<h4 class='text-white text-truncate'>"+grow.grow_title+"</h4>");
+
+						row+=("</div></div></div></div></div></div>");
+
+						
+						growBody.append(row);
+						
+					});
 				},
-				error:function(e){
+				error: function(e){
 					console.log(e);
-					}
-				});
+				}
+
+			});
     	}
         $("#keyword").keypress(function(event) {
             if (event.which === 13) {

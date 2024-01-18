@@ -21,8 +21,8 @@
 		values (#{grow_title}, #{grow_content})
 	</insert>
 
-	<select id="selectAll" resultType="GrowUpVO">
-		select * from GrowUp
+	<select id="selectAll" resultType="GrowUpVO" parameterType="GrowUpVO">
+		select * from GrowUp WHERE farm_num = #{farm_num}
 	</select>
 
 	<select id="getListWithSearch" resultType="GrowUpVO"

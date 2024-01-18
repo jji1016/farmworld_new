@@ -11,7 +11,7 @@ public interface GrowUpMapper {
 
 	public void insertSelectBno(GrowUpVO vo);
 
-	public List<GrowUpVO> selectAll();
+	public List<GrowUpVO> selectAll(GrowUpVO vo);
 
 	public int update(GrowUpVO vo);
 

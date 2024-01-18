@@ -49,7 +49,7 @@ public class MyFarmController {
 	private ImageService imageService;
 	
 	@Autowired
-	private GrowUp growUoService;
+	private GrowUp growUpService;
 	
 	@Autowired
 	private FileUploadService fileUpload;
@@ -186,6 +186,17 @@ public class MyFarmController {
 		model.addAttribute("vo", myFarmService.get(vo.getFarm_num()));
 	}
 	
+	@ResponseBody
+	@PostMapping("/growlist")
+	public List<GrowUpVO> growgetlist(GrowUpVO vo){
+		
+
+		List<GrowUpVO> list = growUpService.growAll(vo);
+		
+		
+		return list;
+	}
+	
 	@GetMapping("/growregister")
 	public void growregister(MyFarmVO vo, Model model) {
 		model.addAttribute("vo", myFarmService.get(vo.getFarm_num()));
@@ -233,7 +244,7 @@ public class MyFarmController {
 	    imageNum = imageService.addGetNum(image);
 	    vo.setImage_folder_num(imageNum);
 	    System.out.println(vo);
-	    growUoService.add(vo);
+	    growUpService.add(vo);
 	    return "redirect:/myfarm/growlist?farm_num=" + vo.getFarm_num();
 	}
 	

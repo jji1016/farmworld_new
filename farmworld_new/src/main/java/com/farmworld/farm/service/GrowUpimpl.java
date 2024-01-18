@@ -41,9 +41,9 @@ public class GrowUpimpl implements GrowUp {
 	}
 
 	@Override
-	public List<GrowUpVO> growAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<GrowUpVO> growAll(GrowUpVO vo) {
+		
+		return mapper.selectAll(vo);
 	}
 
 	@Override
