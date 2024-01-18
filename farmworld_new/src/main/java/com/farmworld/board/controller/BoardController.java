@@ -63,24 +63,20 @@ public class BoardController {
 		// Ajax, Form으로 controller접근 : 데이터 이동
 		@PostMapping("/register")
 		public String register(BoardVO board, RedirectAttributes rttr) {
-			
-			 boardService.add(board);
+			boardService.add(board);
 			System.out.println("board: "+board);
 			return "redirect:/board/list";
 		}
 		
 		@GetMapping("/remove")
-		public String remove(Integer bno,RedirectAttributes rttr) {
+		public String remove(@RequestParam(name = "board_num", required = false) Integer bno,RedirectAttributes rttr) {
 			log.info("remove실행 bno: "+bno);
-//			int count = boardService.delete(bno);
-//			if(count==1) {
-//				rttr.addFlashAttribute("alert", "success");
-//			}
+				boardService.delete(bno);
 			return "redirect:/board/list";
 		}
 		
 		@GetMapping({"/get","/modify"})
-		public void get(@RequestParam(name = "board_num", required = false) Integer bno , Model model) {
+		public void get(@RequestParam(name = "board_num", required = false) Integer bno, Model model) {
 			System.out.println("get실행 bno: "+bno);
 			BoardVO board = boardService.get(bno);
 			System.out.println(board);
@@ -89,11 +85,7 @@ public class BoardController {
 		
 		@PostMapping("/modify")
 		public String modify(BoardVO board , RedirectAttributes rttr) {
-			log.info("modify실행");
-//			int count = boardService.modify(board);
-//			if(count==1) {
-//				rttr.addFlashAttribute("alert", "success");
-//			}
+			boardService.modify(board);
 			return "redirect:/board/list";
 		}
 		

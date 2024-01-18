@@ -24,27 +24,27 @@
                     <div class="panel panel-default">
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                        	<form role="form">
+                        	<form method="get" action="/board/modify">
                         		<div class="form-group">
-                                  <input class="form-control" type="hidden" name="bno" value="${board.board_num }">
-                              </div>
-                              <div class="form-group">
-                                  <label>제목</label>
-                                  <input class="form-control" name="title" readonly="readonly" value="${board.board_title }">
-                              </div>
-                              <div class="form-group">
-                                  <label>작성자</label>
-                                  <input class="form-control" name="writer" readonly="readonly" value="${board.user_nickname }">
-                              </div>
-							  <div class="form-group">
-                                  <label>내용</label>
-                                  <div class="form-control">
-                                  	${board.board_content }
-                                  </div>
-                              </div>
+                                    <input class="form-control" type="hidden" name="board_num" value="${board.board_num }">
+                                </div>
+                                <div class="form-group">
+                                    <label>제목</label>
+                                    <input class="form-control" name="title" readonly="readonly" value="${board.board_title }">
+                                </div>
+                                <div class="form-group">
+                                    <label>작성자</label>
+                                    <input class="form-control" name="writer" readonly="readonly" value="${board.user_nickname }">
+                                </div>
+							    <div class="form-group">
+                                    <label>내용</label>
+                                    <div class="form-control">
+                                        ${board.board_content }
+                                    </div>
+                                </div>
                               
-                              <button type="button" class="btn btn-default" data-oper = "list">목록으로</button>
-                              <button type="button" class="btn btn-default" data-oper = "modify">수정하기</button>
+                                <button type="submit" class="btn btn-default" data-oper = "modify">수정하기</button>
+                                <button type="button" class="btn-default" onclick ="location.href='/board/list?board_category=${param.board_category}'">목록으로</button>
                         	</form>
                         </div>
                      </div>
