@@ -15,4 +15,12 @@ public interface ReviewService extends Generic<ReviewVO, Integer> {
 	public List<OrderVO> review1();
 	public List<GoodsVO> review2();
 	public List<ReviewVO> review3();
+	
+	public int reviewupdate(ReviewVO vo);
+	
+	public int updatereview(ReviewVO vo);
+	
+	public int reviewdelete(int review_num);
+	
+	public ReviewVO getreviewVO(Integer k);
 }
