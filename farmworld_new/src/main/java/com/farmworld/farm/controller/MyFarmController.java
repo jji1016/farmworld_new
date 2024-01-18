@@ -2,12 +2,15 @@ package com.farmworld.farm.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,8 +28,12 @@ import com.farmworld.all.domain.Criteria;
 import com.farmworld.all.domain.ImageVO;
 import com.farmworld.all.domain.pageDTO;
 import com.farmworld.all.service.ImageService;
+import com.farmworld.all.util.FileUploadService;
+import com.farmworld.farm.domain.GrowUpVO;
 import com.farmworld.farm.domain.MyFarmVO;
+import com.farmworld.farm.service.GrowUp;
 import com.farmworld.farm.service.MyFarm;
+import com.google.gson.JsonObject;
 
 import lombok.AllArgsConstructor;
 
@@ -39,7 +46,16 @@ public class MyFarmController {
 	private MyFarm myFarmService;
 	
 	@Autowired
-	private ImageService imageService; 
+	private ImageService imageService;
+	
+	@Autowired
+	private GrowUp growUoService;
+	
+	@Autowired
+	private FileUploadService fileUpload;
+
+	
+	private static String uploadDir = "C:\\Users\\keduit\\git\\farmworld_new\\farmworld_new\\src\\main\\webapp\\resources\\upload\\";
 	
 	@GetMapping("/checkSession")
     @ResponseBody
@@ -67,6 +83,7 @@ public class MyFarmController {
 	
 	@GetMapping("/farm")
 	public void moveFarm(MyFarmVO myFarmVO, Model model) {
+		System.out.println(myFarmVO);
 		myFarmService.view(myFarmVO);
 		model.addAttribute("vo", myFarmService.get(myFarmVO.getFarm_num()));
 	}
@@ -83,41 +100,23 @@ public class MyFarmController {
 	public void registerget() {}
 	
 	@PostMapping("/register")
-	public String register(@RequestParam("image1") MultipartFile file, Model model, HttpSession session, MyFarmVO myFarmVO) {
+	public String register(@RequestParam("image1") MultipartFile file,  HttpSession session, MyFarmVO myFarmVO) {
 	    Integer userNum = (Integer) session.getAttribute("user_num");
-	    Integer imageNum = 0; 
-	    String folderPath = "";  // 폴더 경로
-
+	    Integer imageNum = imageService.MaxFolder(); 
+	    String filePath = "";  // 폴더 경로
+	    ImageVO vo = new ImageVO();
 	    if (!file.isEmpty()) {
 	        try {
-	            // 저장 경로 설정    
-	            String uploadDir = "C:\\Users\\keduit\\git\\farmworld_new\\farmworld_new\\src\\main\\webapp\\resources\\upload\\";
-	            String fileName = file.getOriginalFilename();
-
-	            // 폴더 생성
-	            ImageVO vo = new ImageVO();
-	            vo.setImage1(fileName);
-	            imageNum = imageService.addGetNum(vo);
-	            System.out.println(imageNum);
-	            
-	            folderPath = uploadDir + imageNum + "/";
-	            
-	            File folder = new File(folderPath);
-	            if (!folder.exists()) {
-	                folder.mkdirs();  // 디렉터리가 없으면 생성
-	            }
-
-	            // 파일 저장
-	            String filePath = folderPath + fileName;
-	            File dest = new File(filePath);
-	            file.transferTo(dest);
-
-	            // 모델에 파일 경로 추가
-	            model.addAttribute("filePath", filePath);
+	        	String fileName = file.getOriginalFilename();
+	        	filePath = uploadDir + imageNum + "/";
+	        	fileUpload.uploadFile(file, filePath);
+	        	vo.setImage1(fileName);
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
 	    }
+	    
+	    imageNum = imageService.addGetNum(vo);
 		myFarmVO.setImage_folder_num(imageNum);
 		myFarmService.add(myFarmVO);
 	    return "redirect:/myfarm/main";    
@@ -191,6 +190,72 @@ public class MyFarmController {
 	public void growregister(MyFarmVO vo, Model model) {
 		model.addAttribute("vo", myFarmService.get(vo.getFarm_num()));
 	}
+	
+	
+	@PostMapping("/growregister")
+	public String addgrow(ArrayList<MultipartFile> files, GrowUpVO vo) {
+		System.out.println(vo);
+	    ImageVO image = new ImageVO();
+	    Integer imageNum = imageService.MaxFolder();
+	    System.out.println("파일"+files.get(0));
+
+	    for (int i = 0; i < files.size(); i++) {
+	        MultipartFile file = files.get(i);
+
+	        System.out.println("name:" + file.getOriginalFilename());
+	        System.out.println("size:" + file.getSize());
+
+	        if (file.getSize() > 0) {
+	            try {
+	                String fileName = file.getOriginalFilename();
+	                String filePath = uploadDir + imageNum + "/";
+	                fileUpload.uploadFile(file, filePath);
+
+	                // 동적으로 setImage 실행
+	                switch (i) {
+	                    case 1:
+	                        image.setImage1(fileName);
+	                        break;
+	                    case 2:
+	                        image.setImage2(fileName);
+	                        break;
+	                    case 3:
+	                    	image.setImage3(fileName);
+	                    // 필요한 만큼 계속 추가 가능
+	                    default:
+	                        break;
+	                }
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+	    imageNum = imageService.addGetNum(image);
+	    vo.setImage_folder_num(imageNum);
+	    System.out.println(vo);
+	    growUoService.add(vo);
+	    return "redirect:/myfarm/growlist?farm_num=" + vo.getFarm_num();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 
 
 }
