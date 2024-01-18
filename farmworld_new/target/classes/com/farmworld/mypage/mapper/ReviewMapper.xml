@@ -19,10 +19,32 @@
 							WHERE buyer_num = 9999)
 	</select>
 	<select id="review3" resultType="ReviewVO">
-		SELECT review_score, review_content, review_date
+		SELECT review_score, review_content, review_date, review_num
 		FROM myfarmproject_db.review
 		WHERE user_num = 9999
-	</select>	
+	</select>
+	
+	
+	<!-- 리뷰 상세 -->
+	<select id="getreviewVO" resultType="ReviewVO" parameterType="ReviewVO">
+		SELECT *
+		FROM myfarmproject_db.review
+		WHERE review_num = #{review_num}
+	</select>
+	
+	
+	<!-- 리뷰 수정 -->
+	<update id="updatereview" parameterType="ReviewVO">
+		UPDATE myfarmproject_db.review
+		SET review_score = #{review_score}, review_content = #{review_content}
+		WHERE review_num = #{review_num}
+	</update>
+	
+	
+	<!-- 리뷰 삭제 -->
+	<delete id="reviewdelete" parameterType="ReviewVO">
+		DELETE FROM  myfarmproject_db.review WHERE review_num = #{review_num}
+	</delete>
 
 </mapper>
 	

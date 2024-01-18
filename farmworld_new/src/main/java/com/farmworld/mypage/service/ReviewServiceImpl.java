@@ -26,7 +26,7 @@ public class ReviewServiceImpl implements ReviewService {
 	private final ReviewMapper mapper;
 
 	
-	/*¸®ºä°ü¸®*/
+	/*ë¦¬ë·°ê´€ë¦¬*/
 	@Override
 	public List<OrderVO> review1() {
 		log.info("review()");
@@ -43,11 +43,10 @@ public class ReviewServiceImpl implements ReviewService {
 		return mapper.review3();
 	}
 	
-	
 	@Override
-	public ReviewVO get(Integer k) {
-		// TODO Auto-generated method stub
-		return null;
+	public ReviewVO getreviewVO(Integer k) {
+		
+		return mapper.getreviewVO(k);
 	}
 	@Override
 	public void add(ReviewVO vo) {
@@ -64,6 +63,27 @@ public class ReviewServiceImpl implements ReviewService {
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public int reviewupdate(ReviewVO vo) {
+		log.info("reviewupdate()");
+		return mapper.reviewupdate(vo);
+	}
+	@Override
+	public int reviewdelete(int review_num) {
+		log.info("reviewdelete()");
+		return mapper.reviewdelete(review_num);
+	}
+	@Override
+	public int updatereview(ReviewVO vo) {
+		log.info("updatereview()");
+		return mapper.updatereview(vo);
+	}
+	@Override
+	public ReviewVO get(Integer k) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 	
 }

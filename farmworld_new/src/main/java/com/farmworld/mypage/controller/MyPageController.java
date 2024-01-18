@@ -1,7 +1,10 @@
 
 package com.farmworld.mypage.controller;
 
+import java.lang.ProcessBuilder.Redirect;
+import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
@@ -12,9 +15,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.farmworld.all.domain.Criteria;
 import com.farmworld.all.domain.pageDTO;
@@ -37,101 +43,140 @@ public class MyPageController {
 	private final OrderService orderService;
 	private final ReviewService reviewService;
 
-	/* ±¸¸Å³»¿ª */
+	/* êµ¬ë§¤ë‚´ì—­ */
 	@GetMapping("/buylist")
 	public String buyList() {
-		System.out.println("±¸¸Å³»¿ª");
-		log.info("±¸¸Å³»¿ª");
+		System.out.println("êµ¬ë§¤ë‚´ì—­");
+		log.info("êµ¬ë§¤ë‚´ì—­");
 		return "purchase";
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/getbuylist1", method = RequestMethod.POST)
 	public List<OrderVO> getbuyList1() {
-		System.out.println("Ajax : ±¸¸Å³»¿ª1");
-		log.info("Ajax : ±¸¸Å³»¿ª1");
+		System.out.println("Ajax : êµ¬ë§¤ë‚´ì—­1");
+		log.info("Ajax : êµ¬ë§¤ë‚´ì—­1");
 		return orderService.buyList1();
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/getbuylist2", method = RequestMethod.POST)
 	public List<GoodsVO> getbuyList2() {
-		System.out.println("Ajax : ±¸¸Å³»¿ª2");
-		log.info("Ajax : ±¸¸Å³»¿ª2");
+		System.out.println("Ajax : êµ¬ë§¤ë‚´ì—­2");
+		log.info("Ajax : êµ¬ë§¤ë‚´ì—­2");
 		return orderService.buyList2();
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/getbuylist3", method = RequestMethod.POST)
 	public List<MyFarmVO> getbuyList3() {
-		System.out.println("Ajax : ±¸¸Å³»¿ª3");
-		log.info("Ajax : ±¸¸Å³»¿ª3");
+		System.out.println("Ajax : êµ¬ë§¤ë‚´ì—­3");
+		log.info("Ajax : êµ¬ë§¤ë‚´ì—­3");
 		return orderService.buyList3();
 	}
-	
-	
-	/* ÆÇ¸Å³»¿ª */
+
+	/* íŒë§¤ë‚´ì—­ */
 	@GetMapping("/selllist")
 	public String sellList() {
-		System.out.println("ÆÇ¸Å³»¿ª");
-		log.info("ÆÇ¸Å³»¿ª");
+		System.out.println("íŒë§¤ë‚´ì—­");
+		log.info("íŒë§¤ë‚´ì—­");
 		return "sale";
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/getselllist1", method = RequestMethod.POST)
 	public List<OrderVO> getsellList1() {
-		System.out.println("Ajax : ÆÇ¸Å³»¿ª1");
-		log.info("Ajax : ÆÇ¸Å³»¿ª1");
+		System.out.println("Ajax : íŒë§¤ë‚´ì—­1");
+		log.info("Ajax : íŒë§¤ë‚´ì—­1");
 		return orderService.sellList1();
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/getselllist2", method = RequestMethod.POST)
 	public List<GoodsVO> getsellList2() {
-		System.out.println("Ajax : ÆÇ¸Å³»¿ª2");
-		log.info("Ajax : ÆÇ¸Å³»¿ª2");
+		System.out.println("Ajax : íŒë§¤ë‚´ì—­2");
+		log.info("Ajax : íŒë§¤ë‚´ì—­2");
 		return orderService.sellList2();
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/getselllist3", method = RequestMethod.POST)
 	public List<MyFarmVO> getsellList3() {
-		System.out.println("Ajax : ÆÇ¸Å³»¿ª3");
-		log.info("Ajax : ÆÇ¸Å³»¿ª3");
+		System.out.println("Ajax : íŒë§¤ë‚´ì—­3");
+		log.info("Ajax : íŒë§¤ë‚´ì—­3");
 		return orderService.sellList3();
 	}
-	
-	
-	/* ¸®ºä³»¿ª */
+
+	/* ë¦¬ë·°ë‚´ì—­ */
 	@GetMapping("/review")
 	public String review() {
-		System.out.println("¸®ºä°ü¸®");
-		log.info("¸®ºä°ü¸®");
+		System.out.println("ë¦¬ë·°ê´€ë¦¬");
+		log.info("ë¦¬ë·°ê´€ë¦¬");
 		return "review";
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/getreviewlist1", method = RequestMethod.POST)
 	public List<OrderVO> review1() {
-		System.out.println("Ajax : ¸®ºä°ü¸®1");
-		log.info("Ajax : ¸®ºä°ü¸®1");
+		System.out.println("Ajax : ë¦¬ë·°ê´€ë¦¬1");
+		log.info("Ajax : ë¦¬ë·°ê´€ë¦¬1");
 		return reviewService.review1();
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/getreviewlist2", method = RequestMethod.POST)
 	public List<GoodsVO> review2() {
-		System.out.println("Ajax : ¸®ºä°ü¸®2");
-		log.info("Ajax : ¸®ºä°ü¸®2");
+		System.out.println("Ajax : ë¦¬ë·°ê´€ë¦¬2");
+		log.info("Ajax : ë¦¬ë·°ê´€ë¦¬2");
 		return reviewService.review2();
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/getreviewlist3", method = RequestMethod.POST)
 	public List<ReviewVO> review3() {
-		System.out.println("Ajax : ¸®ºä°ü¸®3");
-		log.info("Ajax : ¸®ºä°ü¸®3");
+		System.out.println("Ajax : ë¦¬ë·°ê´€ë¦¬3");
+		log.info("Ajax : ë¦¬ë·°ê´€ë¦¬3");
 		return reviewService.review3();
+	}
+
+	
+	/* ë¦¬ë·°ìƒì„¸ */
+	@PostMapping("/reviewupdate")
+	public String reviewupdate(@RequestParam("review_num") Integer review_num, Model model) {
+		System.out.println("ë¦¬ë·°ìƒì„¸ë³´ê¸°" + review_num);
+		model.addAttribute("getreview", reviewService.getreviewVO(review_num));
+		System.out.println(model);
+
+		return "reviewupdate";
+	}
+
+	
+	/* ë¦¬ë·°ìˆ˜ì • */
+	@PostMapping("/updatereview")
+	public String updatereview(ReviewVO review, RedirectAttributes rttr) {
+		System.out.println("ë¦¬ë·°ìˆ˜ì • : " + review);
+	   
+	    int count = reviewService.updatereview(review);
+	    if(count == 1) {
+	        rttr.addFlashAttribute("result", "success");
+	    }
+	    return "redirect:/mypage/review";
+	}
+
+	
+	/* ë¦¬ë·°ì‚­ì œ */
+	@PostMapping("/reviewdelete")
+	public String reviewdelete(@RequestParam("review_num") Integer review_num, RedirectAttributes rttr) {
+		System.out.println("ë¦¬ë·°ì‚­ì œ");
+		log.info("ë¦¬ë·°ì‚­ì œ");
+		
+		int count = reviewService.reviewdelete(review_num);
+		System.out.println("count : "+count);
+		if (count == 1) {
+			rttr.addFlashAttribute("result", review_num);
+		}
+		System.out.println("ë¦¬ë·°ì‚­ì œ2");
+		log.info("ë¦¬ë·°ì‚­ì œ2");
+		return "redirect:/mypage/review";
 	}
 }
