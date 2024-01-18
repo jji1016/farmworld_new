@@ -58,14 +58,14 @@
 	                           
 	                            <div class="form-group">
 	                                <label>농장 이름</label>
-	                                <input class="form-control" name="farm_name" maxlength="15" placeholder="농장 이름을 입력해주세요 (최대 15자)">
+	                                <input class="form-control" name="farm_name" maxlength="15" placeholder="농장 이름을 입력해주세요 (최대 15자)" required="required">
 	                            </div>
 	                            
 	                            <div class="form-group">
                                    <label>농장 소개</label>
                                    <textarea class="form-control" rows="5" cols="40" 
                                    name="farm_intro" maxlength="50" 
-                                   placeholder="농장 소개를 입력해주세요 (최대 50자)"></textarea>
+                                   placeholder="농장 소개를 입력해주세요 (최대 50자)" required="required"></textarea>
                                </div>
                                 <div class="form-group">
 					                <label for="image1">이미지 업로드</label>

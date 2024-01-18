@@ -109,7 +109,7 @@
 				type: "POST", 
 				dataType : "json",
 				data:{
-					farm_num : $("#farmNum").val();
+					farm_num : $("#farmNum").val()
 
 				},
 				success: function(data){

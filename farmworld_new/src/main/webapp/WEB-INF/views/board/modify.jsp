@@ -14,7 +14,7 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Board Register</h1>
+					<h1 class="page-header">Board Modify</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -24,20 +24,21 @@
 					<div class="panel panel-default">
 						<!-- /.panel-heading -->
 						<div class="panel-body">
-							<form action="/board/register" method="post">
-								<select name="board_category">
-									<option value="notice">공지사항</option>
-									<option value="free_board">자유게시판</option>
-								</select>
+							<form id="modify_form" role="form">
+								<input name="board_num" type="hidden" value="${board.board_num }">
+								<input name="board_category" type="hidden" value="${board.board_category }">
 								<div class="form-group">
-									<label>제목</label> <input class="form-control" name="board_title" required="required">
+									<label>제목</label><input class="form-control" name="board_title" required="required" value="${board.board_title}">
 								</div>
 								<div class="form-group">
-									<label>작성자</label> <input class="form-control" name="user_nickname">
+									<label>작성자</label><input class="form-control" name="user_nickname" readonly="readonly" value="${board.user_nickname }">
 								</div>
 								<div class="form-group">
 									<label>내용</label>
-									<textarea name="board_content" id="BOARDCONT" required="required" maxlength="10000" cols="30" rows="5" placeholder="내용을 입력해주세요" class="with-border"></textarea>
+									<textarea name="board_content" id="BOARDCONT" required="required" 
+										maxlength="10000" cols="30" rows="5" placeholder="내용을 입력해주세요" class="with-border">
+										${board.board_content}
+									</textarea>
 								</div>
 								<div class="form-group">
 					                <label for="image1">이미지 업로드</label>
@@ -46,7 +47,9 @@
 					            <div id="imagePreview" class="mt-3" style="max-width: 100%;"></div>
 
 								
-								<button type="submit" class="btn btn-default">등록하기</button>
+								<button type="button" class="btn btn-default" data-oper = "modify">수정완료</button>
+								<button type="button" class="btn btn-default" data-oper = "remove">삭제</button>
+                                <button type="button" class="btn-default" onclick ="location.href='/board/list?board_category=${board.board_category}'">목록으로</button>
 							</form>
 						</div>
 					</div>
@@ -59,5 +62,7 @@
 		<!-- /#page-wrapper -->
 	</div>
 </div>
+
+
 <script src="/resources/js/board/board.js" type="text/javascript"></script>
 <%@include file="../includes/footer.jsp"%>

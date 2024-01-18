@@ -35,7 +35,7 @@
 	
 	<update id="viewCount" parameterType="MyFarmVO">
 		UPDATE myfarm
-		SET myfarm_view = +1
+		SET myfarm_view = myfarm_view+1
 		WHERE farm_num = #{farm_num}
 	</update>
 

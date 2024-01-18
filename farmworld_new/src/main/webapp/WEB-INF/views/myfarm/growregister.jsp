@@ -26,8 +26,7 @@
         	<div class="container">
 	            <div class="mx-auto text-center mb-5" style="max-width: 500px;">
 	                <h1 class="display-5" id="headName">${vo.farm_name }</h1>
-	                <input type="hidden" value="${vo.user_num }" name="user_num" id="userNum">
-	                <input type="hidden" value="${vo.farm_num }" name="farm_num" id="farmNum">
+
 	            </div>
             </div>
             <div class="col-lg-3">	
@@ -53,18 +52,38 @@
             <div class="col-lg-9">
                     <div class="bg-primary h-100 p-5">
 
-
                             <div class="row g-3">
-
+								<form method="POST" action="/myfarm/growregister" enctype="multipart/form-data">
+								<input type="hidden" value="${vo.user_num }" name="user_num" id="userNum">
+	                			<input type="hidden" value="${vo.farm_num }" name="farm_num" id="farmNum">
+                                <div class="col-12">
+								<input type="text" class="form-control p-3" name="grow_title" placeholder="성장일기 제목" required="required">
+                                </div>
+                                <div class="col-12">
+								<input type="text" class="form-control p-3" name="growup_category" placeholder="카테고리" required>
+                                </div>
+                                <div class="col-12" style="background-color:white;">
+                                <textarea name="grow_content" id="summernote" maxlength="10000" cols="30" rows="5" placeholder="내용을 입력해주세요" class="with-border" ></textarea>
+                                </div>
+                                <div class="col-12">
+                                	이미지 업로드
+                                	</div>
+                                	<div class="col-4">
+					                <input type="file" name="files" id="image1" class="form-control-file" onchange="previewImage(this, 'imagePreview1')">
+					                </div><div id="imagePreview1" class="col-8"></div>
+					                <div class="col-4">
+					                <input type="file" name="files" id="image2" class="form-control-file" onchange="previewImage(this, 'imagePreview2')">
+					                </div><div id="imagePreview2" class="col-8"></div>
+					                <div class="col-4">
+					                <input type="file" name="files" id="image3" class="form-control-file" onchange="previewImage(this, 'imagePreview3')">
+                                </div><div id="imagePreview3" class="col-8"></div>
+                                
+                                
                                 
                                 <div class="col-12">
-                                <textarea name="BOARDCONT" id="BOARDCONT" maxlength="10000" cols="30" rows="5" placeholder="내용을 입력해주세요" class="with-border"></textarea>
+                                <button type="submit" class="btn btn-default">성장일기 등록</button>
                                 </div>
-                                
-                                <div class="col-12">
-
-                                </div>
-                                
+                                </form>
 
                                 
                             </div>
@@ -80,26 +99,71 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-    	$('#BOARDCONT').summernote({
-			  height: 300,                 // 에디터 높이
-			  minHeight: null,             // 최소 높이
-			  maxHeight: null,             // 최대 높이
-			  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
-			  lang: "ko-KR",					// 한글 설정
-			  placeholder: '최대3000자까지 쓸 수 있습니다'	,//placeholder 설정
-			  toolbar: [
-					    // [groupName, [list of button]]
-					    ['fontname', ['fontname']],
-					    ['fontsize', ['fontsize']],
-					    ['color', ['color']],
-					    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
-					    ['para', ['ul', 'ol', 'paragraph']],
-					    ['height', ['height']]
-					  ],
-					fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
-					fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
-		          
-		});
+            $('#summernote').summernote({
+                codeviewFilter: false, // 코드 보기 필터 비활성화
+                codeviewIframeFilter: false, // 코드 보기 iframe 필터 비활성화
+
+                height: 500, // 에디터 높이
+                minHeight: null, // 최소 높이
+                maxHeight: null, // 최대 높이
+                focus: true, // 에디터 로딩 후 포커스 설정
+                lang: 'ko-KR', // 언어 설정 (한국어)
+
+                toolbar: [
+                    ['style', ['style']], // 글자 스타일 설정 옵션
+                    ['fontsize', ['fontsize']], // 글꼴 크기 설정 옵션
+                    ['font', ['bold', 'underline', 'clear']], // 글자 굵게, 밑줄, 포맷 제거 옵션
+                    ['color', ['color']], // 글자 색상 설정 옵션
+                    ['table', ['table']], // 테이블 삽입 옵션
+                    ['para', ['ul', 'ol', 'paragraph']], // 문단 스타일, 순서 없는 목록, 순서 있는 목록 옵션
+                    ['view', ['codeview',]], // 코드 보기, 전체 화면, 도움말 옵션
+                ],
+
+                fontSizes: [
+                    '8', '9', '10', '11', '12', '14', '16', '18',
+                    '20', '22', '24', '28', '30', '36', '50', '72',
+                ], // 글꼴 크기 옵션
+
+                styleTags: [
+                    'p',  // 일반 문단 스타일 옵션
+                    {
+                        title: 'Blockquote',
+                        tag: 'blockquote',
+                        className: 'blockquote',
+                        value: 'blockquote',
+                    },  // 인용구 스타일 옵션
+                    'pre',  // 코드 단락 스타일 옵션
+                    {
+                        title: 'code_light',
+                        tag: 'pre',
+                        className: 'code_light',
+                        value: 'pre',
+                    },  // 밝은 코드 스타일 옵션
+                    {
+                        title: 'code_dark',
+                        tag: 'pre',
+                        className: 'code_dark',
+                        value: 'pre',
+                    },  // 어두운 코드 스타일 옵션
+                    'h1', 'h2', 'h3', 'h4', 'h5', 'h6',  // 제목 스타일 옵션
+                ],
+
+            })
+        })
+        
+    function previewImage(input, previewId) {
+        var file = input.files[0];
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var preview = document.getElementById(previewId);
+                preview.innerHTML = '<img src="' + e.target.result + '" alt="Image Preview" class="img-fluid">';
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+
 
     	
         $("#keyword").keypress(function(event) {
@@ -140,6 +204,5 @@
                 }
             });
         });
-    });
 </script>
 <%@include file="../includes/footer.jsp" %>

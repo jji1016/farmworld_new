@@ -39,5 +39,10 @@ public class ImageServiceImpl implements ImageService {
 		return vo.getImage_folder_num();
 	}
 
+	@Override
+	public Integer MaxFolder() {
+		return mapper.maxNum();
+	}
+
 
 }
