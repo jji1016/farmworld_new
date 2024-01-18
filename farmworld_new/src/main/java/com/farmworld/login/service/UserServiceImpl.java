@@ -27,10 +27,9 @@ public class UserServiceImpl implements UserService{
 		mapper.insert(vo);
 	}
 
-	@Override
+	@Override //비번 수정
 	public void modify(UserVO vo) {
-		// TODO Auto-generated method stub
-		
+		mapper.modPw(vo);
 	}
 
 	@Override
@@ -49,10 +48,10 @@ public class UserServiceImpl implements UserService{
 		return mapper.nickCheck(vo);
 	}
 
-	@Override
+	@Override //아이디 찾기
 	public String findId(UserVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("service findId: "+mapper.findId(vo));
+		return mapper.findId(vo);
 	}
 
 	@Override
@@ -61,13 +60,13 @@ public class UserServiceImpl implements UserService{
 		
 	}
 	
-	@Override
+	@Override //로그인
 	public UserVO login(UserVO vo) {
 		System.out.println("service login: "+mapper.getUserInfo(vo));
 		return mapper.getUserInfo(vo);	
 	}
 	
-	@Override
+	@Override //로그아웃
 	public void logout() {
 		// TODO Auto-generated method stub
 		
@@ -85,14 +84,16 @@ public class UserServiceImpl implements UserService{
 		return false; //관리자x 경우
 	}
 
+	@Override //비번 수정 위한 본인 확인
+	public String infoCheckForPw(UserVO vo) {
+		String id = mapper.getIdForPw(vo);
+		System.out.println("service infoCheckForPw:"+id);
+		if(id != null) {
+			return id;
+		}
+		return null;
+	}
 
-//	@Override
-//	public int join(UserVO vo) { //회원가입
-//		log.info("service join vo: " + vo);
-//		
-//		System.out.println("mapper joinVo: "+ joinVo);
-//		return joinVo;
-//	}
 
 
 }

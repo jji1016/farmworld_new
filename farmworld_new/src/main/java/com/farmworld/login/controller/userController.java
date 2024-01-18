@@ -1,5 +1,8 @@
 package com.farmworld.login.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -14,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.w3c.dom.UserDataHandler;
 
 import com.farmworld.login.domain.UserVO;
+import com.farmworld.login.service.MailSendService;
 import com.farmworld.login.service.UserService;
 
 import lombok.AllArgsConstructor;
@@ -26,9 +31,8 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 @Log4j
 public class userController {
-	
-	@Autowired
 	private final UserService userService;
+	private final MailSendService mailService;
 	
 //	@GetMapping("/mypage") //로그인 o/x 상태 확인
 //	public String loginCheck(HttpSession session) {
@@ -63,7 +67,7 @@ public class userController {
 	
 	//회원가입 완료
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
-	public String join(UserVO userVo, HttpSession session) {
+	public String join(UserVO userVo) {
 		userService.add(userVo);
 		return "redirect:/";
 	}
@@ -162,7 +166,77 @@ public class userController {
 		System.out.println("세션 초기화");
 		return "redirect:/";
 	}
+
 	
+/*** 아이디 찾기 ***/
+	@GetMapping("/findId")
+	public String getFindId() {
+		System.out.println("getFindId");
+		return "/user/findId";
+	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/findId", method = RequestMethod.POST)
+	public Map<String, String> findId(UserVO vo, Model model) {
+		Map<String, String> resultMap = new HashMap<String, String>();
+		System.out.println("ajax findId");
+		String user_id = userService.findId(vo);
+		if(user_id != null) { //아이디 찾았을 때
+			System.out.println("아이디 찾았다:"+user_id);
+			resultMap.put("result","고객님의 아이디는 "+user_id+ "입니다.");
+		}else {
+			resultMap.put("result", "이름 또는 전화번호가 일치하지 않습니다.");
+		}
+		return resultMap;
+	}
 	
+/*** 비밀번호 수정 ***/
+	@GetMapping("/changePw") //비번수정 jps 열기
+	public String getChangePw() {
+		System.out.println("changePw");
+		return "/user/changePw";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/infoCheckForPw", method = RequestMethod.POST)
+	public boolean infoCheckForPw(UserVO vo) {
+		System.out.println("controller infoCheckForPw"+vo.getUser_id());
+		if(userService.infoCheckForPw(vo) != null) {
+			return true;
+		}
+		return false;
+	}
+	
+	//비번 수정을 위한 본인 인증 번호 전달
+	@ResponseBody
+	@RequestMapping(value = "/sendMail", method = RequestMethod.POST)
+	public String sendMail(String user_id, Model model) {
+		System.out.println("비번 인증 요청"+user_id);
+		return mailService.mailSender(user_id);
+	}
+		
+	//메일 전송 test
+	@RequestMapping(value = "/testest", method = RequestMethod.GET)
+	public String test () {
+		return mailService.mailSender("zzazza1226@gmail.com");
+	}
+	
+	//비번 수정
+	@ResponseBody
+	@RequestMapping(value = "/modPw", method = RequestMethod.POST)
+	public Map<String, Object> modPw (UserVO vo) {
+		System.out.println("비번 수정"+vo);
+		Map<String, Object> response = new HashMap<>();
+		
+		try {
+	        userService.modify(vo);
+	        response.put("success", true);
+	        response.put("message", "비밀번호가 성공적으로 수정되었습니다.");
+	    } catch (Exception e) {
+	        response.put("success", false);
+	        response.put("message", "비밀번호 수정에 실패했습니다.");
+	    }
+
+	    return response;
+	}
 }

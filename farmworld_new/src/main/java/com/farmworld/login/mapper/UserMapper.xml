@@ -7,10 +7,10 @@
 
 	<insert id="insert" parameterType="UserVO" >
 		INSERT INTO user
-		(user_id, user_pw, user_name, 
-			user_nickname, user_address, user_phone)
-		VALUES (#{user_id},#{user_pw},#{user_name},
-			#{user_nickname},#{user_address},#{user_phone})
+		(user_id, user_pw, user_name, user_nickname, 
+			user_postCode, user_address, user_detailAddress, user_phone)
+		VALUES (#{user_id},#{user_pw},#{user_name},#{user_nickname},
+				#{user_postCode},#{user_address},#{user_detailAddress},#{user_phone})
 	</insert>
 	
 	<delete id="delete" parameterType="UserVO">
@@ -35,5 +35,15 @@
 		SELECT user_nickname FROM user WHERE user_nickname=#{user_nickname}
 	</select>
 	
-
+	<select id="findId" parameterType="UserVO" resultType="String">
+		SELECT user_id FROM user WHERE user_name=#{user_name} and user_phone=#{user_phone}
+	</select>
+	
+	<select id="getIdForPw" parameterType="UserVO" resultType="String">
+		SELECT user_id FROM user WHERE user_id=#{user_id} and user_name=#{user_name} and user_phone=#{user_phone}
+	</select>
+	
+	<update id="modPw" parameterType="USerVO">
+		UPDATE user SET user_pw=#{user_pw} WHERE user_id=#{user_id}
+	</update>
 </mapper>

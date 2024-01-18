@@ -18,4 +18,10 @@ public interface UserMapper {
 
 	public String nickCheck(UserVO vo);
 	
+	public String findId(UserVO vo);
+
+	public String getIdForPw(UserVO vo);
+
+	public void modPw(UserVO vo);
+	
 }
