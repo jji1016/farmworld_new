@@ -41,6 +41,10 @@
                                     <div class="form-control">
                                         ${board.board_content }
                                     </div>
+                                    <div class="form-control">
+                                        ${board.image_folder_num }
+                                        이미지 들어갈 자리
+                                    </div>
                                 </div>
                               
                                 <button type="submit" class="btn btn-default" data-oper = "modify">수정하기</button>

@@ -16,7 +16,6 @@ public class FileUploadService {
 	@Autowired
 	private ImageService imageService;
 	
-	static String uploadDir = "C:\\Users\\keduit\\git\\farmworld_new\\farmworld_new\\src\\main\\webapp\\resources\\upload\\";
 	
 	public String uploadFile(MultipartFile file, String path) throws IOException, IllegalStateException {
 	    String folderPath = "";  // 폴더 경로

@@ -24,7 +24,7 @@
 					<div class="panel panel-default">
 						<!-- /.panel-heading -->
 						<div class="panel-body">
-							<form action="/board/register" method="post">
+							<form action="/board/register" method="post" enctype="multipart/form-data">
 								<select name="board_category">
 									<option value="notice">공지사항</option>
 									<option value="free_board">자유게시판</option>
@@ -41,10 +41,14 @@
 								</div>
 								<div class="form-group">
 					                <label for="image1">이미지 업로드</label>
-					                <input type="file" name="image" id="image" class="form-control-file" onchange="previewImage(this)">
-					            </div>
-					            <div id="imagePreview" class="mt-3" style="max-width: 100%;"></div>
-
+					                <input type="file" name="files" id="image1" class="form-control-file" onchange="previewImage(this, 'imagePreview1')">
+					                </div><div id="imagePreview1" class="col-8"></div>
+					                <div class="col-4">
+					                <input type="file" name="files" id="image2" class="form-control-file" onchange="previewImage(this, 'imagePreview2')">
+					                </div><div id="imagePreview2" class="col-8"></div>
+					                <div class="col-4">
+					                <input type="file" name="files" id="image3" class="form-control-file" onchange="previewImage(this, 'imagePreview3')">
+                                	</div><div id="imagePreview3" class="col-8"></div>
 								
 								<button type="submit" class="btn btn-default">등록하기</button>
 							</form>

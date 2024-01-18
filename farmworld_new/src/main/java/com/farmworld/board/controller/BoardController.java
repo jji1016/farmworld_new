@@ -1,7 +1,9 @@
 package com.farmworld.board.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,10 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.farmworld.all.domain.Criteria;
+import com.farmworld.all.domain.ImageVO;
 import com.farmworld.all.domain.pageDTO;
+import com.farmworld.all.service.ImageService;
+import com.farmworld.all.util.FileUploadService;
 import com.farmworld.board.domain.BoardVO;
 import com.farmworld.board.service.BoardService;
 
@@ -26,6 +32,14 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class BoardController {
 	private final BoardService boardService;
+	
+	@Autowired
+	private ImageService imageService;
+	
+	@Autowired
+	private FileUploadService fileUpload;
+	
+	private static String uploadDir = "C:\\Users\\keduit\\Desktop\\farmworld_ new_git\\farmworld_new\\src\\main\\webapp\\resources\\upload\\";
 	
 	@GetMapping("/list")
 	public String listAll(@RequestParam(name = "board_category", required = false) String boardCategory, Criteria cri, Model model) {
@@ -58,7 +72,46 @@ public class BoardController {
 	public void registerGet() {}
 	
 	@PostMapping("/register")
-	public String register(BoardVO board, RedirectAttributes rttr) {
+	public String register(ArrayList<MultipartFile> files, BoardVO board, RedirectAttributes rttr) {
+		ImageVO image = new ImageVO();
+	    Integer imageNum = imageService.MaxFolder();
+	    System.out.println("파일"+files.get(0));
+
+	    for (int i = 0; i < files.size(); i++) {
+	        MultipartFile file = files.get(i);
+
+	        System.out.println("name:" + file.getOriginalFilename());
+	        System.out.println("size:" + file.getSize());
+
+	        if (file.getSize() > 0) {
+	            try {
+	                String fileName = file.getOriginalFilename();
+	                String filePath = uploadDir + imageNum + "/";
+	                fileUpload.uploadFile(file, filePath);
+
+	                // 동적으로 setImage 실행
+	                switch (i) {
+	                    case 1:
+	                        image.setImage1(fileName);
+	                        break;
+	                    case 2:
+	                        image.setImage2(fileName);
+	                        break;
+	                    case 3:
+	                    	image.setImage3(fileName);
+	                    // 필요한 만큼 계속 추가 가능
+	                    default:
+	                        break;
+	                }
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+	    imageNum = imageService.addGetNum(image);
+	    board.setImage_folder_num(imageNum);
+		
+		
 		boardService.add(board);
 		System.out.println("board: "+board);
 		return "redirect:/board/list";

@@ -8,8 +8,8 @@
 
 	<insert id="insert" parameterType="BoardVO">
 		insert into board
-		(board_title,board_content,user_nickname,board_category)
-		values (#{board_title}, #{board_content}, #{user_nickname}, #{board_category})
+		(board_title,board_content,user_nickname,board_category,image_folder_num)
+		values (#{board_title}, #{board_content}, #{user_nickname}, #{board_category}, ${image_folder_num})
 	</insert>
 
 	<insert id="insertSelectBno" parameterType="BoardVO"
