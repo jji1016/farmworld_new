@@ -13,15 +13,20 @@
 		WHERE buyer_num = 9999
 	</select>
 	<select id="review2" resultType="GoodsVO">
-		SELECT goods_title, goods_price
-		FROM myfarmproject_db.goods
-		WHERE goods_num in (SELECT goods_num FROM myfarmproject_db.order
-							WHERE buyer_num = 9999)
+		SELECT *
+		FROM myfarmproject_db.review LEFT JOIN myfarmproject_db.goods ON myfarmproject_db.review.goods_num = myfarmproject_db.goods.goods_num
+		WHERE myfarmproject_db.review.user_num = 9999
 	</select>
 	<select id="review3" resultType="ReviewVO">
 		SELECT review_score, review_content, review_date, review_num
 		FROM myfarmproject_db.review
 		WHERE user_num = 9999
+	</select>
+	<select id="reviewimage" resultType="ImageVO">
+		SELECT *
+		FROM (myfarmproject_db.review LEFT JOIN myfarmproject_db.goods ON myfarmproject_db.review.goods_num = myfarmproject_db.goods.goods_num)
+     	LEFT JOIN myfarmproject_db.image ON myfarmproject_db.goods.image_folder_num = myfarmproject_db.image.image_folder_num
+     	WHERE myfarmproject_db.review.user_num = 9999
 	</select>
 	
 	

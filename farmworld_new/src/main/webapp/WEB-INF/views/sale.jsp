@@ -3,6 +3,35 @@
 
 <head>
 <style type="text/css">
+/* 기본 스타일 */
+.table {
+  font-size: 16px !important; /* 기본 글씨 크기 */
+  white-space: nowrap;
+}
+#salebutton{
+	font-size: 16px !important;
+}
+
+/* 995px 이하일 때 */
+@media screen and (max-width: 995px) {
+  .table {
+    font-size: 12px !important;/* 중간 크기 화면에서의 글씨 크기 */
+    white-space: nowrap;
+  }
+  #salebutton{
+	font-size: 12px !important;
+} 
+}
+/* 770px 이하일 때 */
+@media screen and (max-width: 770px) {
+  .table {
+    font-size: 7px !important; /* 작은 화면에서의 글씨 크기 */
+    white-space: nowrap;
+  }
+    #salebutton{
+	font-size: 7px !important;
+} 
+}
 #tablesize{
 	width: 100%
 }
@@ -10,7 +39,17 @@
     text-align: center;
 }
 .table td {
+    vertical-align: middle;
     text-align: center;
+}
+.table tr td:first-child {
+	width: 20%;
+}
+.table tr td:second-child {
+	width: 15%;
+}
+#saleimg{
+	width: 85%;
 }
 </style>
 </head>
@@ -71,28 +110,38 @@ $(document).ready(function () {
                     type: "POST",
                     dataType: "json",
                     success: function (data3) {
-                        $.ajax({
-                            url: "/mypage/getselllist2",
-                            type: "POST",
-                            dataType: "json",
-                            success: function (data2) {
-                                // Assuming data1, data2, and data3 have the same length
-                                for (let i = 0; i < data1.length; i++) {
-                                    let orderdate = new Date(data1[i].order_date);
-                                    let options = { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" };
-                                    let formatDate = orderdate.toLocaleString("ko-KR", options);
-
-                                    let row = $("<tr>");
-                                    row.html("<td>이미지</td><td>" + formatDate + "</td><td>" + data1[i].order_num + "</td><td>" + data2[i].goods_title + "</td><td>" + data2[i].goods_price + "</td><td>" + data1[i].order_price + "</td><td>" + data1[i].order_price + "</td><td><button class='btn btn-primary middlebutton deliveryBtn'>배송상세</button><button class='btn btn-primary middlebutton purchaseViewBtn'>주문상세</button></td>");
-                                    console.log(row);
-                                    $("tbody").append(row);
-                                }
-                            },
-                            error: function (e2) {
-                                console.log(e2);
-                            }
-                        });
-                    },
+                    	 $.ajax({
+                             url: "/mypage/getselllistimg",
+                             type: "POST",
+                             dataType: "json",
+                             success: function (data4) {
+		                        $.ajax({
+		                            url: "/mypage/getselllist2",
+		                            type: "POST",
+		                            dataType: "json",
+		                            success: function (data2) {
+		                                // Assuming data1, data2, and data3 have the same length
+		                                for (let i = 0; i < data1.length; i++) {
+		                                    let orderdate = new Date(data1[i].order_date);
+		                                    let options = { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" };
+		                                    let formatDate = orderdate.toLocaleString("ko-KR", options);
+		
+		                                    let row = $("<tr>");
+		                                    row.html("<td>"+"<img id='saleimg' src='/resources/upload/"+ data4[i].image_folder_num +"/"+ data4[i].image1 + "'></td><td>" + formatDate + "</td><td>" + data1[i].order_num + "</td><td>" + data2[i].goods_title + "</td><td>" + data2[i].goods_price + "</td><td>" + data1[i].order_price + "</td><td>" + data1[i].order_price + "</td><td><button id='salebutton' class='btn btn-primary middlebutton deliveryBtn'>배송상세</button></td>");
+		                                    console.log(row);
+		                                    $("tbody").append(row);
+		                                }
+		                            },
+		                            error: function (e2) {
+		                                console.log(e2);
+		                            }
+		                        });
+		                    },
+		                    error: function (e4) {
+		                        console.log(e4);
+		                    }
+		                });
+		            },
                     error: function (e3) {
                         console.log(e3);
                     }
