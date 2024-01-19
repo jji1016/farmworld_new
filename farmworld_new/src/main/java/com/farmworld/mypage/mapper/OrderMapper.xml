@@ -8,15 +8,15 @@
 
 	<!-- 구매내역 조회 -->
 	<select id="buylist1" resultType="OrderVO">
-		SELECT order_num, order_date
+		SELECT *
 		FROM myfarmproject_db.order
 		WHERE buyer_num = 9999
 	</select>
-	<select id="buylist2" resultType="GoodsVO">
-		SELECT goods_title, goods_price
+	<select id="buylist2" resultType="GoodsVO">							
+		SELECT *
 		FROM myfarmproject_db.goods
 		WHERE goods_num in (SELECT goods_num FROM myfarmproject_db.order
-							WHERE buyer_num = 9999)	
+							WHERE buyer_num = 9999)						
 	</select>
 	<select id="buylist3" resultType="MyFarmVO">
 		SELECT  mf.farm_name, mf.user_num
@@ -24,6 +24,20 @@
 		JOIN myfarmproject_db.order o ON mf.user_num = o.seller_num
 		WHERE o.buyer_num = 9999;
 	</select>
+	<select id="buylistimg" resultType="ImageVO">
+		SELECT *
+		FROM myfarmproject_db.goods
+		LEFT JOIN myfarmproject_db.image ON myfarmproject_db.goods.image_folder_num = myfarmproject_db.image.image_folder_num
+		WHERE goods_num in (SELECT goods_num FROM myfarmproject_db.order
+							WHERE buyer_num = 9999)							
+	</select>
+
+	
+	<!-- 구매취소 -->
+	<delete id="returnpurchase" parameterType="OrderVO">
+		DELETE FROM myfarmproject_db.order WHERE order_num = #{order_num}
+	</delete>
+	
 	
 	<!-- 판매내역 조회 -->
 	<select id="selllist1" resultType="OrderVO">
@@ -43,6 +57,14 @@
 		JOIN myfarmproject_db.order o ON mf.user_num = o.seller_num
 		WHERE o.seller_num = 8888;
 	</select>
+	<select id="selllistimg" resultType="ImageVO">
+		SELECT *
+		FROM myfarmproject_db.goods
+		LEFT JOIN myfarmproject_db.image ON myfarmproject_db.goods.image_folder_num = myfarmproject_db.image.image_folder_num
+		WHERE goods_num in (SELECT goods_num FROM myfarmproject_db.order
+							WHERE seller_num = 8888)				
+	</select>
+
 
 	<!-- 구매 -->
 	<insert id="purchase" parameterType="OrderVO">

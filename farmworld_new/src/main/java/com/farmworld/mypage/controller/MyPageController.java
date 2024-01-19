@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.farmworld.all.domain.Criteria;
+import com.farmworld.all.domain.ImageVO;
 import com.farmworld.all.domain.pageDTO;
 import com.farmworld.farm.domain.MyFarmVO;
 import com.farmworld.mypage.domain.OrderVO;
@@ -50,7 +51,6 @@ public class MyPageController {
 		log.info("구매내역");
 		return "purchase";
 	}
-
 	@ResponseBody
 	@RequestMapping(value = "/getbuylist1", method = RequestMethod.POST)
 	public List<OrderVO> getbuyList1() {
@@ -58,7 +58,6 @@ public class MyPageController {
 		log.info("Ajax : 구매내역1");
 		return orderService.buyList1();
 	}
-
 	@ResponseBody
 	@RequestMapping(value = "/getbuylist2", method = RequestMethod.POST)
 	public List<GoodsVO> getbuyList2() {
@@ -66,7 +65,6 @@ public class MyPageController {
 		log.info("Ajax : 구매내역2");
 		return orderService.buyList2();
 	}
-
 	@ResponseBody
 	@RequestMapping(value = "/getbuylist3", method = RequestMethod.POST)
 	public List<MyFarmVO> getbuyList3() {
@@ -74,7 +72,34 @@ public class MyPageController {
 		log.info("Ajax : 구매내역3");
 		return orderService.buyList3();
 	}
-
+	@ResponseBody
+	@RequestMapping(value = "/getbuylistimg", method = RequestMethod.POST)
+	public List<ImageVO> getbuyListImg() {
+		System.out.println("Ajax : 구매내역사진");
+		log.info("Ajax : 구매내역사진");
+		return orderService.buylistimg();
+	}
+	
+	
+	/* 구매취소 */
+	@PostMapping("/returnpurchase")
+	public String returnpurchase(@RequestParam("order_num") Integer order_num, RedirectAttributes rttr) {
+		System.out.println("구매취소");
+		log.info("구매취소");
+		System.out.println(order_num);
+		log.info(order_num);
+		
+		int count = orderService.returnpurchase(order_num);
+		System.out.println("count : "+count);
+		if (count == 1) {
+			rttr.addFlashAttribute("result", order_num);
+		}
+		System.out.println("구매취소2");
+		log.info("구매취소2");
+		return "redirect:/mypage/buylist";
+	}
+	
+	
 	/* 판매내역 */
 	@GetMapping("/selllist")
 	public String sellList() {
@@ -82,7 +107,6 @@ public class MyPageController {
 		log.info("판매내역");
 		return "sale";
 	}
-
 	@ResponseBody
 	@RequestMapping(value = "/getselllist1", method = RequestMethod.POST)
 	public List<OrderVO> getsellList1() {
@@ -90,7 +114,6 @@ public class MyPageController {
 		log.info("Ajax : 판매내역1");
 		return orderService.sellList1();
 	}
-
 	@ResponseBody
 	@RequestMapping(value = "/getselllist2", method = RequestMethod.POST)
 	public List<GoodsVO> getsellList2() {
@@ -98,7 +121,6 @@ public class MyPageController {
 		log.info("Ajax : 판매내역2");
 		return orderService.sellList2();
 	}
-
 	@ResponseBody
 	@RequestMapping(value = "/getselllist3", method = RequestMethod.POST)
 	public List<MyFarmVO> getsellList3() {
@@ -106,7 +128,16 @@ public class MyPageController {
 		log.info("Ajax : 판매내역3");
 		return orderService.sellList3();
 	}
-
+	@ResponseBody
+	@RequestMapping(value = "/getselllistimg", method = RequestMethod.POST)
+	public List<ImageVO> getsellListImg() {
+		System.out.println("Ajax : 판매내역사진");
+		log.info("Ajax : 판매내역사진");
+		return orderService.selllistimg();
+	}
+	
+	
+	
 	/* 리뷰내역 */
 	@GetMapping("/review")
 	public String review() {
@@ -114,7 +145,6 @@ public class MyPageController {
 		log.info("리뷰관리");
 		return "review";
 	}
-
 	@ResponseBody
 	@RequestMapping(value = "/getreviewlist1", method = RequestMethod.POST)
 	public List<OrderVO> review1() {
@@ -122,7 +152,6 @@ public class MyPageController {
 		log.info("Ajax : 리뷰관리1");
 		return reviewService.review1();
 	}
-
 	@ResponseBody
 	@RequestMapping(value = "/getreviewlist2", method = RequestMethod.POST)
 	public List<GoodsVO> review2() {
@@ -130,7 +159,6 @@ public class MyPageController {
 		log.info("Ajax : 리뷰관리2");
 		return reviewService.review2();
 	}
-
 	@ResponseBody
 	@RequestMapping(value = "/getreviewlist3", method = RequestMethod.POST)
 	public List<ReviewVO> review3() {
@@ -138,7 +166,14 @@ public class MyPageController {
 		log.info("Ajax : 리뷰관리3");
 		return reviewService.review3();
 	}
-
+	@ResponseBody
+	@RequestMapping(value = "/getreviewimage", method = RequestMethod.POST)
+	public List<ImageVO> reviewimgage() {
+		System.out.println("Ajax : 리뷰관리이미지");
+		log.info("Ajax : 리뷰관리이미지");
+		return reviewService.reviewimage();
+	}
+	
 	
 	/* 리뷰상세 */
 	@PostMapping("/reviewupdate")

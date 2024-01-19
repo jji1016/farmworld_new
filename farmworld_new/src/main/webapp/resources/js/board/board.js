@@ -43,7 +43,9 @@ $(document).ready(function() {
 					let row = $("<tr>");
 					row.append($("<td>").text(board.board_num));
 					
-					let titleLink = $("<a>").attr("href","/board/get?board_num="+board.board_num+"&board_category="+board.board_category).text(board.board_title);
+					let titleLink = $("<a>").attr("href","/board/get?board_num="+board.board_num+"&board_category="+board.board_category)
+						.text(board.board_title).on("click",function(){clickBoard(board.board_num, board.board_category);
+				    	});
 					let titleTd = $("<td>").append(titleLink);
 					row.append(titleTd);
 					row.append($("<td>").text(board.user_nickname));
@@ -59,15 +61,31 @@ $(document).ready(function() {
 			}
 		});
 	
-	let actionForm = $("#actionForm");
-	$(".paginate_button a").on("click",function(e){
-		e.preventDefault(); // 이벤트 초기화
-		// pageNum값을 사용자가 누른 a태그의 href속성값으로 변경
-		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
-		actionForm.submit();
-	});
+		let actionForm = $("#actionForm");
+		$(".paginate_button a").on("click",function(e){
+			e.preventDefault(); // 이벤트 초기화
+			// pageNum값을 사용자가 누른 a태그의 href속성값으로 변경
+			actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+			actionForm.submit();
+		});
 	
 	}// loadTableData 함수 선언 종료
+	
+	// 클릭한 게시물의 조회수를 증가시키는 Ajax 요청
+	function clickBoard(boardNum, boardCategory) {
+        $.ajax({
+            type: "POST",
+            url: "/board/increaseViewCount",
+            data: {
+                board_num: boardNum
+            },
+            success: function(result) {
+            },
+            error: function(error) {
+                console.log("Error: " + error);
+            }
+        });
+    };
 	
 	// summernote 사용
 	$('#BOARDCONT').summernote({
@@ -91,7 +109,10 @@ $(document).ready(function() {
 		          
 	});
 	
-	let formObj = $("#modify_form");
+}); // $(document).ready 함수 선언 종료
+
+let formObj = $("#modify_form");
+	let category = $("#category").val();
 		$(".btn").click(function() {
 			let operation = $(this).data("oper");
 			console.log(operation);
@@ -106,24 +127,28 @@ $(document).ready(function() {
 			}
 			formObj.submit();
 		});
-	
-}); // $(document).ready 함수 선언 종료
 
-// 이미지 미리보기기능
-function previewImage(input) {
-    var preview = document.getElementById('imagePreview');
-    preview.innerHTML = ''; // 이미지 미리보기를 초기화합니다.
-
-    if (input.files && input.files[0]) {
+function previewImage(input, previewId) {
+    var file = input.files[0];
+    if (file) {
         var reader = new FileReader();
-
         reader.onload = function (e) {
-            var img = document.createElement('img');
-            img.src = e.target.result;
-            img.className = 'img-preview';
-            preview.appendChild(img);
-        }
+            $("#" + previewId).html('<img src="' + e.target.result + '" alt="Image Preview" class="img-fluid">');
+        };
+        reader.readAsDataURL(file);
+    }
+}
 
-        reader.readAsDataURL(input.files[0]);
-    };
-};
+$("#image1").change(function () {
+    previewImage(this, 'imagePreview1');
+});
+
+$("#image2").change(function () {
+    previewImage(this, 'imagePreview2');
+});
+
+$("#image3").change(function () {
+    previewImage(this, 'imagePreview3');
+});
+
+

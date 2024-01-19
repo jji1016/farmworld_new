@@ -35,6 +35,10 @@
     <!-- jQuery 변경 : 반응형 버전이 최적화 / jsp에서 jQuery 사용이 필요하므로 header에 -->
 	<!-- jQuery -->
 	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	
+	<!-- 카카오 우편번호 서비스 -->
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	
 	<!-- 캐시 비활성화 -->
 	<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, post-check=0, pre-check=0">
@@ -98,7 +102,7 @@
                                 <i class="fa fa-shopping-bag fa-2x"></i>
                                 <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
                             </a>
-                            <a href="#" class="my-auto">
+                            <a href="../mypage" class="my-auto">
                                 <i class="fas fa-user fa-2x"></i>
                             </a>
                         </div>

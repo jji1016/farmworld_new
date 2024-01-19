@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.farmworld.all.domain.Criteria;
+import com.farmworld.all.domain.ImageVO;
 import com.farmworld.farm.domain.MyFarmVO;
 import com.farmworld.mypage.domain.OrderVO;
 import com.farmworld.mypage.mapper.OrderMapper;
@@ -24,37 +25,7 @@ public class OrderServiceImpl implements OrderService {
 
 	private final OrderMapper mapper;
 
-	@Override
-	public void add(OrderVO vo) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(Integer k) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/*∆«∏≈≥ªø™*/
-	@Override
-	public List<OrderVO> sellList1() {
-		log.info("selllist()");
-		return mapper.selllist1();
-	}
-	@Override
-	public List<GoodsVO> sellList2() {
-		log.info("selllist()");
-		return mapper.selllist2();
-	}
-	@Override
-	public List<MyFarmVO> sellList3() {
-		log.info("selllist()");
-		return mapper.selllist3();
-	}
-
-	
-	/*±∏∏≈≥ªø™*/
+	/* Íµ¨Îß§ÎÇ¥Ïó≠ */
 	@Override
 	public List<OrderVO> buyList1() {
 		log.info("buylist()");
@@ -70,6 +41,59 @@ public class OrderServiceImpl implements OrderService {
 		log.info("buylist()");
 		return mapper.buylist3();
 	}
+	@Override
+	public List<ImageVO> buylistimg() {
+		log.info("buylistimg()");
+		return mapper.buylistimg();
+	}
+	
+	/* Íµ¨Îß§Ï∑®ÏÜå */
+	@Override
+	public int returnpurchase(int order_num) {
+		log.info("returnpurchase()");
+		return mapper.returnpurchase(order_num);
+	}
+
+
+	/* ÌåêÎß§ÎÇ¥Ïó≠ */
+	@Override
+	public List<OrderVO> sellList1() {
+		log.info("selllist()");
+		return mapper.selllist1();
+	}
+	@Override
+	public List<GoodsVO> sellList2() {
+		log.info("selllist()");
+		return mapper.selllist2();
+	}
+	@Override
+	public List<MyFarmVO> sellList3() {
+		log.info("selllist()");
+		return mapper.selllist3();
+	}
+	@Override
+	public List<ImageVO> selllistimg() {
+		log.info("selllistimg()");
+		return mapper.selllistimg();
+	}
+	
+
+	
+
+	
+	
+	
+	@Override
+	public void add(OrderVO vo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Integer k) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	@Override
 	public OrderVO get(Integer k) {
@@ -82,5 +106,8 @@ public class OrderServiceImpl implements OrderService {
 		// TODO Auto-generated method stub
 		
 	}
+	
+
+
 
 }
