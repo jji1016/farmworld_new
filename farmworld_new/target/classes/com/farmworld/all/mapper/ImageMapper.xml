@@ -15,7 +15,7 @@
 	</insert>
 	
 	
-	<update id="update" parameterType="ImageVO">
+	<update id="update" parameterType="ImageVO" keyColumn="image_folder_num" keyProperty="image_folder_num">
 		UPDATE image
 		SET image1 = #{image1},
 		image2 = #{image2},

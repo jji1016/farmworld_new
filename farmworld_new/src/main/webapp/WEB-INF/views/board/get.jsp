@@ -42,8 +42,15 @@
                                         ${board.board_content }
                                     </div>
                                     <div class="form-control">
-                                        ${board.image_folder_num }
-                                        이미지 들어갈 자리
+                                    	<c:if test="${board.image1 != null}">
+                                    		<img src="/resources/upload/${board.image_folder_num }/${board.image1}">
+                                    	</c:if>
+                                    	<c:if test="${board.image2 != null}">
+                                    		<img src="/resources/upload/${board.image_folder_num }/${board.image2}">
+                                    	</c:if>
+                                    	<c:if test="${board.image3 != null}">
+                                    		<img src="/resources/upload/${board.image_folder_num }/${board.image3}">
+                                    	</c:if>
                                     </div>
                                 </div>
                               

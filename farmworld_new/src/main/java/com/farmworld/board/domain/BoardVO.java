@@ -15,4 +15,7 @@ public class BoardVO {
 	private String user_nickname;
 	private int image_folder_num;
 	private String board_category;
+	private String image1;
+	private String image2;
+	private String image3;
 }

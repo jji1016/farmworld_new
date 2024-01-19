@@ -1,6 +1,10 @@
 package com.farmworld.board.controller;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,12 +89,11 @@ public class BoardController {
 
 	        if (file.getSize() > 0) {
 	            try {
-	                String fileName = file.getOriginalFilename();
 	                String filePath = uploadDir + imageNum + "/";
-	                fileUpload.uploadFile(file, filePath);
+	                String fileName = fileUpload.uploadFile(file, filePath);
 
 	                // 동적으로 setImage 실행
-	                switch (i) {
+	                switch (i+1) {
 	                    case 1:
 	                        image.setImage1(fileName);
 	                        break;
@@ -133,7 +136,71 @@ public class BoardController {
 	}
 	
 	@PostMapping("/modify")
-	public String modify(@RequestParam(name = "board_category", required = false) String boardCategory, BoardVO board , RedirectAttributes rttr) {
+	public String modify(@RequestParam(name = "board_category", required = false) String boardCategory,ArrayList<MultipartFile> files, BoardVO board, RedirectAttributes rttr) {
+		System.out.println("---------"+board);
+		ImageVO image = imageService.get(board.getImage_folder_num());
+	    Integer imageNum = board.getImage_folder_num();
+	    image.setImage_folder_num(imageNum);
+	    
+	    System.out.println("이미지1-: "+ image.getImage1());
+	    System.out.println("이미지2-: "+ image.getImage2());
+	    System.out.println("이미지3-: "+ image.getImage3());
+
+	    for (int i = 0; i < files.size(); i++) {
+	        MultipartFile file = files.get(i);
+
+	        System.out.println("name:" + file.getOriginalFilename());
+	        System.out.println("size:" + file.getSize());
+
+	        if (file.getSize() > 0) {
+	            try {
+	                String filePath = uploadDir + imageNum + "/";
+	                String fileName = fileUpload.uploadFile(file, filePath);
+	                Path FPath;
+	                System.out.println(filePath);
+	                
+
+	                // 동적으로 setImage 실행
+	                switch (i+1) {
+	                    case 1:
+	                    	FPath = Paths.get(uploadDir + imageNum+"\\"+image.getImage1());
+	                    	System.out.println(FPath);
+	                    	if(image.getImage1() != null) {
+	                    		 Files.delete(FPath);
+	                    	}
+	                    		image.setImage1(fileName);
+	                        break;
+	                    case 2:
+	                    	FPath = Paths.get(uploadDir + imageNum+"\\"+image.getImage2());
+	                    	System.out.println(FPath);
+	                    	if(image.getImage2() != null) {
+	                    		 Files.delete(FPath);
+	                    	}
+	                    		image.setImage2(fileName);
+	                        break;
+	                    case 3:
+	                    	FPath = Paths.get(uploadDir + imageNum+"\\"+image.getImage3());
+	                    	System.out.println(FPath);
+	                    	if(image.getImage3() != null) {
+	                    		 Files.delete(FPath);
+	                    	}
+	                    		image.setImage3(fileName);
+	                        break;
+	                    default:
+	                        break;
+	                }
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+	    System.out.println("imagevo: "+image);
+	    imageService.modify(image);
+		
+	    System.out.println("이미지1: "+ image.getImage1());
+	    System.out.println("이미지2: "+ image.getImage2());
+	    System.out.println("이미지3: "+ image.getImage3());
+	    
 		boardService.modify(board);
 		return "redirect:/board/list?board_category="+boardCategory;
 	}
