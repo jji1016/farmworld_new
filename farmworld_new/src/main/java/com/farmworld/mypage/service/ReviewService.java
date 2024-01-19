@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.farmworld.all.domain.Criteria;
+import com.farmworld.all.domain.ImageVO;
 import com.farmworld.all.service.Generic;
 import com.farmworld.mypage.domain.OrderVO;
 import com.farmworld.mypage.domain.ReviewVO;
@@ -15,6 +16,7 @@ public interface ReviewService extends Generic<ReviewVO, Integer> {
 	public List<OrderVO> review1();
 	public List<GoodsVO> review2();
 	public List<ReviewVO> review3();
+	public List<ImageVO> reviewimage();
 	
 	public int reviewupdate(ReviewVO vo);
 	

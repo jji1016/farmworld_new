@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.farmworld.all.domain.Criteria;
+import com.farmworld.all.domain.ImageVO;
 import com.farmworld.farm.domain.MyFarmVO;
 import com.farmworld.mypage.domain.OrderVO;
 import com.farmworld.mypage.domain.ReviewVO;
@@ -42,12 +43,44 @@ public class ReviewServiceImpl implements ReviewService {
 		log.info("review()");
 		return mapper.review3();
 	}
+	@Override
+	public List<ImageVO> reviewimage() {
+		log.info("review()");
+		return mapper.reviewimage();
+	}
+	
+	
+	
+	/*리뷰수정*/
+	@Override
+	public int reviewupdate(ReviewVO vo) {
+		log.info("reviewupdate()");
+		return mapper.reviewupdate(vo);
+	}
+	@Override
+	public int updatereview(ReviewVO vo) {
+		log.info("updatereview()");
+		return mapper.updatereview(vo);
+	}
+	
+	
+	
+	/*리뷰 삭제*/
+	@Override
+	public int reviewdelete(int review_num) {
+		log.info("reviewdelete()");
+		return mapper.reviewdelete(review_num);
+	}
+	
+	
 	
 	@Override
 	public ReviewVO getreviewVO(Integer k) {
 		
 		return mapper.getreviewVO(k);
 	}
+	
+	
 	@Override
 	public void add(ReviewVO vo) {
 		// TODO Auto-generated method stub
@@ -63,21 +96,7 @@ public class ReviewServiceImpl implements ReviewService {
 		// TODO Auto-generated method stub
 		
 	}
-	@Override
-	public int reviewupdate(ReviewVO vo) {
-		log.info("reviewupdate()");
-		return mapper.reviewupdate(vo);
-	}
-	@Override
-	public int reviewdelete(int review_num) {
-		log.info("reviewdelete()");
-		return mapper.reviewdelete(review_num);
-	}
-	@Override
-	public int updatereview(ReviewVO vo) {
-		log.info("updatereview()");
-		return mapper.updatereview(vo);
-	}
+	
 	@Override
 	public ReviewVO get(Integer k) {
 		// TODO Auto-generated method stub
