@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.farmworld.all.domain.Criteria;
+import com.farmworld.all.domain.GrowCriteria;
 import com.farmworld.farm.domain.GrowUpVO;
 import com.farmworld.farm.mapper.GrowUpMapper;
 
@@ -19,8 +20,7 @@ public class GrowUpimpl implements GrowUp {
 
 	@Override
 	public GrowUpVO get(Integer k) {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.select(k);
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class GrowUpimpl implements GrowUp {
 
 	@Override
 	public void modify(GrowUpVO vo) {
-		// TODO Auto-generated method stub
+		mapper.update(vo);
 		
 	}
 
@@ -41,9 +41,9 @@ public class GrowUpimpl implements GrowUp {
 	}
 
 	@Override
-	public List<GrowUpVO> growAll(GrowUpVO vo) {
+	public List<GrowUpVO> growAll(GrowCriteria cri) {
 		
-		return mapper.selectAll(vo);
+		return mapper.getListWithPaging(cri);
 	}
 
 	@Override
@@ -54,8 +54,14 @@ public class GrowUpimpl implements GrowUp {
 
 	@Override
 	public int getTotal(Criteria cri) {
-		// TODO Auto-generated method stub
-		return 0;
+		return mapper.getTotalCount(cri);
+	}
+
+	@Override
+	public List<GrowUpVO> categoryAll(GrowCriteria vo) {
+		
+		
+		return mapper.getCategory(vo);
 	}
 
 }

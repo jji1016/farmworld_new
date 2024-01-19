@@ -21,7 +21,7 @@
 	                <input type="hidden" value="${vo.user_num }" name="user_num" id="userNum">
 	            </div>
             </div>
-            <div class="col-lg-3">	
+            <div class="col-lg-3" style="position: relative;">	
 			<div class="bg-primary h-100 p-5">
 			<div style="position: relative;">
 			    <img src='/resources/upload/${vo.image_folder_num}/${vo.image1}' class='card-img-top fixed-size-image' alt='농장 이미지'>
@@ -29,7 +29,7 @@
 			</div>
 			
 			<h4>${vo.farm_intro}</h4>
-			<form id="findForm">
+			<form id="findForm"">
 			    <div class="input-group">
 			        <input type='text' class="form-control p-3" placeholder="농장 이름 검색" name='keyword' id='keyword'>
 			        <span class="input-group-text">
