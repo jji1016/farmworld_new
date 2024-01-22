@@ -111,22 +111,50 @@ $(document).ready(function() {
 	
 }); // $(document).ready 함수 선언 종료
 
+
+// post방식 modify 넘기기
 let formObj = $("#modify_form");
-	let category = $("#category").val();
-		$(".btn").click(function() {
-			let operation = $(this).data("oper");
-			console.log(operation);
-			
-			if(operation == "remove"){
-				formObj.attr("action","/board/remove")
-					.attr("method","get");
-				// formObj.submit(); remove랑 modify쪽에 둘다 이걸 넣어줘야하지만 밖에 하나만 넣음
-			}else if(operation == "modify"){
-				formObj.attr("action","/board/modify")
-				.attr("method","post");
-			}
-			formObj.submit();
-		});
+let category = $("#category").val();
+$(".btn").click(function() {
+	let operation = $(this).data("oper");
+	console.log(operation);
+	
+	if(operation == "remove"){
+		formObj.attr("action","/board/remove")
+			.attr("method","get");
+		// formObj.submit(); remove랑 modify쪽에 둘다 이걸 넣어줘야하지만 밖에 하나만 넣음
+	}else if(operation == "modify"){
+		formObj.attr("action","/board/modify")
+		.attr("method","post");
+	}
+	formObj.submit();
+});
+
+// 게시글 수정시 삽입된 이미지 삭제
+$(".del_image").on("click", function () {
+    var id = $(this).attr("id");
+    console.log(id);
+	var replaceID = id.replace("del_", "");
+	console.log(replaceID);
+
+    $.ajax({
+        type: "POST",
+        url: "/board/deleteImage",
+        data: { del_image_id: replaceID,
+        		image_folder_num : $("#image_FN").val() },
+        success: function(result) {
+            // 성공적으로 삭제되면 해당 이미지를 화면에서 제거
+            console.log(result);
+             $("#" + replaceID).empty();
+            console.log("Image deleted successfully");
+        },
+        error: function(error) {
+            console.log("Error: " + error);
+        }
+    });
+});
+
+
 
 function previewImage(input, previewId) {
     var file = input.files[0];
