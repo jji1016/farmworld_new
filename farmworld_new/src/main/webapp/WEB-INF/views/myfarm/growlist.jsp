@@ -18,11 +18,17 @@
         	<div class="container">
 	            <div class="mx-auto text-center mb-5" style="max-width: 500px;">
 	                <h1 class="display-5" id="headName">${vo.farm_name }</h1>
+	                <form id="pageForm">
 	                <input type="hidden" value="${vo.user_num }" name="user_num" id="userNum">
 	                <input type="hidden" value="${vo.farm_num }" name="farm_num" id="farmNum">
+	                <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+                   	<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+                   	<input type="hidden" name="type" value="${pageMaker.cri.type }">
+                   	<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
+                   	</form>
 	            </div>
             </div>
-            <div class="col-lg-3">	
+            <div class="col-lg-3" style="position: relative;">	
 			<div class="bg-primary h-100 p-5">
 			<div style="position: relative;">
 			    <img src='/resources/upload/${vo.image_folder_num}/${vo.image1}' class='card-img-top fixed-size-image' alt='농장 이미지'>
@@ -67,25 +73,22 @@
                                 <div class="col-12" id="growInput">
 
                                 </div>
+                                <div class="col-4">
+                                <ul class="pagination">
+                            		<c:if test="${pageMaker.prev }">
+                            			<li class="paginate_button previous" ><a href="${pageMaker.startPage -1}">prev</a></li>
+                            		</c:if>
+                            		<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" >
+                            			<li class="paginate_button  ${pageMaker.cri.pageNum == num ? 'active': '' }" ><a href="${num }">${num }</a></li>
+                            		</c:forEach>
+                            		<c:if test="${pageMaker.next }">
+                            			<li class="paginate_button next" ><a href="${pageMaker.endPage + 1}">Next</a></li>
+                            		</c:if>
+                            	</ul>
+								</div>
                                 
                                 <div class="col-12">
-
-                                </div>
-                                
-                                <div class="col-12">
-
-                                </div>
-                                
-                                <div class="col-12">
-
-                                </div>
-                                
-                                <div class="col-12">
-
-                                </div>
-                                
-                                <div class="col-12">
-                                <a href="/myfarm/growregister?farm_num=<c:out value="${vo.farm_num}"/>">성장일기 등록</a>
+                                <a href="/myfarm/growregister?farm_num=<c:out value="${vo.farm_num}" />"style='background-color: #f8d7da;'>성장일기 등록</a>
                                 </div>
                                 
                             </div>
@@ -100,47 +103,73 @@
 
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
+function redirectToGrow(growNum) {
+    // userNum을 사용하여 해당 유저의 팜으로 이동
+    if (growNum) {
+        window.location.href = '/myfarm/growboard?grow_num=' + growNum;
+    } else {
+        alert('해당 게시글은 존재하지 않습니다.!');
+        window.history.back();
+    }
+}
     $(document).ready(function () {
 		
     	loadTableData(); // Ajax 실행 함수 호출
 		
-		function loadTableData() {
-			let farmNum = $("#farm_num").val();
-			$.ajax({
-				url: "/myfarm/getlist", 
-				type: "POST", 
-				dataType : "json",
-				data:{
-					farm_num : farmNum
-				},
-				success: function(data){
-					let growBody = $("#growInput");
-					console.log(data)
-					$.each(data, function(index,grow){
-	
-						let row ="";
-						row+=("<div class='col-md-6 col-lg-6 col-xl-4'>");
-						row+=("<div class='rounded position-relative fruite-item' onclick='redirectToFarm(" + grow.grow_num + ")'>");
-						row+=("<div class='row g-0'>");
-						row+=("<div class='col-10'>");
-						row+=("<div class='position-relative'>");
-						row+=("<input type='hidden' name='farm_num' value='"+grow.farm_num+"'>")
-						row+=("<img src='/resources/upload/" + grow.image_folder_num + "/"+ grow.image1 + "' class='card-img-top fixed-size-image' alt='농장 이미지' style='width:100%; height:280px'>");
-						row+=("<div class='position-absolute start-0 bottom-0 w-100 py-3 px-4' style='background: rgba(52, 173, 84, .85);'>");
-						row+=("<h4 class='text-white text-truncate'>"+grow.grow_title+"</h4>");
+    	function loadTableData() {
+    	    let farmNum = $("#farmNum").val();
+    	    console.log("팜넘" + farmNum);
+    	    $.ajax({
+    	        url: "/myfarm/growlist",
+    	        type: "POST",
+    	        dataType: "json",
+    	        data: {
+    	            farm_num: farmNum,
+    	            pageNum: $("#pageForm").find("input[name='pageNum']").val(),
+    	            amount: $("#pageForm").find("input[name='amount']").val(),
+    	            keyword: $("#pageForm").find("input[name='keyword']").val(),
+    	            type: $("#pageForm").find("input[name='type']").val(),
+    	        },
+    	        success: function (data) {
+    	            let growBody = $("#growInput");
+    	            console.log(data);
+    	            if (data.length === 0) {
+    	            	growBody.html("<div style='width: 50%; height: 400px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin: auto; background-color: #f8d7da; border: 1px solid #f5c6cb; border-radius: .25rem;'><p style='font-size: 20px;'>현재 성장일기가 존재하지 않습니다.</p></div>");
+					 } else {
+    	            let row = "<div class='row g-3'>"; // 새로운 행 시작
 
-						row+=("</div></div></div></div></div></div>");
+    	            $.each(data, function (index, grow) {
+    	                // 여기서 grow 항목을 생성하고 클래스 추가
+    	                row += ("<div class='col-md-4 col-lg-4 col-xl-4'>"); // 각 항목의 너비 조절
+    	                row += ("<div class='rounded position-relative fruite-item' onclick='redirectToGrow(" + grow.grow_num + ")'>");
+    	                row += ("<div class='row g-0'>");
+    	                row += ("<div class='col-10'>");
+    	                row += ("<div class='position-relative'>");
+    	                row += ("<input type='hidden' name='farm_num' value='" + grow.farm_num + "'>")
+    	                row += ("<img src='/resources/upload/" + grow.image_folder_num + "/" + grow.image1 + "' class='card-img-top fixed-size-image' alt='농장 이미지' style='width:100%; height:280px'>");
+    	                row += ("<div class='position-absolute start-0 bottom-0 w-100 py-3 px-4' style='background: rgba(52, 173, 84, .85);'>");
+    	                row += ("<h4 class='text-white text-truncate'>" +"["+ grow.growup_category +"]"+ grow.grow_title + "</h4>");
+    	                row += ("</div></div></div></div></div></div>");
 
-						
-						growBody.append(row);
-						
-					});
-				},
-				error: function(e){
-					console.log(e);
-				}
+    	                if ((index + 1) % 3 === 0) {
+    	                    // 3개의 항목을 한 행으로 처리하고 새로운 행 시작
+    	                    row += "</div>"; // 행을 닫음
+    	                    growBody.append(row);
+    	                    row = "<div class='row g-3'>"; // 새로운 행 시작
+    	                }
+    	            });
 
-			});
+    	            if (data.length % 3 !== 0) {
+    	                // 남은 항목들을 마저 처리
+    	                row += "</div>"; // 마지막 행을 닫음
+    	                growBody.append(row);
+    	            }
+    	            }
+    	        },
+    	        error: function (e) {
+    	            console.log(e);
+    	        }
+    	    });
     	}
         $("#keyword").keypress(function(event) {
             if (event.which === 13) {

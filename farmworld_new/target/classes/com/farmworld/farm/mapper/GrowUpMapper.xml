@@ -5,31 +5,39 @@
 
 <mapper namespace="com.farmworld.farm.mapper.GrowUpMapper">
 	<sql id="growupColumns">
-        grow_num, grow_title, grow_content, grow_date, farm_num, user_num, image_folder_num, growup_category
-    </sql>
+		grow_num, grow_title, grow_content, grow_date, farm_num,
+		user_num,
+		image_folder_num, growup_category
+	</sql>
 
 	<insert id="insert" parameterType="GrowUpVO">
 		insert into GrowUp
-		(grow_title, grow_content, growup_category, farm_num, user_num, image_folder_num)
-		values (#{grow_title}, #{grow_content}, #{growup_category}, #{farm_num}, 1, #{image_folder_num})
+		(grow_title, grow_content, growup_category, farm_num, user_num,
+		image_folder_num)
+		values (#{grow_title}, #{grow_content},
+		#{growup_category}, #{farm_num}, 1, #{image_folder_num})
 	</insert>
 
 	<insert id="insertSelectBno" parameterType="GrowUpVO"
 		keyColumn="grow_num" keyProperty="grow_num" useGeneratedKeys="true">
-		insert into GrowUp
+		insert
+		into GrowUp
 		(grow_title, grow_content)
-		values (#{grow_title}, #{grow_content})
+		values (#{grow_title},
+		#{grow_content})
 	</insert>
 
-	<select id="selectAll" resultType="GrowUpVO" parameterType="GrowUpVO">
+	<select id="selectAll" resultType="GrowUpVO"
+		parameterType="GrowUpVO">
 		select * from GrowUp WHERE farm_num = #{farm_num}
 	</select>
 
 	<select id="getListWithSearch" resultType="GrowUpVO"
 		parameterType="com.farmworld.all.domain.Criteria">
-		        SELECT f.*, i.image1
-        FROM myfarm f
-        LEFT JOIN image i ON f.image_folder_num = i.image_folder_num
+		SELECT f.*, i.image1
+		FROM myfarm f
+		LEFT JOIN image i ON
+		f.image_folder_num = i.image_folder_num
 		<if
 			test="type != null and type != '' and keyword != null and keyword != ''">
 			<where>
@@ -40,59 +48,56 @@
 	</select>
 
 	<update id="update" parameterType="GrowUpVO">
-		UPDATE GrowUp
+		UPDATE growUp
 		SET grow_title =
 		#{grow_title},
-		grow_content = #{grow_content}
+		growup_category = #{growup_category},
+		grow_content =
+		#{grow_content}
 		WHERE grow_num = #{grow_num}
 	</update>
 
 	<delete id="delete" parameterType="GrowUpVO">
-		DELETE FROM GrowUp WHERE grow_num =
+		DELETE FROM GrowUp WHERE
+		grow_num =
 		#{grow_num}
 	</delete>
 
-	<select id="select" resultType="GrowUpVO" parameterType="GrowUpVO">
-		SELECT *
-		FROM GrowUp WHERE grow_num = #{grow_num}
+	<select id="select" resultType="GrowUpVO"
+		parameterType="GrowUpVO">
+		SELECT grow_num, grow_title, grow_content, grow_date,
+		farm_num, user_num, image_folder_num, growup_category
+		FROM GrowUp WHERE
+		grow_num = #{grow_num}
 	</select>
 
-	<select id="getTotalCount" resultType="int" parameterType="com.farmworld.all.domain.Criteria">
-		SELECT COUNT(grow_num) FROM GrowUp
-				<if test="type != null and type != '' and keyword != null and keyword != ''">
-			<where>
-				<choose>
-					<when test="type == 'TC'">
-						AND grow_title LIKE CONCAT('%',#{keyword},'%') OR 
-						content LIKE CONCAT('%',#{keyword},'%')
-					</when>
-					<when test="type == 'TCW'">
-					    AND (grow_title LIKE CONCAT('%',#{keyword},'%') OR grow_content LIKE CONCAT('%',#{keyword},'%') OR grow_category LIKE CONCAT('%',#{keyword},'%'))
-					</when>
-					<when test='type == "T"'>
-						AND grow_title LIKE CONCAT('%',#{keyword},'%') 
-					</when>
-					<when test='type == "C"'>
-						AND grow_content LIKE CONCAT('%',#{keyword},'%')
-					</when>
-					<when test='type == "W"'>
-						AND grow_category LIKE CONCAT('%',#{keyword},'%') 
-					</when>
-				</choose>
-			</where>
+	<select id="getTotalCount" resultType="int"
+		parameterType="com.farmworld.all.domain.Criteria">
+		SELECT COUNT(grow_num) FROM GrowUp WHERE farm_num = #{farm_num}
+		<if test="growup_category != null and growup_category !=''">
+		AND growup_category = #{growup_category}
 		</if>
-		
+
 	</select>
 
 
 	<select id="getListWithPaging" resultType="GrowUpVO"
-		parameterType="com.farmworld.all.domain.Criteria">
+		parameterType="com.farmworld.all.domain.GrowCriteria">
 		SELECT g.*, i.image1, i.image2, i.image3
-        FROM growup g
-        LEFT JOIN image i ON g.image_folder_num = i.image_folder_num
-        WHERE farm_num = #{farm_num}
-		ORDER BY bno DESC
-		LIMIT #{start}, #{amount}
+		FROM growup g
+		LEFT JOIN image i ON g.image_folder_num = i.image_folder_num
+		WHERE farm_num = #{farm_num}
+		<if test="growup_category != null and growup_category !=''">
+		AND growup_category = #{growup_category}
+		</if>
+		ORDER BY grow_date DESC
+		LIMIT #{start},
+		#{amount}
+	</select>
+	
+	<select id="getCategory" resultType="GrowUpVO"
+		parameterType="com.farmworld.all.domain.GrowCriteria">
+		SELECT DISTINCT growup_category FROM growup WHERE farm_num = #{farm_num};
 	</select>
 
 </mapper>

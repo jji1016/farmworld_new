@@ -25,18 +25,18 @@
         	
         	<div class="container">
 	            <div class="mx-auto text-center mb-5" style="max-width: 500px;">
-	                <h1 class="display-5" id="headName">${vo.farm_name }</h1>
+	                <h1 class="display-5" id="headName">${farmvo.farm_name }</h1>
 
 	            </div>
             </div>
             <div class="col-lg-3" style="position: relative;">	
 			<div class="bg-primary h-100 p-5">
 			<div style="position: relative;">
-			    <img src='/resources/upload/${vo.image_folder_num}/${vo.image1}' class='card-img-top fixed-size-image' alt='농장 이미지'>
-			    <button style="position: absolute; bottom: 0; right: 0; border-radius:50%; border:none;"><a href='/myfarm/modify?farm_num=<c:out value="${vo.farm_num}"/>'>수정</a></button>
+			    <img src='/resources/upload/${farmvo.image_folder_num}/${farmvo.image1}' class='card-img-top fixed-size-image' alt='농장 이미지'>
+			    <button style="position: absolute; bottom: 0; right: 0; border-radius:50%; border:none;"><a href='/myfarm/modify?farm_num=<c:out value="${farmvo.farm_num}"/>'>수정</a></button>
 			</div>
 			
-			<h4>${vo.farm_intro}</h4>
+			<h4>${farmvo.farm_intro}</h4>
 			<form id="findForm" style="position: absolute; bottom: 4%;">
 			    <div class="input-group">
 			        <input type='text' class="form-control p-3" placeholder="농장 이름 검색" name='keyword' id='keyword'>
@@ -53,35 +53,48 @@
                     <div class="bg-primary h-100 p-5">
 
                             <div class="row g-3">
-								<form method="POST" action="/myfarm/growregister" enctype="multipart/form-data">
+								<form method="POST" action="/myfarm/growmodify" enctype="multipart/form-data">
 								<input type="hidden" value="${vo.user_num }" name="user_num" id="userNum">
 	                			<input type="hidden" value="${vo.farm_num }" name="farm_num" id="farmNum">
+	                			<input type="hidden" value="${vo.grow_num }" name="grow_num" id="grow_num">
+	                			<input type="hidden" value="${vo.image_folder_num }" name="image_folder_num" id="image_folder_num">
                                 <div class="col-12">
-								<input type="text" class="form-control p-3" name="grow_title" placeholder="성장일기 제목" required="required">
+								<input type="text" class="form-control p-3" name="grow_title" placeholder="성장일기 제목" required="required" value="${vo.grow_title}">
                                 </div>
                                 <div class="col-12">
-								<input type="text" class="form-control p-3" name="growup_category" placeholder="카테고리" required>
+								<input type="text" class="form-control p-3" name="growup_category" placeholder="카테고리" value="${vo.growup_category}" required >
                                 </div>
                                 <div class="col-12" style="background-color:white;">
-                                <textarea name="grow_content" id="summernote" maxlength="10000" cols="30" rows="5" placeholder="내용을 입력해주세요" class="with-border" ></textarea>
+                                <textarea name="grow_content" id="summernote" maxlength="10000" cols="30" rows="5" placeholder="내용을 입력해주세요" class="with-border" >${vo.grow_content}</textarea>
                                 </div>
                                 <div class="col-12">
                                 	이미지 업로드(최소 1개)
-                               	</div>
-                               	<div class="col-4">
-				                <input type="file" name="files" id="image1" class="form-control-file" onchange="previewImage(this, 'imagePreview1')" required="required">
-				                </div><div id="imagePreview1" class="col-8"></div>
-				                <div class="col-4">
-				                <input type="file" name="files" id="image2" class="form-control-file" onchange="previewImage(this, 'imagePreview2')">
-				                </div><div id="imagePreview2" class="col-8"></div>
-				                <div class="col-4">
-				                <input type="file" name="files" id="image3" class="form-control-file" onchange="previewImage(this, 'imagePreview3')">
-                                </div><div id="imagePreview3" class="col-8"></div>
+                                	</div>
+                                	<div class="col-4">
+					                <input type="file" name="files" id="image1" class="form-control-file" onchange="previewImage(this, 'imagePreview1')" required="required">
+					                </div><div id="imagePreview1" class="col-8">
+					                <c:if test="${not empty vo.image_folder_num and not empty image.image1}">
+					                <img src="/resources/upload/${vo.image_folder_num}/${image.image1}">
+					                </c:if>
+					                </div>
+					                <div class="col-4">
+					                <input type="file" name="files" id="image2" class="form-control-file" onchange="previewImage(this, 'imagePreview2')">
+					                </div><div id="imagePreview2" class="col-8">
+					                 <c:if test="${not empty vo.image_folder_num and not empty image.image2}">
+					                <img src="/resources/upload/${vo.image_folder_num}/${image.image2}">
+					                </c:if></div>
+					                <div class="col-4">
+					                <input type="file" name="files" id="image3" class="form-control-file" onchange="previewImage(this, 'imagePreview3')">
+                                </div><div id="imagePreview3" class="col-8">
+                                 <c:if test="${not empty vo.image_folder_num and not empty image.image3}">
+					                <img src="/resources/upload/${vo.image_folder_num}/${image.image3}">
+					                </c:if></div>
                                 
+
                                 
                                 
                                 <div class="col-12">
-                                <button type="submit" class="btn btn-default">성장일기 등록</button>
+                                <button type="submit" class="btn btn-default">수정 완료</button>
                                 </div>
                                 </form>
 
