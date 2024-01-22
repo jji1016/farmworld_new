@@ -109,7 +109,9 @@ $(document).ready(function() {
 		          
 	});
 	
-	let formObj = $("#modify_form");
+}); // $(document).ready 함수 선언 종료
+
+let formObj = $("#modify_form");
 	let category = $("#category").val();
 		$(".btn").click(function() {
 			let operation = $(this).data("oper");
@@ -125,24 +127,28 @@ $(document).ready(function() {
 			}
 			formObj.submit();
 		});
-	
-}); // $(document).ready 함수 선언 종료
 
-// 이미지 미리보기기능
-function previewImage(input) {
-    var preview = document.getElementById('imagePreview');
-    preview.innerHTML = ''; // 이미지 미리보기를 초기화합니다.
-
-    if (input.files && input.files[0]) {
+function previewImage(input, previewId) {
+    var file = input.files[0];
+    if (file) {
         var reader = new FileReader();
-
         reader.onload = function (e) {
-            var img = document.createElement('img');
-            img.src = e.target.result;
-            img.className = 'img-preview';
-            preview.appendChild(img);
-        }
+            $("#" + previewId).html('<img src="' + e.target.result + '" alt="Image Preview" class="img-fluid">');
+        };
+        reader.readAsDataURL(file);
+    }
+}
 
-        reader.readAsDataURL(input.files[0]);
-    };
-};
+$("#image1").change(function () {
+    previewImage(this, 'imagePreview1');
+});
+
+$("#image2").change(function () {
+    previewImage(this, 'imagePreview2');
+});
+
+$("#image3").change(function () {
+    previewImage(this, 'imagePreview3');
+});
+
+

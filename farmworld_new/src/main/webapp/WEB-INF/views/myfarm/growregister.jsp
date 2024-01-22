@@ -29,7 +29,7 @@
 
 	            </div>
             </div>
-            <div class="col-lg-3">	
+            <div class="col-lg-3" style="position: relative;">	
 			<div class="bg-primary h-100 p-5">
 			<div style="position: relative;">
 			    <img src='/resources/upload/${vo.image_folder_num}/${vo.image1}' class='card-img-top fixed-size-image' alt='농장 이미지'>
@@ -37,7 +37,7 @@
 			</div>
 			
 			<h4>${vo.farm_intro}</h4>
-			<form id="findForm">
+			<form id="findForm" style="position: absolute; bottom: 4%;">
 			    <div class="input-group">
 			        <input type='text' class="form-control p-3" placeholder="농장 이름 검색" name='keyword' id='keyword'>
 			        <span class="input-group-text">
@@ -66,16 +66,16 @@
                                 <textarea name="grow_content" id="summernote" maxlength="10000" cols="30" rows="5" placeholder="내용을 입력해주세요" class="with-border" ></textarea>
                                 </div>
                                 <div class="col-12">
-                                	이미지 업로드
-                                	</div>
-                                	<div class="col-4">
-					                <input type="file" name="files" id="image1" class="form-control-file" onchange="previewImage(this, 'imagePreview1')">
-					                </div><div id="imagePreview1" class="col-8"></div>
-					                <div class="col-4">
-					                <input type="file" name="files" id="image2" class="form-control-file" onchange="previewImage(this, 'imagePreview2')">
-					                </div><div id="imagePreview2" class="col-8"></div>
-					                <div class="col-4">
-					                <input type="file" name="files" id="image3" class="form-control-file" onchange="previewImage(this, 'imagePreview3')">
+                                	이미지 업로드(최소 1개)
+                               	</div>
+                               	<div class="col-4">
+				                <input type="file" name="files" id="image1" class="form-control-file" onchange="previewImage(this, 'imagePreview1')" required="required">
+				                </div><div id="imagePreview1" class="col-8"></div>
+				                <div class="col-4">
+				                <input type="file" name="files" id="image2" class="form-control-file" onchange="previewImage(this, 'imagePreview2')">
+				                </div><div id="imagePreview2" class="col-8"></div>
+				                <div class="col-4">
+				                <input type="file" name="files" id="image3" class="form-control-file" onchange="previewImage(this, 'imagePreview3')">
                                 </div><div id="imagePreview3" class="col-8"></div>
                                 
                                 

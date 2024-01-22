@@ -2,6 +2,9 @@ package com.farmworld.all.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,13 +22,18 @@ public class FileUploadService {
 	
 	public String uploadFile(MultipartFile file, String path) throws IOException, IllegalStateException {
 	    String folderPath = "";  // 폴더 경로
-
+	    String fileName = file.getOriginalFilename();
 	    
 	        try {
 	            // 저장 경로 설정    
 	            
-	            String fileName = file.getOriginalFilename();
 	            
+	            Date today = new Date();
+	    		Locale currentLocale = new Locale("KOREAN", "KOREA");
+	    		String pattern = "yyyyMMddHHmmss"; //hhmmss로 시간,분,초만 뽑기도 가능
+	    		SimpleDateFormat formatter = new SimpleDateFormat(pattern, currentLocale);
+	    		System.out.println(formatter.format(today));
+	            fileName = formatter.format(today)+"_"+ fileName;
 	            
 	            File folder = new File(path);
 	            if (!folder.exists()) {
@@ -41,7 +49,7 @@ public class FileUploadService {
 	            e.printStackTrace();
 	        }
 	    
-		return folderPath;
+		return fileName;
 	}
 	
 

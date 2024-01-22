@@ -3,6 +3,7 @@ package com.farmworld.farm.mapper;
 import java.util.List;
 
 import com.farmworld.all.domain.Criteria;
+import com.farmworld.all.domain.GrowCriteria;
 import com.farmworld.farm.domain.GrowUpVO;
 
 public interface GrowUpMapper {
@@ -23,7 +24,9 @@ public interface GrowUpMapper {
 	
 	public int getTotalCount(Criteria cri);
 	
-	public List<GrowUpVO> getListWithPaging(Criteria cri);
+	public List<GrowUpVO> getListWithPaging(GrowCriteria cri);
+
+	public List<GrowUpVO> getCategory(GrowCriteria vo);
 
 
 }

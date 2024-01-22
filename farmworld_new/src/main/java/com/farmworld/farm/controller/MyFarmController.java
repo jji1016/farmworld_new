@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.farmworld.all.domain.Criteria;
+import com.farmworld.all.domain.GrowCriteria;
 import com.farmworld.all.domain.ImageVO;
 import com.farmworld.all.domain.pageDTO;
 import com.farmworld.all.service.ImageService;
@@ -139,8 +140,7 @@ public class MyFarmController {
 	
 	@ResponseBody
 	@PostMapping("/getlist")
-	public List<MyFarmVO> getlist(Criteria cri){
-		
+	public List<MyFarmVO> getlist(Criteria cri){	
 		//타입 설정
 		switch (cri.getType()) {
 		case "T":
@@ -150,10 +150,7 @@ public class MyFarmController {
 			cri.setType("user_num");
 			break;		
 		}
-
 		List<MyFarmVO> list = myFarmService.farmAll(cri);
-		
-		
 		return list;
 	}
 	
@@ -180,7 +177,7 @@ public class MyFarmController {
 	public void growlist(MyFarmVO vo, Criteria cri, Model model) {
 		
 		cri.setAmount(6);
-		int total = myFarmService.getTotal(cri);
+		int total = growUpService.getTotal(cri);
 		pageDTO pageResult = new pageDTO(cri, total);
 		model.addAttribute("pageMaker", pageResult);
 		model.addAttribute("vo", myFarmService.get(vo.getFarm_num()));
@@ -188,20 +185,83 @@ public class MyFarmController {
 	
 	@ResponseBody
 	@PostMapping("/growlist")
-	public List<GrowUpVO> growgetlist(GrowUpVO vo){
-		
+	public List<GrowUpVO> growgetlist(GrowCriteria cri, Model model){
+		System.out.println(cri);
+		cri.setAmount(6);
 
-		List<GrowUpVO> list = growUpService.growAll(vo);
+		List<GrowUpVO> list = growUpService.growAll(cri);
 		
 		
 		return list;
 	}
+	
+	@GetMapping("/growboard")
+	public void growboard(GrowUpVO vo,Model model) {
+		System.out.println(vo);
+		GrowUpVO gvo = growUpService.get(vo.getGrow_num());
+		model.addAttribute("vo", growUpService.get(vo.getGrow_num()));
+		model.addAttribute("farmvo", myFarmService.get(gvo.getFarm_num()));
+		model.addAttribute("image", imageService.get(gvo.getImage_folder_num()));
+	}
+	
 	
 	@GetMapping("/growregister")
 	public void growregister(MyFarmVO vo, Model model) {
 		model.addAttribute("vo", myFarmService.get(vo.getFarm_num()));
 	}
 	
+	
+	@GetMapping("/growmodify")
+	public void growmodify(GrowUpVO vo, Model model) {
+		GrowUpVO gvo = growUpService.get(vo.getGrow_num());
+		model.addAttribute("vo", growUpService.get(vo.getGrow_num()));
+		model.addAttribute("farmvo", myFarmService.get(gvo.getFarm_num()));
+		model.addAttribute("image", imageService.get(gvo.getImage_folder_num()));
+	}
+	
+	@PostMapping("/growmodify")
+	public String growModify(ArrayList<MultipartFile> files, GrowUpVO vo) {
+		System.out.println(vo);
+		ImageVO image = imageService.get(vo.getImage_folder_num()) ;
+		int imageNum = vo.getImage_folder_num();
+		String imageNumString = String.valueOf(imageNum);
+		System.out.println(image);
+		for (int i = 0; i < files.size(); i++) {
+	        MultipartFile file = files.get(i);
+
+	        System.out.println("name:" + file.getOriginalFilename());
+	        System.out.println("size:" + file.getSize());
+
+	        if (file.getSize() > 0) {
+	            try {
+	                String fileName = file.getOriginalFilename();
+	                String filePath = uploadDir + imageNumString + "/";
+	                fileUpload.uploadFile(file, filePath);
+	                System.out.println("반복i:"+i);
+
+	                // 동적으로 setImage 실행
+	                switch (i) {
+	                    case 1:
+	                        image.setImage1(fileName);
+	                        break;
+	                    case 2:
+	                        image.setImage2(fileName);
+	                        break;
+	                    case 3:
+	                    	image.setImage3(fileName);
+	                    // 필요한 만큼 계속 추가 가능
+	                    default:
+	                        break;
+	                }
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+		imageService.modify(image);
+		growUpService.modify(vo);
+		return "redirect:/myfarm/growboard?grow_num="+vo.getGrow_num();
+	}
 	
 	@PostMapping("/growregister")
 	public String addgrow(ArrayList<MultipartFile> files, GrowUpVO vo) {
@@ -248,7 +308,15 @@ public class MyFarmController {
 	    return "redirect:/myfarm/growlist?farm_num=" + vo.getFarm_num();
 	}
 	
-	
+	@ResponseBody
+	@PostMapping("/getcategory")
+	public List<GrowUpVO> category(GrowCriteria cri){
+		cri.setAmount(6);
+		
+		List<GrowUpVO> list = growUpService.categoryAll(cri);
+		return list;
+		
+	}
 	
 	
 	
