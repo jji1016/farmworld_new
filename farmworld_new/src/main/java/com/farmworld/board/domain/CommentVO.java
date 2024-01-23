@@ -11,4 +11,5 @@ public class CommentVO {
 	private Timestamp comment_date;
 	private int user_num;
 	private int board_num;
+	private String user_nickname;
 }

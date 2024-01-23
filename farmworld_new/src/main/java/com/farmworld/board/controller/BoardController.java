@@ -28,6 +28,7 @@ import com.farmworld.all.service.ImageService;
 import com.farmworld.all.util.FileUploadService;
 import com.farmworld.board.domain.BoardVO;
 import com.farmworld.board.service.BoardService;
+import com.farmworld.board.service.CommentService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -38,6 +39,9 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class BoardController {
 	private final BoardService boardService;
+	
+	@Autowired
+	private CommentService commentService;
 	
 	@Autowired
 	private ImageService imageService;
