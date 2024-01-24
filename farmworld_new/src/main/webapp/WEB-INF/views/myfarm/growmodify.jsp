@@ -22,92 +22,114 @@
 <div class="container-fluid py-5">
     <div class="container py-5 text-center">
         <div class="row justify-content-center">
-        	
-        	<div class="container">
-	            <div class="mx-auto text-center mb-5" style="max-width: 500px;">
-	                <h1 class="display-5" id="headName">${farmvo.farm_name }</h1>
-
-	            </div>
-            </div>
-            <div class="col-lg-3" style="position: relative;">	
-			<div class="bg-primary h-100 p-5">
-			<div style="position: relative;">
-			    <img src='/resources/upload/${farmvo.image_folder_num}/${farmvo.image1}' class='card-img-top fixed-size-image' alt='농장 이미지'>
-			    <button style="position: absolute; bottom: 0; right: 0; border-radius:50%; border:none;"><a href='/myfarm/modify?farm_num=<c:out value="${farmvo.farm_num}"/>'>수정</a></button>
-			</div>
-			
-			<h4>${farmvo.farm_intro}</h4>
-			<form id="findForm" style="position: absolute; bottom: 4%;">
-			    <div class="input-group">
-			        <input type='text' class="form-control p-3" placeholder="농장 이름 검색" name='keyword' id='keyword'>
-			        <span class="input-group-text">
-			            <button type="button" id="searchBtn" class="btn"><i class="fa fa-search"></i></button>
-			        </span>
-			    </div>
-			</form>
-			</div>
-			</div>
-            
-            
-            <div class="col-lg-9">
-                    <div class="bg-primary h-100 p-5">
-
-                            <div class="row g-3">
-								<form method="POST" action="/myfarm/growmodify" enctype="multipart/form-data">
-								<input type="hidden" value="${vo.user_num }" name="user_num" id="userNum">
-	                			<input type="hidden" value="${vo.farm_num }" name="farm_num" id="farmNum">
-	                			<input type="hidden" value="${vo.grow_num }" name="grow_num" id="grow_num">
-	                			<input type="hidden" value="${vo.image_folder_num }" name="image_folder_num" id="image_folder_num">
-                                <div class="col-12">
-								<input type="text" class="form-control p-3" name="grow_title" placeholder="성장일기 제목" required="required" value="${vo.grow_title}">
-                                </div>
-                                <div class="col-12">
-								<input type="text" class="form-control p-3" name="growup_category" placeholder="카테고리" value="${vo.growup_category}" required >
-                                </div>
-                                <div class="col-12" style="background-color:white;">
-                                <textarea name="grow_content" id="summernote" maxlength="10000" cols="30" rows="5" placeholder="내용을 입력해주세요" class="with-border" >${vo.grow_content}</textarea>
-                                </div>
-                                <div class="col-12">
-                                	이미지 업로드(최소 1개)
-                                	</div>
-                                	<div class="col-4">
-					                <input type="file" name="files" id="image1" class="form-control-file" onchange="previewImage(this, 'imagePreview1')" required="required">
-					                </div><div id="imagePreview1" class="col-8">
-					                <c:if test="${not empty vo.image_folder_num and not empty image.image1}">
-					                <img src="/resources/upload/${vo.image_folder_num}/${image.image1}">
-					                </c:if>
-					                </div>
-					                <div class="col-4">
-					                <input type="file" name="files" id="image2" class="form-control-file" onchange="previewImage(this, 'imagePreview2')">
-					                </div><div id="imagePreview2" class="col-8">
-					                 <c:if test="${not empty vo.image_folder_num and not empty image.image2}">
-					                <img src="/resources/upload/${vo.image_folder_num}/${image.image2}">
-					                </c:if></div>
-					                <div class="col-4">
-					                <input type="file" name="files" id="image3" class="form-control-file" onchange="previewImage(this, 'imagePreview3')">
-                                </div><div id="imagePreview3" class="col-8">
-                                 <c:if test="${not empty vo.image_folder_num and not empty image.image3}">
-					                <img src="/resources/upload/${vo.image_folder_num}/${image.image3}">
-					                </c:if></div>
-                                
-
-                                
-                                
-                                <div class="col-12">
-                                <button type="submit" class="btn btn-default">수정 완료</button>
-                                </div>
-                                </form>
-
-                                
-                            </div>
-
-                    </div>
+            <div class="container">
+                <div class="mx-auto text-center mb-5" style="max-width: 500px;">
+                    <h1 class="display-5" id="headName">${farmvo.farm_name }</h1>
                 </div>
-            
+            </div>
+
+            <div class="col-lg-3" style="position: relative;">
+                <div class="bg-primary h-100 p-5">
+                    <div style="position: relative;">
+                        <img src='/resources/upload/${farmvo.image_folder_num}/${farmvo.image1}' class='card-img-top fixed-size-image' alt='농장 이미지'>
+                        <button style="position: absolute; bottom: 0; right: 0; border-radius:50%; border:none;"><a href='/myfarm/modify?farm_num=<c:out value="${farmvo.farm_num}"/>'>수정</a></button>
+                    </div>
+                    <h4>${farmvo.farm_intro}</h4>
+                    <form id="findForm" style="position: absolute; bottom: 4%;">
+                        <div class="input-group">
+                            <input type='text' class="form-control p-3" placeholder="농장 이름 검색" name='keyword' id='keyword'>
+                            <span class="input-group-text">
+                                <button type="button" id="searchBtn" class="btn"><i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+                <div class="bg-primary h-100 p-5">
+                    <form method="POST" action="/myfarm/growmodify" enctype="multipart/form-data">
+                        <input type="hidden" value="${vo.user_num }" name="user_num" id="userNum">
+                        <input type="hidden" value="${vo.farm_num }" name="farm_num" id="farmNum">
+                        <input type="hidden" value="${vo.grow_num }" name="grow_num" id="grow_num">
+                        <input type="hidden" value="${vo.image_folder_num }" name="image_folder_num" id="image_folder_num">
+                        
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <label for="grow_title" class="form-label">성장일기 제목</label>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control p-3" name="grow_title" id="grow_title" required="required" value="${vo.grow_title}">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="growup_category" class="form-label">카테고리</label>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control p-3" name="growup_category" id="growup_category" required placeholder="카테고리" value="${vo.growup_category}">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="summernote" class="form-label">내용</label>
+                                    </td>
+                                    <td>
+                                        <textarea name="grow_content" id="summernote" maxlength="10000" cols="30" rows="5" placeholder="내용을 입력해주세요" class="with-border">${vo.grow_content}</textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label class="form-label">이미지 업로드(최소 1개)</label>
+                                    </td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <input type="file" name="files" id="image1" class="form-control-file" onchange="previewImage(this, 'imagePreview1')" required="required">
+                                                <div id="imagePreview1">
+                                                <c:if test="${not empty vo.image_folder_num and not empty image.image1}">
+                                                    <img src="/resources/upload/${vo.image_folder_num}/${image.image1}" alt="Image Preview" class="img-fluid">
+                                                </c:if>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <input type="file" name="files" id="image2" class="form-control-file" onchange="previewImage(this, 'imagePreview2')">
+                                                <div id="imagePreview2">
+                                                <c:if test="${not empty vo.image_folder_num and not empty image.image2}">
+                                                    <img src="/resources/upload/${vo.image_folder_num}/${image.image2}" alt="Image Preview" class="img-fluid">
+                                                </c:if>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <input type="file" name="files" id="image3" class="form-control-file" onchange="previewImage(this, 'imagePreview3')">
+                                                <div id="imagePreview3">
+                                                <c:if test="${not empty vo.image_folder_num and not empty image.image3}">
+                                                    <img src="/resources/upload/${vo.image_folder_num}/${image.image3}" alt="Image Preview" class="img-fluid">
+                                                </c:if>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <button type="submit" class="btn btn-default">수정 완료</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 <!-- join End -->
+
+
 
 
 <script type="text/javascript">

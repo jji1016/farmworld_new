@@ -29,7 +29,7 @@
 			</div>
 			
 			<h4>${vo.farm_intro}</h4>
-			<form id="findForm"">
+			<form id="findForm">
 			    <div class="input-group">
 			        <input type='text' class="form-control p-3" placeholder="농장 이름 검색" name='keyword' id='keyword'>
 			        <span class="input-group-text">
@@ -53,7 +53,7 @@
                                 <a href="/myfarm/growlist?farm_num=<c:out value='${vo.farm_num}'/>" style="color:black;">성장일기</a>
                                 </div>
                                 <div class="col-4">
-                                <a href="/myfarm/growlist?farm_num=<c:out value='${vo.farm_num}'/>" style="color:black;">판매상품</a>
+                                <a href="/myfarm/goodslist?farm_num=<c:out value='${vo.farm_num}'/>" style="color:black;">판매상품</a>
                                 </div>
                                 
                                 
@@ -76,6 +76,7 @@
 <!-- join End -->
 
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
 <script type="text/javascript">
     $(document).ready(function () {
     	

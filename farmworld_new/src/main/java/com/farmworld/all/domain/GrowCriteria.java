@@ -17,6 +17,7 @@ public class GrowCriteria {
 	private String image_folder_num;
 	private String image1;
 	private String grow_num;
+	private String growup_category;
 
 	public GrowCriteria() {
 		this(1, 10);

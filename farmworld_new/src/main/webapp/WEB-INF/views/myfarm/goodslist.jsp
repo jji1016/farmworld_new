@@ -72,7 +72,7 @@
                                 <a href="/myfarm/growlist?farm_num=<c:out value='${vo.farm_num}'/>" style="color:black;">성장일기</a>
                                 </div>
                                 <div class="col-4">
-                                <a href="/myfarm/goodslist?farm_num=<c:out value='${vo.farm_num}'/>" style="color:black;">판매상품</a>
+                                <a href="/myfarm/growlist?farm_num=<c:out value='${vo.farm_num}'/>" style="color:black;">판매상품</a>
                                 </div>
                                 
                                 

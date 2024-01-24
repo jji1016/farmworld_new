@@ -18,8 +18,7 @@ public interface MyFarmMapper {
 	public int delete(int myfarm_num);
 
 	public MyFarmVO select(Integer key);
-
-
+	
 	public int getTotalCount(Criteria cri);
 	
 	public List<MyFarmVO> getListWithPaging(Criteria cri);
@@ -29,6 +28,8 @@ public interface MyFarmMapper {
 	public void FarmCreate(MyFarmVO vo);
 
 	public Integer selectFarmKeyword(Criteria cri);
+	
+	public int getGoodsCount(Criteria cri);
 
 
 }

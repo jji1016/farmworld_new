@@ -72,6 +72,8 @@
 		</if>
 		
 	</select>
+	
+	<select id="getGoodsCount" parameterType="com.farmworld.all.domain.Criteria"></select>
 
 
 	<select id="getListWithPaging" resultType="MyFarmVO"

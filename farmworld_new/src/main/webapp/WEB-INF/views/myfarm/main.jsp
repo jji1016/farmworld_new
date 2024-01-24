@@ -203,14 +203,18 @@
 		        $.ajax({
 		            url: '/myfarm/checkSession',  // 세션 체크
 		            type: 'GET',
+		            dataType:'JSON',
 		            success: function(response) {
+		            	console.log(response);
+		            	console.log(response.hasUserNum);
+		            	console.log(response.userNum);
 		                if (response.hasUserNum) {
 		                    // 세션에 user_num이 있으면 /myfarm/farm로 이동
 		                    window.location.href = '/myfarm/farm?user_num=' + response.userNum;
 		                } else {
 		                    // 세션에 user_num이 없으면 alert을 띄우고 /login으로 이동
 		                    alert("로그인을 해주세요!");
-		                    window.location.href = '/login';
+		                    window.location.href = '/user/login';
 		                }
 		            },
 		            error: function(error) {

@@ -35,7 +35,6 @@
     <!-- jQuery 변경 : 반응형 버전이 최적화 / jsp에서 jQuery 사용이 필요하므로 header에 -->
 	<!-- jQuery -->
 	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 	
 	<!-- 카카오 우편번호 서비스 -->
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

@@ -2,6 +2,9 @@ package com.farmworld.farm.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.farmworld.all.domain.Criteria;
 import com.farmworld.all.domain.GrowCriteria;
+import com.farmworld.all.domain.GrowpageDTO;
 import com.farmworld.all.domain.ImageVO;
 import com.farmworld.all.domain.pageDTO;
 import com.farmworld.all.service.ImageService;
@@ -61,18 +65,18 @@ public class MyFarmController {
 	@GetMapping("/checkSession")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> checkSession(HttpSession session) {
+		System.out.println(1);
 	    Map<String, Object> response = new HashMap<>();
 	    Boolean hasUserNum = session.getAttribute("user_num") != null;
-	    
+	    System.out.println(hasUserNum);
 	    response.put("hasUserNum", hasUserNum);
-	    
 	    if (hasUserNum) {
 	        // 세션에 user_num이 있다면 응답에 user_num 추가
-	        String userNum = (String) session.getAttribute("user_num");
+	        Object userNum = session.getAttribute("user_num");
 	        System.out.println("usernum:"+userNum);
 	        response.put("userNum", userNum);
 	    }
-	    
+	    System.out.println(3);
 	    return ResponseEntity.ok(response);
 	}
 	
@@ -108,9 +112,8 @@ public class MyFarmController {
 	    ImageVO vo = new ImageVO();
 	    if (!file.isEmpty()) {
 	        try {
-	        	String fileName = file.getOriginalFilename();
 	        	filePath = uploadDir + imageNum + "/";
-	        	fileUpload.uploadFile(file, filePath);
+	        	String fileName = fileUpload.uploadFile(file, filePath);
 	        	vo.setImage1(fileName);
 	        } catch (IOException e) {
 	            e.printStackTrace();
@@ -129,14 +132,7 @@ public class MyFarmController {
 	}
 	
 		
-	@GetMapping("/farmlist")
-	public void farmlist(Criteria cri, Model model) {
-		//6개 설정
-		cri.setAmount(6);
-		int total = myFarmService.getTotal(cri);
-		pageDTO pageResult = new pageDTO(cri, total);
-		model.addAttribute("pageMaker", pageResult);
-	}
+
 	
 	@ResponseBody
 	@PostMapping("/getlist")
@@ -174,11 +170,11 @@ public class MyFarmController {
 	}
 	
 	@GetMapping("/growlist")
-	public void growlist(MyFarmVO vo, Criteria cri, Model model) {
+	public void growlist(MyFarmVO vo, GrowCriteria cri, Model model) {
 		
 		cri.setAmount(6);
 		int total = growUpService.getTotal(cri);
-		pageDTO pageResult = new pageDTO(cri, total);
+		GrowpageDTO pageResult = new GrowpageDTO(cri, total);
 		model.addAttribute("pageMaker", pageResult);
 		model.addAttribute("vo", myFarmService.get(vo.getFarm_num()));
 	}
@@ -190,8 +186,9 @@ public class MyFarmController {
 		cri.setAmount(6);
 
 		List<GrowUpVO> list = growUpService.growAll(cri);
-		
-		
+		int total = growUpService.getTotal(cri);
+		GrowpageDTO pageResult = new GrowpageDTO(cri, total);
+		model.addAttribute("pageMaker", pageResult);
 		return list;
 	}
 	
@@ -234,20 +231,33 @@ public class MyFarmController {
 
 	        if (file.getSize() > 0) {
 	            try {
-	                String fileName = file.getOriginalFilename();
+	                
 	                String filePath = uploadDir + imageNumString + "/";
-	                fileUpload.uploadFile(file, filePath);
+	                String fileName = fileUpload.uploadFile(file, filePath);
+	                Path FPath;
 	                System.out.println("반복i:"+i);
 
 	                // 동적으로 setImage 실행
 	                switch (i) {
 	                    case 1:
+	                    	FPath = Paths.get(uploadDir + imageNum+"\\"+image.getImage1());
+	                    	if(image.getImage1() != null) {
+	                    		 Files.delete(FPath);
+	                    	}
 	                        image.setImage1(fileName);
 	                        break;
 	                    case 2:
+	                    	FPath = Paths.get(uploadDir + imageNum+"\\"+image.getImage2());
+	                    	if(image.getImage2() != null) {
+	                    		 Files.delete(FPath);
+	                    	}
 	                        image.setImage2(fileName);
 	                        break;
 	                    case 3:
+	                    	FPath = Paths.get(uploadDir + imageNum+"\\"+image.getImage3());
+	                    	if(image.getImage3() != null) {
+	                    		 Files.delete(FPath);
+	                    	}
 	                    	image.setImage3(fileName);
 	                    // 필요한 만큼 계속 추가 가능
 	                    default:
@@ -278,9 +288,9 @@ public class MyFarmController {
 
 	        if (file.getSize() > 0) {
 	            try {
-	                String fileName = file.getOriginalFilename();
+	                
 	                String filePath = uploadDir + imageNum + "/";
-	                fileUpload.uploadFile(file, filePath);
+	                String fileName = fileUpload.uploadFile(file, filePath);
 
 	                // 동적으로 setImage 실행
 	                switch (i) {
@@ -316,6 +326,15 @@ public class MyFarmController {
 		List<GrowUpVO> list = growUpService.categoryAll(cri);
 		return list;
 		
+	}
+	
+	@GetMapping("/goodslist")
+	public void goodslist(MyFarmVO myFarmVO, Criteria cri ,Model model) {
+		cri.setAmount(6);
+		int total = growUpService.getTotal(cri);
+		pageDTO pageResult = new pageDTO(cri, total);
+		model.addAttribute("pageMaker", pageResult);
+		model.addAttribute("vo", myFarmService.get(myFarmVO.getFarm_num()));
 	}
 	
 	

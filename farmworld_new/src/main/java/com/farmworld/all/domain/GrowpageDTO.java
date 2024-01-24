@@ -3,7 +3,7 @@ package com.farmworld.all.domain;
 import lombok.Data;
 
 @Data
-public class pageDTO {
+public class GrowpageDTO {
 	// 페이징 처리에서 표시될 시작 페이지
 		private int startPage;
 		// 페이징 처리에서 표시될 진짜 마지막 페이지
@@ -13,14 +13,14 @@ public class pageDTO {
 		// 전체 데이터의 갯수
 		private int total;
 
-		private Criteria cri;
+		private GrowCriteria cri;
 
-		public pageDTO() {
+		public GrowpageDTO() {
 
 		}
 
 		// 사용자가 선택한 값(request), DB에서 확인할 값(total)
-		public pageDTO(Criteria cri, int total) {
+		public GrowpageDTO(GrowCriteria cri, int total) {
 			this.cri = cri;
 			this.total = total;
 			this.endPage = (int)(Math.ceil(cri.getPageNum()/10.0)*10);
