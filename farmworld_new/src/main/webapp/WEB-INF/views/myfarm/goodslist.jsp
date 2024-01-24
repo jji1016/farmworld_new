@@ -26,14 +26,13 @@
                    	<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
                    	<input type="hidden" name="type" value="${pageMaker.cri.type }">
                    	<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
-                   	<input type="hidden" name="growup_category" value="${pageMaker.cri.growup_category }">
                    	</form>
 	            </div>
             </div>
             <div class="col-lg-3" style="position: relative;">	
 			<div class="bg-primary h-100 p-5">
 			<div style="position: relative;">
-			    <img src='/resources/upload/${vo.image_folder_num}/${vo.image1}' class='card-img-top fixed-size-image' alt='농장 이미지'>
+			    <img src='/resources/upload/${vo.image_folder_num}/${image.image1}' class='card-img-top fixed-size-image' alt='농장 이미지'>
 			    <button style="position: absolute; bottom: 0; right: 0; border-radius:50%; border:none;"><a href='/myfarm/modify?farm_num=<c:out value="${vo.farm_num}"/>'>수정</a></button>
 			</div>
 			
@@ -78,7 +77,7 @@
                                 
 
                                 
-                                <div class="col-12" id="growInput">
+                                <div class="col-12" id="goodsInput">
 
                                 </div>
                                 <div class="col-12">
@@ -123,13 +122,12 @@ function redirectToGrow(growNum) {
     $(document).ready(function () {
 		
     	loadTableData(); // Ajax 실행 함수 호출
-    	loadCategory();
 		
     	function loadTableData() {
     	    let farmNum = $("#farmNum").val();
     	    console.log("팜넘" + farmNum);
     	    $.ajax({
-    	        url: "/myfarm/growlist",
+    	        url: "/myfarm/goodslist",
     	        type: "POST",
     	        dataType: "json",
     	        data: {
@@ -138,42 +136,59 @@ function redirectToGrow(growNum) {
     	            amount: $("#pageForm").find("input[name='amount']").val(),
     	            keyword: $("#pageForm").find("input[name='keyword']").val(),
     	            type: $("#pageForm").find("input[name='type']").val(),
-    	            growup_category: $("#pageForm").find("input[name='growup_category']").val()
     	        },
-    	        success: function (data) {
+    	        success: function (data1) {
     	            let growBody = $("#growInput");
     	            console.log(data);
     	            if (data.length === 0) {
-    	            	growBody.html("<div style='width: 50%; height: 400px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin: auto; background-color: #f8d7da; border: 1px solid #f5c6cb; border-radius: .25rem;'><p style='font-size: 20px;'>현재 성장일기가 존재하지 않습니다.</p></div>");
+    	            	growBody.html("<div style='width: 50%; height: 400px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin: auto; background-color: #f8d7da; border: 1px solid #f5c6cb; border-radius: .25rem;'><p style='font-size: 20px;'>현재 판매상품이 존재하지 않습니다.</p></div>");
 					 } else {
-    	            let row = "<div class='row g-3' >"; // 새로운 행 시작
+						 $.ajax({
+								url:"myfarm/getgoodsimage",
+								dataType:"JSON",
+								type:"POST",
+								data:{
+									user_num: $("#userNum").val(),
+								},
+								success: function(data2){
+									console.log(data2);
+									let row = "<div class='row g-3' >"; // 새로운 행 시작
+				    	            $.each(data1, function (index, goods) {
+				    	                // 여기서 grow 항목을 생성하고 클래스 추가
+				    	                row += ("<div class='col-md-4 col-lg-4 col-xl-4'>"); // 각 항목의 너비 조절
+				    	                row += ("<div class='rounded position-relative fruite-item' onclick='redirectToGrow(" + goods.goods_num + ")'>");
+				    	                row += ("<div class='row g-0'>");
+				    	                row += ("<div class='col-10'>");
+				    	                row += ("<div class='position-relative'>");
+				    	                row += ("<input type='hidden' name='goods_num' value='" + goods.farm_num + "'>")
+				    	                row += ("<img src='/resources/upload/" + goods.image_folder_num + "/" + data2[index].image1 + "' class='card-img-top fixed-size-image' alt='상품 이미지' style='width:100%; height:200px'>");
+				    	                row += ("<div class='position-absolute start-0 bottom-0 w-100 py-3 px-4' style='background: rgba(52, 173, 84, .85);'>");
+				    	                row += ("<h4 class='text-white text-truncate'>" +"["+ goods.goods_category +"]"+ goods.goods_title + "</h4>");
+				    	                row += ("</div></div></div></div></div></div>");
 
-    	            $.each(data, function (index, grow) {
-    	                // 여기서 grow 항목을 생성하고 클래스 추가
-    	                row += ("<div class='col-md-4 col-lg-4 col-xl-4'>"); // 각 항목의 너비 조절
-    	                row += ("<div class='rounded position-relative fruite-item' onclick='redirectToGrow(" + grow.grow_num + ")'>");
-    	                row += ("<div class='row g-0'>");
-    	                row += ("<div class='col-10'>");
-    	                row += ("<div class='position-relative'>");
-    	                row += ("<input type='hidden' name='farm_num' value='" + grow.farm_num + "'>")
-    	                row += ("<img src='/resources/upload/" + grow.image_folder_num + "/" + grow.image1 + "' class='card-img-top fixed-size-image' alt='농장 이미지' style='width:100%; height:200px'>");
-    	                row += ("<div class='position-absolute start-0 bottom-0 w-100 py-3 px-4' style='background: rgba(52, 173, 84, .85);'>");
-    	                row += ("<h4 class='text-white text-truncate'>" +"["+ grow.growup_category +"]"+ grow.grow_title + "</h4>");
-    	                row += ("</div></div></div></div></div></div>");
+				    	                if ((index + 1) % 3 === 0) {
+				    	                    // 3개의 항목을 한 행으로 처리하고 새로운 행 시작
+				    	                    row += "</div>"; // 행을 닫음
+				    	                    growBody.append(row);
+				    	                    row = "<div class='row g-3'>"; // 새로운 행 시작
+				    	                }
+				    	            });
 
-    	                if ((index + 1) % 3 === 0) {
-    	                    // 3개의 항목을 한 행으로 처리하고 새로운 행 시작
-    	                    row += "</div>"; // 행을 닫음
-    	                    growBody.append(row);
-    	                    row = "<div class='row g-3'>"; // 새로운 행 시작
-    	                }
-    	            });
+				    	            if (data.length % 3 !== 0) {
+				    	                // 남은 항목들을 마저 처리
+				    	                row += "</div>"; // 마지막 행을 닫음
+				    	                growBody.append(row);
+				    	            }
+									
+								},
+								error: function(e){
+									console.log(e);
+								}
+							
+							})
+    	            
 
-    	            if (data.length % 3 !== 0) {
-    	                // 남은 항목들을 마저 처리
-    	                row += "</div>"; // 마지막 행을 닫음
-    	                growBody.append(row);
-    	            }
+
     	            }
     	        },
     	        error: function (e) {
@@ -226,50 +241,6 @@ function redirectToGrow(growNum) {
                 }
             });
         });
-        function loadCategory(){
-        	$.ajax({
-        		url : "/myfarm/getcategory",
-        		type: "POST",
-        		dataType:"JSON",
-        		data:{
-        			farm_num : $("#farmNum").val()
-        		},
-        		success:function(data){
-        			console.log(data);
-        			let categoryInput = $("#categoryInput");
-        			
-        			categoryInput.append("<div><p id='cleanCategory'>전체</p></div>")
-        			$.each(data, function (index, category) {
-        				console.log(category.growup_category);
-        				let row="<p>";
-        				row+=category.growup_category;
-        				row+="</p>";
-        				categoryInput.append(row);
-        			});
-        			
-        		},
-        		error:function(e){
-        			console.log(e);
-        		}
-        	})
-        	  $("#categoryInput").on("click", "p", function() {
-        	        // 클릭된 row의 growup_category 값을 가져와서 input에 설정
-        	        
-        	        var growupCategory = $(this).text();
-        	        if(growupCategory=="전체"){
-        	        	$("#pageForm").find("input[name='growup_category']").val("");
-        	        }else{
-        	        	$("#pageForm").find("input[name='growup_category']").val(growupCategory);
-        	        }
-					$("#growInput").html("");
-					$("#pageForm").find("input[name='pageNum']").val("1");
-					
-					
-        	        // loadTableData() 실행
-					$("#pageForm").submit();
-        	    });
-
-        }
 
         
     });

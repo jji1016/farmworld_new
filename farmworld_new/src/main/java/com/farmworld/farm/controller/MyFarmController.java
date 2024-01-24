@@ -38,6 +38,7 @@ import com.farmworld.farm.domain.GrowUpVO;
 import com.farmworld.farm.domain.MyFarmVO;
 import com.farmworld.farm.service.GrowUp;
 import com.farmworld.farm.service.MyFarm;
+import com.farmworld.shop.domain.GoodsVO;
 import com.google.gson.JsonObject;
 
 import lombok.AllArgsConstructor;
@@ -331,12 +332,27 @@ public class MyFarmController {
 	@GetMapping("/goodslist")
 	public void goodslist(MyFarmVO myFarmVO, Criteria cri ,Model model) {
 		cri.setAmount(6);
-		int total = growUpService.getTotal(cri);
+		int total = myFarmService.getGoodsCount(myFarmVO);
 		pageDTO pageResult = new pageDTO(cri, total);
 		model.addAttribute("pageMaker", pageResult);
 		model.addAttribute("vo", myFarmService.get(myFarmVO.getFarm_num()));
+		model.addAttribute("image", imageService.get(myFarmVO.getImage_folder_num()));
 	}
 	
+	@ResponseBody
+	@PostMapping("/getgoodsimage")
+	public List<ImageVO> goodsimage(MyFarmVO myFarmVO){
+		List<ImageVO> imageVO = imageService.getList(myFarmVO);
+		
+		return imageVO;
+	}
+	
+	@ResponseBody
+	@PostMapping("/goodslist")
+	public List<GoodsVO> getGoods(MyFarmVO vo) {
+		List<GoodsVO> goodsvo = myFarmService.getGoodsList(vo);
+		return goodsvo;
+	}
 	
 	
 	
