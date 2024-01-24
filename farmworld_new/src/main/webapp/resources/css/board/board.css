@@ -35,3 +35,70 @@
 .btnLeft{
 	margin-right:auto
 }
+
+.comment_register{
+	display: flex;
+    height: 120px;
+}
+
+.addCommentBtn{
+	height: 100%;
+	width: 120px;
+}
+
+.commentNick{
+	height:100%;
+	width:120px;
+}
+
+.commentCon{
+	height:100%;
+	width:100%;
+}
+
+/* board.css */
+
+/* 댓글 부분 스타일 */
+#commentRap {
+    margin-top: 30px;
+}
+
+#commentList {
+    margin-top: 20px;
+}
+
+.comment {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.comment p {
+    margin: 0;
+}
+
+.commentNick {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+
+/* 예시: 댓글 목록 스타일 */
+.commentList {
+    list-style-type: none;
+    padding: 0;
+}
+
+.commentListItem {
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.commentAuthor {
+    font-weight: bold;
+}
+
+.commentDate {
+    font-style: italic;
+}

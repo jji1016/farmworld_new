@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="/resources/editor/summernote-lite.css">
 <script src="/resources/editor/summernote-ko-KR.js"></script>
 <script src="/resources/editor/summernote-lite.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <div class="container-fluid fruite py-5">
     <div class="container py-5">

@@ -35,6 +35,16 @@
 	<select id="maxNum" resultType="Integer">
 		SELECT MAX(image_folder_num) + 1 FROM image
 	</select>
+	
+	<update id="delImage" parameterType="map">
+	  UPDATE image
+	  <set>
+	    <if test="image == 'image1'">image1 = null</if>
+	    <if test="image == 'image2'">image2 = null</if>
+	    <if test="image == 'image3'">image3 = null</if>
+	  </set>
+	  WHERE image_folder_num = #{image_folder_num}
+	</update>
 
 </mapper>
 	

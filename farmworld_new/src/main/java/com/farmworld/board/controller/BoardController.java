@@ -5,7 +5,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +28,7 @@ import com.farmworld.all.service.ImageService;
 import com.farmworld.all.util.FileUploadService;
 import com.farmworld.board.domain.BoardVO;
 import com.farmworld.board.service.BoardService;
+import com.farmworld.board.service.CommentService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -36,6 +39,9 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class BoardController {
 	private final BoardService boardService;
+	
+	@Autowired
+	private CommentService commentService;
 	
 	@Autowired
 	private ImageService imageService;
@@ -204,6 +210,22 @@ public class BoardController {
 		boardService.modify(board);
 		return "redirect:/board/list?board_category="+boardCategory;
 	}
+	
+	@PostMapping("/deleteImage")
+	@ResponseBody
+	public String deleteImage(@RequestParam("del_image_id") String delImageId, BoardVO board) {
+		System.out.println("delImageId-: "+delImageId);
+		System.out.println("board-: "+board);
+		
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("image_folder_num", board.getImage_folder_num());
+		paramMap.put("image", delImageId);  // 널로 설정하고자 하는 이미지1 값
+
+		imageService.delImage(paramMap);
+		
+	    return delImageId;
+	}
+
 	
 	@PostMapping("/increaseViewCount")
 	@ResponseBody

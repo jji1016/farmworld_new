@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	loadTableData();
 	boardName();
+	loadComments(); // 페이지 로딩 시 댓글 로딩
 	
 	function boardName(){
 		console.log($("#board_ENname").val());
@@ -29,8 +30,6 @@ $(document).ready(function() {
 				board_category : $("#actionForm").find("input[name='board_category']").val()
 			},
 			success:function(data){
-				
-				// 아래에 $("tbody") 부분에 원래 #boardTbody있었는데 일단 안나와서 지움
 				let boardTbody = $("tbody");
 				boardTbody.empty();
 				// for( let item of items) -> 여기서 items 은 data와 같고 item은 board와 같음
@@ -109,24 +108,116 @@ $(document).ready(function() {
 		          
 	});
 	
+	//댓글 불러오기 기능
+    function loadComments() {
+    // 게시글 번호와 카테고리 파라미터 가져오기
+    var boardNum = $("#boardNum").val();
+
+	    // 댓글 목록 가져오기
+	    $.ajax({
+	        type: "GET",
+	        url: "/comment/getComments",
+	        data: {
+	            board_num: boardNum,
+	        },
+	        dataType: "json", // 데이터 형식을 JSON으로 지정
+	        success: function (comments) {
+	            displayComments(comments);
+	        },
+	        error: function (error) {
+	            console.log("Error fetching comments: " + error);
+	        }
+	    });
+	}
+
+	function displayComments(comments) {
+	    var commentList = $("#commentList");
+	    commentList.empty();
+	
+	    // 댓글 목록을 표시
+	    $.each(comments, function (index, comment) {
+	    	let comment_date = new Date(comment.comment_date);
+			let options = {year:"numeric",month:"2-digit", day:"2-digit", hour:"2-digit",minute:"2-digit"}
+			let formatDate = comment_date.toLocaleString("ko-KR",options);
+	        var commentDiv = $("<div class='comment'>");
+	        commentDiv.append("<p>" + comment.comment_contents + "</p>");
+	        commentDiv.append("<p>" + comment.user_nickname + " | " + formatDate + "</p>");
+	
+	        commentList.append(commentDiv);
+	    });
+	}
+
+    // 댓글 등록 폼 제출 시
+    $(".comment_register").submit(function (event) {
+        event.preventDefault();
+
+        var formData = $(this).serialize();
+
+        // 댓글 등록
+        $.ajax({
+            type: "POST",
+            url: "/comment/addComment",
+            data: formData,
+            success: function (result) {
+                if (result === "success") {
+                    // 등록 성공 시 댓글 목록 다시 로드
+                    loadComments();
+                    // 댓글 입력 폼 초기화
+                    $(".commentCon").find("textarea").val("");
+                }
+            },
+            error: function (error) {
+                console.log("Error adding comment: " + error);
+            }
+        });
+    });
+	
 }); // $(document).ready 함수 선언 종료
 
+
+// post방식 modify 넘기기
 let formObj = $("#modify_form");
-	let category = $("#category").val();
-		$(".btn").click(function() {
-			let operation = $(this).data("oper");
-			console.log(operation);
-			
-			if(operation == "remove"){
-				formObj.attr("action","/board/remove")
-					.attr("method","get");
-				// formObj.submit(); remove랑 modify쪽에 둘다 이걸 넣어줘야하지만 밖에 하나만 넣음
-			}else if(operation == "modify"){
-				formObj.attr("action","/board/modify")
-				.attr("method","post");
-			}
-			formObj.submit();
-		});
+let category = $("#category").val();
+$(".btn").click(function() {
+	let operation = $(this).data("oper");
+	console.log(operation);
+	
+	if(operation == "remove"){
+		formObj.attr("action","/board/remove")
+			.attr("method","get");
+		// formObj.submit(); remove랑 modify쪽에 둘다 이걸 넣어줘야하지만 밖에 하나만 넣음
+	}else if(operation == "modify"){
+		formObj.attr("action","/board/modify")
+		.attr("method","post");
+	}
+	formObj.submit();
+});
+
+// 게시글 수정시 삽입된 이미지 삭제
+$(".del_image").on("click", function () {
+    var id = $(this).attr("id");
+    console.log(id);
+	var replaceID = id.replace("del_", "");
+	console.log(replaceID);
+
+    $.ajax({
+        type: "POST",
+        url: "/board/deleteImage",
+        data: { del_image_id: replaceID,
+        		image_folder_num : $("#image_FN").val() },
+        success: function(result) {
+            // 성공적으로 삭제되면 해당 이미지를 화면에서 제거
+            console.log(result);
+             $("#" + replaceID).empty();
+            console.log("Image deleted successfully");
+        },
+        error: function(error) {
+            console.log("Error: " + error);
+        }
+    });
+});
+
+
 
 function previewImage(input, previewId) {
     var file = input.files[0];

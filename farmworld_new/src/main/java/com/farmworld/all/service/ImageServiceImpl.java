@@ -1,5 +1,7 @@
 package com.farmworld.all.service;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 
 import com.farmworld.all.domain.ImageVO;
@@ -42,6 +44,11 @@ public class ImageServiceImpl implements ImageService {
 	@Override
 	public Integer MaxFolder() {
 		return mapper.maxNum();
+	}
+
+	@Override
+	public void delImage(Map<String, Object> paramMap) {
+		mapper.delImage(paramMap);
 	}
 
 
