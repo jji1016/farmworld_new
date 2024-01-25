@@ -36,8 +36,7 @@ public class GrowUpimpl implements GrowUp {
 
 	@Override
 	public void delete(Integer k) {
-		// TODO Auto-generated method stub
-		
+		mapper.delete(k);
 	}
 
 	@Override

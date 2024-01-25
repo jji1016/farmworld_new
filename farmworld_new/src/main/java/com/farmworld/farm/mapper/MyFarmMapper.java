@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.farmworld.all.domain.Criteria;
 import com.farmworld.farm.domain.MyFarmVO;
+import com.farmworld.shop.domain.GoodsVO;
 
 public interface MyFarmMapper {
 	
@@ -29,7 +30,9 @@ public interface MyFarmMapper {
 
 	public Integer selectFarmKeyword(Criteria cri);
 	
-	public int getGoodsCount(Criteria cri);
+	public int getGoodsCount(MyFarmVO vo);
+
+	public List<GoodsVO> getGoodsList(MyFarmVO vo);
 
 
 }

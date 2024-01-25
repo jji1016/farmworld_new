@@ -7,12 +7,12 @@ import org.springframework.stereotype.Service;
 import com.farmworld.all.domain.Criteria;
 import com.farmworld.farm.domain.MyFarmVO;
 import com.farmworld.farm.mapper.MyFarmMapper;
+import com.farmworld.shop.domain.GoodsVO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
 @Service
-@Log4j
 @AllArgsConstructor
 public class MyFarmimpl implements MyFarm {
 	
@@ -66,5 +66,19 @@ public class MyFarmimpl implements MyFarm {
 	public Integer searchFarmKeyword(Criteria cri) {
 		return mapper.selectFarmKeyword(cri);
 	}
+
+	@Override
+	public Integer getGoodsCount(MyFarmVO vo) {
+		return mapper.getGoodsCount(vo);
+	}
+
+	@Override
+	public List<GoodsVO> getGoodsList(MyFarmVO vo) {
+		
+		
+		return mapper.getGoodsList(vo);
+	}
+	
+	
 
 }

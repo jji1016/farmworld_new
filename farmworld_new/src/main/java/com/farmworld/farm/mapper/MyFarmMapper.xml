@@ -73,7 +73,9 @@
 		
 	</select>
 	
-	<select id="getGoodsCount" parameterType="com.farmworld.all.domain.Criteria"></select>
+	<select id="getGoodsCount" parameterType="MyFarmVO" resultType="int">
+	SELECT COUNT(goods_num) FROM goods WHERE user_num = #{user_num}
+	</select>
 
 
 	<select id="getListWithPaging" resultType="MyFarmVO"
@@ -112,6 +114,10 @@
 	
 	<select id="selectFarmKeyword" parameterType="com.farmworld.all.domain.Criteria" resultType="Integer">
 	SELECT farm_num FROM myfarm WHERE farm_name = #{keyword}
+	</select>
+	
+	<select id="getGoodsList" resultType="GoodsVO" parameterType="MyFarmVO">
+	SELECT * FROM goods where user_num = #{user_num}
 	</select>
 
 </mapper>

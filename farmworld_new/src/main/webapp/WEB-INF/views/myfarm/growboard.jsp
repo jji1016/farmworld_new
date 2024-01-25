@@ -61,7 +61,8 @@
 
             <div class="col-lg-9">
                 <div class="bg-primary h-100 p-5">
-
+                <form action="/myfarm/growdelete" method="post">
+				<input type="hidden" name="grow_num" value='${vo.grow_num }'>
                     <div class="row g-3">
 						<div class="col-12">
 						    <!-- Grow 정보 표시 -->
@@ -86,7 +87,9 @@
                         <!-- 기타 필요한 정보들을 추가로 표시 -->
 
                     </div>
-					<div class="col-12"><button class="btn btn-info"><a href='/myfarm/growmodify?grow_num=<c:out value="${vo.grow_num}"/>'>수정하기</a></button></div>
+					<div class="col-3"><button class="btn btn-info"><a href='/myfarm/growmodify?grow_num=<c:out value="${vo.grow_num}"/>'>수정하기</a></button></div>
+					<div class="col-3"><button type="submit" class="btn btn-danger">삭제하기</button></div>
+					</form>
                 </div>
             </div>
 

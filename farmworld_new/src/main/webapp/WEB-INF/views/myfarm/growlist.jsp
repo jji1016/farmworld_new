@@ -156,7 +156,7 @@ function redirectToGrow(growNum) {
     	                row += ("<div class='col-10'>");
     	                row += ("<div class='position-relative'>");
     	                row += ("<input type='hidden' name='farm_num' value='" + grow.farm_num + "'>")
-    	                row += ("<img src='/resources/upload/" + grow.image_folder_num + "/" + grow.image1 + "' class='card-img-top fixed-size-image' alt='농장 이미지' style='width:100%; height:200px'>");
+    	                row += ("<img src='/resources/upload/" + grow.image_folder_num + "/" + grow.image1 + "' class='card-img-top fixed-size-image' alt='성장일기 이미지' style='width:100%; height:200px'>");
     	                row += ("<div class='position-absolute start-0 bottom-0 w-100 py-3 px-4' style='background: rgba(52, 173, 84, .85);'>");
     	                row += ("<h4 class='text-white text-truncate'>" +"["+ grow.growup_category +"]"+ grow.grow_title + "</h4>");
     	                row += ("</div></div></div></div></div></div>");
