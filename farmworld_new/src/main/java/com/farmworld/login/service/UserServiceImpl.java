@@ -32,11 +32,8 @@ public class UserServiceImpl implements UserService{
 		mapper.modPw(vo);
 	}
 
-	@Override
-	public void delete(Integer k) {
-		// TODO Auto-generated method stub
-		
-	}
+	@Override //탈퇴는 마이페이지에서!
+	public void delete(Integer k) {}
 
 	@Override // 회원가입시 아이디 중복 체크
 	public String idCheck(UserVO vo) {

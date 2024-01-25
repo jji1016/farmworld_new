@@ -6,8 +6,6 @@ public interface UserMapper {
 	
 	public void insert(UserVO vo);
 	
-	public void delete(Integer user_num);
-	
 	public UserVO select(Integer user_num);
 	
 	public UserVO getUserInfo(UserVO vo);
@@ -23,5 +21,7 @@ public interface UserMapper {
 	public String getIdForPw(UserVO vo);
 
 	public void modPw(UserVO vo);
+
+	public void uploadImg(UserVO vo);
 	
 }

@@ -133,7 +133,7 @@
 	    					formObj.attr("action","/myfarm/main")
 	    						.attr("method", "get");
 	    				}else if(operation == "remove"){
-	    					formObj.attr("action","/myfarm/remove")
+	    					formObj.attr("action","/myfarm/removefarm")
 	    						.attr("method", "post");
 	    				}else if(operation == "modify"){
 	    					formObj.attr("action","/myfarm/modify")
@@ -150,35 +150,6 @@
     	<!--End Footer Section-->
 
 
-
-
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <!-- <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>-->
-        <script src="/resources/js/jquery-1.12.3.min.js"></script>
-
-
-        <!--Counter UP Waypoint-->
-        <script src="/resources/js/waypoints.min.js"></script>
-        <!--Counter UP-->
-        <script src="/resources/js/jquery.counterup.min.js"></script>
-
-       
-
-
-        <!--Isotope-->
-        <script src="/resources/js/isotope/min/scripts-min.js"></script>
-        <script src="/resources/js/isotope/cells-by-row.js"></script>
-        <script src="/resources/js/isotope/isotope.pkgd.min.js"></script>
-        <script src="/resources/js/isotope/packery-mode.pkgd.min.js"></script>
-        <script src="/resources/js/isotope/scripts.js"></script>
-
-        <!--JQuery Click to Scroll down with Menu-->
-        <script src="/resources/js/jquery.localScroll.min.js"></script>
-        <script src="/resources/js/jquery.scrollTo.min.js"></script>
-
-
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="/resources/js/bootstrap.min.js"></script>
         <!-- Custom JavaScript-->
         <script src="/resources/js/main.js"></script>
     </body>

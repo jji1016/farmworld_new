@@ -18,13 +18,15 @@
         	<div class="container">
 	            <div class="mx-auto text-center mb-5" style="max-width: 500px;">
 	                <h1 class="display-5" id="headName">${vo.farm_name }</h1>
-	                <form id="pageForm">
 	                <input type="hidden" value="${vo.user_num }" name="user_num" id="userNum">
+	                <form id="pageForm" method="get" action="/myfarm/growlist">
+	                
 	                <input type="hidden" value="${vo.farm_num }" name="farm_num" id="farmNum">
 	                <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
                    	<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
                    	<input type="hidden" name="type" value="${pageMaker.cri.type }">
                    	<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
+                   	<input type="hidden" name="growup_category" value="${pageMaker.cri.growup_category }">
                    	</form>
 	            </div>
             </div>
@@ -46,9 +48,15 @@
 			</form>
 			</div>
 			</div>
+			<div class="col-lg-2" style="position: relative;">	
+			<div class="bg-primary h-100 p-5">
+			<h5>카테고리</h5>
+			<div id="categoryInput"></div>
+			</div>
+			</div>
             
             
-            <div class="col-lg-9">
+            <div class="col-lg-7">
                     <div class="bg-primary h-100 p-5">
 
 
@@ -64,7 +72,7 @@
                                 <a href="/myfarm/growlist?farm_num=<c:out value='${vo.farm_num}'/>" style="color:black;">성장일기</a>
                                 </div>
                                 <div class="col-4">
-                                <a href="/myfarm/growlist?farm_num=<c:out value='${vo.farm_num}'/>" style="color:black;">판매상품</a>
+                                <a href="/myfarm/goodslist?farm_num=<c:out value='${vo.farm_num}'/>" style="color:black;">판매상품</a>
                                 </div>
                                 
                                 
@@ -73,8 +81,8 @@
                                 <div class="col-12" id="growInput">
 
                                 </div>
-                                <div class="col-4">
-                                <ul class="pagination">
+                                <div class="col-12">
+                                <ul class="pagination" style="display:flex; justify-content: flex-start;">
                             		<c:if test="${pageMaker.prev }">
                             			<li class="paginate_button previous" ><a href="${pageMaker.startPage -1}">prev</a></li>
                             		</c:if>
@@ -115,6 +123,7 @@ function redirectToGrow(growNum) {
     $(document).ready(function () {
 		
     	loadTableData(); // Ajax 실행 함수 호출
+    	loadCategory();
 		
     	function loadTableData() {
     	    let farmNum = $("#farmNum").val();
@@ -129,6 +138,7 @@ function redirectToGrow(growNum) {
     	            amount: $("#pageForm").find("input[name='amount']").val(),
     	            keyword: $("#pageForm").find("input[name='keyword']").val(),
     	            type: $("#pageForm").find("input[name='type']").val(),
+    	            growup_category: $("#pageForm").find("input[name='growup_category']").val()
     	        },
     	        success: function (data) {
     	            let growBody = $("#growInput");
@@ -136,7 +146,7 @@ function redirectToGrow(growNum) {
     	            if (data.length === 0) {
     	            	growBody.html("<div style='width: 50%; height: 400px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin: auto; background-color: #f8d7da; border: 1px solid #f5c6cb; border-radius: .25rem;'><p style='font-size: 20px;'>현재 성장일기가 존재하지 않습니다.</p></div>");
 					 } else {
-    	            let row = "<div class='row g-3'>"; // 새로운 행 시작
+    	            let row = "<div class='row g-3' >"; // 새로운 행 시작
 
     	            $.each(data, function (index, grow) {
     	                // 여기서 grow 항목을 생성하고 클래스 추가
@@ -146,7 +156,7 @@ function redirectToGrow(growNum) {
     	                row += ("<div class='col-10'>");
     	                row += ("<div class='position-relative'>");
     	                row += ("<input type='hidden' name='farm_num' value='" + grow.farm_num + "'>")
-    	                row += ("<img src='/resources/upload/" + grow.image_folder_num + "/" + grow.image1 + "' class='card-img-top fixed-size-image' alt='농장 이미지' style='width:100%; height:280px'>");
+    	                row += ("<img src='/resources/upload/" + grow.image_folder_num + "/" + grow.image1 + "' class='card-img-top fixed-size-image' alt='성장일기 이미지' style='width:100%; height:200px'>");
     	                row += ("<div class='position-absolute start-0 bottom-0 w-100 py-3 px-4' style='background: rgba(52, 173, 84, .85);'>");
     	                row += ("<h4 class='text-white text-truncate'>" +"["+ grow.growup_category +"]"+ grow.grow_title + "</h4>");
     	                row += ("</div></div></div></div></div></div>");
@@ -170,6 +180,13 @@ function redirectToGrow(growNum) {
     	            console.log(e);
     	        }
     	    });
+    	    
+    	    let pageForm = $("#pageForm");
+    	    $(".paginate_button a").on("click", function(e) {
+				e.preventDefault(); // 기존에 가진 이벤트를 중단
+				pageForm.find("input[name='pageNum']").val($(this).attr("href"));
+				pageForm.submit();
+			});
     	}
         $("#keyword").keypress(function(event) {
             if (event.which === 13) {
@@ -209,6 +226,52 @@ function redirectToGrow(growNum) {
                 }
             });
         });
+        function loadCategory(){
+        	$.ajax({
+        		url : "/myfarm/getcategory",
+        		type: "POST",
+        		dataType:"JSON",
+        		data:{
+        			farm_num : $("#farmNum").val()
+        		},
+        		success:function(data){
+        			console.log(data);
+        			let categoryInput = $("#categoryInput");
+        			
+        			categoryInput.append("<div><p id='cleanCategory'>전체</p></div>")
+        			$.each(data, function (index, category) {
+        				console.log(category.growup_category);
+        				let row="<p>";
+        				row+=category.growup_category;
+        				row+="</p>";
+        				categoryInput.append(row);
+        			});
+        			
+        		},
+        		error:function(e){
+        			console.log(e);
+        		}
+        	})
+        	  $("#categoryInput").on("click", "p", function() {
+        	        // 클릭된 row의 growup_category 값을 가져와서 input에 설정
+        	        
+        	        var growupCategory = $(this).text();
+        	        if(growupCategory=="전체"){
+        	        	$("#pageForm").find("input[name='growup_category']").val("");
+        	        }else{
+        	        	$("#pageForm").find("input[name='growup_category']").val(growupCategory);
+        	        }
+					$("#growInput").html("");
+					$("#pageForm").find("input[name='pageNum']").val("1");
+					
+					
+        	        // loadTableData() 실행
+					$("#pageForm").submit();
+        	    });
+
+        }
+
+        
     });
 </script>
 <%@include file="../includes/footer.jsp" %>

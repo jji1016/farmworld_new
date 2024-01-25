@@ -119,6 +119,7 @@
 		function redirectToFarm(farmNum) {
 		    // userNum을 사용하여 해당 유저의 팜으로 이동
 		    if (farmNum) {
+
 		        window.location.href = '/myfarm/farm?farm_num=' + farmNum;
 		    } else {
 		        alert('로그인을 해주세요!');
@@ -134,6 +135,7 @@
 	        return true;
 	    }
 		$(document).ready(function() {
+			var user_num = 0;
 			loadTableData(); // Ajax 실행 함수 호출
 			
 			function loadTableData() {
@@ -151,6 +153,7 @@
 					success: function(data){
 						let myFarmBody = $("#myfarminput1");
 						console.log(data)
+						
 						$.each(data, function(index,myfarm){
 		
 							let row ="";
@@ -203,14 +206,24 @@
 		        $.ajax({
 		            url: '/myfarm/checkSession',  // 세션 체크
 		            type: 'GET',
+		            dataType:'JSON',
 		            success: function(response) {
+		            	console.log(response);
+		            	console.log(response.hasUserNum);
+		            	console.log(response.userNum);
 		                if (response.hasUserNum) {
-		                    // 세션에 user_num이 있으면 /myfarm/farm로 이동
-		                    window.location.href = '/myfarm/farm?user_num=' + response.userNum;
+		                	if(response.isfarm){
+		                		// 세션에 user_num이 있으면 /myfarm/farm로 이동
+		                		window.location.href = '/myfarm/farm?user_num=' + response.userNum;
+		                	}else{
+		                		alert("먼저 농장을 만들어야 합니다.");
+		                		window.location.href = '/myfarm/register'
+		                		}
+
 		                } else {
 		                    // 세션에 user_num이 없으면 alert을 띄우고 /login으로 이동
 		                    alert("로그인을 해주세요!");
-		                    window.location.href = '/login';
+		                    window.location.href = '/user/login';
 		                }
 		            },
 		            error: function(error) {

@@ -50,46 +50,68 @@
             
             
             <div class="col-lg-9">
-                    <div class="bg-primary h-100 p-5">
-
-                            <div class="row g-3">
-								<form method="POST" action="/myfarm/growregister" enctype="multipart/form-data">
-								<input type="hidden" value="${vo.user_num }" name="user_num" id="userNum">
-	                			<input type="hidden" value="${vo.farm_num }" name="farm_num" id="farmNum">
-                                <div class="col-12">
-								<input type="text" class="form-control p-3" name="grow_title" placeholder="성장일기 제목" required="required">
+    <div class="bg-primary h-100 p-5">
+        <form method="POST" action="/myfarm/growregister" enctype="multipart/form-data">
+            <input type="hidden" value="${vo.user_num}" name="user_num" id="userNum">
+            <input type="hidden" value="${vo.farm_num}" name="farm_num" id="farmNum">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>
+                            <label for="grow_title">성장일기 제목</label>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control p-3" name="grow_title" id="grow_title" required="required" placeholder="성장일기 제목">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="growup_category">카테고리</label>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control p-3" name="growup_category" id="growup_category" required placeholder="카테고리">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="summernote">내용</label>
+                        </td>
+                        <td>
+                            <textarea name="grow_content" id="summernote" maxlength="10000" cols="30" rows="5" placeholder="내용을 입력해주세요" class="with-border"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>이미지 업로드(최소 1개)</label>
+                        </td>
+                        <td>
+                            <div class="row">
+                                <div class="col-4">
+                                    <input type="file" name="files" id="image1" class="form-control-file" onchange="previewImage(this, 'imagePreview1')" required="required">
+                                    <div id="imagePreview1"></div>
                                 </div>
-                                <div class="col-12">
-								<input type="text" class="form-control p-3" name="growup_category" placeholder="카테고리" required>
+                                <div class="col-4">
+                                    <input type="file" name="files" id="image2" class="form-control-file" onchange="previewImage(this, 'imagePreview2')">
+                                    <div id="imagePreview2"></div>
                                 </div>
-                                <div class="col-12" style="background-color:white;">
-                                <textarea name="grow_content" id="summernote" maxlength="10000" cols="30" rows="5" placeholder="내용을 입력해주세요" class="with-border" ></textarea>
+                                <div class="col-4">
+                                    <input type="file" name="files" id="image3" class="form-control-file" onchange="previewImage(this, 'imagePreview3')">
+                                    <div id="imagePreview3"></div>
                                 </div>
-                                <div class="col-12">
-                                	이미지 업로드(최소 1개)
-                               	</div>
-                               	<div class="col-4">
-				                <input type="file" name="files" id="image1" class="form-control-file" onchange="previewImage(this, 'imagePreview1')" required="required">
-				                </div><div id="imagePreview1" class="col-8"></div>
-				                <div class="col-4">
-				                <input type="file" name="files" id="image2" class="form-control-file" onchange="previewImage(this, 'imagePreview2')">
-				                </div><div id="imagePreview2" class="col-8"></div>
-				                <div class="col-4">
-				                <input type="file" name="files" id="image3" class="form-control-file" onchange="previewImage(this, 'imagePreview3')">
-                                </div><div id="imagePreview3" class="col-8"></div>
-                                
-                                
-                                
-                                <div class="col-12">
-                                <button type="submit" class="btn btn-default">성장일기 등록</button>
-                                </div>
-                                </form>
-
-                                
                             </div>
-
-                    </div>
-                </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button type="submit" class="btn btn-default">성장일기 등록</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
             
         </div>
     </div>
@@ -101,7 +123,7 @@
     $(document).ready(function () {
             $('#summernote').summernote({
                 codeviewFilter: false, // 코드 보기 필터 비활성화
-                codeviewIframeFilter: false, // 코드 보기 iframe 필터 비활성화
+                codeviewIframeFilter: false, // 코드 보기 iframe 필터 비활성화	
 
                 height: 500, // 에디터 높이
                 minHeight: null, // 최소 높이
@@ -148,8 +170,8 @@
                     'h1', 'h2', 'h3', 'h4', 'h5', 'h6',  // 제목 스타일 옵션
                 ],
 
-            })
-        })
+            });
+        });
         
     function previewImage(input, previewId) {
         var file = input.files[0];

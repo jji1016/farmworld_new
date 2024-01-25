@@ -36,8 +36,7 @@ public class GrowUpimpl implements GrowUp {
 
 	@Override
 	public void delete(Integer k) {
-		// TODO Auto-generated method stub
-		
+		mapper.delete(k);
 	}
 
 	@Override
@@ -53,7 +52,7 @@ public class GrowUpimpl implements GrowUp {
 	}
 
 	@Override
-	public int getTotal(Criteria cri) {
+	public int getTotal(GrowCriteria cri) {
 		return mapper.getTotalCount(cri);
 	}
 

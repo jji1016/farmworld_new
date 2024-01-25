@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.farmworld.mypage.mapper.MyPageMapper">
+
+	
+	<update id="updateFarmName" parameterType="MyPageVO">
+		UPDATE myfarm SET farm_name = #{farm_name} WHERE user_num=#{userVO.user_num}
+	</update>
+
+	<update id="updateUserInfo" parameterType="UserVO">
+		UPDATE user SET 
+		user_pw = #{user_pw},
+		user_name = #{user_name}, 
+		user_nickname = #{user_nickname}, 
+		user_postCode = #{user_postCode},
+		user_address = #{user_address}, 
+		user_detailAddress = #{user_detailAddress}, 
+		user_phone = #{user_phone}
+		WHERE user_num=#{user_num}
+	</update>
+	
+	<select id="getPw" parameterType="UserVO" resultType="String">
+		SELECT user_pw FROM user WHERE user_num=#{user_num} and user_pw=#{user_pw}
+	</select>
+	
+	<update id="changeUserType" parameterType="Integer">
+		UPDATE user SET user_type=1 WHERE user_num=#{user_num} 
+	</update>
+	
+</mapper>
+	

@@ -199,7 +199,7 @@ $(document).ready(function(){
 				                    if (timer == 0) {
                                         clearInterval(limiter);
                                         ec="";
-                                        $("#timeOut").text("시간 초과");  //------시간 초과해도 -1,-2하고 계속 보여준다..?
+                                        $("#timeOut").text("시간 초과"); 
                                                                             
                                     }
                                     

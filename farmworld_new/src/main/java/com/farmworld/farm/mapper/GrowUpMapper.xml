@@ -72,7 +72,7 @@
 	</select>
 
 	<select id="getTotalCount" resultType="int"
-		parameterType="com.farmworld.all.domain.Criteria">
+		parameterType="com.farmworld.all.domain.GrowCriteria">
 		SELECT COUNT(grow_num) FROM GrowUp WHERE farm_num = #{farm_num}
 		<if test="growup_category != null and growup_category !=''">
 		AND growup_category = #{growup_category}

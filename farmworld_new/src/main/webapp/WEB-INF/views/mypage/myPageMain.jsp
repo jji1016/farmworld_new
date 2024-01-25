@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+    
 <head>
+<%@include file="../includes/header.jsp" %>
 <style type="text/css">
 #leftPart{
 	width: 30%;
@@ -21,7 +22,7 @@
     height: 100%;
 }
 #leftimg {
-    max-width: 50%;
+    max-width: 100%;
     height: 15%;
 }
 #rightPart{
@@ -55,7 +56,7 @@
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #495057;
+/*     color: #495057 */;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     display: block;
 }
@@ -71,10 +72,6 @@
 </style>
 
 </head>
-
-
-<%@include file="includes/header.jsp" %>
-
     
         <!-- 상단 -->
         <div class="container-fluid testimonial py-5">
@@ -91,9 +88,8 @@
 		                					<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
 			                        			<div id="leftbox" class="team-item border-top border-5 border-primary rounded shadow overflow-hidden">
 			                            			<div class="text-center p-4">
-			                                			<img id="leftimg" class="img-fluid rounded-circle mb-4" src="/resources/img/team-1.jpg" alt="">
-			                                			<h5 class="fw-bold mb-1">Full Name</h5>
-			                                			<small>Designation</small>
+			                                			<img id="leftimg" class="img-fluid rounded-circle" src="/resources/upload/profile/${vo.userVO.user_image}" alt="프로필사진">
+			                                			
 			                           				</div>
 			                       	 			</div>
 			                    			</div>
@@ -106,24 +102,24 @@
 											        <div class="col">
 											          <form>
 											            <h4>
-											              BOOK <span>APPOINTMENT</span>
+											              My <span>Page</span>
 											            </h4>
 											            <div class="form-row ">
 											              <div id="boxsize" class="form-group col-lg-4">
-											                <label for="inputPatientName">Patient Name </label>
-											                <input type="text" class="form-control" id="inputPatientName" placeholder="">
+											                <label for="farm_name">농장 이름</label>
+											                <p id="farm_name" class="form-control" ><c:out value="${vo.farm_name}"/></p>
 											              </div>
 											              <div id="boxsize" class="form-group col-lg-4">
-											                <label for="inputDoctorName">Doctor's Name</label>
-											                <input type="text" class="form-control" id="inputPatientName" placeholder="">
+											                <label for="user_id">아이디</label>
+											                <p id="user_id" class="form-control" ><c:out value="${vo.userVO.user_id}"/></p>
 											              </div>
 											              <div id="boxsize" class="form-group col-lg-4">
-											                <label for="inputDoctorName">Doctor's Name</label>
-											                <input type="text" class="form-control" id="inputPatientName" placeholder="">
+											                <label for="user_nickname">닉네임</label>
+											                <p id="user_nickname" class="form-control" ><c:out value="${user_nickname}"/></p>
 											              </div>
 											            </div>
 											            <div class="btn-box">
-											              <button type="submit" class="btn ">회원정보 수정</button>
+											              <button type="button" class="btn " onclick="goMod()">회원정보 수정</button>
 											            </div>
 											          </form>
 											        </div>
@@ -189,6 +185,20 @@
             </div>
         </div>
         <!-- Tastimonial End -->
- 						                        
                         
-<%@include file="includes/footer.jsp" %>
+<%@include file="../includes/footer.jsp" %>
+
+<script type="text/javascript">
+function goMod() {
+	window.location.href = '/mypage/modify';
+}
+</script>
+
+
+
+
+
+
+
+
+

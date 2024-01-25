@@ -20,10 +20,10 @@
 		values (#{farm_name}, #{farm_intro})
 	</insert>
 
-	<select id="selectAll" resultType="MyFarmVO">
-		select * from myfarm
+	<!-- 마이페이지에서 활용 위해 parameterType=int, WHERE절 추가 -->
+	<select id="selectAll" parameterType="int" resultType="MyFarmVO"> 
+		select * from myfarm WHERE user_num=#{user_num}
 	</select>
-
 
 	<update id="update" parameterType="MyFarmVO">
 		UPDATE myfarm
@@ -72,6 +72,10 @@
 		</if>
 		
 	</select>
+	
+	<select id="getGoodsCount" parameterType="MyFarmVO" resultType="int">
+	SELECT COUNT(goods_num) FROM goods WHERE user_num = #{user_num}
+	</select>
 
 
 	<select id="getListWithPaging" resultType="MyFarmVO"
@@ -110,6 +114,10 @@
 	
 	<select id="selectFarmKeyword" parameterType="com.farmworld.all.domain.Criteria" resultType="Integer">
 	SELECT farm_num FROM myfarm WHERE farm_name = #{keyword}
+	</select>
+	
+	<select id="getGoodsList" resultType="GoodsVO" parameterType="MyFarmVO">
+	SELECT * FROM goods where user_num = #{user_num}
 	</select>
 
 </mapper>
