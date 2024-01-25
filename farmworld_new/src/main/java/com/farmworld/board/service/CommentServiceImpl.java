@@ -45,6 +45,21 @@ public class CommentServiceImpl implements CommentService{
         // 댓글 목록을 가져오는 부분을 여기에 구현
         return mapper.getCommentsByBoardNum(board_num);
     }
+
+	@Override
+	public void addComment(CommentVO commentVO) {
+		mapper.registerComment(commentVO);
+	}
+
+	@Override
+	public void delComment(CommentVO commentVO) {
+		mapper.deleteComment(commentVO);
+	}
+
+	@Override
+	public void modComment(CommentVO commentVO) {
+		mapper.updateComment(commentVO);
+	}
 	
 	
 

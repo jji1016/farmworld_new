@@ -54,6 +54,8 @@
 .commentCon{
 	height:100%;
 	width:100%;
+	overflow:auto;
+	resize: none;
 }
 
 /* board.css */
@@ -101,4 +103,16 @@
 
 .commentDate {
     font-style: italic;
+}
+
+.comRap{
+	display: flex;
+}
+
+#modComment{
+	margin: 0 0 0 auto;
+}
+
+#modCommentComplete{
+	margin: 0 0 0 auto;
 }
