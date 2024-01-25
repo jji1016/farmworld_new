@@ -74,7 +74,7 @@
 	</select>
 	
 	<select id="getGoodsCount" parameterType="MyFarmVO" resultType="int">
-	SELECT COUNT(goods_num) FROM myfarm WHERE user_num = #{user_num}
+	SELECT COUNT(goods_num) FROM goods WHERE user_num = #{user_num}
 	</select>
 
 
@@ -117,7 +117,7 @@
 	</select>
 	
 	<select id="getGoodsList" resultType="GoodsVO" parameterType="MyFarmVO">
-	SELECT * FROM goods where user_num = #{user_mum}
+	SELECT * FROM goods where user_num = #{user_num}
 	</select>
 
 </mapper>

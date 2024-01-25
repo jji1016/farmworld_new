@@ -71,7 +71,7 @@
                                 <a href="/myfarm/growlist?farm_num=<c:out value='${vo.farm_num}'/>" style="color:black;">성장일기</a>
                                 </div>
                                 <div class="col-4">
-                                <a href="/myfarm/growlist?farm_num=<c:out value='${vo.farm_num}'/>" style="color:black;">판매상품</a>
+                                <a style="color:black;" href="/myfarm/goodslist?farm_num=<c:out value='${vo.farm_num}'/>&user_num=<c:out value='${vo.user_num}'/>" >판매상품</a>
                                 </div>
                                 
                                 
@@ -93,11 +93,7 @@
                             		</c:if>
                             	</ul>
 								</div>
-                                
-                                <div class="col-12">
-                                <a href="/myfarm/growregister?farm_num=<c:out value="${vo.farm_num}" />"style='background-color: #f8d7da;'>성장일기 등록</a>
-                                </div>
-                                
+                         
                             </div>
 
                     </div>
@@ -139,8 +135,8 @@ function redirectToGrow(growNum) {
     	        },
     	        success: function (data1) {
     	            let growBody = $("#growInput");
-    	            console.log(data);
-    	            if (data.length === 0) {
+    	            console.log(data1);
+    	            if (data1.length === 0) {
     	            	growBody.html("<div style='width: 50%; height: 400px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin: auto; background-color: #f8d7da; border: 1px solid #f5c6cb; border-radius: .25rem;'><p style='font-size: 20px;'>현재 판매상품이 존재하지 않습니다.</p></div>");
 					 } else {
 						 $.ajax({
