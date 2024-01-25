@@ -9,9 +9,18 @@
 	height: 60%;
 	text-align: -webkit-match-parent;
 }
+.col-md-6{
+	 width: 33.3% !important;
+}
 .col-lg-3 {
     flex: 0 0 auto;
     display: table-cell;
+}
+.g-5{
+	display: flex !important;
+    flex-direction: row;
+    justify-content: space-between;
+	
 }
 #boxsize {
     flex: 0 0 auto;
@@ -151,15 +160,6 @@
 	                </div>
 	                <div class="col-md-6">
 	                    <div class="service-item bg-light d-flex p-4">
-	                        <i class="flaticon-food display-1 text-primary me-4"></i>
-	                        <div>
-	                            <h5 class="text-uppercase mb-3">리뷰관리</h5>
-	                            <a class="text-primary text-uppercase" href="/mypage/review">More<i class="bi bi-chevron-right"></i></a>
-	                        </div>
-	                    </div>
-	                </div>
-	                <div class="col-md-6">
-	                    <div class="service-item bg-light d-flex p-4">
 	                        <i class="flaticon-grooming display-1 text-primary me-4"></i>
 	                        <div>
 	                            <h5 class="text-uppercase mb-3">판매내역</h5>
@@ -169,19 +169,17 @@
 	                </div>
 	                <div class="col-md-6">
 	                    <div class="service-item bg-light d-flex p-4">
-	                        <i class="flaticon-cat display-1 text-primary me-4"></i>
+	                        <i class="flaticon-food display-1 text-primary me-4"></i>
 	                        <div>
-	                            <h5 class="text-uppercase mb-3">취소/반품</h5>
-	                            <a class="text-primary text-uppercase" href="">More<i class="bi bi-chevron-right"></i></a>
+	                            <h5 class="text-uppercase mb-3">리뷰관리</h5>
+	                            <a class="text-primary text-uppercase" href="/mypage/review">More<i class="bi bi-chevron-right"></i></a>
 	                        </div>
 	                    </div>
-	                </div>
-	             
-	        </div>
+	                </div>      
+		        </div>
+		    </div>
 	    </div>
 	    <!-- 구매내역 / 판매내역 / 리뷰 / 취소 끝 -->
-                 
-                </div>
             </div>
         </div>
         <!-- Tastimonial End -->

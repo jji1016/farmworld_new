@@ -19,10 +19,12 @@ public interface ReviewMapper {
 	public List<ImageVO> reviewimage();
 	
 	public int reviewupdate(ReviewVO vo);
+	public List<ImageVO> getreviewVOimage();
 	
 	public int reviewdelete(int review_num);
 	
 	public int updatereview(ReviewVO vo);
+	public int updateimage(ReviewVO vo);
 	
 	public ReviewVO getreviewVO(int review_num);
 	
