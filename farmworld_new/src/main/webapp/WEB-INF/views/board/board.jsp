@@ -115,6 +115,7 @@
 								</ul>
 								
 								<button id="regBtn" class="pagingBtn btnRight">글쓰기</button>
+								<input id="userNumHidden" type="hidden" value="${user_num }">
 							</div>
 
 							<form id="actionForm" action="/board/list" method="get">

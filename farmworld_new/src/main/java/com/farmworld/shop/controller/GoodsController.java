@@ -20,12 +20,17 @@ import org.springframework.web.multipart.MultipartFile;
 import com.farmworld.all.domain.ImageVO;
 import com.farmworld.shop.domain.GoodsVO;
 import com.farmworld.shop.service.GoodsService;
+import com.farmworld.mypage.domain.ReviewVO;
+import com.farmworld.mypage.service.ReviewService;
 
 @Controller
 public class GoodsController {
 	private static final Logger log = LoggerFactory.getLogger(GoodsController.class);
 	@Autowired
 	private GoodsService goodsService;
+	
+	@Autowired
+	private ReviewService reviewService;
 
 	// 상품 화면 이동
 	@GetMapping("/goods")
@@ -59,7 +64,8 @@ public class GoodsController {
 			String pattern				= "yyyyMMddHHmmss"; //hhmmss로 시간,분,초만 뽑기도 가능
 			SimpleDateFormat formatter	= new SimpleDateFormat(pattern, currentLocale);
 			String fileName				= formatter.format(today) + "_" + file.getOriginalFilename();
-			String path					= request.getServletContext().getRealPath("") + "resources\\filefolder\\";
+			String path					=  request.getSession().getServletContext().getRealPath("/") + "resources\\filefolder\\";
+//			String path					= request.getServletContext().getRealPath("") + "resources\\filefolder\\";
 	        
 	        File folder = new File(path);
 	        if (!folder.exists()) { // 디렉터리가 없으면 생성
@@ -106,4 +112,23 @@ public class GoodsController {
 			return result;
 		}
 	}
+	
+	
+	@RequestMapping(value = "/detail", method = RequestMethod.GET)
+	public String detail() {
+		//상품 클릭해서 가면 뜨도록 바꿔야 함
+		
+		return "/shop/shopdetail";
+	}
+
+/* 리뷰 */
+	
+	@RequestMapping(value = "/addReview", method = RequestMethod.POST)
+	public String shopdt(ReviewVO vo) {
+		reviewService.add(vo);
+		
+		return "/shop/shopdetail";
+	}
+	
+	
 }

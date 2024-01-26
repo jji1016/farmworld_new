@@ -46,8 +46,7 @@
                                 
                                 <div class="col-12">
                                     <button class="btn btn-secondary w-100 py-3" type="button" id="mailSendBtn"
-                                    data-bs-toggle="modal" data-bs-target="#myModal"
-                                    >본인 인증</button>
+                                    data-bs-toggle="modal" data-bs-target="#myModal">본인 인증</button>
                                 </div>
                                 
                             </div>
