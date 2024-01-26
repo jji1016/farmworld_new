@@ -154,6 +154,7 @@ public class BoardController {
 		System.out.println("get실행 bno: "+bno);
 		BoardVO board = boardService.get(bno);
 		System.out.println(board);
+		
 		model.addAttribute("board",board);
 	}
 	

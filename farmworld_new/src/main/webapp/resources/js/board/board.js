@@ -51,6 +51,7 @@ $(document).ready(function() {
 					let titleTd = $("<td>").append(titleLink);
 					row.append(titleTd);
 					row.append($("<input id='getBoardNum' type='hidden' value='"+board.board_num+"'>"));
+					row.append($("<input id='getBoardCategory' type='hidden' value='"+board.board_category+"'>"));
 					
 					row.append($("<td>").text(board.user_nickname));
 					row.append($("<td>").text(formatDate));
@@ -303,28 +304,33 @@ $(document).ready(function() {
 	});
 	
 	function hide(){
-	console.log($("#sesUserNum").val());
+		console.log($("#sesUserNum").val());
 		// 같은 회원 아니면 수정버튼 사라짐
 		if ($("#sesUserNum").val() != $("#boardUserNum").val()) {
 		    $("#modBtn").css("display", "none");
 		};
+		console.log($("#sesUserNum").val());
 		// 회원아니면 댓글 버튼 비활성화
-		if (isNaN($("#sesUserNum").val())) {
+		if ($("#sesUserNum").val() == '') {
 		    console.log("asdasd");
 		    $(".addCommentBtn").prop('disabled', true);
 		};
+		console.log($("#sesUserNum").val());
 	};
 
 }); // $(document).ready 함수 선언 종료---------------------------------------------------
 
 // 클릭한 게시물의 조회수를 증가시키는 Ajax 요청
 $("#titleLink").on("click",function clickBoard() {
-console.log("조회수: "+$("#getBoardNum").val());
+var boardNum = $("#getBoardNum").val();
+var BoardCategory = $("#getBoardCategory").val();
+console.log("조회수: "+boardNum);
+console.log("조회수: "+$("#getBoardCategory").val());
     $.ajax({
         type: "POST",
         url: "/board/increaseViewCount",
         data: {
-            board_num: $("#getBoardNum").val()
+            board_num: boardNum,
         },
         success: function(result) {
         },
