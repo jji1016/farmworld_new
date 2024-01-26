@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.farmworld.shop.mapper.GoodsMapper">
+	<select id="getGoodsList" parameterType="com.farmworld.shop.domain.GoodsVO" resultType="com.farmworld.shop.domain.GoodsVO">
+		SELECT
+			gs.goods_num,
+			gs.goods_category,
+			gs.goods_title,
+			gs.goods_content,
+			gs.user_num,
+			gs.goods_price,
+			gs.goods_inventory,
+			gs.goods_view,
+			gs.image_folder_num,
+			i.image1
+		FROM goods gs LEFT OUTER JOIN image i ON gs.image_folder_num = i.image_folder_num
+		WHERE 1=1
+		<if test="goods_title != null and goods_title != ''">
+			AND gs.goods_title LIKE CONCAT('%',#{goods_title},'%')
+		</if>
+		<if test="goods_category != null and goods_category != '' and goods_category != '전체보기'">
+			AND gs.goods_category LIKE CONCAT('%',#{goods_category},'%')
+		</if>
+	</select>
+
+	<select id="getGoodsCategoryTotalCount" resultType="map">
+		SELECT A.category, COALESCE(B.CNT, 0) cnt
+		FROM (
+				 SELECT '전체보기' AS category
+				 FROM DUAL
+				 UNION ALL
+				 SELECT '과일' AS category
+				 FROM DUAL
+				 UNION ALL
+				 SELECT '야채' AS category
+				 FROM DUAL
+				 UNION ALL
+				 SELECT '견과류' AS category
+				 FROM DUAL
+				 UNION ALL
+				 SELECT '곡물' AS category
+				 FROM DUAL
+				 UNION ALL
+				 SELECT '씨앗' AS category
+				 FROM DUAL
+				 UNION ALL
+				 SELECT '농기구' AS category
+				 FROM DUAL
+			 ) A
+				 LEFT OUTER JOIN (
+			SELECT CASE WHEN goods_category IS NULL THEN '전체보기' ELSE goods_category END goods_category
+				 , COUNT(D.goods_category) CNT
+			FROM (
+					 SELECT goods_num, goods_category FROM goods
+				 ) D
+			GROUP BY D.goods_category
+				with rollup
+		) B
+								 ON A.category = B.goods_category
+	</select>
+
+
+	<select id="getCount" resultType="Integer">
+		SELECT COALESCE(MAX(image_folder_num), 0) + 1
+		FROM image
+	</select>
+
+	<insert id="saveImage" parameterType="ImageVO">
+		INSERT INTO image
+		VALUES (#{image_folder_num}, #{image1}, #{image2}, #{image3})
+	</insert>
+	
+	<insert id="saveGoods" parameterType="GoodsVO">
+		INSERT INTO goods(goods_category, goods_title, goods_content, user_num, goods_price, goods_inventory, goods_view, image_folder_num)
+		VALUES (#{goods_category}, #{goods_title}, #{goods_content}, #{user_num}, #{goods_price}, #{goods_inventory}, #{goods_view}, #{image_folder_num})
+	</insert>
+
+
+</mapper>
+	

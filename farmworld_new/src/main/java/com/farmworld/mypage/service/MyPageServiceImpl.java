@@ -26,13 +26,17 @@ public class MyPageServiceImpl implements MyPageService{
 	
 	@Override
 	public MyPageVO get(Integer user_num) {
+		log.info(user_num);
+		System.out.println(user_num);
 		MyPageVO vo = new MyPageVO();
 
 		UserVO userVo = userMapper.select(user_num);
+		System.out.println(userVo);
 		vo.setUserVO(userVo);
 		
 		//농장 있을때만 농장이름 가져오기
 		if(userVo.isUser_isFarm() == true) {
+			System.out.println("farm 있음");
 			MyFarmVO farmVo = farmMapper.selectAll(user_num);
 			vo.setFarm_name(farmVo.getFarm_name());
 		}

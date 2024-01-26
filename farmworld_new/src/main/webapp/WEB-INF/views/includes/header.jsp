@@ -35,6 +35,7 @@
     <!-- jQuery 변경 : 반응형 버전이 최적화 / jsp에서 jQuery 사용이 필요하므로 header에 -->
 	<!-- jQuery -->
 	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 	
 	<!-- 카카오 우편번호 서비스 -->
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -72,7 +73,7 @@
             </div>
             <div class="container px-0">
                 <nav class="navbar navbar-light bg-white navbar-expand-xl">
-                    <a href="../home.jsp" class="navbar-brand"><h1 class="text-primary display-6">Fruitables</h1></a>
+                    <a href="/" class="navbar-brand"><h1 class="text-primary display-6">Fruitables</h1></a>
                     <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                         <span class="fa fa-bars text-primary"></span>
                     </button>
@@ -87,8 +88,8 @@
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                                    <a href="../cart.jsp" class="dropdown-item">Cart</a>
-                                    <a href="../chackout.jsp" class="dropdown-item">Chackout</a>
+                                    <a href="../cartMain" class="dropdown-item">Cart</a>
+                                    <a href="../chackout" class="dropdown-item">Chackout</a>
                                     <a href="../testimonial.jsp" class="dropdown-item">Testimonial</a>
                                     <a href="../404.jsp" class="dropdown-item">404 Page</a>
                                 </div>

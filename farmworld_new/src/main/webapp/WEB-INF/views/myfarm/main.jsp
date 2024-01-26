@@ -214,7 +214,7 @@
 		                if (response.hasUserNum) {
 		                	if(response.isfarm){
 		                		// 세션에 user_num이 있으면 /myfarm/farm로 이동
-		                		window.location.href = '/myfarm/farm?user_num=' + response.userNum;
+		                		window.location.href = '/myfarm/farm?farm_num=' + response.farmnum;
 		                	}else{
 		                		alert("먼저 농장을 만들어야 합니다.");
 		                		window.location.href = '/myfarm/register'
