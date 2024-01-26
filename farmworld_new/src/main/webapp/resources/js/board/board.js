@@ -318,7 +318,7 @@ $(document).ready(function() {
 }); // $(document).ready 함수 선언 종료---------------------------------------------------
 
 // 클릭한 게시물의 조회수를 증가시키는 Ajax 요청
-$(document).off("click", "#titleLink").on("click",function clickBoard() {
+$("#titleLink").on("click",function clickBoard() {
 console.log("조회수: "+$("#getBoardNum").val());
     $.ajax({
         type: "POST",

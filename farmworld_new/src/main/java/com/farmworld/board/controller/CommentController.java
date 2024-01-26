@@ -41,7 +41,12 @@ public class CommentController {
     @PostMapping("/addComment")
     @ResponseBody
     public String addComment(HttpSession session, CommentVO commentVO, Model model) {
+    	Integer userNum = (Integer) session.getAttribute("user_num");
+		String userNickname = (String) session.getAttribute("user_nickname");
+		
         // 댓글을 추가하는 비즈니스 로직 호출
+		commentVO.setUser_nickname(userNickname);
+		commentVO.setUser_num(userNum);
         commentService.addComment(commentVO);
         return "success";
     }
