@@ -78,6 +78,12 @@ public class MyFarmimpl implements MyFarm {
 		
 		return mapper.getGoodsList(vo);
 	}
+
+	@Override
+	public MyFarmVO getByUserNum(Integer user_num) {
+		
+		return mapper.selectAll(user_num);
+	}
 	
 	
 

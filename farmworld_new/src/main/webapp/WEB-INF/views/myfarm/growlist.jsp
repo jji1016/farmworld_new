@@ -34,7 +34,7 @@
 			<div class="bg-primary h-100 p-5">
 			<div style="position: relative;">
 			    <img src='/resources/upload/${vo.image_folder_num}/${vo.image1}' class='card-img-top fixed-size-image' alt='농장 이미지'>
-			    <button style="position: absolute; bottom: 0; right: 0; border-radius:50%; border:none;"><a href='/myfarm/modify?farm_num=<c:out value="${vo.farm_num}"/>'>수정</a></button>
+			    <button id="farmModify" style="position: absolute; bottom: 0; right: 0; border-radius:50%; border:none;"><a href='/myfarm/modify?farm_num=<c:out value="${vo.farm_num}"/>'>수정</a></button>
 			</div>
 			
 			<h4>${vo.farm_intro}</h4>
@@ -72,7 +72,7 @@
                                 <a href="/myfarm/growlist?farm_num=<c:out value='${vo.farm_num}'/>" style="color:black;">성장일기</a>
                                 </div>
                                 <div class="col-4">
-                                <a href="/myfarm/goodslist?farm_num=<c:out value='${vo.farm_num}'/>" style="color:black;">판매상품</a>
+                                <a style="color:black;" href="/myfarm/goodslist?farm_num=<c:out value='${vo.farm_num}'/>&user_num=<c:out value='${vo.user_num}'/>" >판매상품</a>
                                 </div>
                                 
                                 
@@ -124,14 +124,16 @@ function redirectToGrow(growNum) {
     	
     	 // 세션에서 user_num을 가져오기
         var sessionUserNum = <%= session.getAttribute("user_num") %>;
-
+		var sessionType = <%= session.getAttribute("user_type") %>;
         // 입력된 user_num 가져오기
         var inputUserNum = document.getElementById("user_num").value;
 		console.log("세션"+sessionUserNum+" jsp" +inputUserNum)
         // user_num이 일치하는지 확인
-        if (sessionUserNum == inputUserNum) {
+        if (sessionUserNum == inputUserNum || sessionType == 2) {
+            document.querySelector('#farmModify').style.display = 'block';
             document.querySelector('.btn-success').style.display = 'block';
         } else {
+            document.querySelector('#farmModify').style.display = 'none';
             document.querySelector('.btn-success').style.display = 'none';
         }
 		

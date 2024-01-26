@@ -84,6 +84,8 @@ public class ReviewServiceImpl implements ReviewService {
 		
 		return mapper.getreviewVO(k);
 	}
+	
+	@Override
 	public List<ImageVO> getreviewVOimage() {
 		log.info("getreviewVOimage()");
 		return mapper.getreviewVOimage();
