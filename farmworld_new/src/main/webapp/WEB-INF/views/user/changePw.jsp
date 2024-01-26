@@ -46,8 +46,7 @@
                                 
                                 <div class="col-12">
                                     <button class="btn btn-secondary w-100 py-3" type="button" id="mailSendBtn"
-                                    data-bs-toggle="modal" data-bs-target="#myModal"
-                                    >본인 인증</button>
+                                    data-bs-toggle="modal" data-bs-target="#myModal">본인 인증</button>
                                 </div>
                                 
                             </div>
@@ -133,9 +132,9 @@ $(document).ready(function(){
 	let ec="";
 	
     // 모달 외부를 클릭해도 닫히지 않음
-    $(".modal").modal({
-        backdrop: 'static',
-    });
+   $(".modal").modal({
+    backdrop: true,
+	}); 
  
 	
  // "비밀번호 수정하기" 버튼 눌렀을 때 1번 모달창(이메일 전송 결과) 활성화
