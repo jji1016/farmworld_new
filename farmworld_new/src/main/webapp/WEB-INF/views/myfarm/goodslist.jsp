@@ -19,7 +19,7 @@
 	            <div class="mx-auto text-center mb-5" style="max-width: 500px;">
 	                <h1 class="display-5" id="headName">${vo.farm_name }</h1>
 	                <input type="hidden" value="${vo.user_num }" name="user_num" id="userNum">
-	                <form id="pageForm" method="get" action="/myfarm/growlist">
+	                <form id="pageForm" method="get" action="/myfarm/goodslist">
 	                
 	                <input type="hidden" value="${vo.farm_num }" name="farm_num" id="farmNum">
 	                <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
@@ -33,7 +33,7 @@
 			<div class="bg-primary h-100 p-5">
 			<div style="position: relative;">
 			    <img src='/resources/upload/${vo.image_folder_num}/${image.image1}' class='card-img-top fixed-size-image' alt='농장 이미지'>
-			    <button style="position: absolute; bottom: 0; right: 0; border-radius:50%; border:none;"><a href='/myfarm/modify?farm_num=<c:out value="${vo.farm_num}"/>'>수정</a></button>
+			    <button id="farmModify" style="position: absolute; bottom: 0; right: 0; border-radius:50%; border:none;"><a href='/myfarm/modify?farm_num=<c:out value="${vo.farm_num}"/>'>수정</a></button>
 			</div>
 			
 			<h4>${vo.farm_intro}</h4>
@@ -47,15 +47,9 @@
 			</form>
 			</div>
 			</div>
-			<div class="col-lg-2" style="position: relative;">	
-			<div class="bg-primary h-100 p-5">
-			<h5>카테고리</h5>
-			<div id="categoryInput"></div>
-			</div>
-			</div>
+
             
-            
-            <div class="col-lg-7">
+            <div class="col-lg-9">
                     <div class="bg-primary h-100 p-5">
 
 
@@ -106,16 +100,29 @@
 
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
-function redirectToGrow(growNum) {
+function redirectToGoods(goodsNum) {
     // userNum을 사용하여 해당 유저의 팜으로 이동
-    if (growNum) {
-        window.location.href = '/myfarm/growboard?grow_num=' + growNum;
+    if (goodsNum) {
+        window.location.href = '/goods/shopdetail?goods_num=' + goodsNum;
     } else {
         alert('해당 게시글은 존재하지 않습니다.!');
         window.history.back();
     }
 }
     $(document).ready(function () {
+    	 // 세션에서 user_num을 가져오기
+        var sessionUserNum = <%= session.getAttribute("user_num") %>;
+        var sessionType = <%= session.getAttribute("user_type") %>;
+
+        // 입력된 user_num 가져오기
+        var inputUserNum = document.getElementById("userNum").value;
+		console.log("세션"+sessionUserNum+" jsp" +inputUserNum)
+        // user_num이 일치하는지 확인
+        if (sessionUserNum == inputUserNum || sessionType == 2) {
+            document.querySelector('#farmModify').style.display = 'block';
+        } else {
+            document.querySelector('#farmModify').style.display = 'none';
+        }
 		
     	loadTableData(); // Ajax 실행 함수 호출
 		
@@ -128,19 +135,20 @@ function redirectToGrow(growNum) {
     	        dataType: "json",
     	        data: {
     	            farm_num: farmNum,
+    	            user_num: $("#userNum").val(),
     	            pageNum: $("#pageForm").find("input[name='pageNum']").val(),
     	            amount: $("#pageForm").find("input[name='amount']").val(),
     	            keyword: $("#pageForm").find("input[name='keyword']").val(),
     	            type: $("#pageForm").find("input[name='type']").val(),
     	        },
     	        success: function (data1) {
-    	            let growBody = $("#growInput");
+    	            let growBody = $("#goodsInput");
     	            console.log(data1);
     	            if (data1.length === 0) {
     	            	growBody.html("<div style='width: 50%; height: 400px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin: auto; background-color: #f8d7da; border: 1px solid #f5c6cb; border-radius: .25rem;'><p style='font-size: 20px;'>현재 판매상품이 존재하지 않습니다.</p></div>");
 					 } else {
 						 $.ajax({
-								url:"myfarm/getgoodsimage",
+								url:"/myfarm/getgoodsimage",
 								dataType:"JSON",
 								type:"POST",
 								data:{
@@ -152,7 +160,7 @@ function redirectToGrow(growNum) {
 				    	            $.each(data1, function (index, goods) {
 				    	                // 여기서 grow 항목을 생성하고 클래스 추가
 				    	                row += ("<div class='col-md-4 col-lg-4 col-xl-4'>"); // 각 항목의 너비 조절
-				    	                row += ("<div class='rounded position-relative fruite-item' onclick='redirectToGrow(" + goods.goods_num + ")'>");
+				    	                row += ("<div class='rounded position-relative fruite-item' onclick='redirectToGoods(" + goods.goods_num + ")'>");
 				    	                row += ("<div class='row g-0'>");
 				    	                row += ("<div class='col-10'>");
 				    	                row += ("<div class='position-relative'>");
@@ -170,7 +178,7 @@ function redirectToGrow(growNum) {
 				    	                }
 				    	            });
 
-				    	            if (data.length % 3 !== 0) {
+				    	            if (data1.length % 3 !== 0) {
 				    	                // 남은 항목들을 마저 처리
 				    	                row += "</div>"; // 마지막 행을 닫음
 				    	                growBody.append(row);

@@ -64,17 +64,27 @@ public class MyFarmController {
 		Map<String, Object> response = new HashMap<>();
 		Boolean hasUserNum = session.getAttribute("user_num") != null;
 		System.out.println(hasUserNum);
+		System.out.println("세션유저"+session.getAttribute("user_num"));
 		response.put("hasUserNum", hasUserNum);
+		int farmnum;
 		if (hasUserNum) {
 			// 세션에 user_num이 있다면 응답에 user_num 추가
 			Integer userNum = (Integer) session.getAttribute("user_num");
 			System.out.println("usernum:" + userNum);
-			MyFarmVO vo = myFarmService.get(userNum);
+			MyFarmVO vo = myFarmService.getByUserNum(userNum);
+			System.out.println(vo);
+			if(vo==null) {
+				farmnum = 0;
+			}else {
+				farmnum = vo.getFarm_num();
+			}
+			System.out.println(vo);
 			response.put("userNum", userNum);
-			if (vo.getFarm_num() == 0) {
+			if (farmnum == 0) {
 			    response.put("isfarm", false);
 			}else {
 				response.put("isfarm", true);
+				response.put("farmnum", farmnum);
 			}
 		}
 		System.out.println(3);
@@ -151,7 +161,7 @@ public class MyFarmController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		myFarmService.delete(vo.getFarm_num());
 		
 		return "redirect:/myfarm/main";
 	}
@@ -310,12 +320,11 @@ public class MyFarmController {
 				Files.delete(FPath);
 			}
 			imageService.delete(vo.getImage_folder_num());
-			growUpService.delete(vo.getGrow_num());
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		growUpService.delete(vo.getGrow_num());
 		
 		return "redirect:/myfarm/farm?farm_num="+vo.getFarm_num();
 	}
@@ -325,7 +334,7 @@ public class MyFarmController {
 		System.out.println(vo);
 		ImageVO image = new ImageVO();
 		Integer imageNum = imageService.MaxFolder();
-		System.out.println("파일" + files.get(0));
+		System.out.println("넘버" + imageNum);
 
 		for (int i = 0; i < files.size(); i++) {
 			MultipartFile file = files.get(i);
@@ -395,7 +404,9 @@ public class MyFarmController {
 
 	@ResponseBody
 	@PostMapping("/goodslist")
-	public List<GoodsVO> getGoods(MyFarmVO vo) {
+	public List<GoodsVO> getGoods(MyFarmVO vo, Criteria cri) {
+		cri.setAmount(6);
+		System.out.println(vo);
 		List<GoodsVO> goodsvo = myFarmService.getGoodsList(vo);
 		return goodsvo;
 	}

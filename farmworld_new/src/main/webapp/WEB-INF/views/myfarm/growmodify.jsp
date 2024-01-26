@@ -87,7 +87,7 @@
                                     <td>
                                         <div class="row">
                                             <div class="col-4">
-                                                <input type="file" name="files" id="image1" class="form-control-file" onchange="previewImage(this, 'imagePreview1')" required="required">
+                                                <input type="file" name="files" id="image1" class="form-control-file" onchange="previewImage(this, 'imagePreview1')" >
                                                 <div id="imagePreview1">
                                                 <c:if test="${not empty vo.image_folder_num and not empty image.image1}">
                                                     <img src="/resources/upload/${vo.image_folder_num}/${image.image1}" alt="Image Preview" class="img-fluid">
