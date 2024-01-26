@@ -33,6 +33,8 @@
 								<div class="form-group">
 									<input class="form-control" type="hidden" name="board_num"
 										value="${board.board_num }">
+									<input id="sesUserNum" type="hidden" value="${user_num }">
+									<input id="boardUserNum" type="hidden" value="${board.user_num }">
 								</div>
 								<div class="form-group">
 									<label>제목</label> <input class="form-control" name="title"
@@ -61,7 +63,7 @@
 									</div>
 								</div>
 
-								<button type="submit" class="btn btn-default" data-oper="modify">수정하기</button>
+								<button type="submit" id="modBtn" class="btn btn-default" data-oper="modify">수정하기</button>
 								<button type="button" class="btn-default"
 									onclick="location.href='/board/list?board_category=${param.board_category}'">목록으로</button>
 							</form>
@@ -80,9 +82,16 @@
                         <div class="form-group">
                             <input type="hidden" id="boardNum" name="board_num" value="${board.board_num}">
                         </div>
-                       <div class="commentNick">nickname 자리</div>
+                       <div class="commentNick">
+						    <c:if test="${user_nickname == null}">
+						        로그인 해주세요
+						    </c:if>
+						    <c:if test="${user_nickname != null}">
+						        ${user_nickname}
+						    </c:if>
+						</div>
                         <textarea class="commentCon" name="comment_contents" placeholder="댓글을 입력하세요"></textarea>
-                        <input type="submit" class="addCommentBtn" value="등록하기">
+                        <input type="submit" class="addCommentBtn" value="등록하기" >
                     </form>
                 </div>
                 

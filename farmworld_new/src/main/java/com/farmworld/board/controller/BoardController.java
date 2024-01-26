@@ -15,11 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -39,11 +41,9 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/board/*")
 @AllArgsConstructor
 @Log4j
+@SessionAttributes({"user_num","user_nickname"}) //세션에 저장된 user_num,user_nickname가져오기
 public class BoardController {
 	private final BoardService boardService;
-	
-	@Autowired
-	private CommentService commentService;
 	
 	@Autowired
 	private ImageService imageService;
@@ -54,8 +54,10 @@ public class BoardController {
 	private static String uploadDir = "C:\\Users\\keduit\\Desktop\\farmworld_ new_git\\farmworld_new\\src\\main\\webapp\\resources\\upload\\";
 	
 	@GetMapping("/list")
-	public String listAll(@RequestParam(name = "board_category", required = false) String boardCategory, Criteria cri, Model model) {
-        // board_category 값이 있으면 cri에 설정
+	public String listAll(HttpSession session, @RequestParam(name = "board_category", required = false) String boardCategory, Criteria cri, Model model) {
+		Integer userNum = (Integer) session.getAttribute("user_num");
+        
+		// board_category 값이 있으면 cri에 설정
         if (boardCategory != null && !boardCategory.isEmpty()) {
             cri.setBoard_category(boardCategory);
         }
@@ -68,8 +70,10 @@ public class BoardController {
 		int total = boardService.getTotal(cri);
 		pageDTO pageResult = new pageDTO(cri, total);
 		model.addAttribute("pageMaker",pageResult);
+		model.addAttribute("user_num",userNum);
 		System.out.println(total);
 		System.out.println("---------------결과"+pageResult);
+		System.out.println("---------------userNum:"+userNum);
 		
 		return "board/board";
 	}
@@ -81,10 +85,16 @@ public class BoardController {
 	}
 	
 	@GetMapping("/register")
-	public void registerGet() {}
+	public void registerGet(HttpSession session, Model model) {
+		String userNickname = (String) session.getAttribute("user_nickname");
+		model.addAttribute("user_nickname",userNickname);
+	}
 	
 	@PostMapping("/register")
-	public String register(ArrayList<MultipartFile> files, BoardVO board, RedirectAttributes rttr, HttpSession session) {
+
+	public String register(HttpSession session, ArrayList<MultipartFile> files, BoardVO board, RedirectAttributes rttr) {
+		Integer userNum = (Integer) session.getAttribute("user_num");
+		String userNickname = (String) session.getAttribute("user_nickname");
 		ImageVO image = new ImageVO();
 	    Integer imageNum = imageService.MaxFolder();
 	    System.out.println("파일"+files.get(0));
@@ -121,8 +131,10 @@ public class BoardController {
 	    }
 	    imageNum = imageService.addGetNum(image);
 	    board.setImage_folder_num(imageNum);
-		board.setUser_num((int) session.getAttribute("user_num"));
+
 		
+		board.setUser_num(userNum);
+		board.setUser_nickname(userNickname);
 		boardService.add(board);
 		System.out.println("board: "+board);
 		return "redirect:/board/list";
@@ -136,10 +148,15 @@ public class BoardController {
 	}
 	
 	@GetMapping({"/get","/modify"})
-	public void get(@RequestParam(name = "board_num", required = false) Integer bno, Model model) {
+	public void get(HttpSession session, @RequestParam(name = "board_num", required = false) Integer bno, Model model) {
+		Integer userNum = (Integer) session.getAttribute("user_num");
+		String userNickname = (String) session.getAttribute("user_nickname");
+		model.addAttribute("user_num",userNum);
+		model.addAttribute("user_nickname",userNickname);
 		System.out.println("get실행 bno: "+bno);
 		BoardVO board = boardService.get(bno);
 		System.out.println(board);
+		
 		model.addAttribute("board",board);
 	}
 	

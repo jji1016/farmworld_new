@@ -29,7 +29,7 @@
                                     <label>제목</label> <input class="form-control" name="board_title" required="required">
                                 </div>
                                 <div class="form-group">
-                                    <label>작성자</label> <input class="form-control" name="user_nickname">
+                                    <label>작성자</label> <input class="form-control" name="user_nickname" value="${user_nickname }" readonly="readonly">
                                 </div>
                                 <div class="form-group">
                                     <label>내용</label>
