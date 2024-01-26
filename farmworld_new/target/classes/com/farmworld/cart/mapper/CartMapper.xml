@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.farmworld.cart.mapper.CartMapper">
+	<select id="getMyCartList" parameterType="CartVO" resultType="CartVO">
+		SELECT C.cart_num
+			 , C.goods_num
+			 , C.count
+			 , G1.goods_title
+			 , FORMAT(G1.goods_price, 0) AS make_price
+			 , G1.image1
+			 , FORMAT(G1.goods_price * C.count, 0) AS total_amt
+			 , FORMAT(SUM(G1.goods_price * C.count) OVER(), 0) AS bill_amt
+		  FROM cart C
+		  LEFT OUTER JOIN (
+		  				   SELECT goods_num, goods_title, goods_price, image1, goods_category
+						     FROM goods G
+						        , image I
+						    WHERE G.image_folder_num = I.image_folder_num) G1
+		    ON C.goods_num = G1.goods_num
+		 WHERE C.user_num = #{user_num}
+		 <if test="category != null and category != ''">
+		   AND goods_category LIKE CONCAT('%', #{category}, '%')
+		</if>
+		<if test="keywords != null and keywords != ''">
+		   AND goods_title LIKE CONCAT('%', #{keywords}, '%')
+		</if>
+	</select>
+	
+	<select id="categoryCntList" parameterType="CartVO" resultType="CntListVO">
+		SELECT A.category, COALESCE(B.CNT, 0) cnt
+		  FROM (
+		  		SELECT '전체보기' AS category
+				  FROM DUAL
+				 UNION ALL
+				SELECT '과일' AS category
+				  FROM DUAL
+				 UNION ALL
+				SELECT '야채' AS category
+				  FROM DUAL
+				 UNION ALL
+				SELECT '견과류' AS category
+				  FROM DUAL
+				 UNION ALL
+				SELECT '곡물' AS category
+				  FROM DUAL
+				 UNION ALL
+				SELECT '씨앗' AS category
+				  FROM DUAL
+				 UNION ALL
+				SELECT '농기구' AS category
+				  FROM DUAL
+		  ) A
+		  LEFT OUTER JOIN (
+		  		SELECT CASE WHEN goods_category IS NULL THEN '전체보기' ELSE goods_category END goods_category
+					 , COUNT(D.goods_category) CNT
+				  FROM (
+				  		SELECT goods_category, 1 AS CNT
+				  		  FROM cart C
+				  		  LEFT OUTER JOIN (
+				  		  		SELECT goods_num, goods_category FROM goods) G1
+			  		  		ON C.goods_num = G1.goods_num
+		  		  		 WHERE user_num = #{user_num}
+				  ) D
+				 GROUP BY D.goods_category
+				  with rollup
+		  ) B
+		    ON A.category = B.goods_category
+	</select>
+	
+	<select id="getCount" parameterType="CartVO" resultType="Integer">
+		SELECT COUNT(*)
+		  FROM cart
+		 WHERE user_num = #{user_num}
+		   AND goods_num = #{goods_num}
+	</select>
+	
+	<insert id="insertCartData" parameterType="CartVO">
+		INSERT INTO cart(goods_num, count, user_num)
+		VALUES (#{goods_num}, 1, #{user_num})
+	</insert>
+	
+	<insert id="insertHistory" parameterType="BillHistoryVO">
+		INSERT INTO billhistory(user_no, name_first, name_last, company_name, addr, postcode, city, country, mobile, email, shipDetail, amt)
+		VALUES (#{user_no}, #{name_first}, #{name_last}, #{company_name}, #{addr}, #{postcode}, #{city}, #{country}, #{mobile}, #{email}, #{shipDetail}, #{amt})
+	</insert>
+	
+	<update id="plus" parameterType="CartVO">
+		UPDATE cart
+		   SET count = count + 1
+		 WHERE cart_num = #{cart_num}
+	</update>
+	
+	<update id="updateCartData" parameterType="CartVO">
+		UPDATE cart
+		   SET count = count + 1
+		 WHERE user_num = #{user_num}
+		   AND goods_num = #{goods_num}
+	</update>
+	
+	<update id="minus" parameterType="CartVO">
+		UPDATE cart
+		   SET count = count - 1
+		 WHERE cart_num = #{cart_num}
+	</update>
+	
+	<delete id="delete" parameterType="CartVO">
+		DELETE FROM cart
+		 WHERE cart_num = #{cart_num}
+	</delete>
+	
+	<delete id="removeCartInfo" parameterType="CartVO">
+		DELETE FROM cart
+		 WHERE user_num = #{user_no}
+	</delete>
+</mapper>
+	
