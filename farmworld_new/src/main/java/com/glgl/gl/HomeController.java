@@ -47,11 +47,6 @@ public class HomeController {
 		return "/myfarmMain";
 	}
 	
-	@RequestMapping(value = "/shopdetail", method = RequestMethod.GET)
-	public String shopdetail() {
-		return "/shopdetail";
-	}
-	
 	@RequestMapping(value = "/board", method = RequestMethod.GET)
 	public String board() {
 		return "/board";
