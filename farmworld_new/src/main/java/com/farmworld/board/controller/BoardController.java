@@ -91,6 +91,7 @@ public class BoardController {
 	}
 	
 	@PostMapping("/register")
+
 	public String register(HttpSession session, ArrayList<MultipartFile> files, BoardVO board, RedirectAttributes rttr) {
 		Integer userNum = (Integer) session.getAttribute("user_num");
 		String userNickname = (String) session.getAttribute("user_nickname");
@@ -130,6 +131,7 @@ public class BoardController {
 	    }
 	    imageNum = imageService.addGetNum(image);
 	    board.setImage_folder_num(imageNum);
+
 		
 		board.setUser_num(userNum);
 		board.setUser_nickname(userNickname);

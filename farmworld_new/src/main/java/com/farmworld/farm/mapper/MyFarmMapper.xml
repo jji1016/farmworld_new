@@ -10,7 +10,7 @@
 
 	<insert id="insert" parameterType="MyFarmVO">
 		insert into myfarm(farm_name,farm_intro,user_num,image_folder_num) values
-		(#{farm_name}, #{farm_intro}, 1, #{image_folder_num})
+		(#{farm_name}, #{farm_intro}, #{user_num}, #{image_folder_num})
 	</insert>
 
 	<insert id="insertSelectBno" parameterType="MyFarmVO"

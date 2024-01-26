@@ -133,6 +133,7 @@ public class MyFarmController {
 
 		imageNum = imageService.addGetNum(vo);
 		myFarmVO.setImage_folder_num(imageNum);
+		myFarmVO.setUser_num(userNum);
 		myFarmService.add(myFarmVO);
 		return "redirect:/myfarm/main";
 	}
