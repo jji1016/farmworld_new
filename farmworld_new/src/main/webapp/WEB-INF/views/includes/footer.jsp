@@ -107,6 +107,8 @@
     
     <!-- Template Javascript -->
     <script src="/resources/js/main.js"></script>
+    <!-- 회원가입 유효성 검사 -->
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 	
 	<div id="lightboxOverlay" tabindex="-1" class="lightboxOverlay" style="display: none;"></div>
 	<div id="lightbox" tabindex="-1" class="lightbox" style="display: none;">

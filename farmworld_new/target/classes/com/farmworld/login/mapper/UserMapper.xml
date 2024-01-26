@@ -13,14 +13,16 @@
 				#{user_postCode},#{user_address},#{user_detailAddress},#{user_phone})
 	</insert>
 	
-	<delete id="delete" parameterType="UserVO">
-		DELETE FROM user WHERE user_num=#{user_num}
-	</delete>
-	
-	<select id="getUserInfo" parameterType="UserVO" resultType="UserVO">
-		SELECT * FROM user WHERE user_id=#{user_id} and user_pw=#{user_pw}
+	<select id="select" parameterType="int" resultType="UserVO">
+		SELECT * FROM user WHERE user_num=#{user_num}
 	</select>
 	
+	<!-- 로그인 -->
+	<select id="getUserInfo" parameterType="UserVO" resultType="UserVO">
+		SELECT * FROM user WHERE user_id=#{user_id} AND user_pw=#{user_pw} AND user_type != 1
+	</select>
+	
+	<!-- 관리자 확인 -->
 	<select id="isAdmin" parameterType="UserVO" resultType="UserVO">
 		SELECT * FROM user WHERE user_num=#{user_num}
 	</select>
@@ -45,5 +47,10 @@
 	
 	<update id="modPw" parameterType="USerVO">
 		UPDATE user SET user_pw=#{user_pw} WHERE user_id=#{user_id}
+	</update>
+	
+	<!-- 이미지 업로드 -->
+	<update id="uploadImg" parameterType="UserVO">
+		UPDATE user SET user_image=#{user_image} WHERE user_num=#{user_num}
 	</update>
 </mapper>

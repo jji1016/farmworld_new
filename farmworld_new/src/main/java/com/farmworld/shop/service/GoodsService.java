@@ -6,7 +6,7 @@ import com.farmworld.all.domain.Criteria;
 import com.farmworld.all.service.Generic;
 import com.farmworld.shop.domain.GoodsVO;
 
-public interface Goods extends Generic<GoodsVO, Integer> {
+public interface GoodsService extends Generic<GoodsVO, Integer> {
 
 	public List<GoodsVO> goodsAll();
 

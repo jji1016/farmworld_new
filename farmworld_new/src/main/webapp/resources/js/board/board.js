@@ -4,7 +4,6 @@ $(document).ready(function() {
 	loadComments(); // 페이지 로딩 시 댓글 로딩
 	
 	function boardName(){
-		console.log($("#board_ENname").val());
 		if($("#board_ENname").val() == "notice"){
 			$(".board_name").text("공지사항");
 			
@@ -112,6 +111,7 @@ $(document).ready(function() {
     function loadComments() {
     // 게시글 번호와 카테고리 파라미터 가져오기
     var boardNum = $("#boardNum").val();
+    console.log("boardNum="+boardNum);
 
 	    // 댓글 목록 가져오기
 	    $.ajax({
@@ -140,8 +140,11 @@ $(document).ready(function() {
 			let options = {year:"numeric",month:"2-digit", day:"2-digit", hour:"2-digit",minute:"2-digit"}
 			let formatDate = comment_date.toLocaleString("ko-KR",options);
 	        var commentDiv = $("<div class='comment'>");
-	        commentDiv.append("<p>" + comment.comment_contents + "</p>");
-	        commentDiv.append("<p>" + comment.user_nickname + " | " + formatDate + "</p>");
+	        commentDiv.append("<input id='commentNum' type='hidden' value='"+ comment.comment_num +"'>");
+	        commentDiv.append("<div class='comRap'><p>" + comment.user_nickname + " | " + formatDate + "</p>"+
+				        	   "<input type='button' id='modComment' value='수정'>"+
+				        	   "<input type='button' id='delComment' value='삭제'>");
+	        commentDiv.append("<p class='commentConP'>" + comment.comment_contents + "</p>");
 	
 	        commentList.append(commentDiv);
 	    });
@@ -150,20 +153,21 @@ $(document).ready(function() {
     // 댓글 등록 폼 제출 시
     $(".comment_register").submit(function (event) {
         event.preventDefault();
-
-        var formData = $(this).serialize();
+        console.log($(".commentCon").val());
+        console.log($("#boardNum").val());
 
         // 댓글 등록
         $.ajax({
             type: "POST",
             url: "/comment/addComment",
-            data: formData,
+            data: {board_num: $("#boardNum").val(),
+            	   comment_contents: $(".commentCon").val() },
             success: function (result) {
                 if (result === "success") {
                     // 등록 성공 시 댓글 목록 다시 로드
                     loadComments();
                     // 댓글 입력 폼 초기화
-                    $(".commentCon").find("textarea").val("");
+                    $(".commentCon").val("");
                 }
             },
             error: function (error) {
@@ -171,9 +175,142 @@ $(document).ready(function() {
             }
         });
     });
-	
-}); // $(document).ready 함수 선언 종료
 
+	// 댓글 삭제버튼 클릭시
+	$(document).off("click", "#delComment").on("click", "#delComment", function(t) {
+	    console.log("삭제 실행");
+	
+	    // commentNum 변수를 유효성 검사하여 숫자로 변환
+	    var commentNum =  $(this).closest('.comment').find('#commentNum').val();
+	    console.log(commentNum+"번 댓글 삭제");
+	    if (!isNaN(commentNum)) {
+	        // 유효한 숫자로 처리
+	        $.ajax({
+	            type: "POST",
+	            url: "/comment/delComment",
+	            data: {
+	                board_num: $("#boardNum").val(),
+	                comment_num: commentNum
+	            },
+	            success: function(result) {
+	                if (result === "success") {
+	                    // 등록 성공 시 댓글 목록 다시 로드
+	                    loadComments();
+	                    // 댓글 입력 폼 초기화
+	                    $(".commentCon").val("");
+	                }
+	            },
+	            error: function(error) {
+	                console.log("Error adding comment: " + error);
+	            }
+	        });
+	    } else {
+	        // 유효하지 않은 숫자 처리
+	        console.error("Invalid comment number");
+	        // 또는 기본값을 설정하거나 에러 처리를 수행할 수 있습니다.
+	    }
+	});
+	
+	// 댓글 수정 버튼 클릭시
+	$(document).off("click", "#modComment").on("click", "#modComment", function(t) {
+		var commentConP = $(this).closest('.comment').find(".commentConP");
+   		var comValue = commentConP.text();
+   		console.log("comValue="+comValue);
+	
+		var hiddenModCom = $('<input>',{
+			'id': 'hiddenModCom',
+			'type': 'hidden',
+			'value': comValue
+		});
+	    var commentConT = $('<textarea>', {
+	        'class': 'commentConT'
+	    });
+	    var modCommentComplete = $('<input>', {
+	        'type': 'button',
+	        'id': 'modCommentComplete',
+	        'value': '수정완료'
+	    });
+	    var modCancel = $('<input>', {
+	        'type': 'button',
+	        'id': 'modCancel',
+	        'value': '취소'
+	    });
+		
+	    var modCommentButton = $(this).closest('.comRap').find("#modComment");
+	    var delCommentButton = $(this).closest('.comRap').find("#delComment");
+	
+		$(this).closest('.comment').append(hiddenModCom);
+	    commentConP.replaceWith(commentConT);
+	    modCommentButton.replaceWith(modCommentComplete);
+	    delCommentButton.replaceWith(modCancel);
+	});
+	
+	// 수정 이후 취소버튼 클릭시
+	$(document).off("click", "#modCancel").on("click", "#modCancel", function(t) {
+		var hiddenModComValue= $("#hiddenModCom").val();
+		console.log(hiddenModComValue);
+	    var commentConP = $('<p>', {
+	    	'class': 'commentConP',
+	    	'text': hiddenModComValue
+	    });
+	    var modComment = $('<input>', {
+	        'type': 'button',
+	        'id': 'modComment',
+	        'value': '수정'
+	    });
+	    var delComment = $('<input>', {
+	        'type': 'button',
+	        'id': 'delComment',
+	        'value': '삭제'
+	    });
+	
+	    var commentConT = $(this).closest('.comment').find(".commentConT");
+	    var modCommentButton = $(this).closest('.comRap').find("#modCommentComplete");
+	    var delCommentButton = $(this).closest('.comRap').find("#modCancel");
+	
+	    commentConT.replaceWith(commentConP);
+	    modCommentButton.replaceWith(modComment);
+	    delCommentButton.replaceWith(delComment);
+	});
+	
+	// 댓글 수정완료버튼 클릭시
+	$(document).off("click", "#modCommentComplete").on("click", "#modCommentComplete", function(t) {
+	    console.log("수정 실행");
+	    console.log($(".commentConT").val());
+	
+	    // commentNum 변수를 유효성 검사하여 숫자로 변환
+	    var commentNum =  $(this).closest('.comment').find('#commentNum').val();
+	    console.log(commentNum+"번 댓글 수정");
+	    if (!isNaN(commentNum)) {
+	        // 유효한 숫자로 처리
+	        $.ajax({
+	            type: "POST",
+	            url: "/comment/modComment",
+	            data: {
+	                board_num: $("#boardNum").val(),
+	                comment_contents: $(".commentConT").val(),
+	                comment_num: commentNum
+	            },
+	            success: function(result) {
+	                if (result === "success") {
+	                    // 등록 성공 시 댓글 목록 다시 로드
+	                    loadComments();
+	                    // 댓글 입력 폼 초기화
+	                    $(".commentConT").val("");
+	                }
+	            },
+	            error: function(error) {
+	                console.log("Error adding comment: " + error);
+	            }
+	        });
+	    } else {
+	        // 유효하지 않은 숫자 처리
+	        console.error("Invalid comment number");
+	        // 또는 기본값을 설정하거나 에러 처리를 수행할 수 있습니다.
+	    }
+	});
+
+}); // $(document).ready 함수 선언 종료
 
 // post방식 modify 넘기기
 let formObj = $("#modify_form");

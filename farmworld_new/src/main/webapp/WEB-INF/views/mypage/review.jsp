@@ -69,7 +69,7 @@
 </style>
 </head>
 
-<%@include file="includes/header.jsp" %>
+<%@include file="../includes/header.jsp" %>
 
 <!-- 상단 공백 추가 끝 -->
 <div class="container-fluid py-5">
@@ -104,7 +104,7 @@
 	</div>
 </div>                      
                         
-<%@include file="includes/footer.jsp" %>
+<%@include file="../includes/footer.jsp" %>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js" type="text/javascript">
 </script>
@@ -157,7 +157,7 @@ $(document).ready(function () {
 		
 		                                    let row = $("<tr>");
 		                                    row.html(
-		                                    		"<td>"+"<img id='purchaseimg' src='/resources/upload/"+ data4[i].image_folder_num +"/"+ data4[i].image1 + "'></td>" +
+		                                    		"<td>"+"<img id='purchaseimg' src='/resources/upload/product/"+ data2[i].image_folder_num +"/"+ data4[i].image1 + "'></td>" +
 		                                    	    "<td>" + orderformatDate + "</td>" +
 		                                    	    "<td>" + data1[i].order_num + "</td>" +
 		                                    	    "<td>" + data2[i].goods_title + "</td>" +
@@ -173,9 +173,9 @@ $(document).ready(function () {
 	                                    	            "<button id='reviewbutton2' name='review_num3' onclick='reviewdelete(" + i + ")' class='btn btn-primary middlebutton purchaseViewBtn'>삭제</button></form>" +
 	                                    	        "</td>"
 		                                    	    
-		                                    	);                                    
+		                                    	);
 		                                    console.log(row);
-		                                    testNum=data3[i].review_num;
+		                                    testNum=data2[i].image_folder_num
 		                                    console.log(testNum);
 		                                    $("tbody").append(row);
 		                                }

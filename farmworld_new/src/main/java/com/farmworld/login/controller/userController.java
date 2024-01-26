@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.w3c.dom.UserDataHandler;
 
 import com.farmworld.login.domain.UserVO;
@@ -33,25 +34,6 @@ import lombok.extern.log4j.Log4j;
 public class userController {
 	private final UserService userService;
 	private final MailSendService mailService;
-	
-//	@GetMapping("/mypage") //로그인 o/x 상태 확인
-//	public String loginCheck(HttpSession session) {
-//		log.info("controller loginCheck");
-//		System.out.println("controller loginCheck");
-//		
-//		//세션에 저장되어 있는 user_num값 받아오기
-//		Integer user_num = (int) session.getAttribute("user_num"); 
-//		
-//		if(user_num != null && user_num !=0 ) { //로그인 된 상태
-//			return "redirect:"+"/"; //후에 마이페이지 이동으로 고쳐야함
-//		}
-//		return "/user/login"; //로그인 안 된 상태
-//	}
-//	
-//	@PostMapping("/mypage")
-//	public void getMyPage() { //마이페이지 이동
-//		
-//	}
 	
 /*** 회원가입
  * 아이디/닉네임 중복 체크
@@ -109,7 +91,7 @@ public class userController {
 	
 	//로그인 정보 확인
 	@RequestMapping(value = "/login", method = RequestMethod.POST) 
-	public String postLogin(UserVO vo, HttpSession session, Model model) {
+	public String postLogin(UserVO vo, HttpSession session, RedirectAttributes rttr) {
 		log.info("controller postLogin: "+vo);
 		System.out.println("controller postLogin 사용자 입력: "+vo);
 		
@@ -124,9 +106,9 @@ public class userController {
 			System.out.println("로그인 성공");
 			return "redirect:/";
 		}else {
-			model.addAttribute("loginError", "아이디 또는 비밀번호가 잘못되었습니다.");
+			rttr.addFlashAttribute("message", "아이디 또는 비밀번호가 잘못되었습니다.");
 			System.out.println("모델 실행");
-			return "/user/login";
+			return "redirect:/user/login";
 		}
 	}
 

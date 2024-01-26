@@ -62,6 +62,11 @@ public class ReviewServiceImpl implements ReviewService {
 		log.info("updatereview()");
 		return mapper.updatereview(vo);
 	}
+	@Override
+	public int updateimage(ReviewVO vo) {
+		log.info("updatereview()");
+		return mapper.updateimage(vo);
+	}
 	
 	
 	
@@ -78,6 +83,10 @@ public class ReviewServiceImpl implements ReviewService {
 	public ReviewVO getreviewVO(Integer k) {
 		
 		return mapper.getreviewVO(k);
+	}
+	public List<ImageVO> getreviewVOimage() {
+		log.info("getreviewVOimage()");
+		return mapper.getreviewVOimage();
 	}
 	
 	
@@ -99,8 +108,7 @@ public class ReviewServiceImpl implements ReviewService {
 	
 	@Override
 	public ReviewVO get(Integer k) {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.getreviewVO(k);
 	}
 
 	

@@ -71,13 +71,11 @@
 
 <script type="text/javascript">
 
-//로그인 버튼 누르면 form 제출
-$("#loginBtn").on("click", function () {
-	$("#login_form").submit();
-	if(result != null){
-		alert("${result}");
-	}
-});
+//아이디, 비번 틀렸을 시 or 비회원 마이페이지 이동 시 안내 문구
+let message = "${message}";
+if(message != ""){
+	alert(message);
+}
 
 </script>
 

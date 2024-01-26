@@ -12,7 +12,7 @@ public interface MyFarmMapper {
 
 	public void insertSelectBno(MyFarmVO vo);
 
-	public List<MyFarmVO> selectAll();
+	public MyFarmVO selectAll(Integer user_num);
 
 	public int update(MyFarmVO vo);
 

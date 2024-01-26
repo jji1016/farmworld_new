@@ -6,7 +6,7 @@ import com.farmworld.all.domain.Criteria;
 import com.farmworld.all.service.Generic;
 import com.farmworld.edu.domain.EduVO;
 
-public interface Edu extends Generic<EduVO, Integer> {
+public interface EduService extends Generic<EduVO, Integer> {
 
 	public List<EduVO> eduAll();
 

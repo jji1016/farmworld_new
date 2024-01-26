@@ -8,6 +8,23 @@
 	<select id="getCommentsByBoardNum" resultType="com.farmworld.board.domain.CommentVO">
         SELECT * FROM comment WHERE board_num = #{board_num}
     </select>
+    
+    <insert id="registerComment" parameterType="CommentVO">
+		insert into comment
+		(comment_contents, board_num, user_num, user_nickname)
+		values (#{comment_contents}, #{board_num}, #{user_num}, #{user_nickname})
+	</insert>
     	
+    <delete id="deleteComment" parameterType="CommentVO">
+		DELETE FROM comment 
+		WHERE board_num = #{board_num} AND comment_num = #{comment_num}
+	</delete>
+	
+	<update id="updateComment" parameterType="BoardVO">
+		UPDATE comment
+		SET comment_contents = #{comment_contents}
+		WHERE board_num = #{board_num} AND comment_num = #{comment_num}
+	</update>
+	
 </mapper>
 	

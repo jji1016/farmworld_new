@@ -80,7 +80,7 @@
                         <div class="navbar-nav mx-auto">
                             <a href="../home" class="nav-item nav-link active">Home</a>
                             <a href="../shopmain" class="nav-item nav-link">Shop</a>
-                            <a href="../shopdetail" class="nav-item nav-link">Shop Detail</a>
+                            <a href="../shop/detail" class="nav-item nav-link">Shop Detail</a>
                             <a href="../myfarm/main" class="nav-item nav-link">My Farm</a>
                             <a href="../board/list" class="nav-item nav-link">Board</a>
 
@@ -101,7 +101,7 @@
                                 <i class="fa fa-shopping-bag fa-2x"></i>
                                 <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
                             </a>
-                            <a href="../mypage" class="my-auto">
+                            <a href="/mypage/myPageMain" class="my-auto">
                                 <i class="fas fa-user fa-2x"></i>
                             </a>
                         </div>
