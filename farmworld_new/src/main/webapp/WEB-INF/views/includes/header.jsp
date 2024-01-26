@@ -80,7 +80,7 @@
                         <div class="navbar-nav mx-auto">
                             <a href="../home" class="nav-item nav-link active">Home</a>
                             <a href="../shopmain" class="nav-item nav-link">Shop</a>
-                            <a href="../shopdetail" class="nav-item nav-link">Shop Detail</a>
+                            <a href="../shop/detail" class="nav-item nav-link">Shop Detail</a>
                             <a href="../myfarm/main" class="nav-item nav-link">My Farm</a>
                             <a href="../board/list" class="nav-item nav-link">Board</a>
 
