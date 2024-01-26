@@ -1,4 +1,3 @@
-
 package com.farmworld.mypage.controller;
 
 import java.io.IOException;
@@ -66,7 +65,7 @@ public class MyPageController {
 	private FileUploadService fileUpload;
 	private final ImageService imageService;
 
-	private static String uploadDir = "C:\\Users\\keduit\\Desktop\\farm_me_ws\\farmworld_new_240118\\farmworld_new\\src\\main\\webapp\\resources\\upload\\profile\\";
+	private static String uploadDir = "C:\\Users\\keduit\\Desktop\\farmworld_ new_git\\farmworld_new\\farmworld_new\\farmworld_new\\src\\main\\webapp\\resources\\upload\\review\\";
 	
 /* 메인
  * 	비회원 권한 없음 */
@@ -176,6 +175,7 @@ public class MyPageController {
 	
 	
 	
+
 	/* 구매내역 */
 	@GetMapping("/buylist")
 	public String buyList() {
@@ -307,56 +307,74 @@ public class MyPageController {
 	}
 	
 	
+	
 	/* 리뷰상세 */
 	@PostMapping("/reviewupdate")
 	public String reviewupdate(@RequestParam("review_num") Integer review_num, Model model) {
+		ReviewVO vo = reviewService.get(review_num);
+		System.out.println(vo);
+		System.out.println("확인1");
+		int a = vo.getImage_folder_num();
 		System.out.println("리뷰상세보기" + review_num);
 		model.addAttribute("getreview", reviewService.getreviewVO(review_num));
+		model.addAttribute("getreviewVOimage", imageService.get(a));
 		System.out.println(model);
-
+		System.out.println("확인2");
 		return "/mypage/reviewupdate";
 	}
-
+	@PostMapping("/getreviewVOimage")
+	public String getreviewVOimage(@RequestParam("image1") String image1, Model model) {
+		System.out.println("리뷰상세이미지" + image1);
+		System.out.println("확인3");
+		model.addAttribute("getreviewVOimage", reviewService.getreviewVOimage());
+		System.out.println(model);
+		System.out.println("확인4");
+		return "/mypage/reviewupdate";
+	}
+	
 	
 	/* 리뷰수정 */
 	@PostMapping("/updatereview")
 	public String updatereview(MultipartFile file, @RequestParam(name = "reviewimage", required = false) String image1,  ReviewVO review, RedirectAttributes rttr) {
 		Integer imageNum = review.getImage_folder_num();
 		ImageVO image = imageService.get(imageNum);
-	    System.out.println(review);
+	    System.out.println("review : " + review);
 	    System.out.println("imgae : " + image);
-	    System.out.println("여기6");
+        System.out.println("여기1");
 	    if (file != null && !file.isEmpty()) {
 	        // 이미지가 null이 아닌 경우에만 아래 코드 실행
-	        System.out.println("여기7");
-	        System.out.println("여기1");
 	        System.out.println("여기2");
 	        if (file.getSize() > 0) {
 	            try {
 	                String filePath = uploadDir  + imageNum + "/";
 	                String fileName = fileUpload.uploadFile(file, filePath);
 	                Path FPath = Paths.get(uploadDir + imageNum + "\\" + image.getImage1());
+	                System.out.println("filePath : " + filePath);
+	                System.out.println("fileName : " + fileName);        
+	                System.out.println("FPath : " + FPath);
 	                System.out.println("여기3");
 	                if (image.getImage1() != null) {
 	                    Files.delete(FPath);
+	                    System.out.println(FPath);
+	                    System.out.println("여기4");
 	                }
 	                image.setImage1(fileName);
 	            } catch (Exception e) {
 	                e.printStackTrace();
-	                System.out.println("여기4");
+	                System.out.println("여기5");
 	            }
 	        }
 	       
 	        imageService.modify(image);
-	        System.out.println("여기5");
 	        System.out.println("이미지1: " + image.getImage1());
+	        System.out.println("여기6");
 	        
-	        reviewService.updatereview(review);
+	        
 	    }
-
+	    reviewService.updatereview(review);
 	    return "redirect:/mypage/review";
 	}
-	
+	 
 	
 	/* 리뷰삭제 */
 	@PostMapping("/reviewdelete")

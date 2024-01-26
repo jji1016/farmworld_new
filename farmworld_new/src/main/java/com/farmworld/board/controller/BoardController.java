@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -82,7 +84,7 @@ public class BoardController {
 	public void registerGet() {}
 	
 	@PostMapping("/register")
-	public String register(ArrayList<MultipartFile> files, BoardVO board, RedirectAttributes rttr) {
+	public String register(ArrayList<MultipartFile> files, BoardVO board, RedirectAttributes rttr, HttpSession session) {
 		ImageVO image = new ImageVO();
 	    Integer imageNum = imageService.MaxFolder();
 	    System.out.println("파일"+files.get(0));
@@ -119,7 +121,7 @@ public class BoardController {
 	    }
 	    imageNum = imageService.addGetNum(image);
 	    board.setImage_folder_num(imageNum);
-		
+		board.setUser_num((int) session.getAttribute("user_num"));
 		
 		boardService.add(board);
 		System.out.println("board: "+board);

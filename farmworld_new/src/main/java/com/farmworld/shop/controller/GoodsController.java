@@ -59,7 +59,8 @@ public class GoodsController {
 			String pattern				= "yyyyMMddHHmmss"; //hhmmss로 시간,분,초만 뽑기도 가능
 			SimpleDateFormat formatter	= new SimpleDateFormat(pattern, currentLocale);
 			String fileName				= formatter.format(today) + "_" + file.getOriginalFilename();
-			String path					= request.getServletContext().getRealPath("") + "resources\\filefolder\\";
+			String path					=  request.getSession().getServletContext().getRealPath("/") + "resources\\filefolder\\";
+//			String path					= request.getServletContext().getRealPath("") + "resources\\filefolder\\";
 	        
 	        File folder = new File(path);
 	        if (!folder.exists()) { // 디렉터리가 없으면 생성
