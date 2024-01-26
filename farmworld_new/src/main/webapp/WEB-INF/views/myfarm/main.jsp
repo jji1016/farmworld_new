@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-
-<%@include file="../includes/header.jsp" %>
 <style>
     .pagination {
         display: flex;
@@ -13,7 +11,19 @@
     .paginate_button {
         margin-right: 5px; /* 각 페이지 버튼 간의 간격을 조절할 수 있습니다. */
     }
+    .shadowhover {
+  		transition: box-shadow 0.3s ease;
+	}
+
+/* 마우스 호버 시 스타일 변경 */
+	.shadowhover:hover {
+	  cursor: pointer; /* 마우스를 올릴 때 포인터로 변경 */
+	  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* 적당한 그림자 효과 */
+	}
 </style>
+
+<%@include file="../includes/header.jsp" %>
+
 
 <!-- 상단 공백 추가 끝 -->
 <div class="container-fluid py-5">
@@ -158,10 +168,9 @@
 		
 							let row ="";
 							row+=("<div class='col-md-6 col-lg-6 col-xl-4'>");
-							row+=("<div class='rounded position-relative fruite-item' onclick='redirectToFarm(" + myfarm.farm_num + ")'>");
 							row+=("<div class='row g-0'>");
-							row+=("<div class='col-10'>");
-							row+=("<div class='position-relative'>");
+							row+=("<div class='col-10'onclick='redirectToFarm(" + myfarm.farm_num + ")'> ");
+							row+=("<div class='position-relative shadowhover'>");
 							row+=("<input type='hidden' name='farm_num' value='"+myfarm.farm_num+"'>")
 							row+=("<img src='/resources/upload/" + myfarm.image_folder_num + "/"+ myfarm.image1 + "' class='card-img-top fixed-size-image' alt='농장 이미지' style='width:100%; height:280px'>");
 							row+=("<div class='position-absolute start-0 bottom-0 w-100 py-3 px-4' style='background: rgba(52, 173, 84, .85);'>");
@@ -171,7 +180,7 @@
 							 for (let i = 0; i < intro.length; i++) {
 		                            row += intro[i];
 		                        }
-							row+=("</div></div></div></div></div></div></div>");
+							row+=("</div></div></div></div></div></div>");
 
 							
 							myFarmBody.append(row);

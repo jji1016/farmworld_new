@@ -15,7 +15,7 @@
 		(grow_title, grow_content, growup_category, farm_num, user_num,
 		image_folder_num)
 		values (#{grow_title}, #{grow_content},
-		#{growup_category}, #{farm_num}, 1, #{image_folder_num})
+		#{growup_category}, #{farm_num}, #{user_num}, #{image_folder_num})
 	</insert>
 
 	<insert id="insertSelectBno" parameterType="GrowUpVO"

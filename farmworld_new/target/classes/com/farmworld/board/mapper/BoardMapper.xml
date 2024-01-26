@@ -7,6 +7,13 @@
 
 	<insert id="insert" parameterType="BoardVO">
 		insert into board
+		(board_title,board_content,user_nickname,board_category,image_folder_num, user_num)
+		values (#{board_title}, #{board_content}, #{user_nickname}, #{board_category}, ${image_folder_num}, ${user_num})
+	</insert>
+
+	<insert id="insertSelectBno" parameterType="BoardVO"
+		keyColumn="board_num" keyProperty="board_num" useGeneratedKeys="true">
+		insert into board
 		(board_title,board_content,user_nickname,board_category,image_folder_num,user_num)
 		values (#{board_title}, #{board_content}, #{user_nickname}, #{board_category}, ${image_folder_num}, ${user_num})
 	</insert>
