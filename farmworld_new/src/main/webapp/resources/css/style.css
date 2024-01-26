@@ -118,7 +118,7 @@
 
 /*** Navbar Start ***/
 .navbar .navbar-nav .nav-link {
-    padding: 10px 15px;
+    padding: 10px 45px;
     font-size: 16px;
     transition: .5s;
 }
@@ -133,6 +133,10 @@
 .fixed-top.bg-white .navbar .navbar-nav .nav-link:hover,
 .fixed-top.bg-white .navbar .navbar-nav .nav-link.active {
     color: var(--bs-primary);
+}
+.navbar .navbar-nav .nav-link:hover {
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .navbar .dropdown-toggle::after {
