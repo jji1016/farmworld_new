@@ -69,7 +69,7 @@
                                </div>
                                 <div class="form-group">
 					                <label for="image1">이미지 업로드</label>
-					                <input type="file" name="image1" id="image1" class="form-control-file" onchange="previewImage(this)">
+					                <input type="file" name="image1" id="image1" class="form-control-file" onchange="previewImage(this)" required>
 					            </div>
 					
 					            <!-- 미리보기를 표시할 DIV -->
@@ -121,35 +121,6 @@
 
 
 
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <!-- <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>-->
-        <script src="/resources/js/jquery-1.12.3.min.js"></script>
-
-
-        <!--Counter UP Waypoint-->
-        <script src="/resources/js/waypoints.min.js"></script>
-        <!--Counter UP-->
-        <script src="/resources/js/jquery.counterup.min.js"></script>
-
-       
-
-
-        <!--Isotope-->
-        <script src="/resources/js/isotope/min/scripts-min.js"></script>
-        <script src="/resources/js/isotope/cells-by-row.js"></script>
-        <script src="/resources/js/isotope/isotope.pkgd.min.js"></script>
-        <script src="/resources/js/isotope/packery-mode.pkgd.min.js"></script>
-        <script src="/resources/js/isotope/scripts.js"></script>
-
-        <!--JQuery Click to Scroll down with Menu-->
-        <script src="/resources/js/jquery.localScroll.min.js"></script>
-        <script src="/resources/js/jquery.scrollTo.min.js"></script>
-
-
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="/resources/js/bootstrap.min.js"></script>
-        <!-- Custom JavaScript-->
-        <script src="/resources/js/main.js"></script>
     </body>
 
 </html>

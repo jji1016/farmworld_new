@@ -13,6 +13,8 @@ public interface MyFarm extends Generic<MyFarmVO, Integer> {
 	
 	public List<MyFarmVO> searchFarm(Criteria cri);
 	
+	public MyFarmVO getByUserNum(Integer user_num);
+	
 	public int getTotal(Criteria cri);
 	
 	public void view(MyFarmVO vo);

@@ -102,6 +102,7 @@ public class userController {
 			//user_num/nickname 세션에 저장
 			session.setAttribute("user_num", userInfo.getUser_num());
 			session.setAttribute("user_nickname", userInfo.getUser_nickname());
+			session.setAttribute("user_type", userInfo.getUser_type());
 			
 			System.out.println("로그인 성공");
 			return "redirect:/";

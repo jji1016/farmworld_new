@@ -33,7 +33,7 @@
 			<div class="bg-primary h-100 p-5">
 			<div style="position: relative;">
 			    <img src='/resources/upload/${vo.image_folder_num}/${image.image1}' class='card-img-top fixed-size-image' alt='농장 이미지'>
-			    <button style="position: absolute; bottom: 0; right: 0; border-radius:50%; border:none;"><a href='/myfarm/modify?farm_num=<c:out value="${vo.farm_num}"/>'>수정</a></button>
+			    <button id="farmModify" style="position: absolute; bottom: 0; right: 0; border-radius:50%; border:none;"><a href='/myfarm/modify?farm_num=<c:out value="${vo.farm_num}"/>'>수정</a></button>
 			</div>
 			
 			<h4>${vo.farm_intro}</h4>
@@ -110,6 +110,19 @@ function redirectToGoods(goodsNum) {
     }
 }
     $(document).ready(function () {
+    	 // 세션에서 user_num을 가져오기
+        var sessionUserNum = <%= session.getAttribute("user_num") %>;
+        var sessionType = <%= session.getAttribute("user_type") %>;
+
+        // 입력된 user_num 가져오기
+        var inputUserNum = document.getElementById("userNum").value;
+		console.log("세션"+sessionUserNum+" jsp" +inputUserNum)
+        // user_num이 일치하는지 확인
+        if (sessionUserNum == inputUserNum || sessionType == 2) {
+            document.querySelector('#farmModify').style.display = 'block';
+        } else {
+            document.querySelector('#farmModify').style.display = 'none';
+        }
 		
     	loadTableData(); // Ajax 실행 함수 호출
 		

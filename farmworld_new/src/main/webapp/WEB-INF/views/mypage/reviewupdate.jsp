@@ -107,7 +107,6 @@
     display: flex;
     text-align: center;
     justify-content: center;
-    margin-left: 15%;
     place-self: center !important;
 }
 #producttable{
