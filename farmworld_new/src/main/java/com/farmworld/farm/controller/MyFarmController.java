@@ -310,12 +310,11 @@ public class MyFarmController {
 				Files.delete(FPath);
 			}
 			imageService.delete(vo.getImage_folder_num());
-			growUpService.delete(vo.getGrow_num());
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		growUpService.delete(vo.getGrow_num());
 		
 		return "redirect:/myfarm/farm?farm_num="+vo.getFarm_num();
 	}
@@ -325,7 +324,7 @@ public class MyFarmController {
 		System.out.println(vo);
 		ImageVO image = new ImageVO();
 		Integer imageNum = imageService.MaxFolder();
-		System.out.println("파일" + files.get(0));
+		System.out.println("넘버" + imageNum);
 
 		for (int i = 0; i < files.size(); i++) {
 			MultipartFile file = files.get(i);
@@ -395,7 +394,9 @@ public class MyFarmController {
 
 	@ResponseBody
 	@PostMapping("/goodslist")
-	public List<GoodsVO> getGoods(MyFarmVO vo) {
+	public List<GoodsVO> getGoods(MyFarmVO vo, Criteria cri) {
+		cri.setAmount(6);
+		System.out.println(vo);
 		List<GoodsVO> goodsvo = myFarmService.getGoodsList(vo);
 		return goodsvo;
 	}

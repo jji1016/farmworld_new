@@ -63,6 +63,7 @@
                 <div class="bg-primary h-100 p-5">
                 <form action="/myfarm/growdelete" method="post">
 				<input type="hidden" name="grow_num" value='${vo.grow_num }'>
+				<input type="hidden" name="user_num" id="user_num" value='${vo.user_num }'>
                     <div class="row g-3">
 						<div class="col-12">
 						    <!-- Grow 정보 표시 -->
@@ -102,6 +103,24 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+    	
+
+        // 세션에서 user_num을 가져오기
+        var sessionUserNum = <%= session.getAttribute("user_num") %>;
+
+        // 입력된 user_num 가져오기
+        var inputUserNum = document.getElementById("user_num").value;
+
+        // user_num이 일치하는지 확인
+        if (sessionUserNum == inputUserNum) {
+            // user_num이 일치하면 수정 및 삭제 버튼 표시
+            document.querySelector('.btn-info').style.display = 'block';
+            document.querySelector('.btn-danger').style.display = 'block';
+        } else {
+            // user_num이 일치하지 않으면 수정 및 삭제 버튼 숨김
+            document.querySelector('.btn-info').style.display = 'none';
+            document.querySelector('.btn-danger').style.display = 'none';
+        }
 
     	
         $("#keyword").keypress(function(event) {

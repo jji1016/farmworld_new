@@ -45,6 +45,14 @@
 	  </set>
 	  WHERE image_folder_num = #{image_folder_num}
 	</update>
+	
+	<select id="selectAll" parameterType="MyFarmVO" resultType="ImageVO">
+		SELECT i.image_folder_num, i.image1, i.image2, i.image3
+    	FROM goods g
+    	JOIN image i ON g.image_folder_num = i.image_folder_num
+    	WHERE g.user_num = #{user_num}
+    	ORDER BY i.image_folder_num DESC
+	</select>
 
 </mapper>
 	

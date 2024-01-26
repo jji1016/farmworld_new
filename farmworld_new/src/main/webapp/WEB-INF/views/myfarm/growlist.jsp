@@ -18,7 +18,7 @@
         	<div class="container">
 	            <div class="mx-auto text-center mb-5" style="max-width: 500px;">
 	                <h1 class="display-5" id="headName">${vo.farm_name }</h1>
-	                <input type="hidden" value="${vo.user_num }" name="user_num" id="userNum">
+	                <input type="hidden" value="${vo.user_num }" name="user_num" id="user_num">
 	                <form id="pageForm" method="get" action="/myfarm/growlist">
 	                
 	                <input type="hidden" value="${vo.farm_num }" name="farm_num" id="farmNum">
@@ -96,7 +96,7 @@
 								</div>
                                 
                                 <div class="col-12">
-                                <a href="/myfarm/growregister?farm_num=<c:out value="${vo.farm_num}" />"style='background-color: #f8d7da;'>성장일기 등록</a>
+                                <button class="btn btn-success"><a href="/myfarm/growregister?farm_num=<c:out value="${vo.farm_num}" />">성장일기 등록</a></button>
                                 </div>
                                 
                             </div>
@@ -121,6 +121,19 @@ function redirectToGrow(growNum) {
     }
 }
     $(document).ready(function () {
+    	
+    	 // 세션에서 user_num을 가져오기
+        var sessionUserNum = <%= session.getAttribute("user_num") %>;
+
+        // 입력된 user_num 가져오기
+        var inputUserNum = document.getElementById("user_num").value;
+		console.log("세션"+sessionUserNum+" jsp" +inputUserNum)
+        // user_num이 일치하는지 확인
+        if (sessionUserNum == inputUserNum) {
+            document.querySelector('.btn-success').style.display = 'block';
+        } else {
+            document.querySelector('.btn-success').style.display = 'none';
+        }
 		
     	loadTableData(); // Ajax 실행 함수 호출
     	loadCategory();

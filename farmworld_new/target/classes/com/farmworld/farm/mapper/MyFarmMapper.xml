@@ -118,6 +118,7 @@
 	
 	<select id="getGoodsList" resultType="GoodsVO" parameterType="MyFarmVO">
 	SELECT * FROM goods where user_num = #{user_num}
+	ORDER BY image_folder_num DESC
 	</select>
 
 </mapper>
