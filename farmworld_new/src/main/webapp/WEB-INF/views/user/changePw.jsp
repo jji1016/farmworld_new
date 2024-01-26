@@ -132,9 +132,9 @@ $(document).ready(function(){
 	let ec="";
 	
     // 모달 외부를 클릭해도 닫히지 않음
-   $(".modal").modal({
-    backdrop: true,
-	}); 
+    $(".modal").modal({
+        backdrop: 'static',
+    });
  
 	
  // "비밀번호 수정하기" 버튼 눌렀을 때 1번 모달창(이메일 전송 결과) 활성화
