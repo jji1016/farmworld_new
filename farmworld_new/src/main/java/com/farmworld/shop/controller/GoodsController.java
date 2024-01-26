@@ -20,7 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.farmworld.all.domain.ImageVO;
 import com.farmworld.shop.domain.GoodsVO;
 import com.farmworld.shop.service.GoodsService;
-import com.farmworld.shop.service.ReviewService;
+import com.farmworld.mypage.domain.ReviewVO;
+import com.farmworld.mypage.service.ReviewService;
 
 @Controller
 public class GoodsController {
