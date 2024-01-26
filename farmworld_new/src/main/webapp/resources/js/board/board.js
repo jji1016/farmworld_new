@@ -2,6 +2,7 @@ $(document).ready(function() {
 	loadTableData();
 	boardName();
 	loadComments(); // 페이지 로딩 시 댓글 로딩
+	hide();
 	
 	function boardName(){
 		if($("#board_ENname").val() == "notice"){
@@ -17,6 +18,10 @@ $(document).ready(function() {
 	});
 	
 	function loadTableData(){
+		if ($("#userNumHidden").val() == "") {
+		    $(".pagingBtn").css("display", "none");
+		}
+	
 		$.ajax({
 			url: "/board/searchList",
 			type: "POST",
@@ -41,11 +46,12 @@ $(document).ready(function() {
 					let row = $("<tr>");
 					row.append($("<td>").text(board.board_num));
 					
-					let titleLink = $("<a>").attr("href","/board/get?board_num="+board.board_num+"&board_category="+board.board_category)
-						.text(board.board_title).on("click",function(){clickBoard(board.board_num, board.board_category);
-				    	});
+					let titleLink = $("<a id='titleLink'>").attr("href","/board/get?board_num="+board.board_num+"&board_category="+board.board_category)
+						.text(board.board_title);
 					let titleTd = $("<td>").append(titleLink);
 					row.append(titleTd);
+					row.append($("<input id='getBoardNum' type='hidden' value='"+board.board_num+"'>"));
+					
 					row.append($("<td>").text(board.user_nickname));
 					row.append($("<td>").text(formatDate));
 					row.append($("<td>").text(board.board_view));
@@ -69,21 +75,7 @@ $(document).ready(function() {
 	
 	}// loadTableData 함수 선언 종료
 	
-	// 클릭한 게시물의 조회수를 증가시키는 Ajax 요청
-	function clickBoard(boardNum, boardCategory) {
-        $.ajax({
-            type: "POST",
-            url: "/board/increaseViewCount",
-            data: {
-                board_num: boardNum
-            },
-            success: function(result) {
-            },
-            error: function(error) {
-                console.log("Error: " + error);
-            }
-        });
-    };
+	
 	
 	// summernote 사용
 	$('#BOARDCONT').summernote({
@@ -309,8 +301,39 @@ $(document).ready(function() {
 	        // 또는 기본값을 설정하거나 에러 처리를 수행할 수 있습니다.
 	    }
 	});
+	
+	function hide(){
+	console.log($("#sesUserNum").val());
+		// 같은 회원 아니면 수정버튼 사라짐
+		if ($("#sesUserNum").val() != $("#boardUserNum").val()) {
+		    $("#modBtn").css("display", "none");
+		};
+		// 회원아니면 댓글 버튼 비활성화
+		if (isNaN($("#sesUserNum").val())) {
+		    console.log("asdasd");
+		    $(".addCommentBtn").prop('disabled', true);
+		};
+	};
 
-}); // $(document).ready 함수 선언 종료
+}); // $(document).ready 함수 선언 종료---------------------------------------------------
+
+// 클릭한 게시물의 조회수를 증가시키는 Ajax 요청
+$(document).off("click", "#titleLink").on("click",function clickBoard() {
+console.log("조회수: "+$("#getBoardNum").val());
+    $.ajax({
+        type: "POST",
+        url: "/board/increaseViewCount",
+        data: {
+            board_num: $("#getBoardNum").val()
+        },
+        success: function(result) {
+        },
+        error: function(error) {
+            console.log("Error: " + error);
+        }
+    });
+});
+
 
 // post방식 modify 넘기기
 let formObj = $("#modify_form");

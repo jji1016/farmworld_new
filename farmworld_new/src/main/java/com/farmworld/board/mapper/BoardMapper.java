@@ -9,8 +9,6 @@ public interface BoardMapper {
 	
 	public void insert(BoardVO vo);
 
-	public void insertSelectBno(BoardVO vo);
-
 	public List<BoardVO> selectAll();
 
 	public int update(BoardVO vo);
