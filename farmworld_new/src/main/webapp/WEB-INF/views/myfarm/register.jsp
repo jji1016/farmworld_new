@@ -69,7 +69,7 @@
                                </div>
                                 <div class="form-group">
 					                <label for="image1">이미지 업로드</label>
-					                <input type="file" name="image1" id="image1" class="form-control-file" onchange="previewImage(this)" required>
+					                <input type="file" name="image1" id="image1" class="form-control-file" accept=".png, .jpg" onchange="previewImage(this)" required>
 					            </div>
 					
 					            <!-- 미리보기를 표시할 DIV -->
@@ -104,7 +104,7 @@
 	               reader.onload = function (e) {
 	                   var img = document.createElement('img');
 	                   img.src = e.target.result;
-	                   img.className = 'img-fluid rounded';
+	                   img.className = 'img-thumbnail rounded';
 	                   preview.appendChild(img);
 	               };
 	

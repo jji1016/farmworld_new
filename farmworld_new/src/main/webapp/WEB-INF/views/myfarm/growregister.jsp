@@ -87,15 +87,15 @@
                         <td>
                             <div class="row">
                                 <div class="col-4">
-                                    <input type="file" name="files" id="image1" class="form-control-file" onchange="previewImage(this, 'imagePreview1')" required="required">
+                                    <input type="file" name="files" id="image1" class="form-control-file" accept=".png, .jpg" onchange="previewImage(this, 'imagePreview1')" required="required">
                                     <div id="imagePreview1"></div>
                                 </div>
-                                <div class="col-4"  style="display: none;">
-                                    <input type="file" name="files" id="image2" class="form-control-file" onchange="previewImage(this, 'imagePreview2')">
+                                <div class="col-4" style="display:none;">
+                                    <input type="file" name="files" id="image2" class="form-control-file" accept=".png, .jpg" onchange="previewImage(this, 'imagePreview2')">
                                     <div id="imagePreview2"></div>
                                 </div>
-                                <div class="col-4" style="display: none;">
-                                    <input type="file" name="files" id="image3" class="form-control-file" onchange="previewImage(this, 'imagePreview3')">
+                                <div class="col-4" style="display:none;">
+                                    <input type="file" name="files" id="image3" class="form-control-file" accept=".png, .jpg" onchange="previewImage(this, 'imagePreview3')">
                                     <div id="imagePreview3"></div>
                                 </div>
                             </div>
@@ -183,7 +183,7 @@
             reader.onload = function (e) {
                 var img = document.createElement('img');
                 img.src = e.target.result;
-                img.className = 'img-fluid rounded';
+                img.className = 'img-thumbnail rounded';
                 preview.appendChild(img);
 
                 // 현재 input에 대한 id와 번호를 추출
