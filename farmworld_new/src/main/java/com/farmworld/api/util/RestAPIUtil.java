@@ -36,7 +36,7 @@ public class RestAPIUtil {
 				}
 				count++;
 			}
-			log.info(urlBuilder.toString());
+			System.out.println(urlBuilder);
 			if (urlBuilder.toString().startsWith("https")) {
 				return JsonUtil.parseJson(RestAPIUtil.httpsConn(urlBuilder.toString(), headerData), classType);
 			}else {

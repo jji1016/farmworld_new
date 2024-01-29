@@ -37,7 +37,7 @@ public class WeatherService {
 		data.put("base_time", "0500");
 		data.put("nx", "55");
 		data.put("ny", "127");
-		headerData.put("Content-Type", "application/json;charset=UTF-8;");
+		headerData.put("Content-Type", "application/json; charset=UTF-8;");
 		
 		WeatherResponse result = RestAPIUtil.ConnHttpGetType(url, headerData, data, WeatherResponse.class);
 		log.info("result"+result);

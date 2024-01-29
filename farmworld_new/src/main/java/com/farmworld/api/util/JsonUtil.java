@@ -11,11 +11,9 @@ public class JsonUtil {
 	public static <T> T parseJson(String JsonString, Class<T> clazz) {
 		
 		Gson gson = new Gson();
-		log.info("Json시작, jsonstring : "+ JsonString);
-		log.info(clazz);
+		System.out.println(JsonString);
 		T result = gson.fromJson(JsonString, clazz);
-		log.info("json끝, parseJson result : " +result);
-		
+		System.out.println("끝"+JsonString);
 		return result;
 	}
 
