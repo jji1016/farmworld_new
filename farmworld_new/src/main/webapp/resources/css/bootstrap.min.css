@@ -6767,7 +6767,7 @@ none
 }
 
 .w-75 {
-	width: 75% !important
+	width: 100% !important
 }
 
 .w-100 {
@@ -7680,10 +7680,12 @@ none
 }
 
 .text-primary {
+	text-align: center;
 	color: #81c408 !important
 }
 
 .text-secondary {
+	text-align: center;
 	color: #ffb524 !important
 }
 
