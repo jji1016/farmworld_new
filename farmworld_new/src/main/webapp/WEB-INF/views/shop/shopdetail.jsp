@@ -94,14 +94,14 @@
                     <div class="col-lg-6">
                         <div class="border rounded">
                             <a href="#">
-                                <img src="img/single-item.jpg" class="img-fluid rounded" alt="Image">
+                                <img src="" class="img-fluid rounded" alt="Image" id="image1" style="">
                             </a>
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <h4 class="fw-bold mb-3">브로콜리</h4>
-                           <p class="mb-3">채소</p>
-                           <h5 class="fw-bold mb-3">1kg / 100원</h5>
+                        <h4 class="fw-bold mb-3" id="goods_title"></h4>
+                           <p class="mb-3" id="goods_category"></p>
+                           <h5 class="fw-bold mb-3">1kg / <i id="goods_price">100원</i></h5>
                            <div class="d-flex mb-4">
                                <i class="fa fa-star text-secondary"></i>
                                <i class="fa fa-star text-secondary"></i>
@@ -109,22 +109,23 @@
                                <i class="fa fa-star text-secondary"></i>
                                <i class="fa fa-star"></i>
                            </div>
-                           <p class="mb-4">브로콜리는</p>
-                           <p class="mb-4">맛없어!</p>
+                           <p class="mb-4" id="goods_content"></p>
                         <div class="input-group quantity mb-5" style="width: 100px;">
                             <div class="input-group-btn">
                                 <button class="btn btn-sm btn-minus rounded-circle bg-light border">
                                     <i class="fa fa-minus"></i>
                                 </button>
                             </div>
-                            <input type="text" class="form-control form-control-sm text-center border-0" value="1">
+                            <input type="text" class="form-control form-control-sm text-center border-0" id="addCnt" value="1">
                             <div class="input-group-btn">
                                 <button class="btn btn-sm btn-plus rounded-circle bg-light border">
                                     <i class="fa fa-plus"></i>
                                 </button>
                             </div>
                         </div>
-                        <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니에 담기</a>
+                        <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary" id="modifyBtn"><i class="fa fa-shopping-bag me-2 text-primary"></i> 수정</a>
+                        <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary" id="deleteBtn"><i class="fa fa-shopping-bag me-2 text-primary"></i> 삭제</a>
+                        <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary" id="addCart"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니에 담기</a>
                        </div>
                     <div class="col-lg-12">
                         <nav>
@@ -267,6 +268,7 @@
 	</div>
 </div>
 
+<script src="/resources/js/shop/detail.js" type="text/javascript"></script>
 <%@include file="../includes/footer.jsp" %>
 
 <script type="text/javascript">

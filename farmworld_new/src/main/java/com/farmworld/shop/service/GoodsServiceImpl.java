@@ -17,6 +17,8 @@ import com.farmworld.shop.mapper.GoodsMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
+import javax.servlet.http.HttpSession;
+
 @Service("GoodsService")
 @Log4j
 @AllArgsConstructor
@@ -53,6 +55,43 @@ public class GoodsServiceImpl implements GoodsService {
 		return returnData;
 	}
 
+	/**
+	 * 상품 상세를 조회
+	 * @param vo
+	 * @param session
+	 * @return
+	 */
+	@Override
+	public Map<String, Object> shopDetail(GoodsVO vo, HttpSession session) {
+		Map<String, Object> returnData = new HashMap<>();
+
+		GoodsVO goodsDetail = mapper.shopDetail(vo);
+		returnData.put("shopDetail", goodsDetail);
+
+		String createdUser = String.valueOf(goodsDetail.getUser_num());
+		// 작성자가 로그인한 사람인지 확인
+		Boolean user_num = session.getAttribute("user_num") != null;
+		if(user_num){
+			String loginUser = session.getAttribute("user_num").toString();
+			Boolean createUser = true;
+			if(!createdUser.equals(loginUser)){
+				createUser = false;
+			}
+
+			returnData.put("loginYn", createUser);
+		}
+
+		return returnData;
+	}
+
+	@Override
+	public int deleteGoods(GoodsVO vo) {
+		mapper.deleteGoods(vo);
+		return mapper.deleteGoodsImage(vo);
+	}
+
+
+
 	// 이미지 테이블 마지막 숫자
 	@Override
 	public int getCount() {
@@ -70,6 +109,12 @@ public class GoodsServiceImpl implements GoodsService {
 	public int saveGoods(GoodsVO goodsVo) {
 		return mapper.saveGoods(goodsVo);
 	}
+
+	@Override
+	public int modifyGoods(GoodsVO goodsVo) {
+		return mapper.modifyGoods(goodsVo);
+	}
+
 
 
 

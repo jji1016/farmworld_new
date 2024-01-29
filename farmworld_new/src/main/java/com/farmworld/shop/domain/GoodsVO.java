@@ -78,4 +78,5 @@ public class GoodsVO {
     private int image_folder_num;
 
 
+
 }
