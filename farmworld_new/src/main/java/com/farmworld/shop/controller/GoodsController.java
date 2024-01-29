@@ -64,8 +64,7 @@ public class GoodsController {
 			String pattern				= "yyyyMMddHHmmss"; //hhmmss로 시간,분,초만 뽑기도 가능
 			SimpleDateFormat formatter	= new SimpleDateFormat(pattern, currentLocale);
 			String fileName				= formatter.format(today) + "_" + file.getOriginalFilename();
-			String path					=  request.getSession().getServletContext().getRealPath("/") + "resources\\filefolder\\";
-//			String path					= request.getServletContext().getRealPath("") + "resources\\filefolder\\";
+			String path					= request.getServletContext().getRealPath("") + "resources\\filefolder\\";
 	        
 	        File folder = new File(path);
 	        if (!folder.exists()) { // 디렉터리가 없으면 생성
@@ -99,9 +98,13 @@ public class GoodsController {
 				goodsVo.setImage_folder_num(imageVo.getImage_folder_num());
 				goodsVo.setUser_num(Integer.parseInt(session.getAttribute("user_num").toString()));
 				/* VO Setting */
-				
-				successCnt = goodsService.saveGoods(goodsVo);
-				
+				if(param.get("goods_num") != null){
+					goodsVo.setGoods_num(Integer.parseInt(param.get("goods_num")));
+					successCnt = goodsService.modifyGoods(goodsVo);
+				} else {
+					successCnt = goodsService.saveGoods(goodsVo);
+				}
+
 				result.put("goodsChk", successCnt == 0 ? "N" : "Y");
 	        }
 		} catch(Exception e) {
@@ -111,6 +114,24 @@ public class GoodsController {
 		} finally {
 			return result;
 		}
+	}
+
+	@ResponseBody
+	@PostMapping("/shop-detail")
+	public Map<String, Object> shopDetail(GoodsVO vo, HttpSession session){
+		return goodsService.shopDetail(vo, session);
+	}
+
+	@ResponseBody
+	@PostMapping("/delete_goods")
+	public Map<String, String> deleteGoods(GoodsVO vo){
+		Map<String, String> result = new HashMap<>();
+
+		int successCnt = goodsService.deleteGoods(vo);
+
+		result.put("result", successCnt == 0 ? "Y" : "N");
+
+		return result;
 	}
 	
 	

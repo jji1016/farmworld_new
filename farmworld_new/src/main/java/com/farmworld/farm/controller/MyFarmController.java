@@ -121,6 +121,7 @@ public class MyFarmController {
 		Integer imageNum = imageService.MaxFolder();
 		String filePath = ""; // 폴더 경로
 		ImageVO vo = new ImageVO();
+		System.out.println(file.getOriginalFilename());
 		if (!file.isEmpty()) {
 			try {
 				filePath = uploadDir + imageNum + "/";

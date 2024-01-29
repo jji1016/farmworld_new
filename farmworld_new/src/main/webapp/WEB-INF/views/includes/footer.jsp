@@ -28,7 +28,7 @@
   width: 30% !important;
   margin-left: 3%;
 }
-.img-fluid {
+.imgpay {
     clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
 }
 
@@ -79,7 +79,7 @@
                             <p>Email: FarmWorld@gmail.com</p>
                             <p>Phone: +010 - 1234 - 5678</p>
                             <p>Payment Accepted</p>
-                            <img src="/resources/img/payment.png" class="img-fluid" alt="">
+                            <img src="/resources/img/payment.png" class="imgpay" alt="">
                         </div>
                     </div>
                 </div>
@@ -104,7 +104,6 @@
             </div>
         </div>
         <!-- Copyright End -->
-
 
 
         <!-- Back to Top -->

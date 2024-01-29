@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%@include file="../includes/header.jsp" %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
 <!-- 상단 공백 추가 끝 -->
 <div class="container-fluid py-5">
