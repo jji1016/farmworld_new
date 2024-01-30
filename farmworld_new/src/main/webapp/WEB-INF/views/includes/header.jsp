@@ -83,6 +83,7 @@
                             <a href="../shopmain" class="nav-item nav-link">Shop</a>
                             <a href="../myfarm/main" class="nav-item nav-link">My Farm</a>
                             <a href="../board/list" class="nav-item nav-link">Board</a>
+                            <a href="../edu/agritech" class="nav-item nav-link">Edu</a>
                         </div>
                         <div class="d-flex m-3 me-0">
                             <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>

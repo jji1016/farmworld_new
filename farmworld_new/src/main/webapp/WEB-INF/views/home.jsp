@@ -6,10 +6,13 @@
 #rightimage{
 	margin-left: 6%;
 }
+.featurs-item{
+	margin: 2%;
+}
 
 </style>
 
-<!-- Hero Start --><!-- 박사라 깃 테스트 -->
+<!-- Hero Start -->
         <div class="container-fluid py-5 mb-5 hero-header">
             <div class="container py-5">
                 <div class="row g-5 align-items-center">
@@ -54,35 +57,41 @@
             <div class="container py-5">
                 <div class="row g-4">
                     <div class="col-md-6 col-lg-3">
-                        <div class="featurs-item text-center rounded bg-light p-4">
-                            <div class="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
-                                <i class="fas fa-store fa-3x text-white"></i>
-                            </div>
-                            <div class="featurs-content text-center">
-                                <h5>Shopping</h5>
-                            </div>
-                        </div>
+	                    <a href="/shopmain"  class="position-relative me-4 my-auto">
+	                        <div class="featurs-item text-center rounded bg-light p-4">
+	                            <div class="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
+	                                <i class="fas fa-store fa-3x text-white"></i>
+	                            </div>
+	                            <div class="featurs-content text-center">
+	                                <h5>Shopping</h5>
+	                            </div>
+	                        </div>
+	                    </a>
                     </div>
                     <div class="col-md-6 col-lg-3">
-                        <div class="featurs-item text-center rounded bg-light p-4">
-                            <div class="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
-                            	<i class="fas fa-microphone fa-3x text-white"></i>
-                            </div>
-                            <div class="featurs-content text-center">
-                                <h5>Information</h5>
-                            </div>
-                        </div>
+                    	<a href="/edu/agritech"  class="position-relative me-4 my-auto">
+	                        <div class="featurs-item text-center rounded bg-light p-4">
+	                            <div class="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
+	                            	<i class="fas fa-microphone fa-3x text-white"></i>
+	                            </div>
+	                            <div class="featurs-content text-center">
+	                                <h5>Edu</h5>
+	                            </div>
+	                        </div>
+                        </a>
                     </div>
                     <div class="col-md-6 col-lg-3">
-                        <div class="featurs-item text-center rounded bg-light p-4">
-                            <div class="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
-                                <i class="fas fa-user-shield fa-3x text-white"></i>
-                            </div>
-                            <div class="featurs-content text-center">
-                                <h5>Notice</h5>
-                                <p class="mb-0"></p>
-                            </div>
-                        </div>
+                    	<a href="/board/list?board_category=notice"  class="position-relative me-4 my-auto">
+	                        <div class="featurs-item text-center rounded bg-light p-4">
+	                            <div class="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
+	                                <i class="fas fa-user-shield fa-3x text-white"></i>
+	                            </div>
+	                            <div class="featurs-content text-center">
+	                                <h5>Notice</h5>
+	                                <p class="mb-0"></p>
+	                            </div>
+	                        </div>
+                    	</a>
                     </div>
                     <div class="col-md-6 col-lg-3">
                         <div class="featurs-item text-center rounded bg-light p-4">
