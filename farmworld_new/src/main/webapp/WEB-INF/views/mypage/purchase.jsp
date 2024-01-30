@@ -78,7 +78,7 @@
 		                <th scope="col">주문번호</th>
 		                <th scope="col">농장이름</th>
 		                <th scope="col">제품이름</th>
-		                <th scope="col">제품가격</th>
+		                <th scope="col">주문가격</th>
 		                <th scope="col">별점</th>
 		                <th scope="col">상세보기</th>
 		              </tr>
@@ -139,7 +139,7 @@ $(document).ready(function () {
 		                                    		"<td>" + data1[i].order_num + "</td>"+
 		                                    		"<td>" + data3[i].farm_name + "</td>"+
 		                                    		"<td>" + data2[i].goods_title + "</td>"+
-		                                    		"<td>" + data2[i].goods_price + "</td>"+
+		                                    		"<td>" + data1[i].order_price + "</td>"+
 		                                    		"<td>" + data2[i].goods_price + "</td>"+
 		                                    		"<td><button id='purchasebutton' class='btn btn-primary middlebutton deliveryBtn'>배송상세</button>"+
 		                                    		"<form name='returnpurchase' action='/mypage/returnpurchase'  method='post'>" +

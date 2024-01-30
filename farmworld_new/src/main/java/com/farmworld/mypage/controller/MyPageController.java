@@ -174,136 +174,147 @@ public class MyPageController {
 	}	
 	
 	
-	
 
 	/* 구매내역 */
 	@GetMapping("/buylist")
-	public String buyList() {
-		System.out.println("구매내역");
-		log.info("구매내역");
+	public String buyList(HttpSession session) {
+		Integer user_num = (Integer) session.getAttribute("user_num");
+		System.out.println("구매내역 user_num : " + user_num);
+		log.info("구매내역 user_num : " + user_num);
+		
 		return "/mypage/purchase";
 	}
 	@ResponseBody
 	@RequestMapping(value = "/getbuylist1", method = RequestMethod.POST)
-	public List<OrderVO> getbuyList1() {
-		System.out.println("Ajax : 구매내역1");
-		log.info("Ajax : 구매내역1");
-		return orderService.buyList1();
+	public List<OrderVO> getbuyList1(HttpSession session) {
+		Integer user_num = (Integer) session.getAttribute("user_num");
+		System.out.println("구매내역1 user_num : " + user_num);
+		log.info("구매내역1 user_num : " + user_num);
+		return orderService.buyList1(user_num);
 	}
 	@ResponseBody
 	@RequestMapping(value = "/getbuylist2", method = RequestMethod.POST)
-	public List<GoodsVO> getbuyList2() {
-		System.out.println("Ajax : 구매내역2");
-		log.info("Ajax : 구매내역2");
-		return orderService.buyList2();
+	public List<GoodsVO> getbuyList2(HttpSession session) {
+		Integer user_num = (Integer) session.getAttribute("user_num");
+		System.out.println("구매내역2 user_num : " + user_num);
+		log.info("구매내역2 user_num : " + user_num);
+		return orderService.buyList2(user_num);
 	}
 	@ResponseBody
 	@RequestMapping(value = "/getbuylist3", method = RequestMethod.POST)
-	public List<MyFarmVO> getbuyList3() {
-		System.out.println("Ajax : 구매내역3");
-		log.info("Ajax : 구매내역3");
-		return orderService.buyList3();
+	public List<MyFarmVO> getbuyList3(HttpSession session) {
+		Integer user_num = (Integer) session.getAttribute("user_num");
+		System.out.println("구매내역3 user_num : " + user_num);
+		log.info("구매내역3 user_num : " + user_num);
+		return orderService.buyList3(user_num);
 	}
 	@ResponseBody
 	@RequestMapping(value = "/getbuylistimg", method = RequestMethod.POST)
-	public List<ImageVO> getbuyListImg() {
-		System.out.println("Ajax : 구매내역사진");
-		log.info("Ajax : 구매내역사진");
-		return orderService.buylistimg();
+	public List<ImageVO> getbuyListImg(HttpSession session) {
+		Integer user_num = (Integer) session.getAttribute("user_num");
+		System.out.println("구매내역사진 user_num : " + user_num);
+		log.info("구매내역사진 user_num : " + user_num);
+		return orderService.buylistimg(user_num);
 	}
 	
 	
 	/* 구매취소 */
 	@PostMapping("/returnpurchase")
-	public String returnpurchase(@RequestParam("order_num") Integer order_num, RedirectAttributes rttr) {
-		System.out.println("구매취소");
-		log.info("구매취소");
-		System.out.println(order_num);
-		log.info(order_num);
+	public String returnpurchase(@RequestParam("order_num") int order_num, RedirectAttributes rttr) {
+		System.out.println("구매취소 order_num : " + order_num);
+		log.info("구매취소 order_num : " + order_num);
 		
 		int count = orderService.returnpurchase(order_num);
 		System.out.println("count : "+count);
 		if (count == 1) {
 			rttr.addFlashAttribute("result", order_num);
 		}
-		System.out.println("구매취소2");
-		log.info("구매취소2");
 		return "redirect:/mypage/buylist";
 	}
 	
 	
 	/* 판매내역 */
 	@GetMapping("/selllist")
-	public String sellList() {
-		System.out.println("판매내역");
-		log.info("판매내역");
+	public String sellList(HttpSession session) {
+		Integer user_num = (Integer) session.getAttribute("user_num");
+		System.out.println("판매내역 user_num : " + user_num);
+		log.info("판매내역 user_num : " + user_num);
 		return "/mypage/sale";
 	}
 	@ResponseBody
 	@RequestMapping(value = "/getselllist1", method = RequestMethod.POST)
-	public List<OrderVO> getsellList1() {
-		System.out.println("Ajax : 판매내역1");
-		log.info("Ajax : 판매내역1");
-		return orderService.sellList1();
+	public List<OrderVO> getsellList1(HttpSession session) {
+		Integer user_num = (Integer) session.getAttribute("user_num");
+		System.out.println("판매내역1 user_num : " + user_num);
+		log.info("판매내역1 user_num : " + user_num);
+		return orderService.sellList1(user_num);
 	}
 	@ResponseBody
 	@RequestMapping(value = "/getselllist2", method = RequestMethod.POST)
-	public List<GoodsVO> getsellList2() {
-		System.out.println("Ajax : 판매내역2");
-		log.info("Ajax : 판매내역2");
-		return orderService.sellList2();
+	public List<GoodsVO> getsellList2(HttpSession session) {
+		Integer user_num = (Integer) session.getAttribute("user_num");
+		System.out.println("판매내역2 user_num : " + user_num);
+		log.info("판매내역2 user_num : " + user_num);
+		return orderService.sellList2(user_num);
 	}
 	@ResponseBody
 	@RequestMapping(value = "/getselllist3", method = RequestMethod.POST)
-	public List<MyFarmVO> getsellList3() {
-		System.out.println("Ajax : 판매내역3");
-		log.info("Ajax : 판매내역3");
-		return orderService.sellList3();
+	public List<MyFarmVO> getsellList3(HttpSession session) {
+		Integer user_num = (Integer) session.getAttribute("user_num");
+		System.out.println("판매내역3 user_num : " + user_num);
+		log.info("판매내역3 user_num : " + user_num);
+		return orderService.sellList3(user_num);
 	}
 	@ResponseBody
 	@RequestMapping(value = "/getselllistimg", method = RequestMethod.POST)
-	public List<ImageVO> getsellListImg() {
-		System.out.println("Ajax : 판매내역사진");
-		log.info("Ajax : 판매내역사진");
-		return orderService.selllistimg();
+	public List<ImageVO> getsellListImg(HttpSession session) {
+		Integer user_num = (Integer) session.getAttribute("user_num");
+		System.out.println("판매내역4 user_num : " + user_num);
+		log.info("판매내역4 user_num : " + user_num);
+		return orderService.selllistimg(user_num);
 	}
 	
 	
 	
 	/* 리뷰내역 */
 	@GetMapping("/review")
-	public String review() {
+	public String review(HttpSession session) {
+		Integer user_num = (Integer) session.getAttribute("user_num");
 		System.out.println("리뷰관리");
 		log.info("리뷰관리");
 		return "/mypage/review";
 	}
 	@ResponseBody
 	@RequestMapping(value = "/getreviewlist1", method = RequestMethod.POST)
-	public List<OrderVO> review1() {
+	public List<OrderVO> review1(HttpSession session) {
+		Integer user_num = (Integer) session.getAttribute("user_num");
 		System.out.println("Ajax : 리뷰관리1");
 		log.info("Ajax : 리뷰관리1");
-		return reviewService.review1();
+		return reviewService.review1(user_num);
 	}
 	@ResponseBody
 	@RequestMapping(value = "/getreviewlist2", method = RequestMethod.POST)
-	public List<GoodsVO> review2() {
+	public List<GoodsVO> review2(HttpSession session) {
+		Integer user_num = (Integer) session.getAttribute("user_num");
 		System.out.println("Ajax : 리뷰관리2");
 		log.info("Ajax : 리뷰관리2");
-		return reviewService.review2();
+		return reviewService.review2(user_num);
 	}
 	@ResponseBody
 	@RequestMapping(value = "/getreviewlist3", method = RequestMethod.POST)
-	public List<ReviewVO> review3() {
+	public List<ReviewVO> review3(HttpSession session) {
+		Integer user_num = (Integer) session.getAttribute("user_num");
 		System.out.println("Ajax : 리뷰관리3");
 		log.info("Ajax : 리뷰관리3");
-		return reviewService.review3();
+		return reviewService.review3(user_num);
 	}
 	@ResponseBody
 	@RequestMapping(value = "/getreviewimage", method = RequestMethod.POST)
-	public List<ImageVO> reviewimgage() {
+	public List<ImageVO> reviewimgage(HttpSession session) {
+		Integer user_num = (Integer) session.getAttribute("user_num");
 		System.out.println("Ajax : 리뷰관리이미지");
 		log.info("Ajax : 리뷰관리이미지");
-		return reviewService.reviewimage();
+		return reviewService.reviewimage(user_num);
 	}
 	
 	

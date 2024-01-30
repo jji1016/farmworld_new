@@ -14,16 +14,16 @@ import com.farmworld.mypage.domain.OrderVO;
 import com.farmworld.shop.domain.GoodsVO;
 
 public interface OrderService extends Generic<OrderVO, Integer> {
-
-	public List<OrderVO> sellList1();
-	public List<GoodsVO> sellList2();
-	public List<MyFarmVO> sellList3();
-	public List<ImageVO> buylistimg();
+	public List<OrderVO> buyList1(Integer user_num);
+	public List<GoodsVO> buyList2(Integer user_num);
+	public List<MyFarmVO> buyList3(Integer user_num);
+	public List<ImageVO> buylistimg(Integer user_num);
 	public int returnpurchase(int order_num);
-	
-	public List<OrderVO> buyList1();
-	public List<GoodsVO> buyList2();
-	public List<MyFarmVO> buyList3();
-	public List<ImageVO> selllistimg();
+
+
+	public List<OrderVO> sellList1(Integer user_num);
+	public List<GoodsVO> sellList2(Integer user_num);
+	public List<MyFarmVO> sellList3(Integer user_num);
+	public List<ImageVO> selllistimg(Integer user_num);
 	
 }

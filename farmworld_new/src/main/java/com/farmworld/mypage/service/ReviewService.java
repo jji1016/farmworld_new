@@ -13,10 +13,10 @@ import com.farmworld.mypage.domain.ReviewVO;
 import com.farmworld.shop.domain.GoodsVO;
 
 public interface ReviewService extends Generic<ReviewVO, Integer> {
-	public List<OrderVO> review1();
-	public List<GoodsVO> review2();
-	public List<ReviewVO> review3();
-	public List<ImageVO> reviewimage();
+	public List<OrderVO> review1(Integer user_num);
+	public List<GoodsVO> review2(Integer user_num);
+	public List<ReviewVO> review3(Integer user_num);
+	public List<ImageVO> reviewimage(Integer user_num);
 	
 	public int reviewupdate(ReviewVO vo);
 	
