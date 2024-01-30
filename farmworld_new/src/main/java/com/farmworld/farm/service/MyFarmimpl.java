@@ -5,12 +5,12 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.farmworld.all.domain.Criteria;
+import com.farmworld.all.domain.GrowCriteria;
 import com.farmworld.farm.domain.MyFarmVO;
 import com.farmworld.farm.mapper.MyFarmMapper;
 import com.farmworld.shop.domain.GoodsVO;
 
 import lombok.AllArgsConstructor;
-import lombok.extern.log4j.Log4j;
 
 @Service
 @AllArgsConstructor
@@ -36,11 +36,13 @@ public class MyFarmimpl implements MyFarm {
 
 	@Override
 	public void delete(Integer k) {
+		
 		mapper.delete(k);
 	}
 
 	@Override
 	public List<MyFarmVO> farmAll(Criteria cri) {
+
 
 		return mapper.getListWithPaging(cri);
 	}
@@ -73,10 +75,10 @@ public class MyFarmimpl implements MyFarm {
 	}
 
 	@Override
-	public List<GoodsVO> getGoodsList(MyFarmVO vo) {
+	public List<GoodsVO> getGoodsList(GrowCriteria cri) {
 		
 		
-		return mapper.getGoodsList(vo);
+		return mapper.getGoodsList(cri);
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package com.farmworld.farm.service;
 import java.util.List;
 
 import com.farmworld.all.domain.Criteria;
+import com.farmworld.all.domain.GrowCriteria;
 import com.farmworld.all.service.Generic;
 import com.farmworld.farm.domain.MyFarmVO;
 import com.farmworld.shop.domain.GoodsVO;
@@ -23,5 +24,5 @@ public interface MyFarm extends Generic<MyFarmVO, Integer> {
 	
 	public Integer getGoodsCount(MyFarmVO vo);
 
-	public List<GoodsVO> getGoodsList(MyFarmVO vo);
+	public List<GoodsVO> getGoodsList(GrowCriteria cri);
 }

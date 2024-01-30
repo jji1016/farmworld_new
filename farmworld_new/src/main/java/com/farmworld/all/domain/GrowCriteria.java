@@ -18,6 +18,7 @@ public class GrowCriteria {
 	private String image1;
 	private String grow_num;
 	private String growup_category;
+	private String user_num;
 
 	public GrowCriteria() {
 		this(1, 10);

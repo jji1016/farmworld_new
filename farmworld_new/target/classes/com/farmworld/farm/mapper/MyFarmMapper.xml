@@ -116,10 +116,19 @@
 	SELECT farm_num FROM myfarm WHERE farm_name = #{keyword}
 	</select>
 	
-	<select id="getGoodsList" resultType="GoodsVO" parameterType="MyFarmVO">
+	<select id="getGoodsList" resultType="GoodsVO" parameterType="com.farmworld.all.domain.GrowCriteria">
 	SELECT * FROM goods where user_num = #{user_num}
 	ORDER BY image_folder_num DESC
+	LIMIT #{start}, #{amount}
 	</select>
+	
+	<update id="Alter1">
+	ALTER TABLE myfarm DROP FOREIGN KEY myfarm_ibfk_1;
+	</update>
+	
+	<update id="Alter2">
+	ALTER TABLE myfarm DROP FOREIGN KEY myfarm_ibfk_1;
+	</update>
 
 </mapper>
 	

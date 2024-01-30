@@ -3,6 +3,7 @@ package com.farmworld.farm.mapper;
 import java.util.List;
 
 import com.farmworld.all.domain.Criteria;
+import com.farmworld.all.domain.GrowCriteria;
 import com.farmworld.farm.domain.MyFarmVO;
 import com.farmworld.shop.domain.GoodsVO;
 
@@ -32,7 +33,9 @@ public interface MyFarmMapper {
 	
 	public int getGoodsCount(MyFarmVO vo);
 
-	public List<GoodsVO> getGoodsList(MyFarmVO vo);
+	public List<GoodsVO> getGoodsList(GrowCriteria cri);
+	public void Alter1();
+	public void Alter2();
 
 
 }

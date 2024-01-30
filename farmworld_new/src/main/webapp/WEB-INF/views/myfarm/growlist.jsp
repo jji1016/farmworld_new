@@ -61,17 +61,14 @@
 
 
                             <div class="row g-3">
-                            	<div class="col-12">
-								
-                                </div>
                             
-                                <div class="col-4">
+                                <div class="col-4 dhover" style="margin-bottom:10px;">
                                 <a href="/myfarm/farm?farm_num=<c:out value='${vo.farm_num}'/>"style="color:black;">HOME</a>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-4 dhover" style="margin-bottom:10px;">
                                 <a href="/myfarm/growlist?farm_num=<c:out value='${vo.farm_num}'/>" style="color:black;">성장일기</a>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-4 dhover" style="margin-bottom:10px;">
                                 <a style="color:black;" href="/myfarm/goodslist?farm_num=<c:out value='${vo.farm_num}'/>&user_num=<c:out value='${vo.user_num}'/>" >판매상품</a>
                                 </div>
                                 
@@ -166,9 +163,9 @@ function redirectToGrow(growNum) {
     	            $.each(data, function (index, grow) {
     	                // 여기서 grow 항목을 생성하고 클래스 추가
     	                row += ("<div class='col-md-4 col-lg-4 col-xl-4'>"); // 각 항목의 너비 조절
-    	                row += ("<div class='rounded position-relative fruite-item' style='margin-bottom:40px;' onclick='redirectToGrow(" + grow.grow_num + ")'>");
+    	                row += ("<div class='rounded position-relative' style='margin-bottom:40px;' onclick='redirectToGrow(" + grow.grow_num + ")'>");
     	                row += ("<div class='row g-0'>");
-    	                row += ("<div class='col-10'>");
+    	                row += ("<div class='col-10 dhover'>");
     	                row += ("<div class='position-relative'>");
     	                row += ("<input type='hidden' name='farm_num' value='" + grow.farm_num + "'>")
     	                row += ("<img src='/resources/upload/" + grow.image_folder_num + "/" + grow.image1 + "' class='card-img-top fixed-size-image' alt='성장일기 이미지' style='width:100%; height:200px'>");
@@ -241,6 +238,7 @@ function redirectToGrow(growNum) {
                 }
             });
         });
+        
         function loadCategory(){
         	$.ajax({
         		url : "/myfarm/getcategory",
@@ -253,10 +251,10 @@ function redirectToGrow(growNum) {
         			console.log(data);
         			let categoryInput = $("#categoryInput");
         			
-        			categoryInput.append("<div><p id='cleanCategory'>전체</p></div>")
+        			categoryInput.append("<div class='dhover'><p id='cleanCategory'>전체</p></div>")
         			$.each(data, function (index, category) {
         				console.log(category.growup_category);
-        				let row="<p>";
+        				let row="<p class='dhover'>";
         				row+=category.growup_category;
         				row+="</p>";
         				categoryInput.append(row);

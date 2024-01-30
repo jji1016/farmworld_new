@@ -9,6 +9,7 @@
 <%@include file="../includes/header.jsp" %>
 
 
+
 <link rel="stylesheet" href="/resources/editor/summernote-lite.css">
 <script src="/resources/editor/summernote-ko-KR.js"> </script>
 <script src="/resources/editor/summernote-lite.js"> </script>	
@@ -54,7 +55,7 @@
                         <input type="hidden" value="${vo.grow_num }" name="grow_num" id="grow_num">
                         <input type="hidden" value="${vo.image_folder_num }" name="image_folder_num" id="image_folder_num">
                         
-                        <table class="table">
+                        <table class="table createTable">
                             <tbody>
                                 <tr>
                                     <td>
@@ -186,45 +187,46 @@
             })
         })
         
-        function previewImage(input, previewId) {
-    	const maxFileSize = 2 * 1024 * 1024; // 2MB
-        const fileInput = input.files[0];
-
-        var preview = document.getElementById(previewId);
-        preview.innerHTML = ''; // 미리보기를 초기화
-
-        if (input.files && input.files[0]) {
-        	if (fileInput.size > maxFileSize) {
-                alert("파일 크기는 2MB를 초과할 수 없습니다.");
-                input.value = ""; // 파일 선택 초기화
-                document.getElementById(previewId).innerHTML = ""; // 미리보기 초기화
-            }else{
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                var img = document.createElement('img');
-                img.src = e.target.result;
-                img.className = 'img-thumbnail rounded';
-                preview.appendChild(img);
-
-                // 현재 input에 대한 id와 번호를 추출
-                var currentInputId = input.id;
-                var currentNumber = parseInt(currentInputId.charAt(currentInputId.length - 1));
-
-                // 다음 input에 파일이 있으면 보이도록 설정
-                var nextInputNumber = currentNumber + 1;
-                var nextInputId = 'image' + nextInputNumber;
-
-                var nextInput = document.getElementById(nextInputId);
-                if (nextInput) {
-                    nextInput.parentElement.style.display = 'block';
-                }
-            };
-
-            reader.readAsDataURL(input.files[0]); // 파일을 읽어 data URL로 변환
-        }
-        }
-    }
+       function previewImage(input, previewId) {
+		    const maxFileSize = 2 * 1024 * 1024; // 2MB
+		    const fileInput = input.files[0];
+		
+		    var preview = document.getElementById(previewId);
+		    preview.innerHTML = ''; // 미리보기 초기화
+		
+		    if (input.files && input.files[0]) {
+		        if (fileInput.size > maxFileSize) {
+		            alert("파일 크기는 2MB를 초과할 수 없습니다.");
+		            input.value = ""; // 파일 선택 초기화
+		            document.getElementById(previewId).innerHTML = ""; // 미리보기 초기화
+		        } else {
+		            var reader = new FileReader();
+		
+		            reader.onload = function (e) {
+		                var img = document.createElement('img');
+		                img.src = e.target.result;
+		                img.className = 'img-thumbnail rounded';
+		                preview.appendChild(img);
+		
+		                // 현재 input에 대한 id와 번호를 추출
+		                var currentInputId = input.id;
+		                var currentNumber = parseInt(currentInputId.charAt(currentInputId.length - 1));
+		
+		                // 다음 input에 파일이 있으면 보이도록 설정
+		                var nextInputNumber = currentNumber + 1;
+		                var nextInputId = 'image' + nextInputNumber;
+		
+		                var nextInput = document.getElementById(nextInputId);
+		                if (nextInput && nextInput.files && nextInput.files[0]) {
+		                    // 다음 파일 입력란이 존재하고 파일이 선택된 경우에만 보이도록 설정
+		                    nextInput.parentElement.style.display = 'block';
+		                }
+		            };
+		
+		            reader.readAsDataURL(input.files[0]); // 파일을 읽어 data URL로 변환
+		        }
+		    }
+		}
 
 
 
