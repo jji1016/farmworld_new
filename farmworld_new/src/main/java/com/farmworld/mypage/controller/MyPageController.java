@@ -65,7 +65,7 @@ public class MyPageController {
 	private FileUploadService fileUpload;
 	private final ImageService imageService;
 
-	private static String uploadDir = "C:\\Users\\keduit\\Desktop\\farmworld_ new_git\\farmworld_new\\farmworld_new\\farmworld_new\\src\\main\\webapp\\resources\\upload\\review\\";
+	private static String uploadDir = "C:\\Users\\keduit\\Desktop\\farmworld_ new_git\\farmworld_new\\src\\main\\webapp\\resources\\upload\\review\\";
 	
 /* 메인
  * 	비회원 권한 없음 */

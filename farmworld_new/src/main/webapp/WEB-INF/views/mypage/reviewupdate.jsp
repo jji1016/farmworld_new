@@ -211,7 +211,7 @@ $(document).ready(function() {
 function previewImage(event) {
     if (event.target.files && event.target.files[0]) {
         var reader = new FileReader();
-
+		console.log("previewImage(event) :" +reader);
         reader.onload = function (e) {
             document.getElementById('productimg').src = e.target.result;
         };
