@@ -10,23 +10,23 @@
 	<select id="review1" resultType="OrderVO">
 		SELECT order_num, order_date
 		FROM myfarmproject_db.order
-		WHERE buyer_num = 9999
+		WHERE buyer_num = #{buyer_num}
 	</select>
 	<select id="review2" resultType="GoodsVO">
 		SELECT goods.goods_num, goods_category, goods_title, goods_content, goods.user_num, goods_price, goods.image_folder_num
 		FROM myfarmproject_db.review LEFT JOIN myfarmproject_db.goods ON myfarmproject_db.review.goods_num = myfarmproject_db.goods.goods_num
-		WHERE myfarmproject_db.review.user_num = 9999;
+		WHERE myfarmproject_db.review.user_num = #{user_num};
 	</select>
 	<select id="review3" resultType="ReviewVO">
 		SELECT review_score, review_content, review_date, review_num
 		FROM myfarmproject_db.review
-		WHERE user_num = 9999
+		WHERE user_num = #{user_num}
 	</select>
 	<select id="reviewimage" resultType="ImageVO">
 		SELECT *
 		FROM (myfarmproject_db.goods LEFT JOIN myfarmproject_db.review ON myfarmproject_db.goods.goods_num = myfarmproject_db.review.goods_num)
      	LEFT JOIN myfarmproject_db.image ON myfarmproject_db.goods.image_folder_num = myfarmproject_db.image.image_folder_num
-     	WHERE myfarmproject_db.review.user_num = 9999
+     	WHERE myfarmproject_db.review.user_num = #{user_num}
 	</select>
 	
 	
