@@ -165,7 +165,7 @@ function redirectToGoods(goodsNum) {
 				    	                row += ("<div class='col-10'>");
 				    	                row += ("<div class='position-relative'>");
 				    	                row += ("<input type='hidden' name='goods_num' value='" + goods.farm_num + "'>")
-				    	                row += ("<img src='/resources/upload/" + goods.image_folder_num + "/" + data2[index].image1 + "' class='card-img-top fixed-size-image' alt='상품 이미지' style='width:100%; height:200px'>");
+				    	                row += ("<img src='/resources/"+ data2[index].image1 + "' class='card-img-top fixed-size-image' alt='상품 이미지' style='width:100%; height:200px'>");
 				    	                row += ("<div class='position-absolute start-0 bottom-0 w-100 py-3 px-4' style='background: rgba(52, 173, 84, .85);'>");
 				    	                row += ("<h4 class='text-white text-truncate'>" +"["+ goods.goods_category +"]"+ goods.goods_title + "</h4>");
 				    	                row += ("</div></div></div></div></div></div>");

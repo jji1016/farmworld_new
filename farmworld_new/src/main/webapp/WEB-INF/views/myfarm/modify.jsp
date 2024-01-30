@@ -70,7 +70,7 @@
                                </div>
                                 <div class="form-group">
 					                <label for="image1">이미지 업로드</label>
-					                <input type="file" name="image1" id="image1" class="form-control-file" onchange="previewImage(this)">
+					                <input type="file" name="image1" id="image1" class="form-control-file" accept=".png, .jpg"  onchange="previewImage(this)">
 					            </div>
 					
 					            <!-- 미리보기를 표시할 DIV -->
@@ -98,10 +98,17 @@
        <script type="text/javascript">
        
 	       function previewImage(input) {
+	    	   const maxFileSize = 2 * 1024 * 1024; // 2MB
+	    	   const fileInput = input.files[0];
 	           var preview = document.getElementById('imagePreview');
 	           preview.innerHTML = ''; // 미리보기를 초기화
 	
 	           if (input.files && input.files[0]) {
+	        	   if (fileInput.size > maxFileSize) {
+	                   alert("파일 크기는 2MB를 초과할 수 없습니다.");
+	                   input.value = ""; // 파일 선택 초기화
+	                   document.getElementById(previewId).innerHTML = ""; // 미리보기 초기화
+	               }else{
 	               var reader = new FileReader();
 	
 	               reader.onload = function (e) {
@@ -112,6 +119,7 @@
 	               };
 	
 	               reader.readAsDataURL(input.files[0]); // 파일을 읽어 data URL로 변환
+	           }
 	           }
 	       }
 	       

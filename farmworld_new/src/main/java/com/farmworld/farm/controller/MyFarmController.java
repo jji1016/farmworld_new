@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,7 +98,8 @@ public class MyFarmController {
 	}
 
 	@GetMapping("/farm")
-	public void moveFarm(MyFarmVO myFarmVO, Model model) {
+	public void moveFarm(MyFarmVO myFarmVO, Model model, HttpServletRequest request) {
+		System.out.println("경로알아보기"+request.getServletContext().getRealPath(""));
 		System.out.println(myFarmVO);
 		myFarmService.view(myFarmVO);
 		model.addAttribute("vo", myFarmService.get(myFarmVO.getFarm_num()));
