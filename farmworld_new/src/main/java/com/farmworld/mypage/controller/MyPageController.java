@@ -174,6 +174,7 @@ public class MyPageController {
 	}	
 	
 	
+	
 
 	/* 구매내역 */
 	@GetMapping("/buylist")
@@ -345,8 +346,10 @@ public class MyPageController {
 	
 	
 	/* 리뷰수정 */
-	@PostMapping("/updatereview")
+	
+	@RequestMapping(value = "/updatereview", method = RequestMethod.POST)
 	public String updatereview(MultipartFile file, @RequestParam(name = "reviewimage", required = false) String image1,  ReviewVO review, RedirectAttributes rttr) {
+		reviewService.updatereview(review);
 		Integer imageNum = review.getImage_folder_num();
 		ImageVO image = imageService.get(imageNum);
 	    System.out.println("review : " + review);
