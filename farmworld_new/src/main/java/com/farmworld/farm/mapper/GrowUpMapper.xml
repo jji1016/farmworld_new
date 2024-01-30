@@ -28,7 +28,7 @@
 	</insert>
 
 	<select id="selectAll" resultType="GrowUpVO"
-		parameterType="GrowUpVO">
+		parameterType="Integer">
 		select * from GrowUp WHERE farm_num = #{farm_num}
 	</select>
 

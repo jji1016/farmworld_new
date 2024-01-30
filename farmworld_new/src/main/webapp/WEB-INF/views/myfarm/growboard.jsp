@@ -90,7 +90,7 @@
                     </div>
 					<div class="col-3"><button class="btn btn-info"><a href='/myfarm/growmodify?grow_num=<c:out value="${vo.grow_num}"/>'>수정하기</a></button></div>
 					<div class="col-3"><button type="submit" class="btn btn-danger">삭제하기</button></div>
-					<div class="col-3"><button class="btn btn-warning"><a href='/myfarm/growlist?farm_num=<c:out value="${vo.farm_num}"/>'>목록으로</a></button></div>
+					<div class="col-3"><button class="btn btn-warning"><a href="javascript:window.history.go(-1);">뒤로가기</a></button></div>
 					</form>
                 </div>
             </div>

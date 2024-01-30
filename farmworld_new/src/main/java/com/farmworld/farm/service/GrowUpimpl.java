@@ -46,9 +46,9 @@ public class GrowUpimpl implements GrowUp {
 	}
 
 	@Override
-	public List<GrowUpVO> searchGrow(Criteria cri) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<GrowUpVO> GrowList(Integer k) {
+		
+		return mapper.selectAll(k);
 	}
 
 	@Override

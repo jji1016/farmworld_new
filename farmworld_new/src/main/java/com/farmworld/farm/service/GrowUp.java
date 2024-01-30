@@ -11,9 +11,12 @@ public interface GrowUp extends Generic<GrowUpVO, Integer> {
 
 	public List<GrowUpVO> growAll(GrowCriteria vo);
 	
-	public List<GrowUpVO> searchGrow(Criteria cri);
 	
 	public int getTotal(GrowCriteria cri);
 	
 	public List<GrowUpVO> categoryAll(GrowCriteria vo);
+
+
+
+	List<GrowUpVO> GrowList(Integer k);
 }
