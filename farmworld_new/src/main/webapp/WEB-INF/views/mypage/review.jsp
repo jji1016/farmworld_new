@@ -123,25 +123,21 @@ $(document).ready(function () {
             type: "POST",
             dataType: "json",
             success: function (data1) {
-            	console.log(data1);
-            	$.ajax({
+                $.ajax({
                     url: "/mypage/getreviewlist2",
                     type: "POST",
                     dataType: "json",
                     success: function (data2) {
-                    	console.log(data2);
                     	$.ajax({
                             url: "/mypage/getreviewimage",
                             type: "POST",
                             dataType: "json",
                             success: function (data4) {
-                            	console.log(data4);
 		                        $.ajax({
 		                            url: "/mypage/getreviewlist3",
 		                            type: "POST",
 		                            dataType: "json",
 		                            success: function (data) {
-		                            	console.log(data);
 		                                data3 = data; // 전역 변수에 저장
 		
 		                                // Assuming data1, data2, and data3 have the same length
@@ -156,7 +152,7 @@ $(document).ready(function () {
 		                                    
 		                                    let stars = "";
 		                                    for (let j = 0; j < data3[i].review_score; j++) {
-		                                      stars += "★";
+		                                      stars += '<i class="fa fa-star text-secondary"></i>';
 		                                    }		                                    
 		
 		                                    let row = $("<tr>");

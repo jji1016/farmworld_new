@@ -78,7 +78,7 @@
 		                <th scope="col">주문번호</th>
 		                <th scope="col">농장이름</th>
 		                <th scope="col">제품이름</th>
-		                <th scope="col">제품가격</th>
+		                <th scope="col">주문가격</th>
 		                <th scope="col">별점</th>
 		                <th scope="col">상세보기</th>
 		              </tr>
@@ -111,26 +111,22 @@ $(document).ready(function () {
             type: "POST",
             dataType: "json",
             success: function (data) {
-            	console.log(data);
             	data1 = data;
                 $.ajax({
                     url: "/mypage/getbuylist3",
                     type: "POST",
                     dataType: "json",
                     success: function (data3) {
-                    	console.log(data3);
                         $.ajax({
                             url: "/mypage/getbuylistimg",
                             type: "POST",
                             dataType: "json",
                             success: function (data4) {
-                            	console.log(data4);
 		                    	$.ajax({
 		                            url: "/mypage/getbuylist2",
 		                            type: "POST",
 		                            dataType: "json",
 		                            success: function (data2) {
-		                            	console.log(data2);
 		                                // Assuming data1, data2, and data3 have the same length
 		                                for (let i = 0; i < data1.length; i++) {
 		                                    let orderdate = new Date(data1[i].order_date);
@@ -143,7 +139,7 @@ $(document).ready(function () {
 		                                    		"<td>" + data1[i].order_num + "</td>"+
 		                                    		"<td>" + data3[i].farm_name + "</td>"+
 		                                    		"<td>" + data2[i].goods_title + "</td>"+
-		                                    		"<td>" + data2[i].goods_price + "</td>"+
+		                                    		"<td>" + data1[i].order_price + "</td>"+
 		                                    		"<td>" + data2[i].goods_price + "</td>"+
 		                                    		"<td><button id='purchasebutton' class='btn btn-primary middlebutton deliveryBtn'>배송상세</button>"+
 		                                    		"<form name='returnpurchase' action='/mypage/returnpurchase'  method='post'>" +
