@@ -3,8 +3,12 @@
 
 <%@include file="includes/header.jsp" %>
 <style type="text/css">
+#leftform{
+	margin-right: 6%;
+}
 #rightimage{
-	margin-left: 6%;
+	margin-top: 2%;
+	margin-left: 0%;
 }
 .featurs-item{
 	margin: 2%;
@@ -16,7 +20,7 @@
         <div class="container-fluid py-5 mb-5 hero-header">
             <div class="container py-5">
                 <div class="row g-5 align-items-center">
-                    <div class="col-md-12 col-lg-5">
+                    <div id="leftform" class="col-md-12 col-lg-5">
                         <h4 class="mb-3 text-secondary">100만 농부 육성 프로젝트</h4>
                         <h1 class="mb-5 display-3 text-primary">Welcome<br>Farm World</h1>
                         <div class="position-relative mx-auto">
