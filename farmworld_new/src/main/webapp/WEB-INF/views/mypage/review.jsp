@@ -123,21 +123,25 @@ $(document).ready(function () {
             type: "POST",
             dataType: "json",
             success: function (data1) {
-                $.ajax({
+            	console.log(data1);
+            	$.ajax({
                     url: "/mypage/getreviewlist2",
                     type: "POST",
                     dataType: "json",
                     success: function (data2) {
+                    	console.log(data2);
                     	$.ajax({
                             url: "/mypage/getreviewimage",
                             type: "POST",
                             dataType: "json",
                             success: function (data4) {
+                            	console.log(data4);
 		                        $.ajax({
 		                            url: "/mypage/getreviewlist3",
 		                            type: "POST",
 		                            dataType: "json",
 		                            success: function (data) {
+		                            	console.log(data);
 		                                data3 = data; // 전역 변수에 저장
 		
 		                                // Assuming data1, data2, and data3 have the same length

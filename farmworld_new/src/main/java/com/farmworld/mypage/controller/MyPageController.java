@@ -188,6 +188,7 @@ public class MyPageController {
 	public List<OrderVO> getbuyList1() {
 		System.out.println("Ajax : 구매내역1");
 		log.info("Ajax : 구매내역1");
+		System.out.println(orderService.buyList1());
 		return orderService.buyList1();
 	}
 	@ResponseBody
@@ -195,6 +196,7 @@ public class MyPageController {
 	public List<GoodsVO> getbuyList2() {
 		System.out.println("Ajax : 구매내역2");
 		log.info("Ajax : 구매내역2");
+		System.out.println(orderService.buyList2());
 		return orderService.buyList2();
 	}
 	@ResponseBody
@@ -202,6 +204,7 @@ public class MyPageController {
 	public List<MyFarmVO> getbuyList3() {
 		System.out.println("Ajax : 구매내역3");
 		log.info("Ajax : 구매내역3");
+		System.out.println(orderService.buyList3());
 		return orderService.buyList3();
 	}
 	@ResponseBody
@@ -282,6 +285,7 @@ public class MyPageController {
 	public List<OrderVO> review1() {
 		System.out.println("Ajax : 리뷰관리1");
 		log.info("Ajax : 리뷰관리1");
+		System.out.println(reviewService.review1());
 		return reviewService.review1();
 	}
 	@ResponseBody
@@ -289,6 +293,7 @@ public class MyPageController {
 	public List<GoodsVO> review2() {
 		System.out.println("Ajax : 리뷰관리2");
 		log.info("Ajax : 리뷰관리2");
+		System.out.println(reviewService.review1());
 		return reviewService.review2();
 	}
 	@ResponseBody
@@ -296,6 +301,7 @@ public class MyPageController {
 	public List<ReviewVO> review3() {
 		System.out.println("Ajax : 리뷰관리3");
 		log.info("Ajax : 리뷰관리3");
+		System.out.println(reviewService.review3());
 		return reviewService.review3();
 	}
 	@ResponseBody
