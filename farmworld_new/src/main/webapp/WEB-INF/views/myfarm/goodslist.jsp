@@ -160,7 +160,7 @@ function redirectToGoods(goodsNum) {
 				    	            $.each(data1, function (index, goods) {
 				    	                // 여기서 grow 항목을 생성하고 클래스 추가
 				    	                row += ("<div class='col-md-4 col-lg-4 col-xl-4'>"); // 각 항목의 너비 조절
-				    	                row += ("<div class='rounded position-relative fruite-item' onclick='redirectToGoods(" + goods.goods_num + ")'>");
+				    	                row += ("<div class='rounded position-relative fruite-item' style='margin-bottom:40px;' onclick='redirectToGoods(" + goods.goods_num + ")'>");
 				    	                row += ("<div class='row g-0'>");
 				    	                row += ("<div class='col-10'>");
 				    	                row += ("<div class='position-relative'>");
