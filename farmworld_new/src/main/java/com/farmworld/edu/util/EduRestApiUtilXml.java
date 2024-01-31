@@ -106,7 +106,6 @@ public class EduRestApiUtilXml {
 		rd.close();
 		conn.disconnect();
 		System.out.println("뭐가문제지4");
-		System.out.println(sb.toString());
 		return sb.toString();
 	}
 	

@@ -29,7 +29,20 @@ public class EduService {
 		String result = EduRestApiUtilXml.ConnHttpGetType(url, headerData, data, MonthFarmTechLst.class);
 		
 		return result;
-    
-   
-}
+	}
+	
+	public String getCntntsSnn(int curationNo) {
+		System.out.println("curationNo--"+curationNo);
+		String url = "http://api.nongsaro.go.kr/service/monthFarmTech/monthFarmTechDtlGuideLst";
+		
+		HashMap<String, String> data = new HashMap<String, String>(); 
+		HashMap<String, String> headerData = new HashMap<String, String>(); 
+		data.put("apiKey", SECURITY);
+		data.put("srchCurationNo", String.valueOf(curationNo));
+		headerData.put("Content-Type", "text/xml;charset=UTF-8");
+		
+		String result2 = EduRestApiUtilXml.ConnHttpGetType(url, headerData, data, MonthFarmTechLst.class);
+		return result2;
+	}
+	
 }

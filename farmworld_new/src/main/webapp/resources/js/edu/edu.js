@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	ajaxTest(1);
-	
+	CntntsSnnAjax();
 }); // document.ready 끝 
 
 function ajaxTest(num) {
@@ -22,7 +22,6 @@ function ajaxTest(num) {
 				pageNum : num
 			},
 			success : function(data) {
-				console.log(data);
 				var parser = new DOMParser();
 				var xmlDoc = parser.parseFromString(data.eduData, "text/xml");
 				
@@ -33,10 +32,6 @@ function ajaxTest(num) {
 				if(hasDecimal){
 					lastPageNum += 1;
 				};
-				console.log("totalCount::"+totalCount);
-				console.log("hasDecimal"+hasDecimal);
-				console.log(lastPageNum);
-				console.log(xmlDoc);
 				
 				var str = "<ul>";
 				
@@ -57,10 +52,8 @@ function ajaxTest(num) {
 					var streCours = item.find("streCours").text();
 					var svcDt = item.find("svcDt").text();
 					var thumbFileNm = item.find("thumbFileNm").text();
-	
-					console.log("curationNo"+curationNo);
 						
-					str += "<li class='eduLi'><a>";
+					str += "<li class='eduLi'><a href='/edu/dtlGuideLst?curationNo="+curationNo+"'>";
 	
 					str += "<div class='eduConBox'><img class='eduImg' src='"+curationImgUrl+"'></div>";
 					str += "<div class='conRap'>";
@@ -78,7 +71,6 @@ function ajaxTest(num) {
 				$("#resultArea").html("");
 				$("#resultArea").append(str);
 	
-				console.log(str);
 				let pm = data.page;
 	            let p = "";
 	            
@@ -99,3 +91,44 @@ function ajaxTest(num) {
 		});
 
 	} // ajaxTest()끝
+	
+	function CntntsSnnAjax() {
+	console.log("CntntsSnnAjax실행");
+		// 현재 URL의 쿼리 문자열을 가져옴
+		var queryString = window.location.search;
+		// URLSearchParams 객체 생성
+		var params = new URLSearchParams(queryString);
+		
+		var curationNo = params.get("curationNo");
+		console.log("curationNo:"+curationNo);
+		$.ajax({
+			url : "/edu/dtlGuideLst",
+			type : "POST",
+			dataType : "xml",
+			data : {
+				curationNo: curationNo
+			},
+			success : function(data) {
+				console.log("CntntsSnnAjax::"+data);
+				console.log($(data));
+				
+				$(data).find('item').each(function() {
+				    var cntntsNm = $(this).find('cntntsNm').text();
+				    var cntntsSnn = $(this).find('cntntsSnn').text();
+				
+				    console.log("Contents Name: " + cntntsNm);
+				    console.log("Contents Snn: " + cntntsSnn);
+				    
+				    // 여기에서 필요한 작업 수행
+				});
+				
+			},
+			error : function(e) {
+				console.log(e);
+			}
+		});
+
+	} // CntntsSnnAjax()끝
+		
+		
+		

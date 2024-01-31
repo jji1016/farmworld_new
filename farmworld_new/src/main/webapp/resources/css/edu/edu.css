@@ -34,11 +34,15 @@ ul{
     justify-content: space-between;
 }
 .conRap strong{
-	margin-bottom: 5px
+	margin-bottom: 5px;
+	color: #333;
 }
 .conRap span{
 	display: flex;
     justify-content: space-between;
+}
+.conRap span em{
+	color:#8e8e8e;
 }
 .material-icons{
 	font-size: 18px;

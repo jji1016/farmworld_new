@@ -51,6 +51,21 @@ public class EduController {
 		return map;
     }
     
+	@GetMapping("/dtlGuideLst")
+	public String getDtlGuideLst() {
+		
+		return "edu/getAgritech";
+	}
+	
+	@ResponseBody
+	@PostMapping("/dtlGuideLst")
+	public String dtlGuideLst(@RequestParam(name = "curationNo", required = false) int curationNo) {
+		System.out.println("curationNo:"+curationNo);
+		String result2 = eduService.getCntntsSnn(curationNo);
+		System.out.println("dtlGuideLst::"+result2);
+		
+		return result2 ;
+	}
     
     
 }
