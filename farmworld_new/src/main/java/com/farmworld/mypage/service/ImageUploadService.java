@@ -3,6 +3,8 @@ package com.farmworld.mypage.service;
 import java.io.File;
 import java.sql.Date;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,10 +17,11 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class ImageUploadService {
 	
+	static HttpServletRequest request;
 	private MyPageService service;
 	
-	private static String uploadDir = "C:\\Users\\keduit\\Desktop\\farm_me_ws\\farmworld_new_240118\\farmworld_new\\src\\main\\webapp\\resources\\upload\\profile\\";
-	
+//	private static String uploadDir = "C:\\Users\\keduit\\Desktop\\farm_me_ws\\farmworld_new_240118\\farmworld_new\\src\\main\\webapp\\resources\\upload\\profile\\";
+	private static String uploadDir = request.getServletContext().getRealPath("") + "resources\\filefolder\\";
 	public String uploadImg(MultipartFile img, Integer user_num) {
 		
 		try {

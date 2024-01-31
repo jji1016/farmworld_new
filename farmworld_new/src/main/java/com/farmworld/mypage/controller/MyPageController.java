@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import java.util.List;
@@ -109,7 +110,8 @@ public class MyPageController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
-	public Map<String, Object> modify(@RequestParam("user_image") MultipartFile imgName, @ModelAttribute("user_num") Integer user_num, UserVO userVo, String farm_name) {
+	public Map<String, Object> modify(@RequestParam("user_image") MultipartFile imgName, 
+			@ModelAttribute("user_num") Integer user_num, UserVO userVo, String farm_name) {
 		MyPageVO vo = new MyPageVO();
 		vo.setUserVO(userVo);
 		vo.setFarm_name(farm_name);
