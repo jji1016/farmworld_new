@@ -58,6 +58,8 @@ function ajaxTest(num) {
 					var svcDt = item.find("svcDt").text();
 					var thumbFileNm = item.find("thumbFileNm").text();
 	
+					console.log("curationNo"+curationNo);
+						
 					str += "<li class='eduLi'><a>";
 	
 					str += "<div class='eduConBox'><img class='eduImg' src='"+curationImgUrl+"'></div>";
