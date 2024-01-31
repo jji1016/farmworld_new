@@ -1,6 +1,11 @@
 $(document).ready(function(){
-	ajaxTest(1);
-	CntntsSnnAjax();
+	if (window.location.href === 'http://localhost:8090/edu/agritech') {
+    	ajaxTest(1);
+	};
+	if (window.location.href.startsWith('http://localhost:8090/edu/dtlGuideLst')) {
+	    CntntsSnnAjax();
+	};
+	
 }); // document.ready 끝 
 
 function ajaxTest(num) {

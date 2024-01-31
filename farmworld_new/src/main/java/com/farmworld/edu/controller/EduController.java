@@ -42,6 +42,7 @@ public class EduController {
         	srchStr = "";
         }
         String result=eduService.apiTest(eduMonth, srchStr, pageNum);
+        System.out.println("result::"+result);
         int totalCount=Integer.valueOf(result.substring(result.indexOf("<totalCount>")+12,result.indexOf("</totalCount>")));
         Map<String, Object> map = new HashMap<String, Object>();
         pageDTO page=new pageDTO(new Criteria(pageNum,8),totalCount);
@@ -61,7 +62,7 @@ public class EduController {
 	@PostMapping("/dtlGuideLst")
 	public String dtlGuideLst(@RequestParam(name = "curationNo", required = false) int curationNo) {
 		System.out.println("curationNo:"+curationNo);
-		String result2 = eduService.getCntntsSnn(curationNo);
+		String result2 = eduService.getAgritech(curationNo);
 		System.out.println("dtlGuideLst::"+result2);
 		
 		return result2 ;
