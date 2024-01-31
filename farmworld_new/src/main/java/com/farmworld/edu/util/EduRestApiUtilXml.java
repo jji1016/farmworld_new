@@ -19,7 +19,7 @@ public class EduRestApiUtilXml {
 	
 	// http연결을 위한 url, 헤더/본문 요청 파라미터, 응답할 데이터 형식 전달 필요
 	public static <T> String ConnHttpGetType(String conUrl, HashMap<String, String> headerData, 
-			HashMap<String, String> data, Class<T> classType){
+			HashMap<String, String> data){
 		try {
 			// StringBuilder를 쓰는이유
 			// 원래 String 클래스는 불변
@@ -41,9 +41,9 @@ public class EduRestApiUtilXml {
 			}
 			System.out.println("xml변환시작한다" + urlBuilder);
 			if(urlBuilder.toString().startsWith("https")) {
-				return EduXmlUtil.parseXml(EduRestApiUtilXml.httpsConn(urlBuilder.toString(), headerData), classType);
+				return EduRestApiUtilXml.httpsConn(urlBuilder.toString(), headerData);
 			}else {
-				return EduXmlUtil.parseXml(EduRestApiUtilXml.httpConn(urlBuilder.toString(), headerData), classType);
+				return EduRestApiUtilXml.httpConn(urlBuilder.toString(), headerData);
 			}
 		} catch (Exception e) {
 			logger.error("ConnHttpGetType Error : {}",e);
