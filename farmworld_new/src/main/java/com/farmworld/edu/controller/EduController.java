@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -31,7 +30,7 @@ public class EduController {
 	}
 	
 	@ResponseBody
-    @RequestMapping(value="/agritech", method = RequestMethod.POST, produces = {"application/json; charset=UTF-8"})
+    @PostMapping("/agritech")
     public Map<String, Object> Lst(@RequestParam(name = "eduMonth", required = false) String eduMonth, @RequestParam(name = "pageNum", required = false) int pageNum,
     		@RequestParam(name = "srchStr", required = false) String srchStr ) {
 		System.out.println("eduMonth: " + eduMonth);
@@ -43,6 +42,7 @@ public class EduController {
         	srchStr = "";
         }
         String result=eduService.apiTest(eduMonth, srchStr, pageNum);
+        System.out.println("result::"+result);
         int totalCount=Integer.valueOf(result.substring(result.indexOf("<totalCount>")+12,result.indexOf("</totalCount>")));
         Map<String, Object> map = new HashMap<String, Object>();
         pageDTO page=new pageDTO(new Criteria(pageNum,8),totalCount);
@@ -62,7 +62,7 @@ public class EduController {
 	@PostMapping("/dtlGuideLst")
 	public String dtlGuideLst(@RequestParam(name = "curationNo", required = false) int curationNo) {
 		System.out.println("curationNo:"+curationNo);
-		String result2 = eduService.getCntntsSnn(curationNo);
+		String result2 = eduService.getAgritech(curationNo);
 		System.out.println("dtlGuideLst::"+result2);
 		
 		return result2 ;
