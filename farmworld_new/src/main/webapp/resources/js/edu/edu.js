@@ -110,7 +110,6 @@ function ajaxTest(num) {
 			},
 			success : function(data) {
 				console.log("CntntsSnnAjax::"+data);
-				console.log($(data));
 				
 				$(data).find('item').each(function() {
 				    var cntntsNm = $(this).find('cntntsNm').text();
