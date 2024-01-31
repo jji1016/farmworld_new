@@ -158,42 +158,47 @@ public class MyFarmController {
 			Path FPath;
 			FPath = Paths.get(uploadDir + imageVO.getImage_folder_num() + "\\" + imageVO.getImage1());
 			Files.delete(FPath);
-			FPath = Paths.get(uploadDir + imageVO.getImage_folder_num());
-			Files.delete(FPath);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		List<GrowUpVO> list = growUpService.GrowList(vo.getFarm_num());
+		System.out.println("리스트"+list);
 		if(list.size()>0) {
 		for (GrowUpVO gvo : list) {
+			System.out.println("방복");
 			ImageVO gimageVO = imageService.get(vo.getImage_folder_num());
 			try {
-				String folderPath = uploadDir + imageVO.getImage_folder_num() + "/";
-				String filePath = folderPath + "/";
-				Path FPath;
-				if (imageVO.getImage1() != null) {
-					FPath = Paths.get(filePath + imageVO.getImage1());
-					Files.delete(FPath);
+				String folderPath1 = uploadDir + gimageVO.getImage_folder_num() + "/";
+				String filePath1 = folderPath1 + "/";
+				Path FPath1;
+				if (gimageVO.getImage1() != null) {
+					FPath1 = Paths.get(filePath1 + gimageVO.getImage1());
+					Files.delete(FPath1);
 				}
-				if (imageVO.getImage2() != null) {
-					FPath = Paths.get(filePath + imageVO.getImage2());
-					Files.delete(FPath);
+				if (gimageVO.getImage2() != null) {
+					FPath1 = Paths.get(filePath1 + gimageVO.getImage2());
+					Files.delete(FPath1);
 				}
-				if (imageVO.getImage3() != null) {
-					FPath = Paths.get(filePath + imageVO.getImage3());
-					Files.delete(FPath);
+				if (gimageVO.getImage3() != null) {
+					FPath1 = Paths.get(filePath1 + gimageVO.getImage3());
+					Files.delete(FPath1);
 				}
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			System.out.println("그로우업삭제");
 			growUpService.delete(gvo.getGrow_num());
+			System.out.println("그로우업완");
 			imageService.delete(gimageVO.getImage_folder_num());
 		}
 		}
-		imageService.delete(imageVO.getImage_folder_num());
+		FPath = Paths.get(uploadDir + imageVO.getImage_folder_num());
+		Files.delete(FPath);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("마이팜삭제시작");
 		myFarmService.delete(vo.getFarm_num());
+		imageService.delete(imageVO.getImage_folder_num());
 		return "redirect:/myfarm/main";
 	}
 
@@ -435,10 +440,10 @@ public class MyFarmController {
 
 	@ResponseBody
 	@PostMapping("/goodslist")
-	public List<GoodsVO> getGoods(MyFarmVO vo, Criteria cri) {
+	public List<GoodsVO> getGoods(GrowCriteria cri) {
 		cri.setAmount(6);
-		System.out.println(vo);
-		List<GoodsVO> goodsvo = myFarmService.getGoodsList(vo);
+		System.out.println(cri);
+		List<GoodsVO> goodsvo = myFarmService.getGoodsList(cri);
 		return goodsvo;
 	}
 

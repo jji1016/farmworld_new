@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"
     isELIgnored="false"%>
     
+    
+   
     <!-- include libraries(jQuery, bootstrap) -->
 
 
@@ -54,7 +56,7 @@
         <form method="POST" action="/myfarm/growregister" enctype="multipart/form-data">
             <input type="hidden" value="${vo.user_num}" name="user_num" id="userNum">
             <input type="hidden" value="${vo.farm_num}" name="farm_num" id="farmNum">
-            <table class="table">
+            <table class="table createTable">
                 <tbody>
                     <tr>
                         <td>

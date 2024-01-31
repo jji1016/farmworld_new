@@ -27,6 +27,9 @@ public interface GrowUpMapper {
 	public List<GrowUpVO> getListWithPaging(GrowCriteria cri);
 
 	public List<GrowUpVO> getCategory(GrowCriteria vo);
-
+	
+	public void Alter1();
+	public void Alter2();
+	
 
 }
