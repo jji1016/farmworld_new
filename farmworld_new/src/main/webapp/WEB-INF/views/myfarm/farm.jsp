@@ -1,8 +1,55 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     isELIgnored="false"%>
+        
+<style>
+#bigbox {
+    margin-right: 3%;
+    margin-left: 3%;
+    border: solid #81c408 3px;
+    border-radius: 30px;
+    height: 600px !important;
+    box-shadow: 5px 5px 10px 0px #888888;
+    position: relative;
+}
+#myimage{
+	margin-top: 10%;
+	width: 70%;
+	height: 50%;
+}
+#myintro{
+	margin-top: 25%;
+	margin-bottom: 1%;
+}
+#mysearch{
+	margin-top: 27%;
+	position: absolute;
+    bottom: 0;
+    right: 0;
+    border-radius: 50%;
+    border: none;
+    margin: 12px;
+    margin-bottom: 7%;
+}
+#farmModify{
+	position: absolute !important;
+    top: 108%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius:50%;
+    border:none;
+}
+@media screen and (max-width: 995px) {
+  #bigbox {
+    flex: 0 0 auto;
+    width: 25%;
+    height: 70%;
+	}
+</style>
 
 <%@include file="../includes/header.jsp" %>
+
+
 
 <!-- 상단 공백 추가 끝 -->
 <div class="container-fluid py-5">
@@ -22,15 +69,15 @@
 	            </div>
             </div>
             <div class="col-lg-3" style="position: relative;">	
-			<div class="bg-primary h-100 p-5">
+			<div id="bigbox" class="h-100 p-3">
 			<div style="position: relative;">
-			    <img src='/resources/upload/${vo.image_folder_num}/${vo.image1}' class='card-img-top fixed-size-image' alt='농장 이미지'>
-			    <button id="farmModify" style="position: absolute; bottom: 0; right: 0; border-radius:50%; border:none;"><a href='/myfarm/modify?farm_num=<c:out value="${vo.farm_num}"/>'>수정</a></button>
+			    <img id="myimage" src='/resources/upload/${vo.image_folder_num}/${vo.image1}' class='card-img-top fixed-size-image' alt='농장 이미지'>
+			    <a href='/myfarm/modify?farm_num=<c:out value="${vo.farm_num}"/>' id="farmModify" class="btn text-white bg-primary px-3 rounded position-absolute">수정</a>
 			</div>
 			
-			<h4>${vo.farm_intro}</h4>
+			<h6 id="myintro">${vo.farm_intro}</h6>
 			<form id="findForm">
-			    <div class="input-group">
+			    <div id="mysearch" class="input-group">
 			        <input type='text' class="form-control p-3" placeholder="농장 이름 검색" name='keyword' id='keyword'>
 			        <span class="input-group-text">
 			            <button type="button" id="searchBtn" class="btn"><i class="fa fa-search"></i></button>
@@ -42,7 +89,7 @@
             
             
             <div class="col-lg-9">
-                    <div class="bg-primary h-100 p-5">
+                    <div id="bigbox" class="h-100 p-4">
 
                             <div class="row g-3">
 

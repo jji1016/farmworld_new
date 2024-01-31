@@ -73,6 +73,12 @@
 	<delete id="reviewdelete" parameterType="ReviewVO">
 		DELETE FROM  myfarmproject_db.review WHERE review_num = #{review_num}
 	</delete>
-
+	
+	<!-- 리뷰 등록 -->
+	<insert id="insertReview" parameterType="ReviewVO"
+	keyColumn="goods_num" keyProperty="goods_num" useGeneratedKeys="true">
+		INSERT INTO review (goods_num, user_num, order_num, review_score, review_content, image_folder_num )
+		VALUES (#{goods_num}, #{user_num}, #{order_num}, #{review_score}, #{review_content}, #{image_folder_num})
+	</insert>
 </mapper>
 	
