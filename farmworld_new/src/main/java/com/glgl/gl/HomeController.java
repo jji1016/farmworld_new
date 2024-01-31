@@ -61,4 +61,9 @@ public class HomeController {
 		return "/chackout";
 	}
 	
+	@RequestMapping(value = "/shop", method = RequestMethod.GET)
+	public String shop() {
+		return "/sh";
+	}
+	
 }
