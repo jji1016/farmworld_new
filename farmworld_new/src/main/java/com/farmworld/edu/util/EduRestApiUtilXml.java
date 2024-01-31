@@ -1,4 +1,4 @@
-package com.farmworld.api.util;
+package com.farmworld.edu.util;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,11 +14,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-public class RestApiUtilXml {
-	private static final Logger logger = LoggerFactory.getLogger(RestApiUtilXml.class);
+public class EduRestApiUtilXml {
+	private static final Logger logger = LoggerFactory.getLogger(EduRestApiUtilXml.class);
 	
 	// http연결을 위한 url, 헤더/본문 요청 파라미터, 응답할 데이터 형식 전달 필요
-	public static <T> T ConnHttpGetType(String conUrl, HashMap<String, String> headerData, 
+	public static <T> String ConnHttpGetType(String conUrl, HashMap<String, String> headerData, 
 			HashMap<String, String> data, Class<T> classType){
 		try {
 			// StringBuilder를 쓰는이유
@@ -41,9 +41,9 @@ public class RestApiUtilXml {
 			}
 			System.out.println("xml변환시작한다" + urlBuilder);
 			if(urlBuilder.toString().startsWith("https")) {
-				return XmlUtil.parseXml(RestApiUtilXml.httpsConn(urlBuilder.toString(), headerData), classType);
+				return EduXmlUtil.parseXml(EduRestApiUtilXml.httpsConn(urlBuilder.toString(), headerData), classType);
 			}else {
-				return XmlUtil.parseXml(RestApiUtilXml.httpConn(urlBuilder.toString(), headerData), classType);
+				return EduXmlUtil.parseXml(EduRestApiUtilXml.httpConn(urlBuilder.toString(), headerData), classType);
 			}
 		} catch (Exception e) {
 			logger.error("ConnHttpGetType Error : {}",e);

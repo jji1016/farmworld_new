@@ -11,7 +11,7 @@ public class JsonUtil {
 	public static <T> T parseJson(String JsonString, Class<T> clazz) {
 		
 		Gson gson = new Gson();
-		System.out.println(JsonString);
+		System.out.println("여기?"+JsonString);
 		T result = gson.fromJson(JsonString, clazz);
 		System.out.println("끝"+JsonString);
 		return result;

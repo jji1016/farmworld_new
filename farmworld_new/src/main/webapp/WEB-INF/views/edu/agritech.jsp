@@ -1,44 +1,49 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
-<title>기상청_단기예보 ((구)_동네예보) 조회서비스</title>
-<style type="text/css">
-	table,td,th {
-		border: 1px solid black
-	}
-</style>
-</head>
-<body>
-	<h1>실험</h1>
-	<input type="text" id="searchInput" placeholder="검색어 입력">
-	<button onclick="ajaxTest()">검색</button>
-	
-	<table id="resultArea"></table>
-	
-	<script type="text/javascript">
-		function ajaxTest() {
-			
-			$.ajax({
-				url : "agritech",
-				type : "POST",
-				data : "",// view에서 전달할 데이터가 없는경우 컨트롤러가 받는 값은 빈 문자열
-				contentType: "application/json; charset=utf-8;",//서버로 보내는 데이터 유형 지정
-				dataType : "json", // 서버에서 응답하는 데이터 유형
-				success: function(data) {
-					console.log(data);
-					
-				},
-				error: function(e) {
-					console.log(e);
-				}
-				
-			});
-		}
-	</script>
-	
-</body>
-</html>
+	pageEncoding="UTF-8"%>
+
+<%@include file="../includes/header.jsp"%>
+<link href="/resources/css/edu/edu.css" rel="stylesheet">
+
+
+<div class="container-fluid py-5"></div>
+<div class="container-fluid fruite py-5">
+	<div class="container py-5">
+		<h1>이달의 농업기술</h1>
+		<div class="search_Form">
+			<form action="/edu/agritech" method="get">
+				<fieldset>
+					<ul>
+						<li><label for="eduMonth" class="sr_only">기간 선택</label> 
+							<select id="eduMonth" class="form-control" name="eduMonth">
+									<option value="" selected="selected">전체</option>
+									<option value="01">1월</option>
+									<option value="02">2월</option>
+									<option value="03">3월</option>
+									<option value="04">4월</option>
+									<option value="05">5월</option>
+									<option value="06">6월</option>
+									<option value="07">7월</option>
+									<option value="08">8월</option>
+									<option value="09">9월</option>
+									<option value="10">10월</option>
+									<option value="11">11월</option>
+									<option value="12">12월</option>
+							</select></li>
+						<li><span class="form-input">
+								<input type="text" id="srchStr" class="form-control " name="srchStr" placeholder="검색어를 입력하세요."
+								title="검색어를 입력하세요." value="" autocomplete="off" autocapitalize="off">
+						</span><span class="form-btn"><button type="submit" class="input-group-text p-3" >검색</button></span></li>
+					</ul>
+				</fieldset>
+			</form>
+		</div>
+
+		<div id="resultArea"></div>
+		<div id="pagingBox" class="pagination mt-5"></div>
+	</div>
+</div>
+
+
+
+<script src="/resources/js/edu/edu.js" type="text/javascript"></script>
+<%@include file="../includes/footer.jsp"%>

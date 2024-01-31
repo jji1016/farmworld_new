@@ -98,18 +98,17 @@
 								<div class="pagingBtn btnLeft"></div>
 								<ul class="pagination">
 									<c:if test="${pageMaker.prev }">
-										<li class="paginate_button previous"><a
+										<li class="paginate_button previous"><a class='rounded'
 											href="${pageMaker.startPage -1 }">이전</a></li>
 									</c:if>
 									<c:forEach var="num" begin="${pageMaker.startPage }"
 										end="${pageMaker.endPage }">
-										<li
-											class="paginate_button ${pageMaker.cri.pageNum ==num?'active':'' }">
-											<a href="${num }">${num }</a>
+										<li	class="paginate_button ${pageMaker.cri.pageNum ==num?'active':'' }">
+											<a class="rounded ${pageMaker.cri.pageNum ==num?'active':'' }" href="${num }">${num }</a>
 										</li>
 									</c:forEach>
 									<c:if test="${pageMaker.next }">
-										<li class="paginate_button next"><a
+										<li class="paginate_button next"><a class='rounded'
 											href="${pageMaker.endPage +1 }">다음</a></li>
 									</c:if>
 								</ul>

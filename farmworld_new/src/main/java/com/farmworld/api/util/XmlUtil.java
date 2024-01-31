@@ -14,16 +14,19 @@ public class XmlUtil {
 	private static final Logger logger = LoggerFactory.getLogger(XmlUtil.class);
 	
 	public static <T> T parseXml(String xmlString, Class<T> clazz) throws IOException {
-		System.out.println(xmlString);
+		
+		System.out.println("xmlString::"+xmlString);
 		// XML을 JSON노드로 변환
 		XmlMapper xmlMapper = new XmlMapper();
+        
 		JsonNode node = xmlMapper.readTree(xmlString.getBytes());
-		System.out.println(xmlString.getBytes());
+		System.out.println("노드위"+xmlString.getBytes());
+		System.out.println("node::"+node);
 		// JSON노드를 JSON문자열로 변환
 		ObjectMapper jsonMapper = new ObjectMapper();
 		String jsonString = jsonMapper.writeValueAsString(node);
 		
-		System.out.println("JSON변환한다");
+		System.out.println("JSON변환한다"+jsonString);
 		// Json을 지정된 JAVA 클래스를 파싱(변환)
 		T result = JsonUtil.parseJson(jsonString, clazz);
 		
