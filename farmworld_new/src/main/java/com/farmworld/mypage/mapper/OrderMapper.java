@@ -13,16 +13,16 @@ import com.farmworld.shop.domain.GoodsVO;
 
 public interface OrderMapper {
 
-	public List<OrderVO> buylist1();
-	public List<GoodsVO> buylist2();
-	public List<MyFarmVO> buylist3();
-	public List<ImageVO> buylistimg();
+	public List<OrderVO> buylist1(Integer user_num);
+	public List<GoodsVO> buylist2(Integer user_num);
+	public List<MyFarmVO> buylist3(Integer user_num);
+	public List<ImageVO> buylistimg(Integer user_num);
 	public int returnpurchase(int order_num);
 	
-	public List<OrderVO> selllist1();
-	public List<GoodsVO> selllist2();
-	public List<MyFarmVO> selllist3();
-	public List<ImageVO> selllistimg();
+	public List<OrderVO> selllist1(Integer user_num);
+	public List<GoodsVO> selllist2(Integer user_num);
+	public List<MyFarmVO> selllist3(Integer user_num);
+	public List<ImageVO> selllistimg(Integer user_num);
 	
 	public void purchase(OrderVO vo);
 

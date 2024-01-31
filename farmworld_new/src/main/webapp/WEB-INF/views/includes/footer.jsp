@@ -28,7 +28,7 @@
   width: 30% !important;
   margin-left: 3%;
 }
-.img-fluid {
+.imgpay {
     clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
 }
 
@@ -79,7 +79,7 @@
                             <p>Email: FarmWorld@gmail.com</p>
                             <p>Phone: +010 - 1234 - 5678</p>
                             <p>Payment Accepted</p>
-                            <img src="/resources/img/payment.png" class="img-fluid" alt="">
+                            <img src="/resources/img/payment.png" class="imgpay" alt="">
                         </div>
                     </div>
                 </div>
@@ -106,13 +106,11 @@
         <!-- Copyright End -->
 
 
-
         <!-- Back to Top -->
         <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>   
 
         
     <!-- JavaScript Libraries -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/resources/lib/easing/easing.min.js"></script>
     <script src="/resources/lib/waypoints/waypoints.min.js"></script>

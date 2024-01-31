@@ -2,7 +2,20 @@
     pageEncoding="UTF-8"%>
 
 <%@include file="../includes/header.jsp" %>
-
+<style type="text/css">
+#loginbox{
+	margin: 1%;
+}
+#loginbox2{
+	margin: 1%;
+	width: 33%;
+}
+#login_bt_box{
+    display: flex;
+    margin-top: 25px;
+    justify-content: center;
+}
+</style>
 <!-- 상단 공백 추가 끝 -->
 <div class="container-fluid py-5">
 </div>
@@ -20,24 +33,24 @@
 	            </div>
             </div>
             
-            <div class="col-lg-6">
+            <div class="col-lg-7">
                     <div class="bg-primary h-100 p-5">
                         <form id="login_form action="/user/login" method="post">
                             <div class="row g-3">
                             
-                                <div class="col-12">
+                                <div id="loginbox" class="col-12">
                                     <input type="email" id="user_id" name="user_id"
                                     	class="form-control bg-light border-0 px-4" 
                                     	placeholder="  아이디(이메일)" style="height: 55px;">
                                 </div>
                                 
-                                <div class="col-12">
+                                <div id="loginbox" class="col-12">
                                     <input type="password" id="user_pw" name="user_pw"
                                     	class="form-control bg-light border-0 px-4" 
                                     	placeholder="  비밀번호" style="height: 55px;">
                                 </div>
                                 
-                                <div class="col-12">
+                                <div id="loginbox" class="col-12">
                                     <button class="btn btn-secondary w-100 py-3" type="submit" id="loginBtn">로그인</button>
                                 </div>
                                 
@@ -46,17 +59,17 @@
                     </div>
                 </div>
                 
-                <div id="login_bt_box" style="display: flex; margin-top: 25px;">
+                <div id="login_bt_box" class="col-lg-6" style="display: flex; margin-top: 25px;">
                 
-                <div class="col-4">
+                <div id="loginbox2" class="col-3">
                     <button class="btn btn-secondary w-100 py-3" type="button"><a href="/user/findId">아이디 찾기</a></button>
                 </div>
                 
-                 <div class="col-4">
+                 <div id="loginbox2" class="col-3">
                     <button class="btn btn-secondary w-100 py-3" type="button"><a href="/user/changePw">비밀번호 찾기</a></button>
                 </div>
                 
-                 <div class="col-4">
+                 <div id="loginbox2" class="col-3">
                     <button class="btn btn-secondary w-100 py-3" type="button"><a href="/user/join">회원가입</a></button>
                 </div>
             

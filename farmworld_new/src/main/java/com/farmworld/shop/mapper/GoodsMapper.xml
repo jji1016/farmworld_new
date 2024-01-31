@@ -26,6 +26,22 @@
 		</if>
 	</select>
 
+	<select id="shopDetail" parameterType="com.farmworld.shop.domain.GoodsVO" resultType="com.farmworld.shop.domain.GoodsVO">
+		SELECT
+			gs.goods_num,
+			gs.goods_category,
+			gs.goods_title,
+			gs.goods_content,
+			gs.user_num,
+			gs.goods_price,
+			gs.goods_inventory,
+			gs.goods_view,
+			gs.image_folder_num,
+			i.image1
+		FROM goods gs LEFT OUTER JOIN image i ON gs.image_folder_num = i.image_folder_num
+		WHERE gs.goods_num = #{goods_num}
+	</select>
+
 	<select id="getGoodsCategoryTotalCount" resultType="map">
 		SELECT A.category, COALESCE(B.CNT, 0) cnt
 		FROM (
@@ -68,7 +84,7 @@
 		FROM image
 	</select>
 
-	<insert id="saveImage" parameterType="ImageVO">
+	<insert id="saveImage" parameterType="ImageVO" keyColumn="image_folder_num" keyProperty="image_folder_num" useGeneratedKeys="true">
 		INSERT INTO image
 		VALUES (#{image_folder_num}, #{image1}, #{image2}, #{image3})
 	</insert>
@@ -78,6 +94,26 @@
 		VALUES (#{goods_category}, #{goods_title}, #{goods_content}, #{user_num}, #{goods_price}, #{goods_inventory}, #{goods_view}, #{image_folder_num})
 	</insert>
 
+	<update id="modifyGoods" parameterType="GoodsVO">
+		UPDATE goods
+		SET goods_category = #{goods_category},
+			goods_title = #{goods_title},
+			goods_content = #{goods_content},
+			goods_price = #{goods_price},
+			goods_inventory = #{goods_inventory},
+			goods_view = #{goods_view},
+			image_folder_num = #{image_folder_num}
+		WHERE goods_num = #{goods_num}
+	</update>
+
+
+	<delete id="deleteGoods" parameterType="GoodsVO">
+		DELETE FROM goods WHERE goods_num = #{goods_num}
+	</delete>
+
+	<delete id="deleteGoodsImage" parameterType="GoodsVO">
+		DELETE FROM image WHERE image_folder_num = #{image_folder_num}
+	</delete>
 
 </mapper>
 	

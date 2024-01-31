@@ -12,7 +12,7 @@ public interface GrowUpMapper {
 
 	public void insertSelectBno(GrowUpVO vo);
 
-	public List<GrowUpVO> selectAll(GrowUpVO vo);
+	public List<GrowUpVO> selectAll(Integer k);
 
 	public int update(GrowUpVO vo);
 
@@ -27,6 +27,9 @@ public interface GrowUpMapper {
 	public List<GrowUpVO> getListWithPaging(GrowCriteria cri);
 
 	public List<GrowUpVO> getCategory(GrowCriteria vo);
-
+	
+	public void Alter1();
+	public void Alter2();
+	
 
 }

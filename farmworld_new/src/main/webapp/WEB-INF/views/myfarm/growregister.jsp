@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"
     isELIgnored="false"%>
     
+    
+   
     <!-- include libraries(jQuery, bootstrap) -->
 
 
@@ -54,7 +56,7 @@
         <form method="POST" action="/myfarm/growregister" enctype="multipart/form-data">
             <input type="hidden" value="${vo.user_num}" name="user_num" id="userNum">
             <input type="hidden" value="${vo.farm_num}" name="farm_num" id="farmNum">
-            <table class="table">
+            <table class="table createTable">
                 <tbody>
                     <tr>
                         <td>
@@ -87,15 +89,15 @@
                         <td>
                             <div class="row">
                                 <div class="col-4">
-                                    <input type="file" name="files" id="image1" class="form-control-file" onchange="previewImage(this, 'imagePreview1')" required="required">
+                                    <input type="file" name="files" id="image1" class="form-control-file" accept=".png, .jpg" onchange="previewImage(this, 'imagePreview1')" required="required">
                                     <div id="imagePreview1"></div>
                                 </div>
-                                <div class="col-4">
-                                    <input type="file" name="files" id="image2" class="form-control-file" onchange="previewImage(this, 'imagePreview2')">
+                                <div class="col-4" style="display:none;">
+                                    <input type="file" name="files" id="image2" class="form-control-file" accept=".png, .jpg" onchange="previewImage(this, 'imagePreview2')">
                                     <div id="imagePreview2"></div>
                                 </div>
-                                <div class="col-4">
-                                    <input type="file" name="files" id="image3" class="form-control-file" onchange="previewImage(this, 'imagePreview3')">
+                                <div class="col-4" style="display:none;">
+                                    <input type="file" name="files" id="image3" class="form-control-file" accept=".png, .jpg" onchange="previewImage(this, 'imagePreview3')">
                                     <div id="imagePreview3"></div>
                                 </div>
                             </div>
@@ -174,14 +176,42 @@
         });
         
     function previewImage(input, previewId) {
-        var file = input.files[0];
-        if (file) {
+    	const maxFileSize = 2 * 1024 * 1024; // 2MB
+        const fileInput = input.files[0];
+
+        var preview = document.getElementById(previewId);
+        preview.innerHTML = ''; // 미리보기를 초기화
+
+        if (input.files && input.files[0]) {
+        	if (fileInput.size > maxFileSize) {
+                alert("파일 크기는 2MB를 초과할 수 없습니다.");
+                input.value = ""; // 파일 선택 초기화
+                document.getElementById(previewId).innerHTML = ""; // 미리보기 초기화
+            }else{
             var reader = new FileReader();
-            reader.onload = function(e) {
-                var preview = document.getElementById(previewId);
-                preview.innerHTML = '<img src="' + e.target.result + '" alt="Image Preview" class="img-fluid">';
+
+            reader.onload = function (e) {
+                var img = document.createElement('img');
+                img.src = e.target.result;
+                img.className = 'img-thumbnail rounded';
+                preview.appendChild(img);
+
+                // 현재 input에 대한 id와 번호를 추출
+                var currentInputId = input.id;
+                var currentNumber = parseInt(currentInputId.charAt(currentInputId.length - 1));
+
+                // 다음 input에 파일이 있으면 보이도록 설정
+                var nextInputNumber = currentNumber + 1;
+                var nextInputId = 'image' + nextInputNumber;
+
+                var nextInput = document.getElementById(nextInputId);
+                if (nextInput) {
+                    nextInput.parentElement.style.display = 'block';
+                }
             };
-            reader.readAsDataURL(file);
+
+            reader.readAsDataURL(input.files[0]); // 파일을 읽어 data URL로 변환
+        }
         }
     }
 

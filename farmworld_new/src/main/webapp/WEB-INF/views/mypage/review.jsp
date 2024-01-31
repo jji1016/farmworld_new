@@ -152,7 +152,7 @@ $(document).ready(function () {
 		                                    
 		                                    let stars = "";
 		                                    for (let j = 0; j < data3[i].review_score; j++) {
-		                                      stars += "★";
+		                                      stars += '<i class="fa fa-star text-secondary"></i>';
 		                                    }		                                    
 		
 		                                    let row = $("<tr>");

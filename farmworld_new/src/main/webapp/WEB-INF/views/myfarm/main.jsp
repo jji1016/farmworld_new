@@ -169,7 +169,7 @@
 							let row ="";
 							row+=("<div class='col-md-6 col-lg-6 col-xl-4'>");
 							row+=("<div class='row g-0'>");
-							row+=("<div class='col-10'onclick='redirectToFarm(" + myfarm.farm_num + ")'> ");
+							row+=("<div class='col-10 dhover' style='margin-bottom:40px;' onclick='redirectToFarm(" + myfarm.farm_num + ")'> ");
 							row+=("<div class='position-relative shadowhover'>");
 							row+=("<input type='hidden' name='farm_num' value='"+myfarm.farm_num+"'>")
 							row+=("<img src='/resources/upload/" + myfarm.image_folder_num + "/"+ myfarm.image1 + "' class='card-img-top fixed-size-image' alt='농장 이미지' style='width:100%; height:280px'>");

@@ -27,6 +27,17 @@
 }
 /*** Spinner End ***/
 
+.dhover:hover{
+	 cursor: pointer;
+	 background-color: #f5f5f5; /* 호버 시 배경색 변경 */
+    transition: background-color 0.3s; /* 부드러운 전환 효과 */
+}
+.createTable{
+    background-color: #f8f9fa; /* 테이블 배경색 */
+    border: 1px solid #dee2e6; /* 테이블 테두리 */
+    border-radius: 5px; /* 둥근 테두리 */
+    }
+
 
 /*** Button Start ***/
 .btn {

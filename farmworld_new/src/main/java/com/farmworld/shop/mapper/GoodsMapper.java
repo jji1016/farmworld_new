@@ -17,7 +17,17 @@ public interface GoodsMapper {
     // 상품 저장
     int saveGoods(GoodsVO goodsVo);
 
+    int modifyGoods(GoodsVO goodsVo);
+
+    // 상품삭제
+    int deleteGoods(GoodsVO goodsVo);
+
+    int deleteGoodsImage(GoodsVO goodsVo);
+
     List<GoodsVO> getGoodsList(GoodsVO goodsVo);
+
+    GoodsVO shopDetail(GoodsVO goodsVo);
+
 
     List<Map<String, Object>> getGoodsCategoryTotalCount();
 

@@ -29,24 +29,24 @@ public class ReviewServiceImpl implements ReviewService {
 	
 	/*리뷰관리*/
 	@Override
-	public List<OrderVO> review1() {
+	public List<OrderVO> review1(Integer user_num) {
 		log.info("review()");
-		return mapper.review1();
+		return mapper.review1(user_num);
 	}
 	@Override
-	public List<GoodsVO> review2() {
+	public List<GoodsVO> review2(Integer user_num) {
 		log.info("review()");
-		return mapper.review2();
+		return mapper.review2(user_num);
 	}
 	@Override
-	public List<ReviewVO> review3() {
+	public List<ReviewVO> review3(Integer user_num) {
 		log.info("review()");
-		return mapper.review3();
+		return mapper.review3(user_num);
 	}
 	@Override
-	public List<ImageVO> reviewimage() {
+	public List<ImageVO> reviewimage(Integer user_num) {
 		log.info("review()");
-		return mapper.reviewimage();
+		return mapper.reviewimage(user_num);
 	}
 	
 	

@@ -26,25 +26,21 @@ public class OrderServiceImpl implements OrderService {
 	private final OrderMapper mapper;
 
 	/* 구매내역 */
-	@Override
-	public List<OrderVO> buyList1() {
+	public List<OrderVO> buyList1(Integer user_num) {
 		log.info("buylist()");
-		return mapper.buylist1();
+		return mapper.buylist1(user_num);
 	}
-	@Override
-	public List<GoodsVO> buyList2() {
+	public List<GoodsVO> buyList2(Integer user_num) {
 		log.info("buylist()");
-		return mapper.buylist2();
+		return mapper.buylist2(user_num);
 	}
-	@Override
-	public List<MyFarmVO> buyList3() {
+	public List<MyFarmVO> buyList3(Integer user_num) {
 		log.info("buylist()");
-		return mapper.buylist3();
+		return mapper.buylist3(user_num);
 	}
-	@Override
-	public List<ImageVO> buylistimg() {
+	public List<ImageVO> buylistimg(Integer user_num) {
 		log.info("buylistimg()");
-		return mapper.buylistimg();
+		return mapper.buylistimg(user_num);
 	}
 	
 	/* 구매취소 */
@@ -57,30 +53,25 @@ public class OrderServiceImpl implements OrderService {
 
 	/* 판매내역 */
 	@Override
-	public List<OrderVO> sellList1() {
+	public List<OrderVO> sellList1(Integer user_num) {
 		log.info("selllist()");
-		return mapper.selllist1();
+		return mapper.selllist1(user_num);
 	}
 	@Override
-	public List<GoodsVO> sellList2() {
+	public List<GoodsVO> sellList2(Integer user_num) {
 		log.info("selllist()");
-		return mapper.selllist2();
+		return mapper.selllist2(user_num);
 	}
 	@Override
-	public List<MyFarmVO> sellList3() {
+	public List<MyFarmVO> sellList3(Integer user_num) {
 		log.info("selllist()");
-		return mapper.selllist3();
+		return mapper.selllist3(user_num);
 	}
 	@Override
-	public List<ImageVO> selllistimg() {
+	public List<ImageVO> selllistimg(Integer user_num) {
 		log.info("selllistimg()");
-		return mapper.selllistimg();
+		return mapper.selllistimg(user_num);
 	}
-	
-
-	
-
-	
 	
 	
 	@Override

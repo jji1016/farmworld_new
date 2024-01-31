@@ -46,13 +46,13 @@
 
                             <div class="row g-3">
 
-                                <div class="col-4">
+                                <div class="col-4 dhover">
                                 <a href="/myfarm/farm?farm_num=<c:out value='${vo.farm_num}'/>"style="color:black;">HOME</a>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-4 dhover">
                                 <a href="/myfarm/growlist?farm_num=<c:out value='${vo.farm_num}'/>" style="color:black;">성장일기</a>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-4 dhover">
                                 <a style="color:black;" href="/myfarm/goodslist?farm_num=<c:out value='${vo.farm_num}'/>&user_num=<c:out value='${vo.user_num}'/>" >판매상품</a>
                                 </div>
                                 

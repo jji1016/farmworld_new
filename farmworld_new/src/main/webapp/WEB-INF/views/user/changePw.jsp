@@ -2,7 +2,28 @@
     pageEncoding="UTF-8"%>
 
 <%@include file="../includes/header.jsp" %>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<style type="text/css">
+#loginbox{
+	margin: 1%;
+}
+#loginbox2{
+	margin: 1%;
+	width: 33%;
+}
+#login_bt_box{
+    display: flex;
+    margin-top: 25px;
+    justify-content: center;
+}
+.modal-footer {
+    display: flex;
+    align-items: center; /* 원하는 정렬 방식에 맞게 조절 */
+}
+.authResult {
+    margin-right: auto; /* 다른 요소와 간격을 두기 위해 auto로 설정 */
+}
+</style>
 <!-- 상단 공백 추가 끝 -->
 <div class="container-fluid py-5">
 </div>
@@ -20,31 +41,31 @@
 	            </div>
             </div>
             
-            <div class="col-lg-6">
+            <div class="col-lg-7">
                     <div class="bg-primary h-100 p-5">
                         <form id="findId_form" action="/user/findId" method="post">
                             <div class="row g-3">
                             
-                            	<div class="col-12">
+                            	<div id="loginbox" class="col-12">
                                     <input type="email" id="user_id" name="user_id"
                                     	class="form-control bg-light border-0 px-4"  required="required"
                                     	placeholder="  아이디(이메일)" style="height: 55px;">
                                 </div>
                             
-                                <div class="col-12">
+                                <div id="loginbox" class="col-12">
                                     <input type="text" id="user_name" name="user_name"
                                     	class="form-control bg-light border-0 px-4"  required="required"
                                     	placeholder="  이름" style="height: 55px;">
                                 </div>
                                 
-                                <div class="col-12">
+                                <div id="loginbox" class="col-12">
                                     <input type="text" id="user_phone" name="user_phone"
                                     	class="form-control bg-light border-0 px-4"  required="required"
                                     	placeholder="  전화번호" style="height: 55px;"
                                     	pattern="[0-9]{11}" title="숫자 11자리를 입력하세요.">
                                 </div>
                                 
-                                <div class="col-12">
+                                <div id="loginbox" class="col-12">
                                     <button class="btn btn-secondary w-100 py-3" type="button" id="mailSendBtn"
                                     data-bs-toggle="modal" data-bs-target="#myModal">본인 인증</button>
                                 </div>
@@ -54,17 +75,17 @@
                     </div>
                 </div>
                 
-                <div id="login_bt_box" style="display: flex; margin-top: 25px;">
+                <div id="login_bt_box" class="col-lg-7" style="display: flex; margin-top: 25px;">
                 
-                <div class="col-4">
+                <div id="loginbox2" class="col-4">
                     <button class="btn btn-secondary w-100 py-3" type="button"><a href="/user/login">로그인</a></button>
                 </div>
                 
-                 <div class="col-4">
+                 <div id="loginbox2" class="col-4">
                     <button class="btn btn-secondary w-100 py-3" type="button"><a href="/user/findId">아이디 찾기</a></button>
                 </div>
                 
-                 <div class="col-4">
+                 <div id="loginbox2" class="col-4">
                     <button class="btn btn-secondary w-100 py-3" type="button"><a href="/user/join">회원가입</a></button>
                 </div>
             
@@ -88,8 +109,9 @@
       <div class="modal-body" id="sendResult">
       </div>
       <p id="timeOut" class="modal-body"></p>
-      <p id="authResult" class="modal-body"></p>
+      
       <div class="modal-footer">
+      	<p id="authResult" class="authResult" ></p>
         <button id="authBtn" class="btn btn-primary" >인증하기</button>
         <button id="nextBtn" class="btn btn-primary" data-bs-target="#changePw" data-bs-toggle="modal" data-bs-dismiss="modal">비밀번호 수정하기</button>
       </div>
@@ -107,8 +129,9 @@
       </div>
       <div class="modal-body" id="inputAdd">
       </div>
-      <div id="pwCheck" class="modal-body"></div>
+      
       <div class="modal-footer" id="modPwResult">
+      	<p id="pwCheck" class="authResult"></p>
         <button type="reset" class="btn btn-secondary">초기화</button>
         <button type="button" class="btn btn-primary" id="modPwBtn">수정하기</button>
       </div>

@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +65,7 @@ public class MyFarmController {
 		Map<String, Object> response = new HashMap<>();
 		Boolean hasUserNum = session.getAttribute("user_num") != null;
 		System.out.println(hasUserNum);
-		System.out.println("세션유저"+session.getAttribute("user_num"));
+		System.out.println("세션유저" + session.getAttribute("user_num"));
 		response.put("hasUserNum", hasUserNum);
 		int farmnum;
 		if (hasUserNum) {
@@ -73,16 +74,16 @@ public class MyFarmController {
 			System.out.println("usernum:" + userNum);
 			MyFarmVO vo = myFarmService.getByUserNum(userNum);
 			System.out.println(vo);
-			if(vo==null) {
+			if (vo == null) {
 				farmnum = 0;
-			}else {
+			} else {
 				farmnum = vo.getFarm_num();
 			}
 			System.out.println(vo);
 			response.put("userNum", userNum);
 			if (farmnum == 0) {
-			    response.put("isfarm", false);
-			}else {
+				response.put("isfarm", false);
+			} else {
 				response.put("isfarm", true);
 				response.put("farmnum", farmnum);
 			}
@@ -97,7 +98,8 @@ public class MyFarmController {
 	}
 
 	@GetMapping("/farm")
-	public void moveFarm(MyFarmVO myFarmVO, Model model) {
+	public void moveFarm(MyFarmVO myFarmVO, Model model, HttpServletRequest request) {
+		System.out.println("경로알아보기" + request.getServletContext().getRealPath(""));
 		System.out.println(myFarmVO);
 		myFarmService.view(myFarmVO);
 		model.addAttribute("vo", myFarmService.get(myFarmVO.getFarm_num()));
@@ -121,6 +123,7 @@ public class MyFarmController {
 		Integer imageNum = imageService.MaxFolder();
 		String filePath = ""; // 폴더 경로
 		ImageVO vo = new ImageVO();
+		System.out.println(file.getOriginalFilename());
 		if (!file.isEmpty()) {
 			try {
 				filePath = uploadDir + imageNum + "/";
@@ -144,7 +147,7 @@ public class MyFarmController {
 
 		return "redirect:/myfarm/farm?farm_num=" + myFarmVO.getFarm_num();
 	}
-	
+
 	@PostMapping("/removefarm")
 	public String removeFarm(MyFarmVO vo) {
 		vo = myFarmService.get(vo.getFarm_num());
@@ -155,15 +158,47 @@ public class MyFarmController {
 			Path FPath;
 			FPath = Paths.get(uploadDir + imageVO.getImage_folder_num() + "\\" + imageVO.getImage1());
 			Files.delete(FPath);
-			FPath = Paths.get(uploadDir + imageVO.getImage_folder_num());
-			Files.delete(FPath);
-			imageService.delete(vo.getImage_folder_num());
-			myFarmService.delete(vo.getFarm_num());
-		} catch (Exception e) {
+
+		List<GrowUpVO> list = growUpService.GrowList(vo.getFarm_num());
+		System.out.println("리스트"+list);
+		if(list.size()>0) {
+		for (GrowUpVO gvo : list) {
+			System.out.println("방복");
+			ImageVO gimageVO = imageService.get(vo.getImage_folder_num());
+			try {
+				String folderPath1 = uploadDir + gimageVO.getImage_folder_num() + "/";
+				String filePath1 = folderPath1 + "/";
+				Path FPath1;
+				if (gimageVO.getImage1() != null) {
+					FPath1 = Paths.get(filePath1 + gimageVO.getImage1());
+					Files.delete(FPath1);
+				}
+				if (gimageVO.getImage2() != null) {
+					FPath1 = Paths.get(filePath1 + gimageVO.getImage2());
+					Files.delete(FPath1);
+				}
+				if (gimageVO.getImage3() != null) {
+					FPath1 = Paths.get(filePath1 + gimageVO.getImage3());
+					Files.delete(FPath1);
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			System.out.println("그로우업삭제");
+			growUpService.delete(gvo.getGrow_num());
+			System.out.println("그로우업완");
+			imageService.delete(gimageVO.getImage_folder_num());
+		}
+		}
+		FPath = Paths.get(uploadDir + imageVO.getImage_folder_num());
+		Files.delete(FPath);
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println("마이팜삭제시작");
 		myFarmService.delete(vo.getFarm_num());
-		
+		imageService.delete(imageVO.getImage_folder_num());
 		return "redirect:/myfarm/main";
 	}
 
@@ -195,7 +230,6 @@ public class MyFarmController {
 			return ResponseEntity.ok(farmNum.toString());
 		}
 	}
-
 
 	@GetMapping("/growlist")
 	public void growlist(MyFarmVO vo, GrowCriteria cri, Model model) {
@@ -298,9 +332,10 @@ public class MyFarmController {
 		growUpService.modify(vo);
 		return "redirect:/myfarm/growboard?grow_num=" + vo.getGrow_num();
 	}
+
 	@PostMapping("/growdelete")
 	public String deleteGrow(GrowUpVO vo) {
-		
+
 		vo = growUpService.get(vo.getGrow_num());
 		System.out.println(vo);
 		ImageVO imageVO = imageService.get(vo.getImage_folder_num());
@@ -308,26 +343,26 @@ public class MyFarmController {
 			String folderPath = uploadDir + imageVO.getImage_folder_num() + "/";
 			String filePath = folderPath + "/";
 			Path FPath;
-			if(imageVO.getImage1()!=null) {
-				FPath = Paths.get(filePath+imageVO.getImage1());
+			if (imageVO.getImage1() != null) {
+				FPath = Paths.get(filePath + imageVO.getImage1());
 				Files.delete(FPath);
 			}
-			if(imageVO.getImage2()!=null) {
-				FPath = Paths.get(filePath+imageVO.getImage2());
+			if (imageVO.getImage2() != null) {
+				FPath = Paths.get(filePath + imageVO.getImage2());
 				Files.delete(FPath);
 			}
-			if(imageVO.getImage3()!=null) {
-				FPath = Paths.get(filePath+imageVO.getImage3());
+			if (imageVO.getImage3() != null) {
+				FPath = Paths.get(filePath + imageVO.getImage3());
 				Files.delete(FPath);
 			}
-			imageService.delete(vo.getImage_folder_num());
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		growUpService.delete(vo.getGrow_num());
-		
-		return "redirect:/myfarm/farm?farm_num="+vo.getFarm_num();
+		imageService.delete(imageVO.getImage_folder_num());
+
+		return "redirect:/myfarm/farm?farm_num=" + vo.getFarm_num();
 	}
 
 	@PostMapping("/growregister")
@@ -389,7 +424,7 @@ public class MyFarmController {
 	public void goodslist(MyFarmVO myFarmVO, Criteria cri, Model model) {
 		cri.setAmount(6);
 		int total = myFarmService.getGoodsCount(myFarmVO);
-		pageDTO pageResult = new pageDTO(cri, total);	
+		pageDTO pageResult = new pageDTO(cri, total);
 		model.addAttribute("pageMaker", pageResult);
 		model.addAttribute("vo", myFarmService.get(myFarmVO.getFarm_num()));
 		model.addAttribute("image", imageService.get(myFarmService.get(myFarmVO.getFarm_num()).getImage_folder_num()));
@@ -405,10 +440,10 @@ public class MyFarmController {
 
 	@ResponseBody
 	@PostMapping("/goodslist")
-	public List<GoodsVO> getGoods(MyFarmVO vo, Criteria cri) {
+	public List<GoodsVO> getGoods(GrowCriteria cri) {
 		cri.setAmount(6);
-		System.out.println(vo);
-		List<GoodsVO> goodsvo = myFarmService.getGoodsList(vo);
+		System.out.println(cri);
+		List<GoodsVO> goodsvo = myFarmService.getGoodsList(cri);
 		return goodsvo;
 	}
 

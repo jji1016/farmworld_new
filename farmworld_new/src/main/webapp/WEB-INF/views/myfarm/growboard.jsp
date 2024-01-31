@@ -18,6 +18,10 @@
     .info-item {
         margin-bottom: 10px; /* 각 항목 아래 여백 추가 */
     }
+    .grow-info img {
+    max-width: 100%; /* 이미지의 최대 폭을 부모 요소(grow-info)의 100%로 설정 */
+    height: auto;    /* 높이는 자동으로 조절되도록 설정 */
+	}
 </style>
 
 
@@ -87,10 +91,12 @@
 
                         <!-- 기타 필요한 정보들을 추가로 표시 -->
 
-                    </div>
-					<div class="col-3"><button class="btn btn-info"><a href='/myfarm/growmodify?grow_num=<c:out value="${vo.grow_num}"/>'>수정하기</a></button></div>
-					<div class="col-3"><button type="submit" class="btn btn-danger">삭제하기</button></div>
-					<div class="col-3"><button class="btn btn-warning"><a href='/myfarm/growlist?farm_num=<c:out value="${vo.farm_num}"/>'>목록으로</a></button></div>
+                    <div class="row">
+					    <div class="col-2"><button class="btn btn-info"><a href='/myfarm/growmodify?grow_num=<c:out value="${vo.grow_num}"/>'>수정하기</a></button></div>
+					    <div class="col-2"><button type="submit" class="btn btn-danger">삭제하기</button></div>
+					    <div class="col-5"></div>
+					    <div class="col-2"><button class="btn btn-warning"><a href="javascript:window.history.go(-1);">뒤로가기</a></button></div>
+					</div>
 					</form>
                 </div>
             </div>
