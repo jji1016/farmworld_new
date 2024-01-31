@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -30,7 +31,7 @@ public class EduController {
 	}
 	
 	@ResponseBody
-    @PostMapping("/agritech")
+    @RequestMapping(value="/agritech", method = RequestMethod.POST, produces = {"application/json; charset=UTF-8"})
     public Map<String, Object> Lst(@RequestParam(name = "eduMonth", required = false) String eduMonth, @RequestParam(name = "pageNum", required = false) int pageNum,
     		@RequestParam(name = "srchStr", required = false) String srchStr ) {
 		System.out.println("eduMonth: " + eduMonth);
