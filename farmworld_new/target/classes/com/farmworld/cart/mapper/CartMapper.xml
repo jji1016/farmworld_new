@@ -79,7 +79,7 @@
 	
 	<insert id="insertCartData" parameterType="CartVO">
 		INSERT INTO cart(goods_num, count, user_num)
-		VALUES (#{goods_num}, 1, #{user_num})
+		VALUES (#{goods_num}, #{count}, #{user_num})
 	</insert>
 	
 	<insert id="insertHistory" parameterType="BillHistoryVO">
@@ -95,7 +95,7 @@
 	
 	<update id="updateCartData" parameterType="CartVO">
 		UPDATE cart
-		   SET count = count + 1
+		   SET count = count+${count}
 		 WHERE user_num = #{user_num}
 		   AND goods_num = #{goods_num}
 	</update>

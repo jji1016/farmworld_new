@@ -84,7 +84,7 @@
 		FROM image
 	</select>
 
-	<insert id="saveImage" parameterType="ImageVO" keyColumn="image_folder_num" keyProperty="image_folder_num" useGeneratedKeys="true">
+	<insert id="saveImage" parameterType="ImageVO">
 		INSERT INTO image
 		VALUES (#{image_folder_num}, #{image1}, #{image2}, #{image3})
 	</insert>

@@ -23,7 +23,7 @@ function getDetailInfo(){
             if(key === 'goods_price'){
                 item = convertMoney(item);
             }
-
+			
             if(key === 'image_folder_num'){
                 paramData.image_folder_num = item;
             }
@@ -63,6 +63,7 @@ $('#deleteBtn').click(function(){
 });
 // 장바구니 담기 클릭시
 $('#addCart').click(function(){
+	
 	paramData.count = $("#addCnt").val();
     ajaxCall("insertCart","POST", paramData, function(reData){
         console.log(reData);

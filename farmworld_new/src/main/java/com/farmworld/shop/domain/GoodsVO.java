@@ -40,10 +40,10 @@ public class GoodsVO {
 	public void setGoods_price(int goods_price) {
 		this.goods_price = goods_price;
 	}
-	public int getGoods_inventory() {
+	public String getGoods_inventory() {
 		return goods_inventory;
 	}
-	public void setGoods_inventory(int goods_inventory) {
+	public void setGoods_inventory(String goods_inventory) {
 		this.goods_inventory = goods_inventory;
 	}
 	public int getGoods_view() {
@@ -73,7 +73,7 @@ public class GoodsVO {
 	private String image1;
     private int user_num;
     private int goods_price;
-    private int goods_inventory;
+    private String goods_inventory;
     private int goods_view;
     private int image_folder_num;
 

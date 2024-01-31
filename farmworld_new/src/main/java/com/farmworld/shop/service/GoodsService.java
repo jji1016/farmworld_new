@@ -33,3 +33,4 @@ public interface GoodsService {
     int modifyGoods(GoodsVO goodsVo);
 
 }
+	

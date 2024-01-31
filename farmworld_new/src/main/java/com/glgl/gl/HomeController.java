@@ -41,6 +41,10 @@ public class HomeController {
 	public String shopmain() {
 		return "/shopmain";
 	}
+	@RequestMapping(value = "/shopdetail", method = RequestMethod.GET)
+	public String shopdetail() {
+		return "/shopdetail";
+	}
 	
 	@RequestMapping(value = "/myfarmMain", method = RequestMethod.GET)
 	public String myfarm() {

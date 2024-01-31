@@ -22,9 +22,11 @@ import com.farmworld.cart.domain.BillHistoryVO;
 import com.farmworld.cart.domain.CartVO;
 import com.farmworld.cart.service.CartService;
 
+import lombok.extern.log4j.Log4j;
+
 @Controller
+@Log4j
 public class CartController {
-	private static final Logger log = LoggerFactory.getLogger(CartController.class);
 	@Autowired
 	private CartService cartService;
 
@@ -66,8 +68,8 @@ public class CartController {
 	@ResponseBody
 	@PostMapping(value = "/insertCart")
 	public Map<String, Object> insertCart(CartVO cartVo, HttpSession session) {
-		Map<String, Object> result = new HashMap<>();
 		
+		Map<String, Object> result = new HashMap<>();
 		try {
 			cartVo.setUser_num(Integer.parseInt(session.getAttribute("user_num").toString()));
 			
@@ -134,7 +136,6 @@ public class CartController {
 	@ResponseBody
 	public Map<String, Object> cartData(@RequestBody Map<String, String> map, HttpSession session) {
 		Map<String, Object> result = new HashMap<>();
-		
 		try {
 			CartVO cartVo = new CartVO();
 			String userNum = session.getAttribute("user_num") == null ? "" : session.getAttribute("user_num").toString();

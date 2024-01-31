@@ -7,7 +7,7 @@
 
 <div class="container-fluid py-5">
     <div class="container py-5">
-        <h1 class="mb-4">상품등록하기</h1>
+        <h1 class="mb-4 title-name">상품등록하기</h1>
         <div id="goodsForm">
         	<!-- Product Information Form -->
 	        <div class="mb-3">
@@ -56,12 +56,46 @@
 	        </form>
         </div>
         
-        <button type="button" class="btn btn-primary" onclick="insertGoods()">상품 등록하기</button>
+        <button type="button" class="btn btn-primary" id="insertGoods" onclick="insertGoods()">상품 등록하기</button>
+		<button type="button" class="btn btn-primary" id="modifyGoods" onclick="insertGoods()">상품 수정하기</button>
     </div>
 </div>
 
 <script>
 var paramData = new FormData();
+
+$(document).ready(function() {
+	init();
+});
+
+function init(){
+	var urlData=getQueryStringObject();
+	if(!isEmptyObj(urlData)){ // 수정의 경우
+
+		$('.title-name').text('상품수정하기');
+		$('#insertGoods').hide();
+		$('#modifyGoods').show();
+		paramData.set("goods_num", urlData.goods_num);
+
+		var goodsData = {goods_num : urlData.goods_num}
+		ajaxCall("shop-detail","POST", goodsData, function(reData) {
+			console.log(reData);
+			var shopDetail = reData.shopDetail;
+
+			$('#productName').val(shopDetail.goods_title);
+			$('#productType option:selected').val(shopDetail.goods_category);
+			$('#weightPrice').val(shopDetail.goods_price);
+			$('#description').val(shopDetail.goods_content);
+			$('#origin').val(shopDetail.goods_inventory);
+			$('#expiryDate').val(shopDetail.goods_view);
+		});
+
+	}else{ // 등록의 경우
+		$('.title-name').text('상품등록하기');
+		$('#insertGoods').show();
+		$('#modifyGoods').hide();
+	}
+};
 
 function insertGoods() {
 	// 입력 값 검사
@@ -93,7 +127,6 @@ function insertGoods() {
 	} else {
 		alert(msg);
 	}
-	
 }
 
 function validation() {
@@ -101,16 +134,30 @@ function validation() {
 	var fileData		= $("#photo")[0].files;					// 업로드한 파일
 	var category		= $("#productType").val();				// 작물
 	var content			= $("#description").val();				// 설명
-	var inputList		= ["이름", "무게/가격", "원산지", "유통기한"];	// input 명 리스트
+	var inputList		= ["이름", "무게/가격", "원산지" , "유통기한"];	// input 명 리스트
 	var msg				= "";									// 메시지
 	
+	
 	for(var i=0; i<getGoodsData.length; i++) {
+		console.log(getGoodsData[i]);
+		
 		if(getGoodsData[i].value == "") {
 			msg = inputList[i] + " 을(를) 입력해주세요.";
 			i = getGoodsData.length;
-		} else if(i != 0 && !$.isNumeric(getGoodsData[i].value)) {
-			msg = inputList[i] + " 을(를) 숫자로 입력해주세요.";
-			i = getGoodsData.length;
+		} else if(i!=0) {
+			console.log(getGoodsData[i].value+"g"+i);
+			if(i==1 && $.isNumeric(getGoodsData[i].value)){
+				
+			}
+			else if(i==2 && !$.isNumeric(getGoodsData[i].value)){
+				
+			}
+			else if(i==3 && $.isNumeric(getGoodsData[i].value)){
+				
+			}else{
+				msg = inputList[i] + " 을(를) 숫자로 입력해주세요.";
+				i = getGoodsData.length;
+			}
 		}
 	}
 	
@@ -131,6 +178,49 @@ function validation() {
 	}
 	
 	return msg;
+}
+
+function isEmptyObj(obj)  {
+	if(obj.constructor === Object
+			&& Object.keys(obj).length === 0)  {
+		return true;
+	}
+
+	return false;
+}
+
+function getQueryStringObject() {
+	var a = window.location.search.substr(1).split('&');
+	if (a == "") return {};
+	var b = {};
+	for (var i = 0; i < a.length; ++i) {
+		var p = a[i].split('=', 2);
+		if (p.length == 1)
+			b[p[0]] = "";
+		else
+			b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+	}
+	return b;
+}
+
+
+function ajaxCall(url, type, paramData, callback){
+	$.ajax({
+		url: url,
+		type: type,
+		dataType : "json",
+		data: paramData,
+		success:function(data){
+			console.log(data);
+			return callback(data);
+
+		},
+		error: function(e) {
+			console.log(e);
+			return callback(e);
+
+		}
+	});
 }
 </script>
 

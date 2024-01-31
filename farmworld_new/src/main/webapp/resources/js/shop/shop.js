@@ -44,6 +44,12 @@ $(document).on('click', '.shopping-basket-btn', function(e){
     });
 });
 
+// 상품 상세보기
+function shopDetail(key){
+    console.log(key);
+    location.href="/shopdetail?detail=" + key;
+}
+
 
 
 function searchEvent(){
@@ -69,7 +75,7 @@ function getGoodList(paramData){
         $.each(reData.goodsList, function(num, item){
 
             var goods_content = item.goods_content !== null ? item.goods_content : "";
-            var goodsForm = '<div class="col-md-6 col-lg-6 col-xl-4">\n' +
+            var goodsForm = '<div class="col-md-6 col-lg-6 col-xl-4" onclick="shopDetail('+item.goods_num+')">\n' +
                 '                                        <div class="rounded position-relative fruite-item">\n' +
                 '                                            <div class="fruite-img">\n' +
                 '                                                <img src="/resources/'+item.image1+'" class="img-fluid w-100 rounded-top" alt="">\n' +
