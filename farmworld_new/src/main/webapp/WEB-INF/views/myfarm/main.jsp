@@ -15,7 +15,6 @@
 	transition: box-shadow 0.3s ease;
 }
 #searchbox{
-	margin-left: 1%;
 }
 /* 마우스 호버 시 스타일 변경 */
 .shadowhover:hover {
@@ -29,6 +28,15 @@
 #myimage{
 	width: 95%;
     height: 50%;
+}
+#type{
+	width: 20%;
+	border: 1px solid #ced4da !important;
+}
+.bg-light {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
 }
 </style>
 
@@ -48,11 +56,10 @@
                 <div class="row g-4">
                     <div class="col-lg-12">
 	                    <form id="searchForm" action="/myfarm/main" method="get" onsubmit="return validateKeyword()">
-	                        <div class="row g-4">
+	                        <div class="row">
 	                            <div class="col-xl-3"></div>
-	                            		<div class="col-3">
+	                            		<%-- <div class="col-xl-1">
 			                                <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">
-			                                    <label for="type">검색 조건</label>
 			                                    <select id="type" name="type" class="border-0 form-select-sm bg-light me-3">
 				                                     <option value="TW" 
 				                                     	<c:out value="${pageMaker.cri.type == 'TW'?'selected':''}"/>>전체</option>
@@ -62,9 +69,18 @@
 				                                     	<c:out value="${pageMaker.cri.type == 'W'?'selected':''}"/>>농장주</option>
 			                                    </select>
 			                            	</div>
-			                            </div>
-	                            		<div id="searchbox" class="col-xl-5">
+			                            </div> --%>
+	                            		<div id="searchbox" class="col-xl-9">
+	                            			
 			                                <div class="input-group w-100 mx-auto d-flex">
+			                                	<select id="type" name="type" class="border-0 form-select-sm bg-light input-group-text p-3">
+				                                     <option value="TW" 
+				                                     	<c:out value="${pageMaker.cri.type == 'TW'?'selected':''}"/>>전체</option>
+				                                     <option value="T" 
+				                                     	<c:out value="${pageMaker.cri.type == 'T'?'selected':''}"/>>농장 이름</option>
+				                                     <option value="W" 
+				                                     	<c:out value="${pageMaker.cri.type == 'W'?'selected':''}"/>>농장주</option>
+			                                    </select>
 			                                    <input type='text' class="form-control p-3" placeholder="keywords"  name='keyword'
 													value='<c:out value="${pageMaker.cri.keyword}"/>'>
 			                                	<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
