@@ -29,13 +29,13 @@
 
 .dhover:hover{
 	 cursor: pointer;
-	 background-color: #f5f5f5; /* 호버 시 배경색 변경 */
-    transition: background-color 0.3s; /* 부드러운 전환 효과 */
+	 background-color: #f5f5f5; /* �샇踰� �떆 諛곌꼍�깋 蹂�寃� */
+    transition: background-color 0.3s; /* 遺��뱶�윭�슫 �쟾�솚 �슚怨� */
 }
 .createTable{
-    background-color: #f8f9fa; /* 테이블 배경색 */
-    border: 1px solid #dee2e6; /* 테이블 테두리 */
-    border-radius: 5px; /* 둥근 테두리 */
+    background-color: #f8f9fa; /* �뀒�씠釉� 諛곌꼍�깋 */
+    border: 1px solid #dee2e6; /* �뀒�씠釉� �뀒�몢由� */
+    border-radius: 5px; /* �뫁洹� �뀒�몢由� */
     }
 
 
@@ -368,7 +368,7 @@
 .vesitable .owl-nav .owl-prev {
     position: absolute;
     top: -8px;
-    right: 0;
+    right: 88px;
     color: var(--bs-primary);
     padding: 5px 25px;
     border: 1px solid var(--bs-secondary);
@@ -385,7 +385,7 @@
 .vesitable .owl-nav .owl-next {
     position: absolute;
     top: -8px;
-    right: 88px;
+    right: 0px;
     color: var(--bs-primary);
     padding: 5px 25px;
     border: 1px solid var(--bs-secondary);
