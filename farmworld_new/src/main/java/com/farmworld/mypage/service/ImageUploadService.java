@@ -18,18 +18,11 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class ImageUploadService {
 	
-<<<<<<< HEAD
+
 	private MyPageService service;
 	
 	private static String uploadDir = "C:\\Users\\keduit\\Desktop\\farm_me_ws\\farmworld_new_240118\\farmworld_new\\src\\main\\webapp\\resources\\upload\\profile\\";
 	
-=======
-//	static HttpServletRequest request;
-	private MyPageService service;
-	
-	private static String uploadDir = "C:\\Users\\keduit\\Desktop\\farm_me_ws\\farmworld_new_240118\\farmworld_new\\src\\main\\webapp\\resources\\upload\\profile\\";
-//	private static String uploadDir = request.getServletContext().getRealPath("") + "resources\\filefolder\\";
->>>>>>> 8eb33a0c5c44e906d8c786c227713659b0de7ea4
 	public String uploadImg(MultipartFile img, Integer user_num) {
 		
 		try {

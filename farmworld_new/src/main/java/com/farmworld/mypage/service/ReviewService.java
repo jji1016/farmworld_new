@@ -27,4 +27,6 @@ public interface ReviewService extends Generic<ReviewVO, Integer> {
 	public int reviewdelete(int review_num);
 	
 	public ReviewVO getreviewVO(Integer k);
+	
+	public int register(ReviewVO vo);
 }

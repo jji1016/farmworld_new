@@ -28,5 +28,5 @@ public interface ReviewMapper {
 	
 	public ReviewVO getreviewVO(int review_num);
 	
-
+	public int insertReview(ReviewVO vo);
 }

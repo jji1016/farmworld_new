@@ -78,6 +78,13 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 	
 	
+	/* 리뷰 등록 */
+	@Override
+	public int register(ReviewVO vo) {
+		int goods_num = mapper.insertReview(vo);
+		return goods_num;
+	}
+	
 	
 	@Override
 	public ReviewVO getreviewVO(Integer k) {

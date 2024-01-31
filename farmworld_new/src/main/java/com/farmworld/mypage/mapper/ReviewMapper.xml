@@ -13,9 +13,16 @@
 		WHERE buyer_num = #{user_num}
 	</select>
 	<select id="review2" resultType="GoodsVO">
-		SELECT goods.goods_num, goods_category, goods_title, goods_content, goods.user_num, goods_price, goods.image_folder_num
-		FROM myfarmproject_db.review LEFT JOIN myfarmproject_db.goods ON myfarmproject_db.review.goods_num = myfarmproject_db.goods.goods_num
-		WHERE myfarmproject_db.review.user_num = #{user_num}
+<!-- 		SELECT goods.goods_num, goods_category, goods_title, goods_content, goods.user_num, goods_price, goods.image_folder_num -->
+<!-- 		FROM myfarmproject_db.review LEFT JOIN myfarmproject_db.goods ON myfarmproject_db.review.goods_num = myfarmproject_db.goods.goods_num -->
+<!-- 		WHERE myfarmproject_db.review.user_num = #{user_num} -->
+	
+	SELECT goods.goods_num, goods_category, goods_title, goods_content, goods.user_num, goods_price, goods.image_folder_num, myfarmproject_db.order.buyer_num
+	FROM myfarmproject_db.goods LEFT JOIN myfarmproject_db.order ON myfarmproject_db.goods.goods_num = myfarmproject_db.order.goods_num
+	WHERE myfarmproject_db.goods.goods_num IN (SELECT goods_num
+												FROM myfarmproject_db.order
+                    							WHERE buyer_num = #{user_num})
+    AND myfarmproject_db.order.buyer_num = #{user_num};
 	</select>
 	<select id="review3" resultType="ReviewVO">
 		SELECT review_score, review_content, review_date, review_num
@@ -23,10 +30,14 @@
 		WHERE user_num = #{user_num}
 	</select>
 	<select id="reviewimage" resultType="ImageVO">
-		SELECT *
-		FROM (myfarmproject_db.goods LEFT JOIN myfarmproject_db.review ON myfarmproject_db.goods.goods_num = myfarmproject_db.review.goods_num)
-     	LEFT JOIN myfarmproject_db.image ON myfarmproject_db.goods.image_folder_num = myfarmproject_db.image.image_folder_num
-     	WHERE myfarmproject_db.review.user_num = #{user_num}
+<!-- 		SELECT * -->
+<!-- 		FROM (myfarmproject_db.goods LEFT JOIN myfarmproject_db.review ON myfarmproject_db.goods.goods_num = myfarmproject_db.review.goods_num) -->
+<!--      	LEFT JOIN myfarmproject_db.image ON myfarmproject_db.goods.image_folder_num = myfarmproject_db.image.image_folder_num -->
+<!--      	WHERE myfarmproject_db.review.user_num = #{user_num} -->
+	
+	SELECT * 
+	FROM myfarmproject_db.order LEFT JOIN myfarmproject_db.goods ON myfarmproject_db.order.goods_num = myfarmproject_db.goods.goods_num 
+	WHERE myfarmproject_db.order.buyer_num = #{user_num};
 	</select>
 	
 	
@@ -62,6 +73,12 @@
 	<delete id="reviewdelete" parameterType="ReviewVO">
 		DELETE FROM  myfarmproject_db.review WHERE review_num = #{review_num}
 	</delete>
-
+	
+	<!-- 리뷰 등록 -->
+	<insert id="insertReview" parameterType="ReviewVO"
+	keyColumn="goods_num" keyProperty="goods_num" useGeneratedKeys="true">
+		INSERT INTO review (goods_num, user_num, order_num, review_score, review_content, image_folder_num )
+		VALUES (#{goods_num}, #{user_num}, #{order_num}, #{review_score}, #{review_content}, #{image_folder_num})
+	</insert>
 </mapper>
 	

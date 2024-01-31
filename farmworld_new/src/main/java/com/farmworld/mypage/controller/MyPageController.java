@@ -68,6 +68,8 @@ public class MyPageController {
 
 	private static String uploadDir = "C:\\Users\\keduit\\Desktop\\farmworld_ new_git\\farmworld_new\\src\\main\\webapp\\resources\\upload\\review\\";
 	
+	private static String uploadDire = "C:\\Users\\keduit\\Desktop\\farm_me_ws\\farm_240130\\src\\main\\webapp\\resources\\upload\\review\\";
+	
 /* 메인
  * 	비회원 권한 없음 */
 	@RequestMapping(value = "/myPageMain", method = RequestMethod.GET)
@@ -407,4 +409,43 @@ public class MyPageController {
 		log.info("리뷰삭제2");
 		return "redirect:/mypage/review";
 	}
+	
+	
+/* 리뷰 등록 */
+	@RequestMapping(value = "/addReview", method = RequestMethod.POST)
+	public String addReviewPost(@RequestParam("order_num") String order_num,
+            @RequestParam("goods_num") String goods_num, Model model) {
+		System.out.println("상품등록페이지");
+		model.addAttribute("order_num", order_num);
+		model.addAttribute("goods_num", goods_num);
+		return "/mypage/reviewRegister";
+	}
+	
+	@RequestMapping(value = "/reviewRegister", method = RequestMethod.POST)
+	public String reviewRegister(@ModelAttribute ReviewVO vo, 
+			@RequestParam("image1") MultipartFile image, @ModelAttribute("user_num") Integer user_num) {
+		vo.setUser_num(user_num);
+		
+		//저장된 폴더 번호 중 제일 큰 수+1 가져오기
+		Integer folderNum = imageService.MaxFolder();
+
+		String filePath = ""; // 폴더 경로
+		ImageVO imgVo = new ImageVO();
+		
+		if (!image.isEmpty()) {
+			try {
+				filePath = uploadDire + folderNum + "/";
+				String fileName = fileUpload.uploadFile(image, filePath);
+				imgVo.setImage1(fileName);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		folderNum = imageService.addGetNum(imgVo);
+		vo.setImage_folder_num(folderNum);
+		reviewService.register(vo);
+		
+		return "/mypage/review";
+	}	
 }

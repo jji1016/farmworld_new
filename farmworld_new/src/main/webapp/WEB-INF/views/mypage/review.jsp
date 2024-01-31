@@ -66,6 +66,11 @@
 	margin-top: 2% !important;
 	width: 100%;
 }
+#addFrm{
+	display: flex;
+    flex-direction: row-reverse;
+    margin: 6% 6%;
+}
 </style>
 </head>
 
@@ -133,57 +138,76 @@ $(document).ready(function () {
                             type: "POST",
                             dataType: "json",
                             success: function (data4) {
-		                        $.ajax({
-		                            url: "/mypage/getreviewlist3",
-		                            type: "POST",
-		                            dataType: "json",
-		                            success: function (data) {
-		                                data3 = data; // 전역 변수에 저장
-		
-		                                // Assuming data1, data2, and data3 have the same length
-		                                for (let i = 0; i < data1.length; i++) {
-		                                    let options = { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" };
-		                                    let orderdate = new Date(data1[i].order_date);
-		                                    let orderformatDate = orderdate.toLocaleString("ko-KR", options);
-		
-		                                    let reviewdate = new Date(data[i].review_date);
-		                                    console.log(data);
-		                                    let reviewformatDate = reviewdate.toLocaleString("ko-KR", options);
-		                                    
-		                                    let stars = "";
-		                                    for (let j = 0; j < data3[i].review_score; j++) {
-		                                      stars += '<i class="fa fa-star text-secondary"></i>';
-		                                    }		                                    
-		
-		                                    let row = $("<tr>");
-		                                    row.html(
-		                                    		"<td>"+"<img id='purchaseimg' src='/resources/upload/product/"+ data2[i].image_folder_num +"/"+ data4[i].image1 + "'></td>" +
-		                                    	    "<td>" + orderformatDate + "</td>" +
-		                                    	    "<td>" + data1[i].order_num + "</td>" +
-		                                    	    "<td>" + data2[i].goods_title + "</td>" +
-		                                    	    "<td>" + reviewformatDate +
-		                                    	    "<br>" + stars +
-		                                    	    "<br>" + data3[i].review_content + "</td>" +
-		                                    	    "<td>" +
-	                                    	            "<form name='review1' action='/mypage/reviewupdate' method='post'>"+
-	                                        	        "<input type='hidden' class='review_num' id='review_num' name='review_num' value='" + data3[i].review_num + "'>" +
-														"<button id='reviewbutton1' type='submit' class='btn btn-primary middlebutton deliveryBtn'>수정</button></form>" +
-	                                    	            "<form name='review2' action='/mypage/reviewdelete'  method='post'>" +
-	                                        	        "<input type='hidden' class='review_num' id='review_num' name='review_num' value='" + data3[i].review_num + "'>" +
-	                                    	            "<button id='reviewbutton2' name='review_num3' onclick='reviewdelete(" + i + ")' class='btn btn-primary middlebutton purchaseViewBtn'>삭제</button></form>" +
-	                                    	        "</td>"
-		                                    	    
-		                                    	);
-		                                    console.log(row);
-		                                    testNum=data2[i].image_folder_num
-		                                    console.log(testNum);
-		                                    $("tbody").append(row);
-		                                }
-		                            },
-		                            error: function (e3) {
-		                                console.log(e3);
-		                            }
-		                        });
+                            	$.ajax({
+                            	    url: "/mypage/getreviewlist3",
+                            	    type: "POST",
+                            	    dataType: "json",
+                            	    success: function (data) {
+                            	        data3 = data; // 전역 변수에 저장
+
+                            	        // Assuming data1, data2, and data3 have the same length
+                            	        for (let i = 0; i < data1.length; i++) {
+                            	            let options = { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" };
+                            	            let orderdate = new Date(data1[i].order_date);
+                            	            let orderformatDate = orderdate.toLocaleString("ko-KR", options);
+
+                            	            let reviewdate = data[i] && data[i].review_date ? new Date(data[i].review_date) : null;
+                            	            let reviewformatDate = reviewdate ? reviewdate.toLocaleString("ko-KR", options) : null;
+
+                            	            let stars = "";
+                            	            if (data3[i] && data3[i].review_score) {
+                            	                for (let j = 0; j < data3[i].review_score; j++) {
+                            	                    stars += '<i class="fa fa-star text-secondary"></i>';
+                            	                }
+                            	            }
+
+                            	            let row = $("<tr>");
+                            	            row.html(
+                            	            	"<td><img id='purchaseimg' src='/resources/upload/product/"+ data2[i].image_folder_num +"/"+ data4[i].image1 + "'></td>" +
+                            	                "<td>" + orderformatDate + "</td>" +
+                            	                "<td>" + data1[i].order_num + "</td>" +
+                            	                "<td>" + data2[i].goods_title + "</td>"
+                            	            );
+                            	            
+                            	            // 리뷰 작성 전
+                            	            if (!data3[i] && data1[i]) { //구매내역은 있는데, 리뷰는 없는 경우
+												console.log("작성전");
+												console.log("order_num"+data1[i].order_num);
+                            	            	console.log("goods_num"+data2[i].goods_num);
+                            	            	row.append(
+                            	                    "<td><form id='addFrm' name='reviewAdd' action='/mypage/addReview' method='post'>" +
+                            	                    "<input type='hidden' name='order_num' value='" + data1[i].order_num + "'>" +
+                            	                    "<input type='hidden' name='goods_num' value='" + data2[i].goods_num + "'>" +
+                            	                    "<button id='reviewAddBtn' type='submit' class='btn btn-primary middlebutton deliveryBtn'>리뷰 등록하기</button></form></td>"+
+                            	                    "<td></td>"
+                            	                );
+                            	            }
+                            	            // 리뷰 작성 후
+                            	            else {
+												console.log("작성후");
+                            	                row.append(
+                            	                    "<td>" + (reviewformatDate ? (reviewformatDate + "<br>" + stars + "<br>" + data3[i].review_content) : "리뷰 작성 전") + "</td>" +
+                            	                    "<td>" +
+                            	                    "<form name='review1' action='/mypage/reviewupdate' method='post'>" +
+                            	                    "<input type='hidden' class='review_num' id='review_num' name='review_num' value='" + data3[i].review_num + "'>" +
+                            	                    "<button id='reviewbutton1' type='submit' class='btn btn-primary middlebutton deliveryBtn'>수정</button></form>" +
+                            	                    "<form name='review2' action='/mypage/reviewdelete'  method='post'>" +
+                            	                    "<input type='hidden' class='review_num' id='review_num' name='review_num' value='" + data3[i].review_num + "'>" +
+                            	                    "<button id='reviewbutton2' name='review_num3' class='btn btn-primary middlebutton purchaseViewBtn'>삭제</button></form>" +
+                            	                    "</td>"
+                            	                );
+                            	            }
+                            	            console.log(row);
+                            	            testNum=data2[i].image_folder_num
+                            	            console.log(testNum);
+                            	            $("tbody").append(row);
+                            	        }
+                            	    },
+                            	    error: function (e3) {
+                            	        console.log(e3);
+                            	    }
+                            	});
+
 		                    },
 		                    error: function (e4) {
 		                        console.log(e4);
