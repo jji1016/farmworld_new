@@ -38,6 +38,46 @@
     justify-content: center;
     align-items: center; 
 }
+#bigbox {
+	margin-top: 20%;
+    margin-right: 3%;
+    margin-left: 3%;
+    border: solid #81c408 3px;
+    border-radius: 30px;
+    height: 280px !important;
+    box-shadow: 5px 5px 10px 0px #888888;
+    position: relative;
+}
+#bigbox2 {
+	margin-top: 10%;
+    margin-right: 3%;
+    margin-left: 3%;
+    border: solid #81c408 3px;
+    border-radius: 30px;
+    height: 100px !important;
+    box-shadow: 5px 5px 10px 0px #888888;
+    position: relative;
+}
+#bigbox2:hover{
+	background-color: #81c408;
+	cursor: pointer;
+}
+#farms{
+    display: flex !important;
+    flex-wrap: wrap !important;
+	justify-content: center !important;
+}
+#myFarmLink{
+	width: 100%;
+	height: 100%;
+	text-align: center;
+    font-size: 25px;
+    line-height: 266%; 
+}
+#myFarmLink:hover{
+	color: white;
+	cursor: pointer;
+}
 </style>
 
 <%@include file="../includes/header.jsp" %>
@@ -52,25 +92,35 @@
 <!-- Fruits Shop Start-->
         <div class="container-fluid fruite py-5">
             <div class="container py-5">
-                <h1 class="mb-4">My Farm</h1>
+            	<div class="row col-lg-12">
+            	<div class="col-xl-3">
+                	<h1 class="mb-4">My Farm</h1>
+                </div>
+                <div id="searchbox" class="col-xl-8">
+	                            			
+                       <div class="input-group w-100 mx-auto d-flex">
+                       	<select id="type" name="type" class="border-0 form-select-sm bg-light input-group-text p-3">
+                             <option value="TW" 
+                             	<c:out value="${pageMaker.cri.type == 'TW'?'selected':''}"/>>전체</option>
+                             <option value="T" 
+                             	<c:out value="${pageMaker.cri.type == 'T'?'selected':''}"/>>농장 이름</option>
+                             <option value="W" 
+                             	<c:out value="${pageMaker.cri.type == 'W'?'selected':''}"/>>농장주</option>
+                           </select>
+                           <input type='text' class="form-control p-3" placeholder="keywords"  name='keyword' value='<c:out value="${pageMaker.cri.keyword}"/>'>
+                       	<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+                  			<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+                           <span id="search-icon-1" class="input-group-text p-3"><button class="btn btn-default"><i class="fa fa-search"></i></button></span>
+                       </div>
+                      </div>
+                      </div>
                 <div class="row g-4">
                     <div class="col-lg-12">
 	                    <form id="searchForm" action="/myfarm/main" method="get" onsubmit="return validateKeyword()">
 	                        <div class="row">
+	                        
 	                            <div class="col-xl-3"></div>
-	                            		<%-- <div class="col-xl-1">
-			                                <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">
-			                                    <select id="type" name="type" class="border-0 form-select-sm bg-light me-3">
-				                                     <option value="TW" 
-				                                     	<c:out value="${pageMaker.cri.type == 'TW'?'selected':''}"/>>전체</option>
-				                                     <option value="T" 
-				                                     	<c:out value="${pageMaker.cri.type == 'T'?'selected':''}"/>>농장 이름</option>
-				                                     <option value="W" 
-				                                     	<c:out value="${pageMaker.cri.type == 'W'?'selected':''}"/>>농장주</option>
-			                                    </select>
-			                            	</div>
-			                            </div> --%>
-	                            		<div id="searchbox" class="col-xl-9">
+	                            <%-- <div id="searchbox" class="col-xl-9">
 	                            			
 			                                <div class="input-group w-100 mx-auto d-flex">
 			                                	<select id="type" name="type" class="border-0 form-select-sm bg-light input-group-text p-3">
@@ -87,7 +137,7 @@
 		                            			<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
 			                                    <span id="search-icon-1" class="input-group-text p-3"><button class="btn btn-default"><i class="fa fa-search"></i></button></span>
 			                                </div>
-		                                </div>
+		                                </div> --%>
 		                                
 	                            	</div>
 	                            
@@ -115,7 +165,17 @@
                         <div class="row g-4">
                         
                         <!-- 내 농장 바로가기 -->
-                            <div class="col-lg-3">
+                        <div class="col-lg-3" style="position: relative;">	
+							<div id="bigbox" class="h-100 p-3">
+								<div style="position: relative;">
+								    <img id="myimage" src='/resources/upload/${vo.image_folder_num}/${vo.image1}' class='card-img-top fixed-size-image' alt='농장 이미지'>
+								</div>
+							</div>
+							<div id="bigbox2" class="h-100 p-3">
+							<h5 id="myFarmLink" class="fw-bold mb-1"><span>내 농장 바로가기</span></h5>
+							</div>
+						</div>
+                            <!-- <div class="col-lg-3">
                             
                                 <div id="mybox" class="col-md-10 wow fadeInUp" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
 			                        <div id="mybox" class="team-item border-top border-5 border-primary rounded shadow overflow-hidden">
@@ -126,21 +186,15 @@
 
 			                        </div>
 			                    </div>
-                            </div>
+                            </div> -->
                         <!-- 내 농장 바로가기 끝 -->
                         
                         <!-- 인기농장  -->
                             <div class="col-lg-9">
-                            	<h5>인기 농장</h5>
+                            	<h5 id="f">인기 농장</h5>
                             	<div class="mx-auto text-center" style="max-width: 500px;">
-					                
 					            </div>
-            
                                 <div class="row g-4 justify-content-center" id="myfarminput1">
-                                    
-
-                                    
-   
                                 </div>
                             </div>
                         </div>
@@ -195,7 +249,7 @@
 		
 							let row ="";
 							row+=("<div class='col-md-6 col-lg-6 col-xl-4'>");
-							row+=("<div class='row g-0'>");
+							row+=("<div class='row g-0' id='farms'>");
 							row+=("<div class='col-10 dhover' style='margin-bottom:40px;' onclick='redirectToFarm(" + myfarm.farm_num + ")'> ");
 							row+=("<div class='position-relative shadowhover'>");
 							row+=("<input type='hidden' name='farm_num' value='"+myfarm.farm_num+"'>")
