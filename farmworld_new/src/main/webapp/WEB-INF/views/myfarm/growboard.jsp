@@ -22,6 +22,48 @@
     max-width: 100%; /* 이미지의 최대 폭을 부모 요소(grow-info)의 100%로 설정 */
     height: auto;    /* 높이는 자동으로 조절되도록 설정 */
 	}
+	#bigbox {
+    margin-right: 3%;
+    margin-left: 3%;
+    border: solid #81c408 3px;
+    border-radius: 30px;
+    height: 100% !important;
+    box-shadow: 5px 5px 10px 0px #888888;
+    position: relative;
+}
+#myimage{
+	margin-top: 10%;
+	width: 70%;
+	height: 50%;
+}
+#myintro{
+	margin-top: 25%;
+	margin-bottom: 1%;
+}
+#mysearch{
+	margin-top: 27%;
+	position: absolute;
+    bottom: 0;
+    right: 0;
+    border-radius: 50%;
+    border: none;
+    margin: 12px;
+    margin-bottom: 7%;
+}
+#farmModify{
+	position: absolute !important;
+    top: 108%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius:50%;
+    border:none;
+}
+@media screen and (max-width: 995px) {
+  #bigbox {
+    flex: 0 0 auto;
+    width: 25%;
+    height: 70%;
+	}
 </style>
 
 
@@ -36,39 +78,37 @@
     <div class="container py-5 text-center">
         <div class="row justify-content-center">
 
-            <div class="container">
-                <div class="mx-auto text-center mb-5" style="max-width: 500px;">
-                    <h1 class="display-5" id="headName">${farmvo.farm_name }</h1>
-                </div>
-            </div>
 
-            <div class="col-lg-3" style="position: relative;">    
-                <div class="bg-primary h-100 p-5">
-                    <div style="position: relative;">
-                        <img src='/resources/upload/${farmvo.image_folder_num}/${farmvo.image1}' class='card-img-top fixed-size-image' alt='농장 이미지'>
-                        <button id="farmModify" style="position: absolute; bottom: 0; right: 0; border-radius:50%; border:none;">
-                            <a href='/myfarm/modify?farm_num=<c:out value="${vo.farm_num}"/>'>수정</a>
-                        </button>
-                    </div>
-                    
-                    <h4>${farmvo.farm_intro}</h4>
-                    <form id="findForm">
-                        <div class="input-group">
-                            <input type='text' class="form-control p-3" placeholder="농장 이름 검색" name='keyword' id='keyword'>
-                            <span class="input-group-text">
-                                <button type="button" id="searchBtn" class="btn"><i class="fa fa-search"></i></button>
-                            </span>
-                        </div>
-                    </form>
-                </div>
+            
+            <div class="container">
+	            <div class="mx-auto text-center mb-5" style="max-width: 500px;">
+	                <h1 class="display-5" id="headName">${farmvo.farm_name }</h1>
+	            </div>
             </div>
+            <div class="col-lg-3" style="position: relative;">	
+			<div id="bigbox" class="h-100 p-3">
+			<div style="position: relative;">
+			    <img id="myimage" src='/resources/upload/${farmvo.image_folder_num}/${farmvo.image1}' class='card-img-top fixed-size-image' alt='농장 이미지'>
+			    <a href='/myfarm/modify?farm_num=<c:out value="${vo.farm_num}"/>' id="farmModify" class="btn text-white bg-primary px-3 rounded position-absolute">수정</a>
+			</div>
+			
+			<h6 id="myintro">${farmvo.farm_intro}</h6>
+			<form id="findForm">
+			    <div id="mysearch" class="input-group">
+			        <input type='text' class="form-control p-3" placeholder="농장 이름 검색" name='keyword' id='keyword'>
+			        <span class="input-group-text">
+			            <button type="button" id="searchBtn" class="btn"><i class="fa fa-search"></i></button>
+			        </span>
+			    </div>
+			</form>
+			</div>
+			</div>
 
             <div class="col-lg-9">
-                <div class="bg-primary h-100 p-5">
+                <div id="bigbox" class="h-100 p-5">
                 <form action="/myfarm/growdelete" method="post">
 				<input type="hidden" name="grow_num" value='${vo.grow_num }'>
 				<input type="hidden" name="user_num" id="user_num" value='${vo.user_num }'>
-                    <div class="row g-3">
 						<div class="col-12">
 						    <!-- Grow 정보 표시 -->
 						    <div class="grow-info">

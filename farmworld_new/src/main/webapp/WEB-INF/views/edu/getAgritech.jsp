@@ -12,7 +12,6 @@
 		
 		<div id="DtlGuideLst"></div>
 		<div id="Dtl"></div>
-		<div id="nongsaroApiLoadingAreaDtl"></div>
 		
 		
 	</div>

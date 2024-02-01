@@ -22,7 +22,9 @@
 
 	<!-- 마이페이지에서 활용 위해 parameterType=int, WHERE절 추가 -->
 	<select id="selectAll" parameterType="int" resultType="MyFarmVO"> 
-		select * from myfarm WHERE user_num=#{user_num}
+		select f.*, i.image1
+        FROM myfarm f
+        LEFT JOIN image i ON f.image_folder_num = i.image_folder_num WHERE f.user_num=#{user_num}
 	</select>
 
 	<update id="update" parameterType="MyFarmVO">
@@ -73,7 +75,7 @@
 		
 	</select>
 	
-	<select id="getGoodsCount" parameterType="MyFarmVO" resultType="int">
+	<select id="getGoodsCount" parameterType="MyFarmVO" resultType="Integer">
 	SELECT COUNT(goods_num) FROM goods WHERE user_num = #{user_num}
 	</select>
 

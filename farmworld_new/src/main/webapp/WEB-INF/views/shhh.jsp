@@ -30,7 +30,7 @@
 	        
 	            <div class="row g-4">
 	            <!-- 카테고리 -->
-	               <div class="col-lg-3" style="width: 20%; margin-right: 5%;">
+	               <div class="col-lg-3">
 	                   <div class="row g-4">
 	                       <div class="col-lg-12">
 	                           <div class="mb-3">
@@ -62,7 +62,7 @@
 				                                <p>파슬리는 맛있다.</p>
 				                                <div class="d-flex justify-content-between flex-lg-wrap">
 				                                    <p class="text-dark fs-5 fw-bold">1kg / 100원</p>
-				                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary">장바구니 담기</i></a>
+				                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니 담기</a>
 				                                </div>
 				                            </div>
 				                        </div>

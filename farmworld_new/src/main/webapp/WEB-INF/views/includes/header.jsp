@@ -13,17 +13,6 @@
     <meta content="" name="keywords">
     <meta content="" name="description">
 
-	<link href="http://api.nongsaro.go.kr/css/api.css" rel="stylesheet" type="text/css">
-	<script type="text/javascript" src="http://api.nongsaro.go.kr/js/framework.js"></script>	
-	<script type="text/javascript" src="http://api.nongsaro.go.kr/js/openapi_nongsaro.js"></script>
-		
-	<script type="text/javascript">
-	nongsaroOpenApiRequest.apiKey = "20240125930NT4LOI997AD1CZL9OG";//변경할 부분 1
-	nongsaroOpenApiRequest.serviceName = "monthFarmTech";
-	nongsaroOpenApiRequest.operationName = "monthFarmTechLst";
-	nongsaroOpenApiRequest.htmlArea="nongsaroApiLoadingArea";
-	nongsaroOpenApiRequest.callback = "http://localhost:8090/edu/getDtl";//변경할 부분 2
-	</script>
 
 	<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
  -->

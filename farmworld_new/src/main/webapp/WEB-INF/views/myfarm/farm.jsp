@@ -105,9 +105,7 @@
                                 
                                 
                                 <div class="row g-4 justify-content-center" id="growupinput1">
-                                    
-
-                                    
+     
    
                                 </div>
                                 
