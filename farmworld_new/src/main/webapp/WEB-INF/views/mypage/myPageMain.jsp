@@ -40,6 +40,9 @@
 	text-align: -webkit-match-parent;
 }
 .book_section form {
+	margin: 3%;
+}
+/* .book_section form {
 	box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15) !important;
 	border-top: 1px solid #dee2e6 !important;
 	border-radius: 10px !important;
@@ -49,7 +52,7 @@
 	box-sizing: border-box;
 	padding: 5%;
     padding-bottom: 10%;
-}
+} */
 .form-row{
 	width: 100%;
 }
@@ -77,6 +80,7 @@
     margin-top: 2%;
     text-transform: uppercase;
    	float : right;
+   	margin-bottom: 8%;
 }
 </style>
 
@@ -90,12 +94,12 @@
             			<div class="container px-lg-5">
                 			<div class="section-title position-relative text-center mx-auto mb-5 pb-4 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
                 			</div>
-                			<div class="row g-4">
+                			<div class="row g-4 team-item border-top border-5 border-primary rounded shadow overflow-hidden">
                 				<table>
 	                				<tr>
 	                					<th id="leftpart">
 		                					<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-			                        			<div id="leftbox" class="team-item border-top border-5 border-primary rounded shadow overflow-hidden">
+			                        			<div id="leftbox" class="">
 			                            			<div class="text-center p-4">
 			                                			<img id="leftimg" class="img-fluid rounded-circle" src="/resources/upload/profile/${vo.userVO.user_image}" alt="프로필사진">
 			                                			
