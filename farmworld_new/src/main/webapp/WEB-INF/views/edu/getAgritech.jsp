@@ -10,6 +10,11 @@
 	<div class="container py-5">
 		<h1>농업기술 상세</h1>
 		
+		<div id="DtlGuideLst"></div>
+		<div id="Dtl"></div>
+		<div id="nongsaroApiLoadingAreaDtl"></div>
+		
+		
 	</div>
 </div>
 
