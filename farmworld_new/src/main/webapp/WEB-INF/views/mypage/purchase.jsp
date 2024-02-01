@@ -9,6 +9,7 @@
   white-space: nowrap;
 }
 #purchasebutton{
+	color : white;
 	margin: 1%;
 	font-size: 16px !important;
 }
@@ -20,6 +21,7 @@
     white-space: nowrap;
   }
   #purchasebutton{
+  	color: white;
   	margin: 1%;
 	font-size: 12px !important;
 } 
@@ -31,6 +33,7 @@
     white-space: nowrap;
   }
     #purchasebutton{
+    color: white;
     margin: 1%;
 	font-size: 7px !important;
 } 
@@ -54,6 +57,10 @@
 #purchaseimg{
 	width: 85%;
 }
+#purchasebutton:hover{
+    color: black;
+    margin: 1%;
+} 
 </style>
 </head>
 
