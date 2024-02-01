@@ -84,11 +84,11 @@
 							<table class="table">
 								<thead>
 									<tr>
-										<th>board_num</th>
-										<th>board_title</th>
-										<th>user_nickname</th>
-										<th>board_date</th>
-										<th>board_view</th>
+										<th>번호</th>
+										<th>제목</th>
+										<th>글쓴이</th>
+										<th>작성일</th>
+										<th>조회수</th>
 									</tr>
 								</thead>
 								<tbody></tbody>
