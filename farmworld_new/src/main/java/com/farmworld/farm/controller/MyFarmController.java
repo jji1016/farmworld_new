@@ -152,7 +152,27 @@ public class MyFarmController {
 	@PostMapping("/modify")
 	public String modify(@RequestParam("image1") MultipartFile file, Model model, HttpSession session,
 			MyFarmVO myFarmVO) {
-
+		String filePath = ""; // 폴더 경로
+		MyFarmVO vo = (myFarmService.get(myFarmVO.getFarm_num()));
+		ImageVO image = imageService.get(vo.getImage_folder_num());
+		int imageNum = image.getImage_folder_num();
+		Path FPath;
+		if (!file.isEmpty()) {
+			try {
+				filePath = uploadDir + imageNum + "/";
+				if (image.getImage1() != null) {
+					FPath = Paths.get(filePath + image.getImage1());
+					Files.delete(FPath);
+				}
+				String fileName = fileUpload.uploadFile(file, filePath);
+				image.setImage1(fileName);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		imageService.modify(image);
+		myFarmService.modify(myFarmVO);
+		
 		return "redirect:/myfarm/farm?farm_num=" + myFarmVO.getFarm_num();
 	}
 

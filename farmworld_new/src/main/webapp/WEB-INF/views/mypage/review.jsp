@@ -61,10 +61,24 @@
 #reviewbutton1{
 	margin-top: 15% !important;
 	width: 100%;
+	color: white;
+}
+#reviewbutton1:hover{
+	color: black;
 }
 #reviewbutton2{
 	margin-top: 2% !important;
 	width: 100%;
+	color: white;
+}
+#reviewbutton2:hover{
+	color: black;
+}
+#reviewAddBtn{
+	color: white;
+}
+#reviewAddBtn:hover{
+	color: black;
 }
 #addFrm{
 	display: flex;
