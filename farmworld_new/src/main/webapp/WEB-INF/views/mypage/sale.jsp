@@ -55,7 +55,7 @@
 	width: 85%;
 }
 #salebutton:hover{
-    color: white;
+    color: black;
 } 
 </style>
 </head>
