@@ -15,7 +15,6 @@
 #myimage{
 	margin-top: 10%;
 	width: 70%;
-	height: 50%;
 }
 #myintro{
 	margin-top: 25%;
@@ -136,6 +135,74 @@
         } else {
             document.querySelector('#farmModify').style.display = 'none';
         }
+		
+		loadTableData();
+		
+    	function loadTableData() {
+    	    let farmNum = $("#farmNum").val();
+    	    console.log("팜넘" + farmNum);
+    	    $.ajax({
+    	        url: "/myfarm/growlist",
+    	        type: "POST",
+    	        dataType: "json",
+    	        data: {
+    	            farm_num: farmNum,
+    	            pageNum: $("#pageForm").find("input[name='pageNum']").val(),
+    	            amount: $("#pageForm").find("input[name='amount']").val(),
+    	            keyword: $("#pageForm").find("input[name='keyword']").val(),
+    	            type: $("#pageForm").find("input[name='type']").val(),
+    	            growup_category: $("#pageForm").find("input[name='growup_category']").val()
+    	        },
+    	        success: function (data) {
+    	            let growBody = $("#growInput");
+    	            console.log(data);
+    	            if (data.length === 0) {
+    	            	growBody.html("<div style='width: 50%; height: 400px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin: auto; background-color: #f8d7da; border: 1px solid #f5c6cb; border-radius: .25rem;'><p style='font-size: 20px;'>현재 성장일기가 존재하지 않습니다.</p></div>");
+					 } else {
+    	            let row = "<div class='row g-3' >"; // 새로운 행 시작
+
+    	            $.each(data, function (index, grow) {
+    	                // 여기서 grow 항목을 생성하고 클래스 추가
+    	                row += ("<div class='col-md-4 col-lg-4 col-xl-4'>"); // 각 항목의 너비 조절
+    	                row += ("<div class='rounded position-relative' style='margin-bottom:40px;' onclick='redirectToGrow(" + grow.grow_num + ")'>");
+    	                row += ("<div class='row g-0'>");
+    	                row += ("<div class='col-10 dhover'>");
+    	                row += ("<div class='position-relative'>");
+    	                row += ("<input type='hidden' name='farm_num' value='" + grow.farm_num + "'>")
+    	                row += ("<img src='/resources/upload/" + grow.image_folder_num + "/" + grow.image1 + "' class='card-img-top fixed-size-image' alt='성장일기 이미지' style='width:100%; height:200px'>");
+    	                row += ("<div class='position-absolute start-0 bottom-0 w-100 py-3 px-4' style='background: rgba(52, 173, 84, .85);'>");
+    	                row += ("<h4 class='text-white text-truncate'>" +"["+ grow.growup_category +"]"+ grow.grow_title + "</h4>");
+    	                row += ("</div></div></div></div></div></div>");
+
+    	                if ((index + 1) % 3 === 0) {
+    	                    // 3개의 항목을 한 행으로 처리하고 새로운 행 시작
+    	                    row += "</div>"; // 행을 닫음
+    	                    growBody.append(row);
+    	                    row = "<div class='row g-3'>"; // 새로운 행 시작
+    	                }
+    	            });
+
+    	            if (data.length % 3 !== 0) {
+    	                // 남은 항목들을 마저 처리
+    	                row += "</div>"; // 마지막 행을 닫음
+    	                growBody.append(row);
+    	            }
+    	            }
+    	        },
+    	        error: function (e) {
+    	            console.log(e);
+    	        }
+    	    });
+    	    
+    	    let pageForm = $("#pageForm");
+    	    $(".paginate_button button a").on("click", function(e) {
+				e.preventDefault(); // 기존에 가진 이벤트를 중단
+				pageForm.find("input[name='pageNum']").val($(this).attr("href"));
+				pageForm.submit();
+			});
+    	}		
+		
+		
     	
         $("#keyword").keypress(function(event) {
             if (event.which === 13) {

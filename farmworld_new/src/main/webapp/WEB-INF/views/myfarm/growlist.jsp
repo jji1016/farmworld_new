@@ -10,14 +10,13 @@
     margin-left: 3%;
     border: solid #81c408 3px;
     border-radius: 30px;
-    height: 600px !important;
+    height: 100% !important;
     box-shadow: 5px 5px 10px 0px #888888;
     position: relative;
 }
 #myimage{
 	margin-top: 10%;
 	width: 70%;
-	height: 50%;
 }
 #myintro{
 	margin-top: 25%;
@@ -75,14 +74,15 @@
 	            </div>
             </div>
             <div class="col-lg-3" style="position: relative;">	
-			<div id="bigbox" class="h-100 p-5">
+			<div id="bigbox" class="h-100 p-3">
 			<div style="position: relative;">
 			    <img id="myimage" src='/resources/upload/${vo.image_folder_num}/${vo.image1}' class='card-img-top fixed-size-image' alt='농장 이미지'>
 			    <a href='/myfarm/modify?farm_num=<c:out value="${vo.farm_num}"/>' id="farmModify" class="btn text-white bg-primary px-3 rounded position-absolute">수정</a>
 			</div>
+			
 			<h6 id="myintro">${vo.farm_intro}</h6>
 			<form id="findForm">
-			    <div class="input-group">
+			    <div id="mysearch" class="input-group">
 			        <input type='text' class="form-control p-3" placeholder="농장 이름 검색" name='keyword' id='keyword'>
 			        <span class="input-group-text">
 			            <button type="button" id="searchBtn" class="btn"><i class="fa fa-search"></i></button>
@@ -94,17 +94,16 @@
 			
 			
 			
-			<div class="col-lg-2" style="position: relative;">	
-			<div id="bigbox" class="h-100 p-5">
-			<h5>카테고리</h5>
-			<div id="categoryInput"></div>
-			</div>
-			</div>
-            
-            
-            <div class="col-lg-7">
-                    <div id="bigbox" class="h-100 p-5">
 
+
+            
+            <div class="col-lg-9">
+            
+                    <div id="bigbox" class="h-100 p-5">
+			            <div class="col-lg-2" style="position: relative; float:left;">	
+								<h5>카테고리</h5>
+								<div id="categoryInput"></div>
+						</div>
 
                             <div class="row g-3">
                             
@@ -130,7 +129,10 @@
                             			<li class="paginate_button previous" ><a href="${pageMaker.startPage -1}">prev</a></li>
                             		</c:if>
                             		<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" >
-                            			<li class="paginate_button  ${pageMaker.cri.pageNum == num ? 'active': '' }" ><a href="${num }">${num }</a></li>
+                            			<li class="paginate_button  ${pageMaker.cri.pageNum == num ? 'active': '' }" >
+                            			<button type="button" class="btn ${pageMaker.cri.pageNum == num ? 'btn-primary': 'btn-outline-primary' }"
+                            			style="padding:0PX;"><a href="${num }">${num }</a></button>
+                            			</li>
                             		</c:forEach>
                             		<c:if test="${pageMaker.next }">
                             			<li class="paginate_button next" ><a href="${pageMaker.endPage + 1}">Next</a></li>
@@ -240,7 +242,7 @@ function redirectToGrow(growNum) {
     	    });
     	    
     	    let pageForm = $("#pageForm");
-    	    $(".paginate_button a").on("click", function(e) {
+    	    $(".paginate_button button a").on("click", function(e) {
 				e.preventDefault(); // 기존에 가진 이벤트를 중단
 				pageForm.find("input[name='pageNum']").val($(this).attr("href"));
 				pageForm.submit();

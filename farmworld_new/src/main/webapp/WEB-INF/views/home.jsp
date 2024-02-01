@@ -104,6 +104,7 @@
                             </div>
                             <div class="featurs-content text-center">
                                 <h5>Weather</h5>
+                                <div id="weatherPlace"></div>
                             </div>
                         </div>
                     </div>
@@ -111,5 +112,85 @@
             </div>
         </div>
         <!-- Featurs Section End -->
-        
+
 <%@include file="includes/footer.jsp" %>
+
+<script>
+	$(document).ready(function(){
+	if (window.location.href.startsWith="http://localhost:8082/weather"){
+		weatherAjax();
+	}
+	});
+	
+	function weatherAjax() {
+		$("#weatherPlace").empty();
+		var today = new Date();
+		var year = today.getFullYear();
+		var month = ('0' + (today.getMonth() + 1)).slice(-2);
+		var day = ('0' + today.getDate()).slice(-2);
+		var dateString = year + '' + month  +'' + day;    	
+		var hours = ('0' + today.getHours()).slice(-2);     	
+		var timeString = (hours*100);
+		
+		$.ajax({
+	        url: "/weather",
+	        type: "post",
+	        contentType: "application/json; charset=utf-8;",
+	        dataType: "json",
+	        success: function(data) {
+	        	let html = "<p>";
+	        	for (let key of data.response.body.items.item){
+	        			if(key["fcstTime"]==timeString && key["fcstDate"]==dateString){
+	        					if(key["category"] =="TMP"){	
+	        						html+="<img src='/resources/img/weatherIcon/temperature.png' style='width:10%; height:10%;'>"+"현재기온:"+key["fcstValue"];
+	        						html +="<br>";
+	        					}	
+	
+	        					if(key["category"] =="PCP"){	
+	        						if(key["fcstValue"] !="강수없음"){
+	        							html+="<img src='/resources/img/weatherIcon/rain.png' style='width:10%; height:10%;'>";
+	        						html+="강수량:"+key["fcstValue"];
+	        						html +="<br>";
+	        						}
+	        					}	
+	        					if(key["category"] =="SNO"){	
+	        						if(key["fcstValue"] !="적설없음"){
+	        							html+="<img src='/resources/img/weatherIcon/snow.png' style='width:10%; height:10%;'>";
+	        						html+="적설량:"+key["fcstValue"];
+	        						html +="<br>";
+	        						}
+	        					}    	            
+	        					if(key["category"] =="SKY"){	
+	        						if(key["fcstValue"] == "1"){
+	        						html+="<img src='/resources/img/weatherIcon/sun.png' style='width:10%; height:10%;'>";
+	        						html+="맑음";
+	        						html +="<br>";
+	        					}	
+	        						if(key["fcstValue"] == "2"){
+	        							html+="<img src='/resources/img/weatherIcon/cloud.png' style='width:10%; height:10%;'>";
+	        						html+="구름조금";
+	        						html +="<br>";
+	        					}	
+	        						if(key["fcstValue"] == "3"){
+	        							html+="<img src='/resources/img/weatherIcon/cloud.png' style='width:10%; height:10%;'>";
+	        						html+="구름많음";
+	        						html +="<br>";
+	        					}	
+	        						if(key["fcstValue"] == "4"){
+	        							html+="<img src='/resources/img/weatherIcon/cloud.png' style='width:10%; height:10%;'>";
+	        						html+="흐림";
+	        						html +="<br>";
+	        					}	
+	        				};		
+	        	};
+	        };
+	        	html += "</p>";
+				$("#weatherPlace").html(html);
+	            
+	        },
+	        error: function(e) {
+	            console.log(e);
+	        }
+	    });
+	}
+</script>
