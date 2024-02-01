@@ -34,7 +34,6 @@
 #myimage{
 	margin-top: 10%;
 	width: 70%;
-	height: 50%;
 }
 #myintro{
 	margin-top: 25%;

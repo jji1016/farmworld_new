@@ -10,14 +10,13 @@
     margin-left: 3%;
     border: solid #81c408 3px;
     border-radius: 30px;
-    height: 600px !important;
+    height: 100% !important;
     box-shadow: 5px 5px 10px 0px #888888;
     position: relative;
 }
 #myimage{
 	margin-top: 10%;
 	width: 70%;
-	height: 50%;
 }
 #myintro{
 	margin-top: 25%;
@@ -123,7 +122,10 @@
                             			<li class="paginate_button previous" ><a href="${pageMaker.startPage -1}">prev</a></li>
                             		</c:if>
                             		<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" >
-                            			<li class="paginate_button  ${pageMaker.cri.pageNum == num ? 'active': '' }" ><a href="${num }">${num }</a></li>
+                            			<li class="paginate_button  ${pageMaker.cri.pageNum == num ? 'active': '' }" >
+                            			<button type="button" class="btn ${pageMaker.cri.pageNum == num ? 'btn-primary': 'btn-outline-primary' }"
+                            			style="padding:0PX;"><a href="${num }">${num }</a></button>
+                            			</li>
                             		</c:forEach>
                             		<c:if test="${pageMaker.next }">
                             			<li class="paginate_button next" ><a href="${pageMaker.endPage + 1}">Next</a></li>

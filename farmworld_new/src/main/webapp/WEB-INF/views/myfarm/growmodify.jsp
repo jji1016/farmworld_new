@@ -34,7 +34,6 @@
 #myimage{
 	margin-top: 10%;
 	width: 70%;
-	height: 50%;
 }
 #myintro{
 	margin-top: 25%;
@@ -94,8 +93,8 @@
 			</div>
 			
 			<h6 id="myintro">${farmvo.farm_intro}</h6>
-                    <form id="findForm" style="position: absolute; bottom: 4%;">
-                        <div class="input-group">
+                    <form id="findForm">
+                        <div id="mysearch" class="input-group">
                             <input type='text' class="form-control p-3" placeholder="농장 이름 검색" name='keyword' id='keyword'>
                             <span class="input-group-text">
                                 <button type="button" id="searchBtn" class="btn"><i class="fa fa-search"></i></button>

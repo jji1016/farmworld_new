@@ -159,12 +159,15 @@ text-align: center;
 					            </div>
                                 <div class="row g-4 justify-content-center" id="myfarminput1">
                                 </div>
-                                   <ul class="pagination">
+                                      <ul class="pagination" style="display:flex; justify-content: flex-start;">
                             		<c:if test="${pageMaker.prev }">
                             			<li class="paginate_button previous" ><a href="${pageMaker.startPage -1}">prev</a></li>
                             		</c:if>
                             		<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" >
-                            			<li class="paginate_button  ${pageMaker.cri.pageNum == num ? 'active': '' }" ><a href="${num }">${num }</a></li>
+                            			<li class="paginate_button  ${pageMaker.cri.pageNum == num ? 'active': '' }" >
+                            			<button type="button" class="btn ${pageMaker.cri.pageNum == num ? 'btn-primary': 'btn-outline-primary' }"
+                            			style="padding:0PX;"><a href="${num }">${num }</a></button>
+                            			</li>
                             		</c:forEach>
                             		<c:if test="${pageMaker.next }">
                             			<li class="paginate_button next" ><a href="${pageMaker.endPage + 1}">Next</a></li>
