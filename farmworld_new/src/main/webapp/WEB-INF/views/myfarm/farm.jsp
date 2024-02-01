@@ -65,6 +65,9 @@
 	            <div class="mx-auto text-center mb-5" style="max-width: 500px;">
 	                <h1 class="display-5" id="headName">${vo.farm_name }</h1>
 	                <input type="hidden" value="${vo.user_num }" name="user_num" id="userNum">
+	                <input type="hidden" value="${vo.user_num }" name="user_num" id="user_num">
+	                <input type="hidden" value="${vo.farm_num }" name="farm_num" id="farmNum">
+
 	            </div>
             </div>
             <div class="col-lg-3" style="position: relative;">	
@@ -102,8 +105,8 @@
                                 <a style="color:black;" href="/myfarm/goodslist?farm_num=<c:out value='${vo.farm_num}'/>&user_num=<c:out value='${vo.user_num}'/>" >판매상품</a>
                                 </div>
                                 
-                                
-                                <div class="row g-4 justify-content-center" id="growupinput1">
+                                <div class="col-12" style="margin-top:1em; margin-bottom:1em;"><h1>최신 글</h1></div>
+                                <div class="row g-4 justify-content-center" id="growInput">
      
    
                                 </div>
@@ -122,6 +125,15 @@
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
 <script type="text/javascript">
+function redirectToGrow(growNum) {
+    // userNum을 사용하여 해당 유저의 팜으로 이동
+    if (growNum) {
+        window.location.href = '/myfarm/growboard?grow_num=' + growNum;
+    } else {
+        alert('해당 게시글은 존재하지 않습니다.!');
+        window.history.back();
+    }
+}
     $(document).ready(function () {
     	
     	var sessionUserNum = <%= session.getAttribute("user_num") %>;
@@ -146,12 +158,7 @@
     	        type: "POST",
     	        dataType: "json",
     	        data: {
-    	            farm_num: farmNum,
-    	            pageNum: $("#pageForm").find("input[name='pageNum']").val(),
-    	            amount: $("#pageForm").find("input[name='amount']").val(),
-    	            keyword: $("#pageForm").find("input[name='keyword']").val(),
-    	            type: $("#pageForm").find("input[name='type']").val(),
-    	            growup_category: $("#pageForm").find("input[name='growup_category']").val()
+    	            farm_num: farmNum
     	        },
     	        success: function (data) {
     	            let growBody = $("#growInput");
@@ -159,13 +166,13 @@
     	            if (data.length === 0) {
     	            	growBody.html("<div style='width: 50%; height: 400px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin: auto; background-color: #f8d7da; border: 1px solid #f5c6cb; border-radius: .25rem;'><p style='font-size: 20px;'>현재 성장일기가 존재하지 않습니다.</p></div>");
 					 } else {
-    	            let row = "<div class='row g-3' >"; // 새로운 행 시작
+    	            let row = "<div class='row g-3 justify-content-center' >"; // 새로운 행 시작
 
-    	            $.each(data, function (index, grow) {
+    	            $.each(data.slice(0,3), function (index, grow) {
     	                // 여기서 grow 항목을 생성하고 클래스 추가
-    	                row += ("<div class='col-md-4 col-lg-4 col-xl-4'>"); // 각 항목의 너비 조절
+    	                row += ("<div class='col-md-3 col-lg-3 col-xl-3'>"); // 각 항목의 너비 조절
     	                row += ("<div class='rounded position-relative' style='margin-bottom:40px;' onclick='redirectToGrow(" + grow.grow_num + ")'>");
-    	                row += ("<div class='row g-0'>");
+    	                row += ("<div class='row g-3 justify-content-center'>");
     	                row += ("<div class='col-10 dhover'>");
     	                row += ("<div class='position-relative'>");
     	                row += ("<input type='hidden' name='farm_num' value='" + grow.farm_num + "'>")
@@ -178,15 +185,10 @@
     	                    // 3개의 항목을 한 행으로 처리하고 새로운 행 시작
     	                    row += "</div>"; // 행을 닫음
     	                    growBody.append(row);
-    	                    row = "<div class='row g-3'>"; // 새로운 행 시작
     	                }
     	            });
 
-    	            if (data.length % 3 !== 0) {
-    	                // 남은 항목들을 마저 처리
-    	                row += "</div>"; // 마지막 행을 닫음
-    	                growBody.append(row);
-    	            }
+
     	            }
     	        },
     	        error: function (e) {
