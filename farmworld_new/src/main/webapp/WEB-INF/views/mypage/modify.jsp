@@ -85,7 +85,10 @@
 	width: 35% !important;
     margin-right: 7%;
 }
-
+.btn-box2{
+	margin-top: 2%;
+	display: block;
+}
 </style>
 
 </head>
@@ -187,11 +190,11 @@
 												                	id="user_detailAddress" name="user_detailAddress" value="${vo.userVO.user_detailAddress}">
 												              </div>
 												            </div>
-												            <div class="btn-box">
+												           <!--  <div class="btn-box2">
 												              <button type="button" class="btn text-white bg-primary px-3 rounded" id="openModal"
 												              	data-bs-toggle="modal" data-bs-target="#checkPw">회원 탈퇴</button>
 												              <button type="submit" class="btn text-white bg-primary px-3 rounded">회원 정보 수정</button>
-												          </div>
+												          </div> -->
 												          
 												        </div>
 												      </div>
@@ -201,6 +204,11 @@
 		                						</th>	
 	                						</tr>
                 						</table>
+                						<div class="btn-box2">
+							              <button type="button" class="btn text-white bg-primary px-3 rounded" id="openModal"
+							              	data-bs-toggle="modal" data-bs-target="#checkPw">회원 탈퇴</button>
+							              <button type="submit" class="btn text-white bg-primary px-3 rounded">회원 정보 수정</button>
+							          </div>
 		                			</div>
                 				</form>
                 			</div>

@@ -52,20 +52,22 @@ public class EduController {
 		return map;
     }
     
-	@GetMapping("/dtlGuideLst")
+	@GetMapping("/getDtl")
 	public String getDtlGuideLst() {
 		
 		return "edu/getAgritech";
 	}
 	
 	@ResponseBody
-	@PostMapping("/dtlGuideLst")
-	public String dtlGuideLst(@RequestParam(name = "curationNo", required = false) int curationNo) {
+	@PostMapping("/getDtl")
+	public Map<String, String> dtlGuideLst(@RequestParam(name = "curationNo", required = false) int curationNo, 
+			@RequestParam(name = "cntntsSnn", required = false) int cntntsSnn) {
 		System.out.println("curationNo:"+curationNo);
-		String result2 = eduService.getAgritech(curationNo);
-		System.out.println("dtlGuideLst::"+result2);
+		System.out.println("cntntsSnn:"+cntntsSnn);
+		Map<String, String> apiMap = eduService.getAgritech(curationNo, cntntsSnn);
+		System.out.println("apiMap::"+apiMap);
 		
-		return result2 ;
+		return apiMap ;
 	}
     
     
