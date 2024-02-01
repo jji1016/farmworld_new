@@ -82,6 +82,18 @@
    	float : right;
    	margin-bottom: 8%;
 }
+#updateBtn {
+    color: #ffffff;
+    margin-top: 2%;
+    text-transform: uppercase;
+   	float : right;
+   	margin-bottom: 8%;
+   	background-color: #81c408;
+   	border-radius: 10px;
+}
+#updateBtn:hover {
+    color: black !important;
+}
 </style>
 
 </head>
@@ -131,8 +143,8 @@
 											                <p id="user_nickname" class="form-control" ><c:out value="${user_nickname}"/></p>
 											              </div>
 											            </div>
-											            <div class="btn-box">
-											              <button type="button" class="btn " onclick="goMod()">회원정보 수정</button>
+											            <div>
+											              <button id="updateBtn" type="button" class="btn btn-primary middlebutton deliveryBtn " onclick="goMod()">회원정보 수정</button>
 											            </div>
 											          </form>
 											        </div>

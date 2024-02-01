@@ -35,6 +35,9 @@
     display: grid;
     
 }
+#checkPwInput{
+	margin-left: 3%;
+}
 .book_section form {
 	box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15) !important;
 	border-top: 1px solid #dee2e6 !important;
@@ -88,6 +91,37 @@
 .btn-box2{
 	margin-top: 2%;
 	display: block;
+}
+#updateBtn {
+    color: #ffffff;
+    text-transform: uppercase;
+   	float : right;
+   	background-color: #81c408;
+   	border-radius: 10px;
+}
+#updateBtn:hover {
+    color: black !important;
+}
+#updateBtn2 {
+    color: #ffffff;
+    text-transform: uppercase;
+   	float : right;
+   	background-color: #81c408;
+   	border-radius: 10px;
+   	margin-left: 1%;
+}
+#updateBtn2:hover {
+    color: black !important;
+}
+#imgBtn {
+    color: #ffffff;
+    text-transform: uppercase;
+   	float : right;
+   	background-color: #81c408;
+   	border-radius: 10px;
+}
+#imgBtn:hover {
+    color: black !important;
 }
 </style>
 
@@ -172,7 +206,7 @@
 												                	id="user_postCode" name="user_postCode" value="${vo.userVO.user_postCode}">
 	
 												              <!-- 우편번호 찾기 버튼-->
-							                                	<input type="button" class="btn text-white bg-primary px-3 rounded " style="max-width: 33%;" 
+							                                	<input id="updateBtn" type="button" class="btn text-white bg-primary px-3 rounded " style="max-width: 33%;" 
 							                                		onclick="execDaumPostcode()" value="우편번호 찾기">
 							                                
 							                                	<div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">
@@ -205,9 +239,9 @@
 	                						</tr>
                 						</table>
                 						<div class="btn-box2">
-							              <button type="button" class="btn text-white bg-primary px-3 rounded" id="openModal"
+							              <button id="updateBtn2" type="button" class="btn text-white bg-primary px-3 rounded" id="openModal"
 							              	data-bs-toggle="modal" data-bs-target="#checkPw">회원 탈퇴</button>
-							              <button type="submit" class="btn text-white bg-primary px-3 rounded">회원 정보 수정</button>
+							              <button id="updateBtn2" type="submit" class="btn text-white bg-primary px-3 rounded">회원 정보 수정</button>
 							          </div>
 		                			</div>
                 				</form>
@@ -230,7 +264,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">비밀번호 확인</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button id="updateBtn" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div id="pwCheck" class="modal-body">
       비밀번호를 입력해주세요.
@@ -241,7 +275,7 @@
       <div class="modal-body" id="inputAdd">
       </div>
       <div class="modal-footer">
-      <button type="button" class="btn btn-primary" id="checkPwBtn" data-bs-dismiss="modal">확인</button>
+      <button id="updateBtn" type="button" class="btn btn-primary" id="checkPwBtn" data-bs-dismiss="modal">확인</button>
       </div>
     </div>
   </div>
@@ -253,7 +287,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">회원 탈퇴</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button id="updateBtn" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
       정말 탈퇴하시겠습니까?
@@ -261,8 +295,8 @@
       구매자를 위해 판매자 활동 정보는 한 달 뒤 삭제 예정입니다.)
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니오.</button>
-        <button type="button" class="btn btn-primary" id="delBtn" data-bs-dismiss="modal">네, 탈퇴하겠습니다</button>
+        <button id="updateBtn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니오.</button>
+        <button id="updateBtn" type="button" class="btn btn-primary" id="delBtn" data-bs-dismiss="modal">네, 탈퇴하겠습니다</button>
       </div>
     </div>
   </div>
