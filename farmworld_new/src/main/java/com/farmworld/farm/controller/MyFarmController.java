@@ -106,7 +106,15 @@ public class MyFarmController {
 	}
 
 	@GetMapping({ "/main", "/" })
-	public void myfarmMain(Criteria cri, Model model) {
+	public void myfarmMain(Criteria cri, Model model, HttpSession session) {
+		Boolean hasUserNum = session.getAttribute("user_num") != null;
+		if (hasUserNum) {
+			// 세션에 user_num이 있다면 응답에 user_num 추가
+			Integer userNum = (Integer) session.getAttribute("user_num");
+			System.out.println("usernum:" + userNum);
+			MyFarmVO vo = myFarmService.getByUserNum(userNum);
+			model.addAttribute("vo", vo);
+		}
 		cri.setAmount(6);
 		int total = myFarmService.getTotal(cri);
 		pageDTO pageResult = new pageDTO(cri, total);
@@ -423,8 +431,11 @@ public class MyFarmController {
 	@GetMapping("/goodslist")
 	public void goodslist(MyFarmVO myFarmVO, Criteria cri, Model model) {
 		cri.setAmount(6);
+		System.out.println(myFarmVO);
 		int total = myFarmService.getGoodsCount(myFarmVO);
+		System.out.println("토오타알"+total);
 		pageDTO pageResult = new pageDTO(cri, total);
+		System.out.println("페이지"+pageResult);
 		model.addAttribute("pageMaker", pageResult);
 		model.addAttribute("vo", myFarmService.get(myFarmVO.getFarm_num()));
 		model.addAttribute("image", imageService.get(myFarmService.get(myFarmVO.getFarm_num()).getImage_folder_num()));
