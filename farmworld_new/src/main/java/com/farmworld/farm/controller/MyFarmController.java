@@ -152,7 +152,6 @@ public class MyFarmController {
 	@PostMapping("/modify")
 	public String modify(@RequestParam("image1") MultipartFile file, Model model, HttpSession session,
 			MyFarmVO myFarmVO) {
-		Integer userNum = (Integer) session.getAttribute("user_num");
 		String filePath = ""; // 폴더 경로
 		MyFarmVO vo = (myFarmService.get(myFarmVO.getFarm_num()));
 		ImageVO image = imageService.get(vo.getImage_folder_num());
