@@ -1,6 +1,8 @@
 package com.farmworld.shop.mapper;
 
 import com.farmworld.all.domain.ImageVO;
+import com.farmworld.login.domain.UserVO;
+import com.farmworld.mypage.domain.ReviewVO;
 import com.farmworld.shop.domain.GoodsVO;
 
 import java.util.List;
@@ -31,5 +33,9 @@ public interface GoodsMapper {
 
     List<Map<String, Object>> getGoodsCategoryTotalCount();
 
+  //리뷰 가져오기
+    public List<ReviewVO> getReview(int goods_num);
+    public List<UserVO> getUser(int user_num);
+    public List<ImageVO> getImage(int image_folder_num);
 
 }

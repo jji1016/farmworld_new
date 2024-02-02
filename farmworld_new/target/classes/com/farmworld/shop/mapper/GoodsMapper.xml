@@ -115,5 +115,21 @@
 		DELETE FROM image WHERE image_folder_num = #{image_folder_num}
 	</delete>
 
+
+<!-- 리뷰 가져오기 -->
+	<select id="getReview" parameterType="int" resultType="ReviewVO">
+		SELECT * FROM review
+        WHERE goods_num = #{goods_num}
+	</select>
+	
+	<select id="getUser" parameterType="int" resultType="UserVO">
+		SELECT * FROM user
+        WHERE user_num = #{user_num}
+	</select>
+	
+	<select id="getImage" parameterType="int" resultType="ImageVO">
+		SELECT * FROM image
+        WHERE image_folder_num = #{image_folder_num}
+	</select>
 </mapper>
 	

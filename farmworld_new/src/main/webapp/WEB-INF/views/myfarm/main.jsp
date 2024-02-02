@@ -154,7 +154,7 @@ text-align: center;
                         
                         <!-- 인기농장  -->
                             <div class="col-lg-9">
-                            	<h5 id="f">인기 농장</h5>
+                            	<h4 id="f">인기 농장</h4>
                             	<div class="mx-auto text-center" style="max-width: 500px;">
 					            </div>
                                 <div class="row g-4 justify-content-center" id="myfarminput1">

@@ -2,7 +2,11 @@
     pageEncoding="UTF-8"%>
 
 <%@include file="includes/header.jsp" %>
-    
+<style>
+.imgHeight{
+	height: 18rem;
+}
+</style>  
 
 <!-- 상단 공백 추가 끝 -->
 <div class="container-fluid py-5">
@@ -12,30 +16,32 @@
 <!-- 페이지 왼쪽 -->        
 <div class="container-fluid fruite py-5">
 	<div class="container py-5">
-	    <h1 class="mb-4">작물샵</h1>
+		<div class="row col-lg-12" style="margin-bottom: 2%;">
+           	<!-- 검색 -->
+			<div class="col-xl-3">
+	    		<h1 class="mb-4">Shop</h1>
+            </div>
+            <div id="searchbox" class="col-xl-8">
+                <div class="input-group w-100 mx-auto d-flex" style="height: 64px;">
+                    <input id="searchInput" type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
+                    <span id="search-icon-1" class="input-group-text p-3"><a href="javascript:void(0);" id="searchBtn" class="btn btn-default"><i class="fa fa-search"></i></a></span>
+                </div>
+            <!-- 검색 끝 -->
+                <div class="col-6"></div>
+                <div class="col-xl-3"></div>
+	        </div>
+        </div>
 	    <div class="row g-4">
 	        <div class="col-lg-12">
-	            <div class="row g-4">
-	            	<!-- 검색 -->
-					<div class="col-xl-3">
-	                    <div class="input-group w-100 mx-auto d-flex">
-	                        <input id="searchInput" type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
-	                        <span id="search-icon-1" class="input-group-text p-3"><a href="javascript:void(0);" id="searchBtn"><i class="fa fa-search"></i></a></span>
-	                    </div>
-	                </div>
-	                <!-- 검색 끝 -->
-	                <div class="col-6"></div>
-	                <div class="col-xl-3"></div>
-	            </div>
 	        
 	            <div class="row g-4">
 	            <!-- 카테고리 -->
-	               <div class="col-lg-3" style="width: 20%; margin-right: 5%;">
+	               <div class="col-lg-3" >
 	                   <div class="row g-4">
 	                       <div class="col-lg-12">
-	                           <div class="mb-3">
+	                           <div class="mb-3 col-lg-10">
 	                           
-	                               <h4>Categories</h4>
+	                               <h4>카테고리</h4>
 	                               <ul id="categories" class="list-unstyled fruite-categorie">
 
 	                               		
@@ -49,7 +55,7 @@
                     
                     <div class="col-lg-9">
                             <!-- 추천상품 -->
-                            	<h1 class="fw-bold mb-0">추천 상품</h1>
+                            	<h4 class="fw-bold mb-0">추천 상품</h4>
 				                <div class="vesitable">
 				                    <div class="owl-carousel vegetable-carousel justify-content-center">
 				                        <div class="border border-primary rounded position-relative vesitable-item">
@@ -73,7 +79,7 @@
 				                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">과일</div>
 				                            <div class="p-4 pb-0 rounded-bottom">
 				                                <h4>방울토마토</h4>
-				                                <p>방울토마토는 맛있다.</p>
+				                                <p>맛있겠다.</p>
 				                                <div class="d-flex justify-content-between flex-lg-wrap">
 				                                    <p class="text-dark fs-5 fw-bold">2kg / 200원</p>
 				                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니 담기</a>
@@ -101,7 +107,7 @@
 				                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">과일</div>
 				                            <div class="p-4 pb-0 rounded-bottom">
 				                                <h4>파프리카</h4>
-				                                <p>파프리카는 싫어싫어</p>
+				                                <p>싫어싫어</p>
 				                                <div class="d-flex justify-content-between flex-lg-wrap">
 				                                    <p class="text-dark fs-5 fw-bold">4kg / 400원</p>
 				                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니 담기</a>
@@ -115,7 +121,7 @@
 				                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">채소</div>
 				                            <div class="p-4 pb-0 rounded-bottom">
 				                                <h4>감자</h4>
-				                                <p>감자는 왕감자 왕감자</p>
+				                                <p>감자는 왕감자</p>
 				                                <div class="d-flex justify-content-between flex-lg-wrap">
 				                                    <p class="text-dark fs-5 fw-bold">5kg / 500원</p>
 				                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니 담기</a>
