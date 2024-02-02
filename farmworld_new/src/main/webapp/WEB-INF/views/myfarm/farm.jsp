@@ -139,10 +139,9 @@ function redirectToGrow(growNum) {
     	
     	var sessionUserNum = <%= session.getAttribute("user_num") %>;
     	var sessionType = <%= session.getAttribute("user_type") %>;
-        // 입력된 user_num 가져오기
+    	
         var inputUserNum = document.getElementById("userNum").value;
-		console.log("세션"+sessionUserNum+" jsp" +inputUserNum)
-        // user_num이 일치하는지 확인
+
         if (sessionUserNum == inputUserNum || sessionType == 2) {
             document.querySelector('#farmModify').style.display = 'block';
         } else {
@@ -167,11 +166,10 @@ function redirectToGrow(growNum) {
     	            if (data.length === 0) {
     	            	growBody.html("<div style='width: 50%; height: 400px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin: auto;'><p style='font-size: 20px;'>현재 성장일기가 존재하지 않습니다.</p></div>");
 					 } else {
-    	            let row = "<div class='row g-3 justify-content-center' >"; // 새로운 행 시작
-
+    	            let row = "<div class='row g-3 justify-content-center' >"; 
+					// 불러온 데이터를 반복해서 저장 후 growbody에 추가
     	            $.each(data.slice(0,3), function (index, grow) {
-    	                // 여기서 grow 항목을 생성하고 클래스 추가
-    	                row += ("<div class='col-md-3 col-lg-3 col-xl-3'>"); // 각 항목의 너비 조절
+    	                row += ("<div class='col-md-3 col-lg-3 col-xl-3'>"); 
     	                row += ("<div class='rounded position-relative' style='margin-bottom:40px;' onclick='redirectToGrow(" + grow.grow_num + ")'>");
     	                row += ("<div class='row g-3 justify-content-center'>");
     	                row += ("<div class='col-10 dhover'>");
@@ -183,8 +181,8 @@ function redirectToGrow(growNum) {
     	                row += ("</div></div></div></div></div></div>");
 
     	                if ((index + 1) % 3 === 0) {
-    	                    // 3개의 항목을 한 행으로 처리하고 새로운 행 시작
-    	                    row += "</div>"; // 행을 닫음
+    	                    // 3개의 항목만 보여주기
+    	                    row += "</div>"; 
     	                    growBody.append(row);
     	                }
     	            });

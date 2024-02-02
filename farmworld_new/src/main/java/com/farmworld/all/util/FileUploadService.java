@@ -15,24 +15,16 @@ import com.farmworld.all.service.ImageService;
 
 @Service
 public class FileUploadService {
-	
-	@Autowired
-	private ImageService imageService;
-	
-	
 	public String uploadFile(MultipartFile file, String path) throws IOException, IllegalStateException {
 	    String folderPath = "";  // 폴더 경로
 	    String fileName = file.getOriginalFilename();
 	    
 	        try {
 	            // 저장 경로 설정    
-	            
-	            
 	            Date today = new Date();
 	    		Locale currentLocale = new Locale("KOREAN", "KOREA");
 	    		String pattern = "yyyyMMddHHmmss"; //hhmmss로 시간,분,초만 뽑기도 가능
 	    		SimpleDateFormat formatter = new SimpleDateFormat(pattern, currentLocale);
-	    		System.out.println(formatter.format(today));
 	            fileName = formatter.format(today)+"_"+ fileName;
 	            
 	            File folder = new File(path);
@@ -48,9 +40,6 @@ public class FileUploadService {
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
-	    
 		return fileName;
 	}
-	
-
 }

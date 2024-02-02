@@ -322,7 +322,6 @@ function redirectToGrow(growNum) {
         		success:function(data){
         			console.log(data);
         			let categoryInput = $("#categoryInput");
-        			
         			categoryInput.append("<div class='dhover'><p id='cleanCategory'>전체</p></div>")
         			$.each(data, function (index, category) {
         				console.log(category.growup_category);
@@ -350,7 +349,6 @@ function redirectToGrow(growNum) {
 					$("#pageForm").find("input[name='pageNum']").val("1");
 					
 					
-        	        // loadTableData() 실행
 					$("#pageForm").submit();
         	    });
 
