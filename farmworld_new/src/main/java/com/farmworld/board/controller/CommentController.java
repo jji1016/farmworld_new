@@ -34,7 +34,7 @@ public class CommentController {
     	System.out.println("getcom실행");
         // 댓글을 가져오는 비즈니스 로직을 호출
         List<CommentVO> comments = commentService.comAll(boardNum);
-        System.out.println(comments);
+        System.out.println("comcom"+comments);
         return comments;
     }
 	
