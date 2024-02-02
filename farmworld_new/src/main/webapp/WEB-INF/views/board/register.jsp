@@ -5,6 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <link rel="stylesheet" href="/resources/editor/summernote-lite.css">
+<link href="/resources/css/board/board.css" rel="stylesheet">
 <script src="/resources/editor/summernote-ko-KR.js"></script>
 <script src="/resources/editor/summernote-lite.js"></script>
 
@@ -13,7 +14,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Board Register</h1>
+                    <h1 class="page-header">게시글 등록</h1>
                 </div>
             </div>
             <div class="row">
@@ -21,7 +22,7 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <form action="/board/register" method="post" enctype="multipart/form-data">
-                                <select name="board_category">
+                                <select name="board_category" class="border-0 form-select-sm bg-light input-group-text p-2">
                                     <option value="notice">공지사항</option>
                                     <option value="free_board">자유게시판</option>
                                 </select>
@@ -51,7 +52,9 @@
                                     <input type="file" name="files" id="image3" class="form-control-file">
                                     <div id="imagePreview3" class="col-8"></div>
                                 </div>
-                                <button type="submit" class="btn btn-default">등록하기</button>
+                                <div class="btnBox">
+                                	<button type="submit" class="btn btn-default btnMid">등록하기</button>
+                            	</div>
                             </form>
                         </div>
                     </div>

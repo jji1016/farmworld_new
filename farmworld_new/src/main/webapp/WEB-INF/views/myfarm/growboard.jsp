@@ -155,11 +155,9 @@
         // 세션에서 user_num을 가져오기
         var sessionUserNum = <%= session.getAttribute("user_num") %>;
         var sessionType = <%= session.getAttribute("user_type") %>;
-        // 입력된 user_num 가져오기
+
         var inputUserNum = document.getElementById("user_num").value;
 	
-        console.log("세션"+sessionUserNum+" jsp" +inputUserNum)
-        // user_num이 일치하는지 확인
         if (sessionUserNum == inputUserNum || sessionType == 2) {
             document.querySelector('.btn-info').style.display = 'block';
             document.querySelector('.btn-danger').style.display = 'block';
@@ -180,7 +178,6 @@
         $("#searchBtn").click(function () {
             // AJAX 호출
 					var keyword = $("#findForm").find("input[name='keyword']").val();
-            		console.log($("#keyword").val());
             $.ajax({
             	type: "POST",
             	contentType: "application/x-www-form-urlencoded",

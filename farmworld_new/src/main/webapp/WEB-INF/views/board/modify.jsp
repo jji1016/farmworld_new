@@ -6,6 +6,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <link rel="stylesheet" href="/resources/editor/summernote-lite.css">
+<link href="/resources/css/board/board.css" rel="stylesheet">
 <script src="/resources/editor/summernote-ko-KR.js"> </script>
 <script src="/resources/editor/summernote-lite.js"> </script>
 
@@ -14,7 +15,7 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Board Modify</h1>
+					<h1 class="page-header">게시글 수정</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -45,7 +46,7 @@
                                     <label for="image1">이미지 업로드</label>
                                     <input type="file" name="files" id="image1" class="form-control-file" >
                                     <button type="button" class="del_image" id="del_image1">삭제</button>
-                                    <div id="imagePreview1" class="col-8">
+                                    <div id="imagePreview1" class="form-control mod_form-control rapI">
                                     	<c:if test="${board.image1 != null}">
                                     		<img src="/resources/upload/${board.image_folder_num }/${board.image1}">
                                     	</c:if>
@@ -55,7 +56,7 @@
                                     <label for="image2">이미지 업로드</label>
                                     <input type="file" name="files" id="image2" class="form-control-file">
                                     <button type="button" class="del_image" id="del_image2">삭제</button>
-                                    <div id="imagePreview2" class="col-8">
+                                    <div id="imagePreview2" class="form-control mod_form-control rapI">
                                     	<c:if test="${board.image2 != null}">
                                     		<img src="/resources/upload/${board.image_folder_num }/${board.image2}">
                                     	</c:if>
@@ -65,16 +66,18 @@
                                     <label for="image3">이미지 업로드</label>
                                     <input type="file" name="files" id="image3" class="form-control-file">
                                     <button type="button" class="del_image" id="del_image3">삭제</button>
-                                    <div id="imagePreview3" class="col-8">
+                                    <div id="imagePreview3" class="form-control mod_form-control rapI">
                                     	<c:if test="${board.image3 != null}">
                                     		<img src="/resources/upload/${board.image_folder_num }/${board.image3}">
                                     	</c:if>
                                     </div>
                                 </div>
 								
-								<button type="button" class="btn btn-default" data-oper = "modify">수정완료</button>
-								<button type="button" class="btn btn-default" data-oper = "remove">삭제</button>
-                                <button type="button" class="btn-default" onclick ="location.href='/board/list?board_category=${board.board_category}'">목록으로</button>
+								<div class="btnBox">
+									<button type="button" class="btn btn-default btnMid" data-oper = "modify">수정완료</button>
+									<button type="button" class="btn btn-default btnMid" data-oper = "remove">삭제</button>
+	                                <button type="button" class="btn btn-default btnMid" onclick ="location.href='/board/list?board_category=${board.board_category}'">목록으로</button>
+                                </div>
 							</form>
 						</div>
 					</div>
