@@ -33,9 +33,9 @@
 	</select>
 	
 	<select id="maxNum" resultType="Integer">
-		SELECT MAX(image_folder_num) + 1 FROM image
+	    SELECT COALESCE(MAX(image_folder_num)+1, 1)  FROM image
 	</select>
-	
+		
 	<update id="delImage" parameterType="map">
 	  UPDATE image
 	  <set>

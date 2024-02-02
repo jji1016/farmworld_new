@@ -111,7 +111,7 @@ public class BoardController {
 	                String fileName = fileUpload.uploadFile(file, filePath);
 
 	                // 동적으로 setImage 실행
-	                switch (i+1) {
+	                switch (i) {
 	                    case 1:
 	                        image.setImage1(fileName);
 	                        break;
@@ -186,7 +186,7 @@ public class BoardController {
 	                
 
 	                // 동적으로 setImage 실행
-	                switch (i+1) {
+	                switch (i) {
 	                    case 1:
 	                    	FPath = Paths.get(uploadDir + imageNum+"\\"+image.getImage1());
 	                    	System.out.println(FPath);

@@ -1,10 +1,10 @@
 package com.farmworld.edu.service;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import com.farmworld.edu.domain.MonthFarmTechLst;
 import com.farmworld.edu.util.EduRestApiUtilXml;
 
 
@@ -31,7 +31,7 @@ public class EduService {
 		return result;
 	}
 	
-	public String getAgritech(int curationNo) {
+	public Map<String, String> getAgritech(int curationNo, int cntntsSnn) {
 		System.out.println("curationNo--"+curationNo);
 		// monthFarmTechDtlGuideLst 
 		String url1 = "http://api.nongsaro.go.kr/service/monthFarmTech/monthFarmTechDtlGuideLst";
@@ -54,21 +54,23 @@ public class EduService {
 		System.out.println("result2::"+result2);
 		
 		// monthFarmTechDtl
-		String srchCntntsSnn=result1.substring(result1.indexOf("<cntntsSnn>")+20,result1.indexOf("]]></cntntsSnn>"));
-		System.out.println("srchCntntsSnn::"+srchCntntsSnn);
+		System.out.println("cntntsSnn::"+cntntsSnn);
 		String url3 = "http://api.nongsaro.go.kr/service/monthFarmTech/monthFarmTechDtl";
 		HashMap<String, String> data3 = new HashMap<String, String>(); 
 		HashMap<String, String> headerData3 = new HashMap<String, String>(); 
 		data3.put("apiKey", SECURITY);
 		data3.put("srchCurationNo", String.valueOf(curationNo));
-		data3.put("srchCntntsSnn", srchCntntsSnn);
+		data3.put("srchCntntsSnn", String.valueOf(cntntsSnn));
 		headerData3.put("Content-Type", "text/xml;charset=UTF-8");
 		String result3 = EduRestApiUtilXml.ConnHttpGetType(url3, headerData3, data3);
 		System.out.println("result3::"+result3);
 		
+		Map<String, String> apiMap = new HashMap<String, String>();
+		apiMap.put("DtlGuideLst", result1);
+		apiMap.put("DtlDefaultInfo", result2);
+		apiMap.put("Dtl", result3);
 		
-		
-		return result1;
+		return apiMap;
 	}
 	
 }

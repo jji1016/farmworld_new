@@ -106,7 +106,15 @@ public class MyFarmController {
 	}
 
 	@GetMapping({ "/main", "/" })
-	public void myfarmMain(Criteria cri, Model model) {
+	public void myfarmMain(Criteria cri, Model model, HttpSession session) {
+		Boolean hasUserNum = session.getAttribute("user_num") != null;
+		if (hasUserNum) {
+			// 세션에 user_num이 있다면 응답에 user_num 추가
+			Integer userNum = (Integer) session.getAttribute("user_num");
+			System.out.println("usernum:" + userNum);
+			MyFarmVO vo = myFarmService.getByUserNum(userNum);
+			model.addAttribute("vo", vo);
+		}
 		cri.setAmount(6);
 		int total = myFarmService.getTotal(cri);
 		pageDTO pageResult = new pageDTO(cri, total);
@@ -144,7 +152,27 @@ public class MyFarmController {
 	@PostMapping("/modify")
 	public String modify(@RequestParam("image1") MultipartFile file, Model model, HttpSession session,
 			MyFarmVO myFarmVO) {
-
+		String filePath = ""; // 폴더 경로
+		MyFarmVO vo = (myFarmService.get(myFarmVO.getFarm_num()));
+		ImageVO image = imageService.get(vo.getImage_folder_num());
+		int imageNum = image.getImage_folder_num();
+		Path FPath;
+		if (!file.isEmpty()) {
+			try {
+				filePath = uploadDir + imageNum + "/";
+				if (image.getImage1() != null) {
+					FPath = Paths.get(filePath + image.getImage1());
+					Files.delete(FPath);
+				}
+				String fileName = fileUpload.uploadFile(file, filePath);
+				image.setImage1(fileName);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		imageService.modify(image);
+		myFarmService.modify(myFarmVO);
+		
 		return "redirect:/myfarm/farm?farm_num=" + myFarmVO.getFarm_num();
 	}
 
@@ -423,8 +451,11 @@ public class MyFarmController {
 	@GetMapping("/goodslist")
 	public void goodslist(MyFarmVO myFarmVO, Criteria cri, Model model) {
 		cri.setAmount(6);
+		System.out.println(myFarmVO);
 		int total = myFarmService.getGoodsCount(myFarmVO);
+		System.out.println("토오타알"+total);
 		pageDTO pageResult = new pageDTO(cri, total);
+		System.out.println("페이지"+pageResult);
 		model.addAttribute("pageMaker", pageResult);
 		model.addAttribute("vo", myFarmService.get(myFarmVO.getFarm_num()));
 		model.addAttribute("image", imageService.get(myFarmService.get(myFarmVO.getFarm_num()).getImage_folder_num()));

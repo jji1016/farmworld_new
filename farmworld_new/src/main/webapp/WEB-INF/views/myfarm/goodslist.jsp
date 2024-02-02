@@ -4,6 +4,73 @@
 
 <%@include file="../includes/header.jsp" %>
 
+<style>
+#bigbox {
+    margin-right: 3%;
+    margin-left: 3%;
+    border: solid #81c408 3px;
+    border-radius: 30px;
+    min-height: 600px; /* 최소 높이를 600px로 지정 */
+    height: 100% !important;
+    box-shadow: 5px 5px 10px 0px #888888;
+    position: relative;
+}
+#myimage{
+	margin-top: 10%;
+	width: 70%;
+}
+#myintro{
+	margin-top: 25%;
+	margin-bottom: 1%;
+}
+#mysearch{
+	margin-top: 27%;
+	position: absolute;
+    bottom: 0;
+    right: 0;
+    border-radius: 50%;
+    border: none;
+    margin: 12px;
+    margin-bottom: 7%;
+}
+#farmModify{
+	position: absolute !important;
+    top: 108%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius:50%;
+    border:none;
+}
+.pagination-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-wrap: wrap; /* 추가: 작은 화면에서 줄 바꿈 */
+    gap: 5px;
+}
+.pagination li {
+    margin: 5px; /* 수정: 각 페이지 번호의 간격 조정 */
+}
+@media screen and (max-width: 995px) {
+  #bigbox {
+    flex: 0 0 auto;
+    width: 90%;
+    height: 70%;
+	}
+	.pagination {
+        justify-content: center; /* 추가: 페이지 번호 중앙 정렬 */
+    }
+    .pagination li {
+        margin: 0px; /* 추가: 작은 화면에서 각 페이지 번호의 간격 조정 */
+    }
+</style>
 <!-- 상단 공백 추가 끝 -->
 <div class="container-fluid py-5">
 </div>
@@ -14,13 +81,11 @@
 <div class="container-fluid py-5">
     <div class="container py-5 text-center">
         <div class="row justify-content-center">
-        	
-        	<div class="container">
+			 <div class="container">
 	            <div class="mx-auto text-center mb-5" style="max-width: 500px;">
 	                <h1 class="display-5" id="headName">${vo.farm_name }</h1>
-	                <input type="hidden" value="${vo.user_num }" name="user_num" id="userNum">
 	                <form id="pageForm" method="get" action="/myfarm/goodslist">
-	                
+	                <input type="hidden" value="${vo.user_num }" name="user_num" id="userNum">
 	                <input type="hidden" value="${vo.farm_num }" name="farm_num" id="farmNum">
 	                <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
                    	<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
@@ -30,15 +95,15 @@
 	            </div>
             </div>
             <div class="col-lg-3" style="position: relative;">	
-			<div class="bg-primary h-100 p-5">
+			<div id="bigbox" class="h-100 p-3">
 			<div style="position: relative;">
-			    <img src='/resources/upload/${vo.image_folder_num}/${image.image1}' class='card-img-top fixed-size-image' alt='농장 이미지'>
-			    <button id="farmModify" style="position: absolute; bottom: 0; right: 0; border-radius:50%; border:none;"><a href='/myfarm/modify?farm_num=<c:out value="${vo.farm_num}"/>'>수정</a></button>
+			    <img id="myimage" src='/resources/upload/${vo.image_folder_num}/${vo.image1}' class='card-img-top fixed-size-image' alt='농장 이미지'>
+			    <a href='/myfarm/modify?farm_num=<c:out value="${vo.farm_num}"/>' id="farmModify" class="btn text-white bg-primary px-3 rounded position-absolute">수정</a>
 			</div>
 			
-			<h4>${vo.farm_intro}</h4>
+			<h6 id="myintro">${vo.farm_intro}</h6>
 			<form id="findForm">
-			    <div class="input-group">
+			    <div id="mysearch" class="input-group">
 			        <input type='text' class="form-control p-3" placeholder="농장 이름 검색" name='keyword' id='keyword'>
 			        <span class="input-group-text">
 			            <button type="button" id="searchBtn" class="btn"><i class="fa fa-search"></i></button>
@@ -47,10 +112,11 @@
 			</form>
 			</div>
 			</div>
+            
 
             
             <div class="col-lg-9">
-                    <div class="bg-primary h-100 p-5">
+                    <div id="bigbox" class="h-100 p-5">
 
 
                             <div class="row g-3">
@@ -74,13 +140,16 @@
                                 <div class="col-12" id="goodsInput">
 
                                 </div>
-                                <div class="col-12">
+                                <div class="col-12 pagination-container">
                                 <ul class="pagination" style="display:flex; justify-content: flex-start;">
                             		<c:if test="${pageMaker.prev }">
                             			<li class="paginate_button previous" ><a href="${pageMaker.startPage -1}">prev</a></li>
                             		</c:if>
                             		<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" >
-                            			<li class="paginate_button  ${pageMaker.cri.pageNum == num ? 'active': '' }" ><a href="${num }">${num }</a></li>
+                            			<li class="paginate_button  ${pageMaker.cri.pageNum == num ? 'active': '' }" >
+                            			<button type="button" class="btn ${pageMaker.cri.pageNum == num ? 'btn-primary': 'btn-outline-primary' }"
+                            			style="padding:0PX;"><a href="${num }">${num }</a></button>
+                            			</li>
                             		</c:forEach>
                             		<c:if test="${pageMaker.next }">
                             			<li class="paginate_button next" ><a href="${pageMaker.endPage + 1}">Next</a></li>
@@ -103,7 +172,7 @@
 function redirectToGoods(goodsNum) {
     // userNum을 사용하여 해당 유저의 팜으로 이동
     if (goodsNum) {
-        window.location.href = '/goods/shopdetail?goods_num=' + goodsNum;
+        window.location.href = '/shopdetail?detail=' + goodsNum;
     } else {
         alert('해당 게시글은 존재하지 않습니다.!');
         window.history.back();
@@ -145,7 +214,7 @@ function redirectToGoods(goodsNum) {
     	            let growBody = $("#goodsInput");
     	            console.log(data1);
     	            if (data1.length === 0) {
-    	            	growBody.html("<div style='width: 50%; height: 400px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin: auto; background-color: #f8d7da; border: 1px solid #f5c6cb; border-radius: .25rem;'><p style='font-size: 20px;'>현재 판매상품이 존재하지 않습니다.</p></div>");
+    	            	growBody.html("<div style='width: 50%; height: 400px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin: auto;'><p style='font-size: 20px;'>현재 판매상품이 존재하지 않습니다.</p></div>");
 					 } else {
 						 $.ajax({
 								url:"/myfarm/getgoodsimage",

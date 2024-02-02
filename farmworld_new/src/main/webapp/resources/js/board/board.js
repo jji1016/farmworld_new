@@ -364,6 +364,7 @@ $(".del_image").on("click", function () {
     var id = $(this).attr("id");
     console.log(id);
 	var replaceID = id.replace("del_", "");
+	var previewID = "imagePreview" + replaceID.charAt(replaceID.length-1);
 	console.log(replaceID);
 
     $.ajax({
@@ -374,7 +375,8 @@ $(".del_image").on("click", function () {
         success: function(result) {
             // 성공적으로 삭제되면 해당 이미지를 화면에서 제거
             console.log(result);
-             $("#" + replaceID).empty();
+            $("#" + replaceID).empty();
+            $("#" + previewID).empty();
             console.log("Image deleted successfully");
         },
         error: function(error) {
@@ -386,13 +388,21 @@ $(".del_image").on("click", function () {
 
 
 function previewImage(input, previewId) {
+    const maxFileSize = 2 * 1024 * 1024; // 2MB
     var file = input.files[0];
+    console.log("file:" + file);
+
     if (file) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            $("#" + previewId).html('<img src="' + e.target.result + '" alt="Image Preview" class="img-fluid">');
-        };
-        reader.readAsDataURL(file);
+        if (file.size > maxFileSize) {
+            alert("파일 크기는 2MB를 초과할 수 없습니다.");
+            input.value = ""; // 파일 선택 초기화
+        } else {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $("#" + previewId).html('<img src="' + e.target.result + '" alt="Image Preview" class="img-fluid">');
+            };
+            reader.readAsDataURL(file);
+        }
     }
 }
 
@@ -407,5 +417,3 @@ $("#image2").change(function () {
 $("#image3").change(function () {
     previewImage(this, 'imagePreview3');
 });
-
-

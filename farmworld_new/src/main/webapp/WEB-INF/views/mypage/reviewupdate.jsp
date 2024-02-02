@@ -109,6 +109,7 @@
     text-align: center;
     justify-content: center;
     place-self: center !important;
+    color: white;
 }
 #producttable{
 	margin-bottom: 3%;
@@ -125,9 +126,18 @@
 #reviewtitle{
 	margin-bottom: 1%;
 }
-#reviewscore{
-	margin-bottom: 5% !important;
-	background-color: white !important;
+.rvScore{
+	background-color: #f4f6f8 !important;
+    font-size: x-large !important;
+}
+.btn-primary{
+	color: white !important;
+}
+#button1:hover{
+	color: black !important
+}
+#button2:hover{
+	color: black !important
 }
 </style>
 </head>
@@ -158,6 +168,7 @@
 							</table>
 						</div>
 						<label id="reviewtitle" for="inputDoctorName">상품 만족도</label><br>
+						<div class="rvScore mb col-12">
 							<span id="starContainer" name="review_score" value="${getreview.review_score}">
 								<i class="fa fa-star rvStar" data-star="1"></i>
 						        <i class="fa fa-star rvStar" data-star="2"></i>
@@ -165,6 +176,7 @@
 						        <i class="fa fa-star rvStar" data-star="4"></i>
 						        <i class="fa fa-star rvStar" data-star="5"></i>
 							</span><br><br>
+						</div>
 						<input type="hidden" name="review_num" value="${getreview.review_num}">
 						<input type="hidden" name="review_score" value="${getreview.review_score}">
 						<input type="hidden" id="folderNum" name="image_folder_num" value="${getreview.image_folder_num}">

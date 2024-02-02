@@ -44,7 +44,7 @@
 								<div class="form-group">
                                     <label for="image1">이미지 업로드</label>
                                     <input type="file" name="files" id="image1" class="form-control-file" >
-                                    <input type="button" class="del_image" id="del_image1">삭제
+                                    <button type="button" class="del_image" id="del_image1">삭제</button>
                                     <div id="imagePreview1" class="col-8">
                                     	<c:if test="${board.image1 != null}">
                                     		<img src="/resources/upload/${board.image_folder_num }/${board.image1}">
@@ -54,7 +54,7 @@
                                 <div class="form-group">
                                     <label for="image2">이미지 업로드</label>
                                     <input type="file" name="files" id="image2" class="form-control-file">
-                                    <button class="del_image" id="del_image2">삭제</button>
+                                    <button type="button" class="del_image" id="del_image2">삭제</button>
                                     <div id="imagePreview2" class="col-8">
                                     	<c:if test="${board.image2 != null}">
                                     		<img src="/resources/upload/${board.image_folder_num }/${board.image2}">
@@ -64,7 +64,7 @@
                                 <div class="form-group">
                                     <label for="image3">이미지 업로드</label>
                                     <input type="file" name="files" id="image3" class="form-control-file">
-                                    <button class="del_image" id="del_image3">삭제</button>
+                                    <button type="button" class="del_image" id="del_image3">삭제</button>
                                     <div id="imagePreview3" class="col-8">
                                     	<c:if test="${board.image3 != null}">
                                     		<img src="/resources/upload/${board.image_folder_num }/${board.image3}">

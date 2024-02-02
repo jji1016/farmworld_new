@@ -9,6 +9,7 @@
   white-space: nowrap;
 }
 #salebutton{
+	color: white;
 	font-size: 16px !important;
 }
 
@@ -19,6 +20,7 @@
     white-space: nowrap;
   }
   #salebutton{
+	color: white;
 	font-size: 12px !important;
 } 
 }
@@ -29,6 +31,7 @@
     white-space: nowrap;
   }
     #salebutton{
+    color: white;
 	font-size: 7px !important;
 } 
 }
@@ -51,6 +54,9 @@
 #saleimg{
 	width: 85%;
 }
+#salebutton:hover{
+    color: black;
+} 
 </style>
 </head>
 
