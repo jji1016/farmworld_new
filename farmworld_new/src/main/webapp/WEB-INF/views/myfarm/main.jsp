@@ -154,7 +154,7 @@ text-align: center;
                         
                         <!-- 인기농장  -->
                             <div class="col-lg-9">
-                            	<h5 id="f">인기 농장</h5>
+                            	<h4 id="f">인기 농장</h4>
                             	<div class="mx-auto text-center" style="max-width: 500px;">
 					            </div>
                                 <div class="row g-4 justify-content-center" id="myfarminput1">
@@ -179,7 +179,6 @@ text-align: center;
                     </div>
                 </div>
             </div>
-        </div>
         <!-- Fruits Shop End-->
         <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 		<script>
@@ -190,10 +189,11 @@ text-align: center;
 
 		        window.location.href = '/myfarm/farm?farm_num=' + farmNum;
 		    } else {
-		        alert('로그인을 해주세요!');
-		        window.location.href = '/login';
+		        alert('해당 팜은 없습니다.');
+		        window.location.href = '/myfarm/main';
 		    }
 		}
+		
 		function validateKeyword() {
 	        var keyword = document.forms["searchForm"]["keyword"].value;
 	        if (keyword.length === 1) {
@@ -267,7 +267,9 @@ text-align: center;
 					searchForm.submit();
 				});
 			}
-		    
+			
+
+			
 		    $('#myFarmLink').click(function() {
 		        // jQuery를 사용하여 /myfarm/farm로 이동
 		        // 이동하기 전에 세션에 user_num이 있는지 확인
@@ -276,9 +278,6 @@ text-align: center;
 		            type: 'GET',
 		            dataType:'JSON',
 		            success: function(response) {
-		            	console.log(response);
-		            	console.log(response.hasUserNum);
-		            	console.log(response.userNum);
 		                if (response.hasUserNum) {
 		                	if(response.isfarm){
 		                		// 세션에 user_num이 있으면 /myfarm/farm로 이동

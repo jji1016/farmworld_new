@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.farmworld.all.domain.ImageVO;
 import com.farmworld.shop.domain.GoodsVO;
+import com.farmworld.shop.domain.UserAndReviewVO;
 import com.farmworld.shop.service.GoodsService;
 
 @Controller
@@ -129,6 +130,14 @@ public class GoodsController {
 		return result;
 	}
 
+/* 리뷰 가져오기 */	
+	@ResponseBody
+	@RequestMapping(value = "/getReviewlist", method = RequestMethod.POST)
+	public List<UserAndReviewVO> getReviewList(@RequestParam("goods_num") int goods_num) {
+	    List<UserAndReviewVO> list = goodsService.getReviewList(goods_num);
+	    System.out.println("list" + list);
+	    return list;
+	}
 
 
 }

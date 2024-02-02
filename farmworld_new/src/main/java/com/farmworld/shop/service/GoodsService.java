@@ -6,6 +6,7 @@ import java.util.Map;
 import com.farmworld.all.domain.Criteria;
 import com.farmworld.all.domain.ImageVO;
 import com.farmworld.shop.domain.GoodsVO;
+import com.farmworld.shop.domain.UserAndReviewVO;
 
 import javax.servlet.http.HttpSession;
 
@@ -32,5 +33,7 @@ public interface GoodsService {
 
     int modifyGoods(GoodsVO goodsVo);
 
+  //리뷰 가져오기
+    public List<UserAndReviewVO> getReviewList(int goods_num);
 }
 	

@@ -29,6 +29,7 @@
     margin-left: 3%;
     border: solid #81c408 3px;
     border-radius: 30px;
+    min-height: 600px; /* 최소 높이를 600px로 지정 */
     height: 100% !important;
     box-shadow: 5px 5px 10px 0px #888888;
     position: relative;
@@ -59,10 +60,14 @@
     border-radius:50%;
     border:none;
 }
+
+
+
+
 @media screen and (max-width: 995px) {
   #bigbox {
     flex: 0 0 auto;
-    width: 25%;
+    width: 90%;
     height: 70%;
 	}
 </style>
@@ -232,11 +237,11 @@
         });
         
     function previewImage(input, previewId) {
-    	const maxFileSize = 2 * 1024 * 1024; // 2MB
+    	const maxFileSize = 2 * 1024 * 1024;
         const fileInput = input.files[0];
 
         var preview = document.getElementById(previewId);
-        preview.innerHTML = ''; // 미리보기를 초기화
+        preview.innerHTML = ''; // if절 시작 전 미리보기를 초기화
 
         if (input.files && input.files[0]) {
         	if (fileInput.size > maxFileSize) {
