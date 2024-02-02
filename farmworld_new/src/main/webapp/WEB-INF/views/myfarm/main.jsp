@@ -179,7 +179,6 @@ text-align: center;
                     </div>
                 </div>
             </div>
-        </div>
         <!-- Fruits Shop End-->
         <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 		<script>
