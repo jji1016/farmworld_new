@@ -11,8 +11,6 @@ public interface MyFarmMapper {
 	
 	public void insert(MyFarmVO vo);
 
-	public void insertSelectBno(MyFarmVO vo);
-
 	public MyFarmVO selectAll(Integer user_num);
 
 	public int update(MyFarmVO vo);
@@ -34,8 +32,7 @@ public interface MyFarmMapper {
 	public int getGoodsCount(MyFarmVO vo);
 
 	public List<GoodsVO> getGoodsList(GrowCriteria cri);
-	public void Alter1();
-	public void Alter2();
+
 
 
 }

@@ -10,6 +10,7 @@
     margin-left: 3%;
     border: solid #81c408 3px;
     border-radius: 30px;
+    min-height: 600px; /* 최소 높이를 600px로 지정 */
     height: 100% !important;
     box-shadow: 5px 5px 10px 0px #888888;
     position: relative;
@@ -40,12 +41,35 @@
     border-radius:50%;
     border:none;
 }
+.pagination-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-wrap: wrap; /* 추가: 작은 화면에서 줄 바꿈 */
+    gap: 5px;
+}
+.pagination li {
+    margin: 5px; /* 수정: 각 페이지 번호의 간격 조정 */
+}
 @media screen and (max-width: 995px) {
   #bigbox {
     flex: 0 0 auto;
-    width: 25%;
+    width: 90%;
     height: 70%;
 	}
+	.pagination {
+        justify-content: center; /* 추가: 페이지 번호 중앙 정렬 */
+    }
+    .pagination li {
+        margin: 0px; /* 추가: 작은 화면에서 각 페이지 번호의 간격 조정 */
+    }
 </style>
 
 <!-- 상단 공백 추가 끝 -->
@@ -123,7 +147,7 @@
                                 <div class="col-12" id="growInput">
 
                                 </div>
-                                <div class="col-12">
+                                <div class="col-12 pagination-container">
                                 <ul class="pagination" style="display:flex; justify-content: flex-start;">
                             		<c:if test="${pageMaker.prev }">
                             			<li class="paginate_button previous" ><a href="${pageMaker.startPage -1}">prev</a></li>
@@ -204,7 +228,7 @@ function redirectToGrow(growNum) {
     	            let growBody = $("#growInput");
     	            console.log(data);
     	            if (data.length === 0) {
-    	            	growBody.html("<div style='width: 50%; height: 400px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin: auto; background-color: #f8d7da; border: 1px solid #f5c6cb; border-radius: .25rem;'><p style='font-size: 20px;'>현재 성장일기가 존재하지 않습니다.</p></div>");
+    	            	growBody.html("<div style='width: 50%; height: 400px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin: auto;'><p style='font-size: 20px;'>현재 성장일기가 존재하지 않습니다.</p></div>");
 					 } else {
     	            let row = "<div class='row g-3' >"; // 새로운 행 시작
 

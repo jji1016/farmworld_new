@@ -8,7 +8,8 @@
     margin-left: 3%;
     border: solid #81c408 3px;
     border-radius: 30px;
-    height: 600px !important;
+    min-height: 600px; /* 최소 높이를 600px로 지정 */
+    height: 100% !important;
     box-shadow: 5px 5px 10px 0px #888888;
     position: relative;
 }
@@ -41,7 +42,7 @@
 @media screen and (max-width: 995px) {
   #bigbox {
     flex: 0 0 auto;
-    width: 25%;
+    width: 90%;
     height: 70%;
 	}
 </style>
@@ -164,7 +165,7 @@ function redirectToGrow(growNum) {
     	            let growBody = $("#growInput");
     	            console.log(data);
     	            if (data.length === 0) {
-    	            	growBody.html("<div style='width: 50%; height: 400px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin: auto; background-color: #f8d7da; border: 1px solid #f5c6cb; border-radius: .25rem;'><p style='font-size: 20px;'>현재 성장일기가 존재하지 않습니다.</p></div>");
+    	            	growBody.html("<div style='width: 50%; height: 400px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin: auto;'><p style='font-size: 20px;'>현재 성장일기가 존재하지 않습니다.</p></div>");
 					 } else {
     	            let row = "<div class='row g-3 justify-content-center' >"; // 새로운 행 시작
 
