@@ -79,7 +79,7 @@
 				                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">과일</div>
 				                            <div class="p-4 pb-0 rounded-bottom">
 				                                <h4>방울토마토</h4>
-				                                <p>방울토마토는 맛있다.</p>
+				                                <p>맛있겠다.</p>
 				                                <div class="d-flex justify-content-between flex-lg-wrap">
 				                                    <p class="text-dark fs-5 fw-bold">2kg / 200원</p>
 				                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니 담기</a>
@@ -107,7 +107,7 @@
 				                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">과일</div>
 				                            <div class="p-4 pb-0 rounded-bottom">
 				                                <h4>파프리카</h4>
-				                                <p>파프리카는 싫어싫어</p>
+				                                <p>싫어싫어</p>
 				                                <div class="d-flex justify-content-between flex-lg-wrap">
 				                                    <p class="text-dark fs-5 fw-bold">4kg / 400원</p>
 				                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니 담기</a>
@@ -121,7 +121,7 @@
 				                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">채소</div>
 				                            <div class="p-4 pb-0 rounded-bottom">
 				                                <h4>감자</h4>
-				                                <p>감자는 왕감자 왕감자</p>
+				                                <p>감자는 왕감자</p>
 				                                <div class="d-flex justify-content-between flex-lg-wrap">
 				                                    <p class="text-dark fs-5 fw-bold">5kg / 500원</p>
 				                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니 담기</a>
