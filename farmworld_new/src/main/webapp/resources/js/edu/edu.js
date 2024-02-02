@@ -82,13 +82,13 @@ function ajaxTest(num) {
 			let pm = data.page;
             let p = "";
             
-            p += num>10 ? "<a class='rounded' href='javascript:ajaxTest(" + 1 + ")'>맨앞으로</a>" : "";
-			p += pm.prev ? "<a class='rounded' href='javascript:ajaxTest(" + (pm.startPage-1) + ")'>이전</a>" : "";
+            p += num>10 ? "<a class='rounded' href='javascript:ajaxTest(" + 1 + ")'>&laquo;&laquo;</a>" : "";
+			p += pm.prev ? "<a class='rounded' href='javascript:ajaxTest(" + (pm.startPage-1) + ")'>&laquo;</a>" : "";
 			for (let i = pm.startPage ; i < data.page.endPage + 1; i++) {
 	            p += i==num ? "<a class='active rounded' href=javascript:ajaxTest(" + i + ")>" + i + "</a> " :"<a class='rounded' href=javascript:ajaxTest(" + i + ")>" + i + "</a> ";
 	        }
-	        p += pm.next ? "<a class='rounded' href='javascript:ajaxTest(" + (pm.endPage+1) + ")'>다음</a>" : "";
-	        p += num<=parseInt(lastPageNum / 10) * 10 ? "<a class='rounded' href='javascript:ajaxTest(" + lastPageNum + ")'>맨뒤로</a>" : "";
+	        p += pm.next ? "<a class='rounded' href='javascript:ajaxTest(" + (pm.endPage+1) + ")'>&raquo;</a>" : "";
+	        p += num<=parseInt(lastPageNum / 10) * 10 ? "<a class='rounded' href='javascript:ajaxTest(" + lastPageNum + ")'>&raquo;&raquo;</a>" : "";
 	        
 	        $("#pagingBox").html("");
 	        $("#pagingBox").append(p);

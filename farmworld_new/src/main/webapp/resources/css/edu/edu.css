@@ -54,7 +54,7 @@ ul{
     display: flex;
     justify-content: center;
 }
-.pagination a.active {
+/* .pagination a.active {
     background-color: #81c408;
     color: #f4f6f8;
     border: 1px solid #ffb524;
@@ -69,4 +69,4 @@ ul{
 }
 .pagination a:hover{
 	background-color: #81c408 !important;
-}
+} */
