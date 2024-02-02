@@ -246,12 +246,12 @@ public class BoardController {
 	}
 
 	
-	@PostMapping("/increaseViewCount")
 	@ResponseBody
-	public String increaseViewCount(@RequestParam("board_num") int boardNum) {
+	@PostMapping("/increaseViewCount")
+	public void increaseViewCount(@RequestParam("board_num") int boardNum) {
+		System.out.println("boardNum조회수"+boardNum);
 	    // 게시물 조회수 증가 로직을 처리하는 서비스 메서드 호출
 	    boardService.increaseViewCount(boardNum);
-	    return "success";
 	}
 		
 }
