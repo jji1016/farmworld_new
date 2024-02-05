@@ -110,7 +110,7 @@ public class MyPageController {
 		return "/mypage/modify";
 	}
 	
-	@ResponseBody
+	
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	public Map<String, Object> modify(@RequestParam("user_image") MultipartFile imgName, 
 			@ModelAttribute("user_num") Integer user_num, UserVO userVo, String farm_name) {
