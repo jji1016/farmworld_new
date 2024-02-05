@@ -16,6 +16,9 @@
 }
 #searchbox{
 }
+.text-intro{
+	color : white;
+}
 /* 마우스 호버 시 스타일 변경 */
 .shadowhover:hover {
 	cursor: pointer; /* 마우스를 올릴 때 포인터로 변경 */
@@ -27,7 +30,7 @@
 }
 #myimage{
 	width: 95%;
-    height: 50%;
+    height: 100%;
 }
 #type{
 	width: 20%;
@@ -135,9 +138,7 @@ text-align: center;
                         <div class="col-lg-3" style="position: relative;">	
                        	<c:if test="${not empty vo}">
 							<div id="bigbox" class="h-100 p-3">
-								<div style="position: relative;">
-								    <img id="myimage" src='/resources/upload/${vo.image_folder_num}/${vo.image1}' class='card-img-top fixed-size-image' alt='농장 이미지'>
-								</div>
+								    <img id="myimage" src='/resources/upload/${vo.image_folder_num}/${vo.image1}' class='card-img-top' alt='농장 이미지' style="object-fit: cover;">
 							</div>
 						</c:if>
 						<c:if test="${empty vo}">
@@ -235,7 +236,7 @@ text-align: center;
 							row+=("<div class='position-absolute start-0 bottom-0 w-100 py-3 px-4' style='background: rgba(52, 173, 84, .85);'>");
 							row+=("<h4 class='text-white text-truncate'>"+myfarm.farm_name+"</h4>");
 							let intro = myfarm.farm_intro;
-							row+=("<div class='text-truncate'>")
+							row+=("<div class='text-truncate text-intro'>")
 							 for (let i = 0; i < intro.length; i++) {
 		                            row += intro[i];
 		                        }
