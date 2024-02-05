@@ -83,8 +83,8 @@
 	</insert>
 	
 	<insert id="insertHistory" parameterType="BillHistoryVO">
-		INSERT INTO billhistory(user_no, name_first, name_last, company_name, addr, postcode, city, country, mobile, email, shipDetail, amt)
-		VALUES (#{user_no}, #{name_first}, #{name_last}, #{company_name}, #{addr}, #{postcode}, #{city}, #{country}, #{mobile}, #{email}, #{shipDetail}, #{amt})
+		INSERT INTO billhistory(user_no,  name_last,  addr, postcode, city,  mobile, email, shipDetail, amt)
+		VALUES (#{user_no},  #{name_last},  #{addr}, #{postcode}, #{city},  #{mobile}, #{email}, #{shipDetail}, #{amt})
 	</insert>
 	
 	<update id="plus" parameterType="CartVO">
@@ -115,5 +115,10 @@
 		DELETE FROM cart
 		 WHERE user_num = #{user_no}
 	</delete>
+
+	<select id="userInfo" resultType="UserVO">
+		SELECT * FROM user
+		WHERE user_num = #{user_num}
+	</select>
 </mapper>
 	

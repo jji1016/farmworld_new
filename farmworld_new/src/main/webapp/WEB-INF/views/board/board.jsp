@@ -20,8 +20,8 @@
 					
 						<form id="searchForm" action="/board/list" method="get">
 							<input  type="hidden" name="board_category" value="${param.board_category }">
-							<div class="input-group w-100 mx-auto d-flex">
-								<select id="type" class="board_type border-0 form-select-sm bg-light input-group-text p-3" name="type">
+							<div class="input-group w-100 mx-auto d-flex ">
+								<select id="type" class="board_type form-select-sm bg-light input-group-text p-3" name="type">
 									<option value=""
 										<c:out value="${pageMaker.cri.type == null?'selected':''}"/>>전체</option>
 									<option value="T"
@@ -32,18 +32,15 @@
 										<c:out value="${pageMaker.cri.type == 'W'?'selected':''}"/>>작성자</option>
 									<option value="TC"
 										<c:out value="${pageMaker.cri.type == 'TC'?'selected':''}"/>>제목+내용</option>
-									<!-- <option value="TC">제목+내용</option>  -->
 								</select>
 								
-								<div class="form-group input-group">
-									<input type='text' name='keyword' class="board_input form-control p-3" 
-									placeholder="검색어를 입력하세요" value='<c:out value="${pageMaker.cri.keyword}"/>' /> 
-									<span class="input-group-text p-3 ">
-										<button class="btn btn-default">
-											<i class="fa fa-search"></i>
-										</button>
-									</span>
-								</div>
+								<input type='text' name='keyword' class="board_input form-control p-3" 
+								placeholder="검색어를 입력하세요" value='<c:out value="${pageMaker.cri.keyword}"/>' /> 
+								<span class="input-group-text p-3 ">
+									<button class="btn btn-default">
+										<i class="fa fa-search"></i>
+									</button>
+								</span>
 							</div>
 
 						</form>

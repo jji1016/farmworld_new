@@ -24,6 +24,20 @@
 		<if test="goods_category != null and goods_category != '' and goods_category != '전체보기'">
 			AND gs.goods_category LIKE CONCAT('%',#{goods_category},'%')
 		</if>
+		LIMIT #{startCnt}, #{endCnt}
+	</select>
+	
+	<select id="getGoodsListCnt" parameterType="com.farmworld.shop.domain.GoodsVO" resultType="Integer">
+		SELECT
+			COUNT(*)
+		FROM goods gs LEFT OUTER JOIN image i ON gs.image_folder_num = i.image_folder_num
+		WHERE 1=1
+		<if test="goods_title != null and goods_title != ''">
+			AND gs.goods_title LIKE CONCAT('%',#{goods_title},'%')
+		</if>
+		<if test="goods_category != null and goods_category != '' and goods_category != '전체보기'">
+			AND gs.goods_category LIKE CONCAT('%',#{goods_category},'%')
+		</if>
 	</select>
 
 	<select id="shopDetail" parameterType="com.farmworld.shop.domain.GoodsVO" resultType="com.farmworld.shop.domain.GoodsVO">
@@ -115,8 +129,7 @@
 		DELETE FROM image WHERE image_folder_num = #{image_folder_num}
 	</delete>
 
-
-<!-- 리뷰 가져오기 -->
+	<!-- 리뷰 가져오기 -->
 	<select id="getReview" parameterType="int" resultType="ReviewVO">
 		SELECT * FROM review
         WHERE goods_num = #{goods_num}

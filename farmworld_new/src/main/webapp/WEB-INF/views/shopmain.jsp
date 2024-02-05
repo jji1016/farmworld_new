@@ -2,11 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%@include file="includes/header.jsp" %>
-<style>
-.imgHeight{
-	height: 18rem;
-}
-</style>  
+    
 
 <!-- 상단 공백 추가 끝 -->
 <div class="container-fluid py-5">
@@ -16,46 +12,99 @@
 <!-- 페이지 왼쪽 -->        
 <div class="container-fluid fruite py-5">
 	<div class="container py-5">
-		<div class="row col-lg-12" style="margin-bottom: 2%;">
-           	<!-- 검색 -->
-			<div class="col-xl-3">
-	    		<h1 class="mb-4">Shop</h1>
-            </div>
-            <div id="searchbox" class="col-xl-8">
-                <div class="input-group w-100 mx-auto d-flex" style="height: 64px;">
-                    <input id="searchInput" type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
-                    <span id="search-icon-1" class="input-group-text p-3"><a href="javascript:void(0);" id="searchBtn" class="btn btn-default"><i class="fa fa-search"></i></a></span>
-                </div>
-            <!-- 검색 끝 -->
-                <div class="col-6"></div>
-                <div class="col-xl-3"></div>
-	        </div>
-        </div>
+	    <h1 class="mb-4">작물샵</h1>
 	    <div class="row g-4">
 	        <div class="col-lg-12">
-	        
+	            <div class="row g-4">
+	            	<!-- 검색 select -->
+	                <div class="col-xl-3">
+	                    <a href="/goods" class="btn btn-primary">상품등록하기</a>
+	                </div>
+	                <!-- 검색 select 끝 -->
+	                <!-- 검색 keywords -->
+	                <div class="col-6">
+	                	<div class="input-group w-100 mx-auto d-flex">
+	                        <input id="searchInput" type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
+	                        <a href="javascript:void(0);" id="searchBtn"><span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span></a>
+	                    </div>
+	                </div>
+	                <!-- 검색 keywords 끝 -->
+	                <!-- 정렬 -->
+	                <div class="col-xl-3">
+	                    <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">
+	                        <label for="fruits">Default Sorting:</label>
+	                        <select id="fruits" name="fruitlist" class="border-0 form-select-sm bg-light me-3" form="fruitform">
+	                            <option value="volvo">Nothing</option>
+	                            <option value="saab">Popularity</option>
+	                            <option value="opel">Organic</option>
+	                            <option value="audi">Fantastic</option>
+	                        </select>
+	                    </div>
+	                </div>
+	                <!-- 정렬 끝 -->
+	            </div>
 	            <div class="row g-4">
 	            <!-- 카테고리 -->
-	               <div class="col-lg-3" >
+	               <div class="col-lg-3">
 	                   <div class="row g-4">
 	                       <div class="col-lg-12">
-	                           <div class="mb-3 col-lg-10">
+	                           <div class="mb-3">
 	                           
-	                               <h4>카테고리</h4>
+	                               <h4>Categories</h4>
 	                               <ul id="categories" class="list-unstyled fruite-categorie">
-
+<%--	                                   <li>--%>
+<%--	                                       <div class="d-flex justify-content-between fruite-name">--%>
+<%--	                                           <a href="#"><i class="fas fa-apple-alt me-2"></i>전체보기</a>--%>
+<%--	                                           <span>(3)</span>--%>
+<%--	                                       </div>--%>
+<%--	                                   </li>--%>
+<%--	                                   <li>--%>
+<%--	                                       <div class="d-flex justify-content-between fruite-name">--%>
+<%--	                                           <a href="#"><i class="fas fa-apple-alt me-2"></i>과일</a>--%>
+<%--	                                           <span>(5)</span>--%>
+<%--	                                       </div>--%>
+<%--	                                   </li>--%>
+<%--	                                   <li>--%>
+<%--	                                       <div class="d-flex justify-content-between fruite-name">--%>
+<%--	                                           <a href="#"><i class="fas fa-apple-alt me-2"></i>야채</a>--%>
+<%--	                                           <span>(2)</span>--%>
+<%--	                                       </div>--%>
+<%--	                                   </li>	                                 --%>
+<%--	                                   <li>--%>
+<%--	                                       <div class="d-flex justify-content-between fruite-name">--%>
+<%--	                                           <a href="#"><i class="fas fa-apple-alt me-2"></i>견과류</a>--%>
+<%--	                                           <span>(5)</span>--%>
+<%--	                                       </div>--%>
+<%--	                                   </li>--%>
+<%--	                                   <li>--%>
+<%--	                                       <div class="d-flex justify-content-between fruite-name">--%>
+<%--	                                           <a href="#"><i class="fas fa-apple-alt me-2"></i>곡물</a>--%>
+<%--	                                           <span>(5)</span>--%>
+<%--	                                       </div>--%>
+<%--	                                   </li>--%>
+<%--	                               		<li>--%>
+<%--	                                       <div class="d-flex justify-content-between fruite-name">--%>
+<%--	                                           <a href="#"><i class="fas fa-apple-alt me-2"></i>씨앗</a>--%>
+<%--	                                           <span>(5)</span>--%>
+<%--                                            </div>--%>
+<%--                                        </li>	--%>
+<%--                                   	   <li>--%>
+<%--	                                       <div class="d-flex justify-content-between fruite-name">--%>
+<%--	                                           <a href="#"><i class="fas fa-apple-alt me-2"></i>농기구</a>--%>
+<%--	                                           <span>(5)</span>--%>
+<%--                                            </div>--%>
+<%--                                        </li>	--%>
 	                               		
 	                               </ul>
 	                           </div>
 	                       </div>
 	                   </div>
-	                   <a href="/goods" class="btn btn-primary">상품등록하기</a>
 	               </div>
 	               <!-- 카테고리 끝 -->
                     
                     <div class="col-lg-9">
                             <!-- 추천상품 -->
-                            	<h4 class="fw-bold mb-0">추천 상품</h4>
+                            	<h1 class="fw-bold mb-0">추천 상품</h1>
 				                <div class="vesitable">
 				                    <div class="owl-carousel vegetable-carousel justify-content-center">
 				                        <div class="border border-primary rounded position-relative vesitable-item">
@@ -68,7 +117,7 @@
 				                                <p>파슬리는 맛있다.</p>
 				                                <div class="d-flex justify-content-between flex-lg-wrap">
 				                                    <p class="text-dark fs-5 fw-bold">1kg / 100원</p>
-				                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary">장바구니 담기</i></a>
+				                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니 담기</a>
 				                                </div>
 				                            </div>
 				                        </div>
@@ -79,7 +128,7 @@
 				                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">과일</div>
 				                            <div class="p-4 pb-0 rounded-bottom">
 				                                <h4>방울토마토</h4>
-				                                <p>맛있겠다.</p>
+				                                <p>방울토마토는 맛있다.</p>
 				                                <div class="d-flex justify-content-between flex-lg-wrap">
 				                                    <p class="text-dark fs-5 fw-bold">2kg / 200원</p>
 				                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니 담기</a>
@@ -107,7 +156,7 @@
 				                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">과일</div>
 				                            <div class="p-4 pb-0 rounded-bottom">
 				                                <h4>파프리카</h4>
-				                                <p>싫어싫어</p>
+				                                <p>파프리카는 싫어싫어</p>
 				                                <div class="d-flex justify-content-between flex-lg-wrap">
 				                                    <p class="text-dark fs-5 fw-bold">4kg / 400원</p>
 				                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니 담기</a>
@@ -121,7 +170,7 @@
 				                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">채소</div>
 				                            <div class="p-4 pb-0 rounded-bottom">
 				                                <h4>감자</h4>
-				                                <p>감자는 왕감자</p>
+				                                <p>감자는 왕감자 왕감자</p>
 				                                <div class="d-flex justify-content-between flex-lg-wrap">
 				                                    <p class="text-dark fs-5 fw-bold">5kg / 500원</p>
 				                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니 담기</a>
@@ -176,23 +225,9 @@
 				                
 				                <!-- 상품 -->
                                 <div id="goodsList" class="row g-4 justify-content-center">
-
-                                    
+                                	
                                 </div>
-                                
-                                <div class="col-12">
-                                    <div class="pagination d-flex justify-content-center mt-5">
-                                        <a href="#" class="rounded">&laquo;</a>
-                                        <a href="#" class="active rounded">1</a>
-                                        <a href="#" class="rounded">2</a>
-                                        <a href="#" class="rounded">3</a>
-                                        <a href="#" class="rounded">4</a>
-                                        <a href="#" class="rounded">5</a>
-                                        <a href="#" class="rounded">6</a>
-                                        <a href="#" class="rounded">&raquo;</a>
-                                    </div>
-                                </div>
-                            </div>
+                   			</div>
                         </div>
                         <!-- 상품 끝 -->
                     </div>
