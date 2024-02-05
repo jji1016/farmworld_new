@@ -11,6 +11,7 @@ import com.farmworld.cart.domain.BillHistoryVO;
 import com.farmworld.cart.domain.CartVO;
 import com.farmworld.cart.domain.CntListVO;
 import com.farmworld.cart.mapper.CartMapper;
+import com.farmworld.login.domain.UserVO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -82,4 +83,9 @@ public class CartServiceImpl implements CartService {
 			return mapper.updateCartData(cartVo);
 		}
 	}
-}
+	 @Override
+	    public UserVO userInfo(int user_Num) {
+	        return mapper.userInfo(user_Num);
+	    }
+	}
+

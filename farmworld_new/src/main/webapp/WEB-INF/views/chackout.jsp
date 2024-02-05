@@ -19,40 +19,34 @@
                 <div class="col-md-12 col-lg-6 col-xl-7">
                     <div class="row">
                         <div class="col-md-12 col-lg-6">
-                            <div class="form-item w-100">
-                                <label class="form-label my-3">성<sup>*</sup></label>
-                                <input type="text" id="name_first" class="form-control">
+                             <!-- 추가된 부분: 기본 배송지로 받기 버튼 -->
+                            <div class="form-item">
+                                <button type="button" id="setbtn" class="btn btn-primary">기본배송지로 받기</button>
                             </div>
+          
                         </div>
-                        <div class="col-md-12 col-lg-6">
-                            <div class="form-item w-100">
+                        
+                             <div class="form-item">
                                 <label class="form-label my-3">이름<sup>*</sup></label>
                                 <input type="text" id="name_last" class="form-control">
                             </div>
-                        </div>
-                    </div>
-                    <div class="form-item">
-                        <label class="form-label my-3">Company Name<sup>*</sup></label>
-                        <input type="text" id="company_name" class="form-control">
+                        
                     </div>
                     <div class="form-item">
                         <label class="form-label my-3">주소 <sup>*</sup></label>
-                        <input type="text" id="addr" onclick="execDaumPostcode()" class="form-control" readonly="readonly" placeholder="House Number Street Name">
+                        <input type="text" id="addr" onclick="execDaumPostcode()" class="form-control" readonly="readonly" placeholder="우편번호">
                         
                         <div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">
 							<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
 						</div>
                     </div>
                     <div class="form-item">
-                        <label class="form-label my-3">Town/City<sup>*</sup></label>
+                        <label class="form-label my-3">상세주소<sup>*</sup></label>
                         <input type="text" id="city" class="form-control">
                     </div>
+                    
                     <div class="form-item">
-                        <label class="form-label my-3">Country<sup>*</sup></label>
-                        <input type="text" id="country" class="form-control">
-                    </div>
-                    <div class="form-item">
-                        <label class="form-label my-3">Postcode/Zip<sup>*</sup></label>
+                        <label class="form-label my-3">사진<sup>*</sup></label>
                         <input type="text" id="postcode" class="form-control" readonly="readonly">
                     </div>
                     <div class="form-item">
@@ -196,13 +190,10 @@
 		} else {
 			var IMP = window.IMP;
 			var param = {
-				"name_first":	$("#name_first").val(),
 				"name_last":	$("#name_last").val(),
-				"company_name": $("#company_name").val(),
 				"addr":			$("#addr").val(),
 				"postcode":		$("#postcode").val(),
 				"city":			$("#city").val(),
-				"country":		$("#country").val(),
 				"mobile":		$("#mobile").val(),
 				"email":		$("#email").val(),
 				"shipDetail":	$("#shipDetail").val(),
@@ -260,18 +251,12 @@
 		var email	= $("#email").val();
 		var mobile	= $("#mobile").val();
 		
-		if($("#name_first").val() == "") { // 성
-			msg = "성을 입력해주세요.";
-		} else if($("#name_last").val() == "") { // 이름
+		if($("#name_last").val() == "") { // 성
 			msg = "이름을 입력해주세요.";
-		} else if($("#company_name").val() == "") { // company Name
-			msg = "회사명을 입력해주세요.";
 		} else if($("#addr").val() == "" || $("#postcode").val() == "") { // 주소 / Postcode/Zip
 			msg = "주소를 선택해주세요.";
 		} else if($("#city").val() == "") { // Town/City
-			msg = "Town/City를 입력해주세요.";
-		} else if($("#country").val() == "") { // Country
-			msg = "Country를 입력해주세요.";
+			msg = "상세주소를 입력해주세요.";
 		} else if(mobile == "") { // Moblie
 			msg = "핸드폰 번호를 입력해주세요.";
 		} else if(!$.isNumeric(mobile)) { // Moblie 숫자만 체크
@@ -286,6 +271,33 @@
 		
 		return msg;
 	}
-</script>
+	$("#setbtn").click(function() {
+	    // 사용자 정보를 가져오기 위한 AJAX 요청
+	    $.ajax({
+	        type: "POST",
+	        url: "/getUserInfoForDefaultAddress",
+	        contentType: "application/json;charset=UTF-8",
+	        dataType: "json",
+	        success: function(response) {
+	            if (response.result === "Y") {
+	                // 가져온 사용자 정보로 폼 필드를 업데이트
+	                var userInfo = response.userInfo;
+	                $("#name_last").val(userInfo.user_name);
+	                $("#addr").val(userInfo.user_address);
+	                $("#postcode").val(userInfo.user_postCode);
+	                $("#city").val(userInfo.user_detailAddress);
+	                $("#mobile").val(userInfo.user_phone);
+	                $("#email").val(userInfo.user_id);
+	            } else {
+	                alert("사용자 정보를 가져오는데 실패했습니다.");
+	            }
+	        },
+	        error: function(err) {
+	            console.log("err:", err);
+	        }
+	    });
+	});
+	 
+	</script>
 
 <%@include file="includes/footer.jsp" %>

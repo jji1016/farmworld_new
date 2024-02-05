@@ -33,7 +33,7 @@ public interface GoodsService {
 
     int modifyGoods(GoodsVO goodsVo);
 
-  //리뷰 가져오기
+    //리뷰 가져오기
     public List<UserAndReviewVO> getReviewList(int goods_num);
 }
 	
