@@ -107,11 +107,11 @@ public class MyPageController {
 		
 		System.out.println("getModify mainService에서 받았다:"+vo);
 		model.addAttribute("vo", vo);
-		return "/mypage/modify";
+		return "redirect:/mypage/modify";
 	}
 	
 	
-	@RequestMapping(value = "/modify", method = RequestMethod.POST)
+	@RequestMapping(value = "/postmodify", method = RequestMethod.POST)
 	public Map<String, Object> modify(@RequestParam("user_image") MultipartFile imgName, 
 			@ModelAttribute("user_num") Integer user_num, UserVO userVo, String farm_name) {
 		MyPageVO vo = new MyPageVO();

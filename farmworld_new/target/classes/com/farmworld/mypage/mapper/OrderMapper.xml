@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.farmworld.mypage.mapper.OrderMapper">
+
+
+	<!-- 구매내역 조회 -->
+	<select id="buylist1" resultType="OrderVO">
+		SELECT *
+		FROM myfarmproject_db.order
+		WHERE buyer_num = #{user_num}
+        ORDER BY myfarmproject_db.order.order_date DESC
+	</select>
+	<select id="buylist2" resultType="GoodsVO">
+		SELECT *
+		FROM myfarmproject_db.goods LEFT JOIN myfarmproject_db.order ON myfarmproject_db.goods.goods_num = myfarmproject_db.order.goods_num
+		WHERE myfarmproject_db.order.buyer_num = #{user_num}
+		ORDER BY myfarmproject_db.order.order_date DESC
+							
+	</select>
+	<select id="buylist3" resultType="MyFarmVO">
+		SELECT  *
+		FROM myfarmproject_db.myfarm mf
+		LEFT JOIN myfarmproject_db.order o ON mf.user_num = o.seller_num
+		WHERE o.buyer_num = #{user_num}
+        ORDER BY o.order_date DESC
+	</select>
+	<select id="buylistimg" resultType="ImageVO">
+		SELECT *
+		FROM (myfarmproject_db.goods
+		LEFT JOIN myfarmproject_db.image ON myfarmproject_db.goods.image_folder_num = myfarmproject_db.image.image_folder_num)
+        LEFT JOIN myfarmproject_db.order ON myfarmproject_db.goods.goods_num = myfarmproject_db.order.goods_num
+		WHERE  buyer_num = #{user_num}
+		ORDER BY myfarmproject_db.order.order_date DESC						
+	</select>
+
+	
+	<!-- 구매취소 -->
+	<delete id="returnpurchase" parameterType="OrderVO">
+		DELETE FROM myfarmproject_db.order WHERE order_num = #{order_num}
+	</delete>
+	
+	
+	<!-- 판매내역 조회 -->
+	<select id="selllist1" resultType="OrderVO">
+		SELECT order_num, order_date, order_price, order_amount
+		FROM myfarmproject_db.order
+		WHERE seller_num = #{user_num}
+		ORDER BY myfarmproject_db.order.order_date DESC 
+	</select>
+	<select id="selllist2" resultType="GoodsVO">
+		SELECT myfarmproject_db.goods.goods_num, goods_title, goods_price, order_num
+		FROM myfarmproject_db.goods LEFT JOIN myfarmproject_db.order ON myfarmproject_db.goods.goods_num = myfarmproject_db.order.goods_num
+		WHERE myfarmproject_db.goods.goods_num in (SELECT goods_num FROM myfarmproject_db.order
+												   WHERE seller_num = #{user_num} )
+		ORDER BY myfarmproject_db.order.order_date DESC
+	
+	</select>
+	<select id="selllist3" resultType="MyFarmVO">
+		SELECT  mf.farm_name, mf.user_num
+		FROM myfarmproject_db.myfarm mf
+		JOIN myfarmproject_db.order o ON mf.user_num = o.seller_num
+		WHERE o.seller_num = #{user_num}
+		ORDER BY o.order_date DESC
+	</select>
+	<select id="selllistimg" resultType="ImageVO">
+		SELECT *
+		FROM (myfarmproject_db.goods
+		LEFT JOIN myfarmproject_db.image ON myfarmproject_db.goods.image_folder_num = myfarmproject_db.image.image_folder_num)
+        LEFT JOIN myfarmproject_db.order ON myfarmproject_db.goods.goods_num = myfarmproject_db.order.goods_num
+		WHERE seller_num = #{user_num}
+		ORDER BY myfarmproject_db.order.order_date DESC;	
+	</select>
+
+
+	<!-- 구매 -->
+	<insert id="purchase" parameterType="OrderVO">
+		insert into order
+		(goods_num,buyer_num,order_amount)
+		values (#{goods_num}, #{buyer_num}, #{order_amount})
+	</insert>
+	
+	<!-- 반품 -->	
+	<delete id="refund" parameterType="OrderVO">
+		DELETE FROM order
+		WHERE order_num = #{order_num}
+	</delete>
+
+
+</mapper>
+	

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.farmworld.farm.mapper.MyFarmMapper">
+	<sql id="myfarmColumns">
+    farm_num, farm_name, farm_intro, user_num, image_folder_num, myfarm_view
+	</sql>
+
+	<insert id="insert" parameterType="MyFarmVO">
+		insert into myfarm(farm_name,farm_intro,user_num,image_folder_num) values
+		(#{farm_name}, #{farm_intro}, #{user_num}, #{image_folder_num})
+	</insert>
+
+	<insert id="insertSelectBno" parameterType="MyFarmVO"
+		keyColumn="farm_num" keyProperty="farm_num" useGeneratedKeys="true">
+		insert into myfarm
+		(farm_name, farm_intro)
+		values (#{farm_name}, #{farm_intro})
+	</insert>
+
+	<!-- 마이페이지에서 활용 위해 parameterType=int, WHERE절 추가 -->
+	<select id="selectAll" parameterType="int" resultType="MyFarmVO"> 
+		select f.*, i.image1
+        FROM myfarm f
+        LEFT JOIN image i ON f.image_folder_num = i.image_folder_num WHERE f.user_num=#{user_num}
+	</select>
+
+	<update id="update" parameterType="MyFarmVO">
+		UPDATE myfarm
+		SET farm_name =
+		#{farm_name},
+		farm_intro = #{farm_intro}
+		WHERE farm_num = #{farm_num}
+	</update>
+	
+	<update id="viewCount" parameterType="MyFarmVO">
+		UPDATE myfarm
+		SET myfarm_view = myfarm_view+1
+		WHERE farm_num = #{farm_num}
+	</update>
+
+	<delete id="delete" parameterType="MyFarmVO">
+		DELETE FROM myfarm WHERE farm_num =
+		#{farm_num}
+	</delete>
+
+	<select id="select" resultType="MyFarmVO" parameterType="MyFarmVO">
+		SELECT f.*, i.image1
+        FROM myfarm f
+        LEFT JOIN image i ON f.image_folder_num = i.image_folder_num WHERE f.farm_num = #{farm_num}
+	</select>
+
+	<select id="getTotalCount" resultType="int" parameterType="com.farmworld.all.domain.Criteria">
+		SELECT COUNT(farm_num) FROM myfarm
+				<if test="type != null and type != '' and keyword != null and keyword != ''">
+			<where>
+				<choose>
+					<when test="type == 'TW'">
+						AND farm_name LIKE CONCAT('%',#{keyword},'%') OR 
+						user_num LIKE CONCAT('%',#{keyword},'%')
+					</when>
+					
+					<when test='type == "T"'>
+						AND farm_name LIKE CONCAT('%',#{keyword},'%') 
+					</when>
+
+					<when test='type == "W"'>
+						AND user_num LIKE CONCAT('%',#{keyword},'%') 
+					</when>
+				</choose>
+			</where>
+		</if>
+		
+	</select>
+	
+	<select id="getGoodsCount" parameterType="MyFarmVO" resultType="Integer">
+	SELECT COUNT(goods_num) FROM goods WHERE user_num = #{user_num}
+	</select>
+
+
+	<select id="getListWithPaging" resultType="MyFarmVO"
+		parameterType="com.farmworld.all.domain.Criteria">
+		SELECT f.*, i.image1, u.user_name
+        FROM myfarm f
+        LEFT JOIN image i ON f.image_folder_num = i.image_folder_num
+        LEFT JOIN user u ON f.user_num = u.user_num
+		<if test="type != null and type != '' and keyword != null and keyword != ''">
+			<where>
+				<choose>
+					<when test="type == 'TW'">
+						AND farm_name LIKE CONCAT('%',#{keyword},'%') OR 
+						user_name LIKE CONCAT('%',#{keyword},'%')
+					</when>
+					<otherwise>
+						AND ${type} LIKE CONCAT('%',#{keyword},'%')
+					</otherwise>
+				</choose>
+			</where>
+		</if>
+		ORDER BY myfarm_view DESC
+		LIMIT #{start}, #{amount}
+	</select>
+	
+	<update id="FarmCreate" parameterType="MyFarmVO">
+	UPDATE user
+	SET user_isFarm = 1
+	WHERE user_num = #{user_num}
+	</update>
+	
+	<update id="FarmDelete" parameterType="MyFarmVO">
+	UPDATE user
+	SET user_isFarm = 0
+	WHERE user_num = #{user_num}
+	</update>
+	
+	<select id="selectFarmKeyword" parameterType="com.farmworld.all.domain.Criteria" resultType="Integer">
+	SELECT farm_num FROM myfarm WHERE farm_name = #{keyword}
+	</select>
+	
+	<select id="getGoodsList" resultType="GoodsVO" parameterType="com.farmworld.all.domain.GrowCriteria">
+	SELECT * FROM goods where user_num = #{user_num}
+	ORDER BY image_folder_num DESC
+	LIMIT #{start}, #{amount}
+	</select>
+	
+	<update id="Alter1">
+	ALTER TABLE myfarm DROP FOREIGN KEY myfarm_ibfk_1;
+	</update>
+	
+	<update id="Alter2">
+	ALTER TABLE myfarm DROP FOREIGN KEY myfarm_ibfk_1;
+	</update>
+
+</mapper>
+	

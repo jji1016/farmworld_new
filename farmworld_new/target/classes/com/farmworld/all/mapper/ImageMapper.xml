@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.farmworld.all.mapper.ImageMapper">
+
+	<sql id="imageColumns">
+	image1,image2,image3,image_folder_num
+    </sql>
+
+	<insert id="insertReturn" parameterType="ImageVO"
+	keyColumn="image_folder_num" keyProperty="image_folder_num" useGeneratedKeys="true">
+		insert into image (image1, image2, image3) values (#{image1}, #{image2}, #{image3})
+	</insert>
+	
+	
+	<update id="update" parameterType="ImageVO">
+		UPDATE image
+		SET image1 = #{image1},
+		image2 = #{image2},
+		image3 = #{image3}
+		WHERE image_folder_num = #{image_folder_num}
+	</update>
+	
+	<delete id="delete" parameterType="ImageVO">
+		DELETE FROM image WHERE image_folder_num =
+		#{image_folder_num}
+	</delete>
+	
+	<select id="select" parameterType="ImageVO" resultType="ImageVO">
+		SELECT image_folder_num, image1,image2,image3 FROM image WHERE image_folder_num = ${image_folder_num}
+	</select>
+	
+	<select id="maxNum" resultType="Integer">
+	    SELECT COALESCE(MAX(image_folder_num)+1, 1)  FROM image
+	</select>
+		
+	<update id="delImage" parameterType="map">
+	  UPDATE image
+	  <set>
+	    <if test="image == 'image1'">image1 = null</if>
+	    <if test="image == 'image2'">image2 = null</if>
+	    <if test="image == 'image3'">image3 = null</if>
+	  </set>
+	  WHERE image_folder_num = #{image_folder_num}
+	</update>
+	
+	<select id="selectAll" parameterType="MyFarmVO" resultType="ImageVO">
+		SELECT i.image_folder_num, i.image1, i.image2, i.image3
+    	FROM goods g
+    	JOIN image i ON g.image_folder_num = i.image_folder_num
+    	WHERE g.user_num = #{user_num}
+    	ORDER BY i.image_folder_num DESC
+	</select>
+
+</mapper>
+	

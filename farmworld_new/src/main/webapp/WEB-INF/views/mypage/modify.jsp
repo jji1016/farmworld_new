@@ -140,7 +140,7 @@
                 			<div class="section-title position-relative text-center mx-auto mb-5 pb-4 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
                 			</div>
                 			<div class="row g-4">
-	                			<form action="/mypage/modify" method="post" enctype="multipart/form-data" id="frm">
+	                			<form action="/mypage/postmodify" method="post" enctype="multipart/form-data" id="frm">
 		                			<div class="team-item border-top border-5 border-primary rounded shadow overflow-hidden" id="mpg_frm">
 		                				<table>
 		                						<h2>My <span>Page</span></h2>
@@ -192,7 +192,7 @@
 												              </div>
 												              <div id="boxsize" class="form-group row g-4">
 												                <label for="user_nickname" class="my_mod_Label">닉네임</label>
-												                <input type="text" class="my_mod_input form-control" 
+												                <input type="text" class="my_mod_input form-control" readonly="readonly"
 												                	id="user_nickname" name="user_nickname" value="${vo.userVO.user_nickname}">
 												              </div>
 												              <div id="boxsize" class="form-group row g-4">
@@ -241,7 +241,7 @@
                 						<div class="btn-box2">
 							              <button type="button" class="btn text-white bg-primary px-3 rounded updateBtn2" id="openModal"
 							              	data-bs-toggle="modal" data-bs-target="#checkPw">회원 탈퇴</button>
-							              <button id="updateBtn2" type="submit" class="btn text-white bg-primary px-3 rounded updateBtn2">회원 정보 수정</button>
+							              <button id="updateBtn2" type="button" class="btn text-white bg-primary px-3 rounded updateBtn2">회원 정보 수정</button>
 							          </div>
 		                			</div>
                 				</form>
@@ -502,7 +502,7 @@ $('#frm').validate({
     submitHandler: function (form) {	// 모든 유효성검사 통과해야 폼 제출
     		console.log("회원 정보 수정 완료");
     		$.ajax({
-            url: "/mypage/modify",
+            url: "/mypage/postmodify",
             type: "POST",
             data: new FormData(form),
             processData: false,
@@ -513,7 +513,7 @@ $('#frm').validate({
                     alert(response.message);
                     console.log("수정끝22");
                     //수정 페이지 불러오기
-                    window.location.href = "/mypage/modify";
+                    window.location.href = "redirect:/mypage/modify";
                 } else {
                     alert(response.message);
                 }
