@@ -5,6 +5,7 @@ import java.util.List;
 import com.farmworld.cart.domain.BillHistoryVO;
 import com.farmworld.cart.domain.CartVO;
 import com.farmworld.cart.domain.CntListVO;
+import com.farmworld.login.domain.UserVO;
 
 public interface CartService {
 	
@@ -31,4 +32,6 @@ public interface CartService {
 	
 	// 상품 장바구니에 담기
 	int mergeGoods(CartVO cartVo);
+
+	public UserVO userInfo(int user_Num);
 }

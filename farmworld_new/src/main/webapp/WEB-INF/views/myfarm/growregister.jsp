@@ -124,7 +124,7 @@
                             <label for="grow_title">성장일기 제목</label>
                         </td>
                         <td>
-                            <input type="text" class="form-control p-3" name="grow_title" id="grow_title" required="required" placeholder="성장일기 제목">
+                            <input type="text" class="form-control p-3" maxlength="40" name="grow_title" id="grow_title" required="required" placeholder="성장일기 제목">
                         </td>
                     </tr>
                     <tr>
@@ -132,7 +132,7 @@
                             <label for="growup_category">카테고리</label>
                         </td>
                         <td>
-                            <input type="text" class="form-control p-3" name="growup_category" id="growup_category" required placeholder="카테고리">
+                            <input type="text" class="form-control p-3" maxlength="8" name="growup_category" id="growup_category" required placeholder="카테고리">
                         </td>
                     </tr>
                     <tr>

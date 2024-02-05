@@ -233,7 +233,7 @@ public class MyFarmController {
 			cri.setType("farm_name");
 			break;
 		case "W":
-			cri.setType("user_num");
+			cri.setType("user_name");
 			break;
 		}
 		List<MyFarmVO> list = myFarmService.farmAll(cri);

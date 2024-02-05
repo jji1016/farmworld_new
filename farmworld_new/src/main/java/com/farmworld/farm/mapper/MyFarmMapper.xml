@@ -82,15 +82,16 @@
 
 	<select id="getListWithPaging" resultType="MyFarmVO"
 		parameterType="com.farmworld.all.domain.Criteria">
-		SELECT f.*, i.image1
+		SELECT f.*, i.image1, u.user_name
         FROM myfarm f
         LEFT JOIN image i ON f.image_folder_num = i.image_folder_num
+        LEFT JOIN user u ON f.user_num = u.user_num
 		<if test="type != null and type != '' and keyword != null and keyword != ''">
 			<where>
 				<choose>
 					<when test="type == 'TW'">
 						AND farm_name LIKE CONCAT('%',#{keyword},'%') OR 
-						user_num LIKE CONCAT('%',#{keyword},'%')
+						user_name LIKE CONCAT('%',#{keyword},'%')
 					</when>
 					<otherwise>
 						AND ${type} LIKE CONCAT('%',#{keyword},'%')
