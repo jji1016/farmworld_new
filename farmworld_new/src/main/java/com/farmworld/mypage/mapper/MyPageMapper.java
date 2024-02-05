@@ -18,6 +18,7 @@ public interface MyPageMapper {
 
 	public void updateUserInfo(UserVO vo);
 	public void updateBoardInfo(UserVO vo);
+	public void updateCommentInfo(UserVO vo);
 
 	public String getPw(UserVO vo);
 

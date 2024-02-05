@@ -28,6 +28,12 @@
 	    WHERE user_num=#{user_num}
 	</update>
 	
+	<update id="updateCommentInfo" parameterType="UserVO">
+		UPDATE comment SET
+	    user_nickname = #{user_nickname}
+	    WHERE user_num=#{user_num}
+	</update>
+	
 	<select id="getPw" parameterType="UserVO" resultType="String">
 		SELECT user_pw FROM user WHERE user_num=#{user_num} and user_pw=#{user_pw}
 	</select>

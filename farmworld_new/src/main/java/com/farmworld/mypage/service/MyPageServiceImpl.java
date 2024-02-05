@@ -51,6 +51,7 @@ public class MyPageServiceImpl implements MyPageService{
 	    UserVO userVo = vo.getUserVO();
 	    mypageMapper.updateUserInfo(userVo);
 	    mypageMapper.updateBoardInfo(userVo);
+	    mypageMapper.updateCommentInfo(userVo);
 	    
 	    System.out.println("정보 수정 완료");
 	}

@@ -144,7 +144,7 @@
 											              </div>
 											            </div>
 											            <div>
-											              <button id="updateBtn" type="button" class="btn btn-primary middlebutton deliveryBtn " onclick="goMod()">회원정보 수정</button>
+											              <a href="/mypage/modify"><button id="updateBtn" type="button" class="btn btn-primary middlebutton deliveryBtn " onclick="goMod()">회원정보 수정</button></a>
 											            </div>
 											          </form>
 											        </div>
@@ -207,6 +207,7 @@ function goMod() {
 	window.location.href = '/mypage/modify';
 }
 </script>
+
 
 
 
