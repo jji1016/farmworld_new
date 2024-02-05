@@ -16,7 +16,7 @@
 
 <div class="container-fluid py-5 mt-5">
     <div class="container py-5">
-        <div class="row g-4 mb-5">
+        <div class="row g-4 mb-5 fruite">
         
         <!-- 카테고리 -->
 	               <div class="col-lg-3">
