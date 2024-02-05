@@ -37,10 +37,6 @@
 	display:flex;
 	justify-content: flex-end;
 }
-.board_input{
-	border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-}
 
 
 .pagingBtn{
@@ -231,4 +227,7 @@
 #titleLink{
 	font-weight: bold;
     color: #757575;
+}
+.typeRap{
+	height: 64px;
 }
