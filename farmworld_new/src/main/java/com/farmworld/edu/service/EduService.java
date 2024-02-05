@@ -31,7 +31,7 @@ public class EduService {
 		return result;
 	}
 	
-	public Map<String, String> getAgritech(int curationNo, int cntntsSnn) {
+	public Map<String, String> getAgritech(int curationNo, int cntntsSnn) { //curationNo:게시글 번호, cntntsSnn:게시글 내부 컨텐츠 번호
 		System.out.println("curationNo--"+curationNo);
 		// monthFarmTechDtlGuideLst 
 		String url1 = "http://api.nongsaro.go.kr/service/monthFarmTech/monthFarmTechDtlGuideLst";

@@ -22,6 +22,7 @@
 		WHERE user_num=#{user_num}
 	</update>
 	
+<<<<<<< HEAD
 	<update id="updateBoardInfo" parameterType="UserVO">
 		UPDATE board SET
 	    user_nickname = #{user_nickname}
@@ -34,6 +35,8 @@
 	    WHERE user_num=#{user_num}
 	</update>
 	
+=======
+>>>>>>> 754e30772ac853c1157922be347823dc5893600a
 	<select id="getPw" parameterType="UserVO" resultType="String">
 		SELECT user_pw FROM user WHERE user_num=#{user_num} and user_pw=#{user_pw}
 	</select>

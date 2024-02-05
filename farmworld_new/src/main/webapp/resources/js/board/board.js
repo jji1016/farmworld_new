@@ -109,7 +109,6 @@ $(document).ready(function() {
     function loadComments() {
     // 게시글 번호와 카테고리 파라미터 가져오기
     var boardNum = $("#boardNum").val();
-    console.log("boardNum="+boardNum);
 
 	    // 댓글 목록 가져오기
 	    $.ajax({
@@ -127,14 +126,12 @@ $(document).ready(function() {
 	        }
 	    });
 	}
-
 	function displayComments(comments) {
 	    var commentList = $("#commentList");
 	    var commentNick = $(".commentNick").data("user-nickname");
 		console.log("세션 닉넴" + commentNick);
 
 	    commentList.empty();
-	
 	    // 댓글 목록을 표시
 	    $.each(comments, function (index, comment) {
 	    	let comment_date = new Date(comment.comment_date);
@@ -149,7 +146,6 @@ $(document).ready(function() {
 				    commentDiv2.append("<input type='button' id='delComment' value='삭제'>");
 				}
 				commentDiv2.append("</div>");
-
 			commentDiv.append(commentDiv2);
 	        commentDiv.append("<p class='commentConP'>" + comment.comment_contents + "</p>");
 	        commentDiv.append("</div>");
