@@ -10,12 +10,13 @@
 <div class="container-fluid fruite py-5">
 	<div class="container py-5">
 		<input  type="hidden" id="board_ENname" value="${param.board_category }">
-		<h1 class="mb-4 board_name" >공지사항</h1>
 		<div class="row g-4">
 			<div class="col-lg-12">
 				<div class="row g-4">
-					<div class="col-xl-3"></div>
-					<div class="col-6">
+					<div class="col-xl-3">
+						<h1 class="mb-4 board_name" >공지사항</h1>
+					</div>
+					<div class="col-xl-8">
 					
 						<form id="searchForm" action="/board/list" method="get">
 							<input  type="hidden" name="board_category" value="${param.board_category }">
