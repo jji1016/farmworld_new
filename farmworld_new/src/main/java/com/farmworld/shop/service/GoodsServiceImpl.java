@@ -1,5 +1,6 @@
 package com.farmworld.shop.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +12,10 @@ import org.springframework.stereotype.Service;
 
 import com.farmworld.all.domain.Criteria;
 import com.farmworld.all.domain.ImageVO;
+import com.farmworld.login.domain.UserVO;
+import com.farmworld.mypage.domain.ReviewVO;
 import com.farmworld.shop.domain.GoodsVO;
+import com.farmworld.shop.domain.UserAndReviewVO;
 import com.farmworld.shop.mapper.GoodsMapper;
 
 import lombok.AllArgsConstructor;
@@ -48,7 +52,13 @@ public class GoodsServiceImpl implements GoodsService {
 	@Override
 	public Map<String, Object> getGoodsList(GoodsVO vo) {
 		Map<String, Object> returnData = new HashMap<>();
-
+		
+		vo.setStartCnt(vo.getNowPage() == 0 ? 0 : vo.getNowPage() * 10);
+		vo.setEndCnt(10);
+		
+		int getCnt = mapper.getGoodsListCnt(vo);
+		vo.setTotalCnt(getCnt/10 + 1);
+		returnData.put("page", vo);
 		returnData.put("goodsList", mapper.getGoodsList(vo));
 		returnData.put("categoryList", mapper.getGoodsCategoryTotalCount());
 
@@ -115,7 +125,35 @@ public class GoodsServiceImpl implements GoodsService {
 		return mapper.modifyGoods(goodsVo);
 	}
 
-
+	//리뷰 가져오기
+	@Override
+	public List<UserAndReviewVO> getReviewList(int goods_num) {
+		List<ReviewVO> rs = mapper.getReview(goods_num);
+		List<UserAndReviewVO> list = new ArrayList<UserAndReviewVO>();
+		
+		for (ReviewVO r : rs) {
+            //리뷰 정보 불러오기
+			UserAndReviewVO vo = new UserAndReviewVO();
+            vo.setReviewVo(r);
+            
+            //리뷰 작성자 정보 불러오기
+            List<UserVO> us = mapper.getUser(r.getUser_num());
+            if (!us.isEmpty()) {
+                vo.setUserVo(us.get(0));
+            }
+            
+            //리뷰 이미지 불러오기
+            List<ImageVO> is = mapper.getImage(r.getImage_folder_num());
+            if (!is.isEmpty()) {
+                vo.setImageVo(is.get(0));
+            }
+            
+            list.add(vo);
+	
+		}
+		System.out.println("Service list"+list);
+		return list;
+	}
 
 
 }

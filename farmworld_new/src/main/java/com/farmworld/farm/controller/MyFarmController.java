@@ -61,25 +61,20 @@ public class MyFarmController {
 	@GetMapping("/checkSession")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> checkSession(HttpSession session) {
-		System.out.println(1);
 		Map<String, Object> response = new HashMap<>();
 		Boolean hasUserNum = session.getAttribute("user_num") != null;
 		System.out.println(hasUserNum);
-		System.out.println("세션유저" + session.getAttribute("user_num"));
 		response.put("hasUserNum", hasUserNum);
 		int farmnum;
 		if (hasUserNum) {
 			// 세션에 user_num이 있다면 응답에 user_num 추가
 			Integer userNum = (Integer) session.getAttribute("user_num");
-			System.out.println("usernum:" + userNum);
 			MyFarmVO vo = myFarmService.getByUserNum(userNum);
-			System.out.println(vo);
 			if (vo == null) {
 				farmnum = 0;
 			} else {
 				farmnum = vo.getFarm_num();
 			}
-			System.out.println(vo);
 			response.put("userNum", userNum);
 			if (farmnum == 0) {
 				response.put("isfarm", false);
@@ -88,7 +83,6 @@ public class MyFarmController {
 				response.put("farmnum", farmnum);
 			}
 		}
-		System.out.println(3);
 		return ResponseEntity.ok(response);
 	}
 
@@ -239,7 +233,7 @@ public class MyFarmController {
 			cri.setType("farm_name");
 			break;
 		case "W":
-			cri.setType("user_num");
+			cri.setType("user_name");
 			break;
 		}
 		List<MyFarmVO> list = myFarmService.farmAll(cri);
@@ -306,11 +300,9 @@ public class MyFarmController {
 
 	@PostMapping("/growmodify")
 	public String growModify(ArrayList<MultipartFile> files, GrowUpVO vo) {
-		System.out.println(vo);
 		ImageVO image = imageService.get(vo.getImage_folder_num());
 		int imageNum = vo.getImage_folder_num();
 		String imageNumString = String.valueOf(imageNum);
-		System.out.println(image);
 		for (int i = 0; i < files.size(); i++) {
 			MultipartFile file = files.get(i);
 
@@ -323,9 +315,6 @@ public class MyFarmController {
 					String filePath = uploadDir + imageNumString + "/";
 					String fileName = fileUpload.uploadFile(file, filePath);
 					Path FPath;
-					System.out.println("반복i:" + i);
-
-					// 동적으로 setImage 실행
 					switch (i) {
 					case 1:
 						FPath = Paths.get(uploadDir + imageNum + "\\" + image.getImage1());
@@ -347,7 +336,6 @@ public class MyFarmController {
 							Files.delete(FPath);
 						}
 						image.setImage3(fileName);
-						// 필요한 만큼 계속 추가 가능
 					default:
 						break;
 					}

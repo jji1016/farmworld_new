@@ -10,16 +10,18 @@
 <div class="container-fluid fruite py-5">
 	<div class="container py-5">
 		<input  type="hidden" id="board_ENname" value="${param.board_category }">
-		<h1 class="mb-4 board_name" >공지사항</h1>
 		<div class="row g-4">
 			<div class="col-lg-12">
 				<div class="row g-4">
-					<div class="col-xl-3"></div>
-					<div class="col-6">
+					<div class="col-xl-3">
+						<h1 class="mb-4 board_name" >공지사항</h1>
+					</div>
+					<div class="col-xl-8 ">
+					
 						<form id="searchForm" action="/board/list" method="get">
 							<input  type="hidden" name="board_category" value="${param.board_category }">
-							<div class="form-group col-xs-4">
-								<select id="type" class="board_type form-control" name="type">
+							<div class="input-group w-100 mx-auto d-flex typeRap">
+								<select id="type" class="board_type form-select-sm bg-light input-group-text p-3 typeSelc" name="type">
 									<option value=""
 										<c:out value="${pageMaker.cri.type == null?'selected':''}"/>>전체</option>
 									<option value="T"
@@ -30,18 +32,15 @@
 										<c:out value="${pageMaker.cri.type == 'W'?'selected':''}"/>>작성자</option>
 									<option value="TC"
 										<c:out value="${pageMaker.cri.type == 'TC'?'selected':''}"/>>제목+내용</option>
-									<!-- <option value="TC">제목+내용</option>  -->
 								</select>
 								
-								<div class="form-group input-group">
-									<input type='text' name='keyword'
-										value='<c:out value="${pageMaker.cri.keyword}"/>' /> <span
-										class="input-group-btn">
-										<button class="btn btn-default">
-											<i class="fa fa-search"></i>
-										</button>
-									</span>
-								</div>
+								<input type='text' name='keyword' class="board_input form-control p-3" 
+								placeholder="검색어를 입력하세요" value='<c:out value="${pageMaker.cri.keyword}"/>' /> 
+								<span class="input-group-text p-3 ">
+									<button class="btn btn-default">
+										<i class="fa fa-search"></i>
+									</button>
+								</span>
 							</div>
 
 						</form>
@@ -84,11 +83,11 @@
 							<table class="table">
 								<thead>
 									<tr>
-										<th>board_num</th>
-										<th>board_title</th>
-										<th>user_nickname</th>
-										<th>board_date</th>
-										<th>board_view</th>
+										<th>번호</th>
+										<th>제목</th>
+										<th>글쓴이</th>
+										<th>작성일</th>
+										<th>조회수</th>
 									</tr>
 								</thead>
 								<tbody></tbody>
@@ -99,7 +98,7 @@
 								<ul class="pagination">
 									<c:if test="${pageMaker.prev }">
 										<li class="paginate_button previous"><a class='rounded'
-											href="${pageMaker.startPage -1 }">이전</a></li>
+											href="${pageMaker.startPage -1 }">&laquo;</a></li>
 									</c:if>
 									<c:forEach var="num" begin="${pageMaker.startPage }"
 										end="${pageMaker.endPage }">
@@ -109,11 +108,11 @@
 									</c:forEach>
 									<c:if test="${pageMaker.next }">
 										<li class="paginate_button next"><a class='rounded'
-											href="${pageMaker.endPage +1 }">다음</a></li>
+											href="${pageMaker.endPage +1 }">&raquo;</a></li>
 									</c:if>
 								</ul>
 								
-								<button id="regBtn" class="pagingBtn btnRight">글쓰기</button>
+								<button id="regBtn" class="pagingBtn btnRight btn btn-primary middlebutton deliveryBtn ">글쓰기</button>
 								<input id="userNumHidden" type="hidden" value="${user_num }">
 							</div>
 

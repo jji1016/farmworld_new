@@ -27,6 +27,7 @@
     margin-left: 3%;
     border: solid #81c408 3px;
     border-radius: 30px;
+    min-height: 600px; /* 최소 높이를 600px로 지정 */
     height: 100% !important;
     box-shadow: 5px 5px 10px 0px #888888;
     position: relative;
@@ -60,7 +61,7 @@
 @media screen and (max-width: 995px) {
   #bigbox {
     flex: 0 0 auto;
-    width: 25%;
+    width: 90%;
     height: 70%;
 	}
 </style>
@@ -119,7 +120,7 @@
                                         <label for="grow_title" class="form-label">성장일기 제목</label>
                                     </td>
                                     <td>
-                                        <input type="text" class="form-control p-3" name="grow_title" id="grow_title" required="required" value="${vo.grow_title}">
+                                        <input type="text" class="form-control p-3" maxlength="40" name="grow_title" id="grow_title" required="required" value="${vo.grow_title}">
                                     </td>
                                 </tr>
                                 <tr>
@@ -127,7 +128,7 @@
                                         <label for="growup_category" class="form-label">카테고리</label>
                                     </td>
                                     <td>
-                                        <input type="text" class="form-control p-3" name="growup_category" id="growup_category" required placeholder="카테고리" value="${vo.growup_category}">
+                                        <input type="text" class="form-control p-3" maxlength="8" name="growup_category" id="growup_category" required placeholder="카테고리" value="${vo.growup_category}">
                                     </td>
                                 </tr>
                                 <tr>

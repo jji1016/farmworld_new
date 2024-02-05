@@ -5,6 +5,7 @@ import java.util.List;
 import com.farmworld.cart.domain.BillHistoryVO;
 import com.farmworld.cart.domain.CartVO;
 import com.farmworld.cart.domain.CntListVO;
+import com.farmworld.login.domain.UserVO;
 
 public interface CartMapper {
 	// 내 장바구니 가져오기
@@ -36,4 +37,6 @@ public interface CartMapper {
 	
 	// 상품 장바구니에서 Update
 	int updateCartData(CartVO cartVo);
+	
+	UserVO userInfo(int user_num);
 }

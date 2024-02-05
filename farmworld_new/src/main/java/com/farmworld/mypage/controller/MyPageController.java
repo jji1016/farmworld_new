@@ -110,7 +110,7 @@ public class MyPageController {
 		return "/mypage/modify";
 	}
 	
-	@ResponseBody
+	
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	public Map<String, Object> modify(@RequestParam("user_image") MultipartFile imgName, 
 			@ModelAttribute("user_num") Integer user_num, UserVO userVo, String farm_name) {
@@ -421,7 +421,7 @@ public class MyPageController {
 		return "/mypage/reviewRegister";
 	}
 	
-	@RequestMapping(value = "/reviewRegister", method = RequestMethod.POST)
+	@RequestMapping(value = "/reviewAdd", method = RequestMethod.POST)
 	public String reviewRegister(@ModelAttribute ReviewVO vo, 
 			@RequestParam("image1") MultipartFile image, @ModelAttribute("user_num") Integer user_num) {
 		vo.setUser_num(user_num);
@@ -446,6 +446,6 @@ public class MyPageController {
 		vo.setImage_folder_num(folderNum);
 		reviewService.register(vo);
 		
-		return "/mypage/review";
+		return "redirect:/mypage/review";
 	}	
 }

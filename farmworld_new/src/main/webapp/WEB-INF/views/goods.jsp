@@ -130,6 +130,7 @@ function insertGoods() {
 }
 
 function validation() {
+	//var a = 2* 1024*1024;
 	var getGoodsData	= $("#goodsForm input[type=text]");		// input text 값 가져오기
 	var fileData		= $("#photo")[0].files;					// 업로드한 파일
 	var category		= $("#productType").val();				// 작물

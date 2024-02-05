@@ -1,4 +1,8 @@
 $(document).ready(function() {
+	if (window.location.href.startsWith('http://localhost:8090/board/get')) {
+	    clickBoard()
+	};
+	
 	loadTableData();
 	boardName();
 	loadComments(); // 페이지 로딩 시 댓글 로딩
@@ -46,7 +50,8 @@ $(document).ready(function() {
 					let row = $("<tr>");
 					row.append($("<td>").text(board.board_num));
 					
-					let titleLink = $("<a id='titleLink'>").attr("href","/board/get?board_num="+board.board_num+"&board_category="+board.board_category)
+					let titleLink = $("<a id='titleLink'>").attr("href","/board/get?board_num="+board.board_num
+						+"&board_category="+board.board_category+"&board_date="+formatDate)
 						.text(board.board_title);
 					let titleTd = $("<td>").append(titleLink);
 					row.append(titleTd);
@@ -125,6 +130,9 @@ $(document).ready(function() {
 
 	function displayComments(comments) {
 	    var commentList = $("#commentList");
+	    var commentNick = $(".commentNick").data("user-nickname");
+		console.log("세션 닉넴" + commentNick);
+
 	    commentList.empty();
 	
 	    // 댓글 목록을 표시
@@ -134,10 +142,17 @@ $(document).ready(function() {
 			let formatDate = comment_date.toLocaleString("ko-KR",options);
 	        var commentDiv = $("<div class='comment'>");
 	        commentDiv.append("<input id='commentNum' type='hidden' value='"+ comment.comment_num +"'>");
-	        commentDiv.append("<div class='comRap'><p>" + comment.user_nickname + " | " + formatDate + "</p>"+
-				        	   "<input type='button' id='modComment' value='수정'>"+
-				        	   "<input type='button' id='delComment' value='삭제'>");
+	        var commentDiv2 = $("<div class='comRap'>");
+		        commentDiv2.append("<p>" + comment.user_nickname + " | " + formatDate + "</p>");
+				if (comment.user_nickname === commentNick) {
+				    commentDiv2.append("<input type='button' id='modComment' value='수정'>");
+				    commentDiv2.append("<input type='button' id='delComment' value='삭제'>");
+				}
+				commentDiv2.append("</div>");
+
+			commentDiv.append(commentDiv2);
 	        commentDiv.append("<p class='commentConP'>" + comment.comment_contents + "</p>");
+	        commentDiv.append("</div>");
 	
 	        commentList.append(commentDiv);
 	    });
@@ -216,7 +231,8 @@ $(document).ready(function() {
 			'value': comValue
 		});
 	    var commentConT = $('<textarea>', {
-	        'class': 'commentConT'
+	        'class': 'commentConT',
+	        'text': comValue
 	    });
 	    var modCommentComplete = $('<input>', {
 	        'type': 'button',
@@ -240,7 +256,8 @@ $(document).ready(function() {
 	
 	// 수정 이후 취소버튼 클릭시
 	$(document).off("click", "#modCancel").on("click", "#modCancel", function(t) {
-		var hiddenModComValue= $("#hiddenModCom").val();
+		var hiddenModComValue= $(this).closest('.comment').find("#hiddenModCom").val();
+		
 		console.log(hiddenModComValue);
 	    var commentConP = $('<p>', {
 	    	'class': 'commentConP',
@@ -304,33 +321,32 @@ $(document).ready(function() {
 	});
 	
 	function hide(){
-		console.log($("#sesUserNum").val());
+		console.log("회원번호"+$("#sesUserNum").val());
+		console.log("회원번호보드"+$("#boardUserNum").val());
 		// 같은 회원 아니면 수정버튼 사라짐
 		if ($("#sesUserNum").val() != $("#boardUserNum").val()) {
 		    $("#modBtn").css("display", "none");
 		};
-		console.log($("#sesUserNum").val());
+		
 		// 회원아니면 댓글 버튼 비활성화
 		if ($("#sesUserNum").val() == '') {
 		    console.log("asdasd");
-		    $(".addCommentBtn").prop('disabled', true);
+		    $(".addCommentBtn").prop('disabled', true).css("background-color", "#c1c1c1");
 		};
-		console.log($("#sesUserNum").val());
 	};
 
 }); // $(document).ready 함수 선언 종료---------------------------------------------------
 
 // 클릭한 게시물의 조회수를 증가시키는 Ajax 요청
-$("#titleLink").on("click",function clickBoard() {
-var boardNum = $("#getBoardNum").val();
-var BoardCategory = $("#getBoardCategory").val();
-console.log("조회수: "+boardNum);
-console.log("조회수: "+$("#getBoardCategory").val());
+function clickBoard() {
+	var urlParams = new URLSearchParams(window.location.search);
+	var boardNum = urlParams.get('board_num');
+	console.log("조회수: "+boardNum);
     $.ajax({
         type: "POST",
         url: "/board/increaseViewCount",
         data: {
-            board_num: boardNum,
+            board_num: boardNum
         },
         success: function(result) {
         },
@@ -338,7 +354,7 @@ console.log("조회수: "+$("#getBoardCategory").val());
             console.log("Error: " + error);
         }
     });
-});
+};
 
 
 // post방식 modify 넘기기
@@ -364,6 +380,7 @@ $(".del_image").on("click", function () {
     var id = $(this).attr("id");
     console.log(id);
 	var replaceID = id.replace("del_", "");
+	var previewID = "imagePreview" + replaceID.charAt(replaceID.length-1);
 	console.log(replaceID);
 
     $.ajax({
@@ -374,7 +391,8 @@ $(".del_image").on("click", function () {
         success: function(result) {
             // 성공적으로 삭제되면 해당 이미지를 화면에서 제거
             console.log(result);
-             $("#" + replaceID).empty();
+            $("#" + replaceID).empty();
+            $("#" + previewID).empty();
             console.log("Image deleted successfully");
         },
         error: function(error) {
@@ -386,13 +404,21 @@ $(".del_image").on("click", function () {
 
 
 function previewImage(input, previewId) {
+    const maxFileSize = 2 * 1024 * 1024; // 2MB
     var file = input.files[0];
+    console.log("file:" + file);
+
     if (file) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            $("#" + previewId).html('<img src="' + e.target.result + '" alt="Image Preview" class="img-fluid">');
-        };
-        reader.readAsDataURL(file);
+        if (file.size > maxFileSize) {
+            alert("파일 크기는 2MB를 초과할 수 없습니다.");
+            input.value = ""; // 파일 선택 초기화
+        } else {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $("#" + previewId).html('<img src="' + e.target.result + '" alt="Image Preview" class="img-fluid">');
+            };
+            reader.readAsDataURL(file);
+        }
     }
 }
 
@@ -407,5 +433,3 @@ $("#image2").change(function () {
 $("#image3").change(function () {
     previewImage(this, 'imagePreview3');
 });
-
-

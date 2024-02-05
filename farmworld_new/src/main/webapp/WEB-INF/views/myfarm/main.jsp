@@ -16,6 +16,9 @@
 }
 #searchbox{
 }
+.text-intro{
+	color : white;
+}
 /* 마우스 호버 시 스타일 변경 */
 .shadowhover:hover {
 	cursor: pointer; /* 마우스를 올릴 때 포인터로 변경 */
@@ -27,7 +30,7 @@
 }
 #myimage{
 	width: 95%;
-    height: 50%;
+    height: 100%;
 }
 #type{
 	width: 20%;
@@ -135,9 +138,7 @@ text-align: center;
                         <div class="col-lg-3" style="position: relative;">	
                        	<c:if test="${not empty vo}">
 							<div id="bigbox" class="h-100 p-3">
-								<div style="position: relative;">
-								    <img id="myimage" src='/resources/upload/${vo.image_folder_num}/${vo.image1}' class='card-img-top fixed-size-image' alt='농장 이미지'>
-								</div>
+								    <img id="myimage" src='/resources/upload/${vo.image_folder_num}/${vo.image1}' class='card-img-top' alt='농장 이미지' style="object-fit: cover;">
 							</div>
 						</c:if>
 						<c:if test="${empty vo}">
@@ -154,7 +155,7 @@ text-align: center;
                         
                         <!-- 인기농장  -->
                             <div class="col-lg-9">
-                            	<h5 id="f">인기 농장</h5>
+                            	<h4 id="f">인기 농장</h4>
                             	<div class="mx-auto text-center" style="max-width: 500px;">
 					            </div>
                                 <div class="row g-4 justify-content-center" id="myfarminput1">
@@ -179,7 +180,6 @@ text-align: center;
                     </div>
                 </div>
             </div>
-        </div>
         <!-- Fruits Shop End-->
         <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 		<script>
@@ -190,10 +190,11 @@ text-align: center;
 
 		        window.location.href = '/myfarm/farm?farm_num=' + farmNum;
 		    } else {
-		        alert('로그인을 해주세요!');
-		        window.location.href = '/login';
+		        alert('해당 팜은 없습니다.');
+		        window.location.href = '/myfarm/main';
 		    }
 		}
+		
 		function validateKeyword() {
 	        var keyword = document.forms["searchForm"]["keyword"].value;
 	        if (keyword.length === 1) {
@@ -235,7 +236,7 @@ text-align: center;
 							row+=("<div class='position-absolute start-0 bottom-0 w-100 py-3 px-4' style='background: rgba(52, 173, 84, .85);'>");
 							row+=("<h4 class='text-white text-truncate'>"+myfarm.farm_name+"</h4>");
 							let intro = myfarm.farm_intro;
-							row+=("<div class='text-truncate'>")
+							row+=("<div class='text-truncate text-intro'>")
 							 for (let i = 0; i < intro.length; i++) {
 		                            row += intro[i];
 		                        }
@@ -267,7 +268,9 @@ text-align: center;
 					searchForm.submit();
 				});
 			}
-		    
+			
+
+			
 		    $('#myFarmLink').click(function() {
 		        // jQuery를 사용하여 /myfarm/farm로 이동
 		        // 이동하기 전에 세션에 user_num이 있는지 확인
@@ -276,9 +279,6 @@ text-align: center;
 		            type: 'GET',
 		            dataType:'JSON',
 		            success: function(response) {
-		            	console.log(response);
-		            	console.log(response.hasUserNum);
-		            	console.log(response.userNum);
 		                if (response.hasUserNum) {
 		                	if(response.isfarm){
 		                		// 세션에 user_num이 있으면 /myfarm/farm로 이동

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.farmworld.cart.domain.BillHistoryVO;
 import com.farmworld.cart.domain.CartVO;
 import com.farmworld.cart.service.CartService;
+import com.farmworld.login.domain.UserVO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -98,13 +99,10 @@ public class CartController {
 		try {
 			BillHistoryVO historyVo = new BillHistoryVO();
 			historyVo.setUser_no(Integer.parseInt(session.getAttribute("user_num").toString()));
-			historyVo.setName_first(map.get("name_first"));
 			historyVo.setName_last(map.get("name_last"));
-			historyVo.setCompany_name(map.get("company_name"));
 			historyVo.setAddr(map.get("addr"));
 			historyVo.setPostcode(map.get("postcode"));
 			historyVo.setCity(map.get("city"));
-			historyVo.setCountry(map.get("country"));
 			historyVo.setMobile(map.get("mobile"));
 			historyVo.setEmail(map.get("email"));
 			historyVo.setShipDetail(map.get("shipDetail"));
@@ -159,7 +157,7 @@ public class CartController {
 	@RequestMapping(value = "/changeCart", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> postLogin(@RequestBody Map<String, String> map, HttpSession session) {
-		Map<String, Object> result = new HashMap<>();
+		Map<String, Object> result = new 	HashMap<>();
 		log.debug("getParam : " + ", " + map.get("id"));
 		try {
 			int state	= Integer.parseInt(map.get("state").toString());
@@ -187,5 +185,34 @@ public class CartController {
 		}
 		
 		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/getUserInfoForDefaultAddress", method = RequestMethod.POST)
+	public Map<String, Object> getUserInfoForDefaultAddress(HttpSession session) {
+	    Map<String, Object> result = new HashMap<>();
+
+	    try {
+	        int user_Num = session.getAttribute("user_num") == null ? 0 : Integer.parseInt(session.getAttribute("user_num").toString());
+	        
+	        if (user_Num != 0) {
+	            // 사용자 번호를 기반으로 사용자 정보를 가져오는 메서드
+	            UserVO userVO = cartService.userInfo(user_Num);
+	            
+	            if (userVO != null) {
+	                result.put("result", "Y");
+	                result.put("userInfo", userVO);
+	            } else {
+	                result.put("result", "N");
+	            }
+	        } else {
+	            result.put("result", "N");
+	        }
+	    } catch (Exception e) {
+	        log.error(e.getMessage());
+	        result.put("result", "N");
+	    }
+
+	    return result;
 	}
 }

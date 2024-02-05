@@ -77,6 +77,36 @@ public class GoodsVO {
     private int goods_view;
     private int image_folder_num;
 
+ // 페이징 관련
+    private int totalCnt;	// 전체 페이징 갯수
+    private int nowPage;	// 현재 페이징 번호
+    private int startCnt;	// 페이징 시작 번호
+    private int endCnt;		// 페이징 마지막 번호
+    
+	public int getTotalCnt() {
+		return totalCnt;
+	}
+	public void setTotalCnt(int totalCnt) {
+		this.totalCnt = totalCnt;
+	}
+	public int getNowPage() {
+		return nowPage;
+	}
+	public void setNowPage(int nowPage) {
+		this.nowPage = nowPage;
+	}
+	public int getStartCnt() {
+		return startCnt;
+	}
+	public void setStartCnt(int startCnt) {
+		this.startCnt = startCnt;
+	}
+	public int getEndCnt() {
+		return endCnt;
+	}
+	public void setEndCnt(int endCnt) {
+		this.endCnt = endCnt;
+	}
 
 
 }

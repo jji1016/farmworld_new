@@ -203,15 +203,15 @@ function execDaumPostcode() {
 //유효성 검사
 
 $('#frm').validate({
-	onfocusout: false,  // 포커스가 떠날 때 유효성 검사 시작
-    focusCleanup: false, // 잘못된 필드에 포커스가 가면 에러메세지 지우기
-    rules: {        // 유효성 검사 규칙
-    	user_id: {             		// 이름 필드
-            required: true,     	// 필수 입력
-            minlength: 4,			// 최소 입력값
-            maxlength: 40, 			// 최대 입력값
-            email: true,			// 이메일 형식 검증
-            remote: {				// 중복 체크 서버 연결
+	onfocusout: false,  //포커스가 떠날 때 유효성 검사 시작
+    focusCleanup: false, //잘못된 필드에 포커스가 가면 에러메세지 지우기
+    rules: {        //유효성 검사 규칙
+    	user_id: {             		//이름 필드
+            required: true,     	//필수 입력
+            minlength: 4,			//최소 입력값
+            maxlength: 40, 			//최대 입력값
+            email: true,			//이메일 형식 검증
+            remote: {				//중복 체크 서버 연결
                 url: "/user/idCheck",
                 type: "POST",
                 data: {
@@ -222,24 +222,25 @@ $('#frm').validate({
             }
             
     	},
-        user_pw1: {            		// 비밀번호 필드
+        user_pw1: {            		//비밀번호 필드
             required: true,     
             minlength: 4,			
             maxlength: 20,     
-            equalTo: user_pw		// 비밀번호 필드와 동일한 값인지 확인
+            equalTo: user_pw		//비밀번호 필드와 동일한 값인지 확인
         },
-        user_pw: {     				// 비밀번호 재확인 필드
+        user_pw: {     				//비밀번호 재확인 필드
             required: true,     
             minlength: 4,			
             maxlength: 20,       
             equalTo: user_pw1    
         },
-        user_name: {     			// 이름 필드
+        user_name: {     			//이름 필드
             required: true,     
             minlength: 2,			
-            maxlength: 20,       
+            maxlength: 20,
+            regx: /^[a-zA-Z가-힣ㄱ-ㅎㅏ-ㅣ]*$/ //정규식
         },
-        user_nickname: {     		// 닉네임 필드
+        user_nickname: {     		//닉네임 필드
             required: true,     
             minlength: 1,			
             maxlength: 20,
@@ -253,20 +254,21 @@ $('#frm').validate({
                 }
             }	
         },
-        user_phone: {     			// 전화번호 재확인 필드
+        user_phone: {     			//전화번호 재확인 필드
             required: true,     
-            digits:	true,        	// 숫자만 입력 
+            digits:	true,        	//숫자만 입력 
             minlength: 10,			
-            maxlength: 11
+            maxlength: 11,
+            regx: /^(010|011|016)-?\d{3,4}-?\d{4}$/
         },
-        user_address: {     		// 주소 필드
+        user_address: {     		//주소 필드
             required: true,     
         },
-        user_detailAddress: {     	// 상세 주소 필드     			
+        user_detailAddress: {     	//상세 주소 필드     			
             maxlength: 50
         },
     },
-    messages: {     // 오류값 발생시 출력할 메시지 수동 지정
+    messages: {     //오류값 발생시 출력할 메시지 수동 지정
     	user_id: {             		
     		required: '필수 입력 항목입니다.',
     		minlength: '4글자 이상 입력해야 합니다.',		
@@ -289,7 +291,8 @@ $('#frm').validate({
         user_name: {            		
     		required: '필수 입력 항목입니다.',
     		minlength: '2글자 이상 입력해야 합니다.',		
-            maxlength: '20글자까지 입력 가능합니다.'  
+            maxlength: '20글자까지 입력 가능합니다.',
+            regx: '숫자와 특수문자는 입력할 수 없습니다.'
         },
         user_nickname: {            		
     		required: '필수 입력 항목입니다.',
@@ -300,8 +303,9 @@ $('#frm').validate({
         user_phone: {            		
     		required: '필수 입력 항목입니다.',
         	digits: '-없이 숫자만 입력하세요.',
-    		minlength: '10글자 이상 입력해야 합니다.',		
-            maxlength: '11글자까지 입력 가능합니다.'
+    		minlength: '9글자 이상 입력해야 합니다.',		
+            maxlength: '11글자까지 입력 가능합니다.',
+            regx: '형식에 맞게 입력해주세요. 예)01012345678'
         },
         user_address: {            		
     		required: '우편번호를 검색하세요.'
@@ -310,7 +314,7 @@ $('#frm').validate({
         	maxlength: '최대 50글자 입력 가능합니다.'  
         }
     },
-    submitHandler: function (form) {	// 모든 유효성검사 통과해야 폼 제출
+    submitHandler: function (form) {	//모든 유효성검사 통과해야 폼 제출
     		console("회원가입 완료");
     		$.ajax({
             url: "/join",
@@ -333,7 +337,10 @@ $('#frm').validate({
 });
 
 
-
+//정규식을 적용
+$.validator.addMethod("regx", function(value, element, regexpr) {          
+    return regexpr.test(value);
+});
 
 
 

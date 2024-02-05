@@ -14,40 +14,40 @@
 	
 </script>
 
+<%
+    // 경로 변수에서 값 가져오기
+    String board_date = request.getParameter("board_date");
+%>
 <div class="container-fluid fruite py-5">
 	<div class="container py-5">
 		<div id="page-wrapper">
-			<div class="row">
-				<div class="col-lg-12">
-					<h1 class="page-header">Board Get</h1>
-				</div>
-				<!-- /.col-lg-12 -->
-			</div>
-			<!-- /.row -->
-			<div class="row">
+			<div class="row conMargin">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
 						<!-- /.panel-heading -->
 						<div class="panel-body">
-							<form method="get" action="/board/modify">
+							<form method="get" class="modForm" action="/board/modify">
 								<div class="form-group">
 									<input class="form-control" type="hidden" name="board_num"
 										value="${board.board_num }">
 									<input id="sesUserNum" type="hidden" value="${user_num }">
 									<input id="boardUserNum" type="hidden" value="${board.user_num }">
 								</div>
-								<div class="form-group">
-									<label>제목</label> <input class="form-control" name="title"
+								<div class="rapTWD">
+									<div class="form-group BTitleWidth">
+									<input class="form-control mod_form-control BTitle" name="title"
 										readonly="readonly" value="${board.board_title }">
 								</div>
-								<div class="form-group">
-									<label>작성자</label> <input class="form-control" name="writer"
+								<div class="form-group rapWD">
+									<input class="form-control mod_form-control BNick" name="writer"
 										readonly="readonly" value="${board.user_nickname }">
+									<div class="form-control mod_form-control BDate"> | <%= board_date %></div>
 								</div>
-								<div class="form-group">
-									<label>내용</label>
-									<div class="form-control">${board.board_content }</div>
-									<div class="form-control">
+								</div>
+								<div class="form-group rapCI">
+									
+									<div class="form-control mod_form-control">${board.board_content }</div>
+									<div class="form-control mod_form-control rapI">
 										<c:if test="${board.image1 != null}">
 											<img
 												src="/resources/upload/${board.image_folder_num }/${board.image1}">
@@ -62,10 +62,9 @@
 										</c:if>
 									</div>
 								</div>
-
-								<button type="submit" id="modBtn" class="btn btn-default" data-oper="modify">수정하기</button>
-								<button type="button" class="btn-default"
+								<button type="button" class="btn btn-default btnRight" 
 									onclick="location.href='/board/list?board_category=${param.board_category}'">목록으로</button>
+								<button type="submit" id="modBtn" class="btn btn-default btnRight" data-oper="modify">수정하기</button>
 							</form>
 						</div>
 					</div>
@@ -81,8 +80,9 @@
                     <form class="comment_register" id="commentForm" method="post">
                         <div class="form-group">
                             <input type="hidden" id="boardNum" name="board_num" value="${board.board_num}">
+                            <input type="hidden" id="user_nickname" value="${user_nickname}">
                         </div>
-                       <div class="commentNick">
+                        <div class="commentNick" data-user-nickname="${user_nickname}">
 						    <c:if test="${user_nickname == null}">
 						        로그인 해주세요
 						    </c:if>
@@ -90,14 +90,16 @@
 						        ${user_nickname}
 						    </c:if>
 						</div>
+
                         <textarea class="commentCon" name="comment_contents" placeholder="댓글을 입력하세요"></textarea>
                         <input type="submit" class="addCommentBtn" value="등록하기" >
                     </form>
                 </div>
                 
-			<!-- /.row -->
+				<!-- /.row -->
+			</div>
+			<!-- /#page-wrapper -->
 		</div>
-		<!-- /#page-wrapper -->
 	</div>
 </div>
 <script src="/resources/js/board/board.js" type="text/javascript"></script>

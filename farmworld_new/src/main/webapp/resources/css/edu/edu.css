@@ -54,19 +54,13 @@ ul{
     display: flex;
     justify-content: center;
 }
-.pagination a.active {
-    background-color: #81c408;
-    color: #f4f6f8;
-    border: 1px solid #ffb524;
+.argiH1{
+	font-size: 2.3rem;
 }
-.pagination a {
-    color: #45595b;
-    padding: 10px 16px;
-    text-decoration: none;
-    transition: 0.5s;
-    border: 1px solid #ffb524;
-    margin: 0 4px;
+
+.eduSelect{
+	width: 20%;
 }
-.pagination a:hover{
-	background-color: #81c408 !important;
+.eduMonthRap{
+	height: 64px;
 }

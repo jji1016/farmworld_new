@@ -8,13 +8,15 @@
 <div class="container-fluid py-5"></div>
 <div class="container-fluid fruite py-5">
 	<div class="container py-5">
-		<h1>이달의 농업기술</h1>
-		<div class="search_Form">
-			<form action="/edu/agritech" method="get">
-				<fieldset>
-					<ul>
-						<li><label for="eduMonth" class="sr_only">기간 선택</label> 
-							<select id="eduMonth" class="form-control" name="eduMonth">
+		<div class="row col-lg-12" style="margin-bottom: 2%;">
+			<div class="col-xl-3">
+				<h1 class="argiH1">이달의 농업기술</h1>
+			</div>
+			<div class="col-xl-8 search_Form">
+				<form action="/edu/agritech" method="get">
+					<fieldset>
+						<div class="input-group w-100 mx-auto d-flex eduMonthRap">
+							<select id="eduMonth" class="form-select-sm bg-light input-group-text p-3 eduSelect " name="eduMonth">
 									<option value="" selected="selected">전체</option>
 									<option value="01">1월</option>
 									<option value="02">2월</option>
@@ -28,14 +30,19 @@
 									<option value="10">10월</option>
 									<option value="11">11월</option>
 									<option value="12">12월</option>
-							</select></li>
-						<li><span class="form-input">
-								<input type="text" id="srchStr" class="form-control " name="srchStr" placeholder="검색어를 입력하세요."
+							</select>
+						
+							<input type="text" id="srchStr" class="form-control p-3" name="srchStr" placeholder="검색어를 입력하세요."
 								title="검색어를 입력하세요." value="" autocomplete="off" autocapitalize="off">
-						</span><span class="form-btn"><button type="submit" class="input-group-text p-3" >검색</button></span></li>
-					</ul>
-				</fieldset>
-			</form>
+							<span class="input-group-text p-3 ">
+								<button type="submit" class="btn btn-default" >
+									<i class="fa fa-search"></i>
+								</button>
+							</span>
+						</div>
+					</fieldset>
+				</form>
+			</div>
 		</div>
 
 		<div id="resultArea"></div>
