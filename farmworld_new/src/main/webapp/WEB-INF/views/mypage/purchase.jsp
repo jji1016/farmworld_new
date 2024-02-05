@@ -147,7 +147,7 @@ $(document).ready(function () {
 		                                    		"<td>" + data3[i].farm_name + "</td>"+
 		                                    		"<td>" + data2[i].goods_title + "</td>"+
 		                                    		"<td>" + data1[i].order_price + "</td>"+
-		                                    		"<td>" + data2[i].goods_price + "</td>"+
+		                                    		/* "<td>" + data2[i].goods_score + "</td>"+ */
 		                                    		"<td><button id='purchasebutton' class='btn btn-primary middlebutton deliveryBtn'>배송상세</button>"+
 		                                    		"<form name='returnpurchase' action='/mypage/returnpurchase'  method='post'>" +
                                         	        "<input type='hidden' class='order_num' id='order_num' name='order_num' value='" + data1[i].order_num + "'>" +                                    	        
