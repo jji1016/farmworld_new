@@ -31,7 +31,7 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/user")
 @AllArgsConstructor
 @Log4j
-public class userController {
+public class UserController {
 	private final UserService userService;
 	private final MailSendService mailService;
 	
