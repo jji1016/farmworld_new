@@ -1,9 +1,0 @@
-diff a/farmworld_new/src/main/java/com/farmworld/all/mapper/ImageMapper.xml b/farmworld_new/src/main/java/com/farmworld/all/mapper/ImageMapper.xml	(rejected hunks)
-@@ -15,6 +15,7 @@
- 	</insert>
- 	
- 	
-+	<update id="update" parameterType="ImageVO">
- 		UPDATE image
- 		SET image1 = #{image1},
- 		image2 = #{image2},
