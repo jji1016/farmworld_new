@@ -86,7 +86,7 @@
 		                <th scope="col">농장이름</th>
 		                <th scope="col">제품이름</th>
 		                <th scope="col">주문가격</th>
-		                <th scope="col">별점</th>
+		                <!-- <th scope="col">별점</th> -->
 		                <th scope="col">상세보기</th>
 		              </tr>
 		            </thead>
