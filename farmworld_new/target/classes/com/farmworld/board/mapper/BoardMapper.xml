@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.farmworld.board.mapper.BoardMapper">
+
+	<insert id="insert" parameterType="BoardVO">
+		insert into board
+		(board_title,board_content,user_nickname,board_category,image_folder_num, user_num)
+		values (#{board_title}, #{board_content}, #{user_nickname}, #{board_category}, ${image_folder_num}, ${user_num})
+	</insert>
+
+	<insert id="insertSelectBno" parameterType="BoardVO"
+		keyColumn="board_num" keyProperty="board_num" useGeneratedKeys="true">
+		insert into board
+		(board_title,board_content,user_nickname,board_category,image_folder_num,user_num)
+		values (#{board_title}, #{board_content}, #{user_nickname}, #{board_category}, ${image_folder_num}, ${user_num})
+	</insert>
+
+	<select id="selectAll" resultType="BoardVO">
+		select * from board
+	</select>
+
+	<select id="getListWithSearch" resultType="BoardVO"
+		parameterType="com.farmworld.all.domain.Criteria">
+		SELECT * FROM board
+		<if
+			test="type != null and type != '' and keyword != null and keyword != ''">
+			<where>
+				AND ${type} LIKE CONCAT('%',#{keyword},'%')
+			</where>
+		</if>
+		ORDER BY board_num DESC
+	</select>
+
+	<update id="update" parameterType="BoardVO">
+		UPDATE board
+		SET board_title = #{board_title}, board_content = #{board_content}
+		WHERE board_num = #{board_num}
+	</update>
+
+	<delete id="delete" parameterType="BoardVO">
+		DELETE FROM board WHERE board_num =	#{board_num}
+	</delete>
+
+	<select id="select" resultType="BoardVO" parameterType="BoardVO">
+		SELECT board.*, image.*
+		FROM board 
+		LEFT JOIN image ON board.image_folder_num = image.image_folder_num
+		WHERE board_num = #{board_num}
+	</select>
+
+	<select id="getTotalCount" resultType="int" parameterType="com.farmworld.all.domain.Criteria">
+	    SELECT COUNT(board_num) FROM board WHERE board_category = #{board_category}
+	    <if test="type != null and type != '' and keyword != null and keyword != ''">
+	        <choose>
+	            <when test="type == 'TC'">
+	                AND (board_title LIKE CONCAT('%',#{keyword},'%') OR board_content LIKE CONCAT('%',#{keyword},'%'))
+	            </when>
+	            <when test='type == "T"'>
+	                AND board_title LIKE CONCAT('%',#{keyword},'%') 
+	            </when>
+	            <when test='type == "C"'>
+	                AND board_content LIKE CONCAT('%',#{keyword},'%')
+	            </when>
+	            <when test='type == "W"'>
+	                AND user_nickname LIKE CONCAT('%',#{keyword},'%') 
+	            </when>
+	        </choose>
+	    </if>
+	</select>
+	
+	<select id="getListWithPaging" resultType="BoardVO"
+	    parameterType="com.farmworld.all.domain.Criteria">
+	    SELECT * FROM board WHERE board_category = #{board_category}
+	    <if test="type != null and type != '' and keyword != null and keyword != ''">
+	        <choose>
+	            <when test="type == 'TC'">
+	                AND (board_title LIKE CONCAT('%',#{keyword},'%') OR 
+	                board_content LIKE CONCAT('%',#{keyword},'%'))
+	                AND board_category LIKE #{board_category}
+	            </when>
+	            <when test='type == "T"'>
+	                AND board_title LIKE CONCAT('%',#{keyword},'%') 
+	                AND board_category LIKE #{board_category}
+	            </when>
+	            <when test='type == "C"'>
+	                AND board_content LIKE CONCAT('%',#{keyword},'%')
+	                AND board_category LIKE #{board_category}
+	            </when>
+	            <when test='type == "W"'>
+	                AND user_nickname LIKE CONCAT('%',#{keyword},'%') 
+	                AND board_category LIKE #{board_category}
+	            </when>
+	            <otherwise>
+	                AND ${type} LIKE CONCAT('%',#{keyword},'%')
+	                AND board_category LIKE #{board_category}
+	            </otherwise>
+	        </choose>
+	    </if>
+	    ORDER BY board_num DESC
+	    LIMIT #{start}, #{amount}
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="increaseViewCount">
+	    UPDATE board
+	    SET board_view = board_view + 1
+	    WHERE board_num = #{boardNum}
+	</update>
+	
+	
+</mapper>
+	
