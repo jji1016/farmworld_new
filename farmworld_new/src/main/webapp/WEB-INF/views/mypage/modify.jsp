@@ -92,17 +92,17 @@
 	margin-top: 2%;
 	display: block;
 }
-#updateBtn {
+.updateBtn {
     color: #ffffff;
     text-transform: uppercase;
    	float : right;
    	background-color: #81c408;
    	border-radius: 10px;
 }
-#updateBtn:hover {
+.updateBtn:hover {
     color: black !important;
 }
-#updateBtn2 {
+.updateBtn2 {
     color: #ffffff;
     text-transform: uppercase;
    	float : right;
@@ -110,7 +110,7 @@
    	border-radius: 10px;
    	margin-left: 1%;
 }
-#updateBtn2:hover {
+.updateBtn2:hover {
     color: black !important;
 }
 #imgBtn {
@@ -239,9 +239,9 @@
 	                						</tr>
                 						</table>
                 						<div class="btn-box2">
-							              <button id="updateBtn2" type="button" class="btn text-white bg-primary px-3 rounded" id="openModal"
+							              <button type="button" class="btn text-white bg-primary px-3 rounded updateBtn2" id="openModal"
 							              	data-bs-toggle="modal" data-bs-target="#checkPw">회원 탈퇴</button>
-							              <button id="updateBtn2" type="submit" class="btn text-white bg-primary px-3 rounded">회원 정보 수정</button>
+							              <button id="updateBtn2" type="submit" class="btn text-white bg-primary px-3 rounded updateBtn2">회원 정보 수정</button>
 							          </div>
 		                			</div>
                 				</form>
@@ -275,7 +275,7 @@
       <div class="modal-body" id="inputAdd">
       </div>
       <div class="modal-footer">
-      <button id="updateBtn" type="button" class="btn btn-primary" id="checkPwBtn" data-bs-dismiss="modal">확인</button>
+      <button type="button" class="btn btn-primary updateBtn" id="checkPwBtn" data-bs-dismiss="modal">확인</button>
       </div>
     </div>
   </div>
@@ -287,7 +287,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">회원 탈퇴</h5>
-        <button id="updateBtn" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button id="updateBtn" type="button" class="btn-close updateBtn" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
       정말 탈퇴하시겠습니까?
@@ -295,8 +295,8 @@
       구매자를 위해 판매자 활동 정보는 한 달 뒤 삭제 예정입니다.)
       </div>
       <div class="modal-footer">
-        <button id="updateBtn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니오.</button>
-        <button id="updateBtn" type="button" class="btn btn-primary" id="delBtn" data-bs-dismiss="modal">네, 탈퇴하겠습니다</button>
+        <button id="" type="button" class="btn btn-secondary updateBtn" data-bs-dismiss="modal">아니오.</button>
+        <button type="button" class="btn btn-primary updateBtn" id="delBtn" data-bs-dismiss="modal">네, 탈퇴하겠습니다</button>
       </div>
     </div>
   </div>
@@ -410,6 +410,10 @@ $("#delBtn").click(function () {
 	});
 })
 
+//정규식을 적용
+$.validator.addMethod("regx", function(value, element, regexpr) {          
+    return regexpr.test(value);
+});
 
 //유효성 검사
 $('#frm').validate({
@@ -424,7 +428,8 @@ $('#frm').validate({
         user_name: {     			// 이름 필드
             required: true,     
             minlength: 2,			
-            maxlength: 20,       
+            maxlength: 20,  
+            regx: /^[a-zA-Z가-힣ㄱ-ㅎㅏ-ㅣ]*$/
         },
         user_nickname: {     		// 닉네임 필드
             required: true,     
@@ -434,8 +439,16 @@ $('#frm').validate({
                 url: "/user/nickCheck",
                 type: "POST",
                 data: {
-                    user_nickname: function () {
-                        return $('input[name="user_nickname"]').val();
+                	user_nickname: function () {
+                        var currentNickname = $('input[name="user_nickname"]').val();
+                        
+                        // 수정된 경우에만 중복 검사 실행
+                        if (currentNickname !== prevNickname) {
+                            prevNickname = currentNickname; // 현재 닉네임으로 업데이트
+                            return currentNickname;
+                        }
+                        
+                        return true; // 수정되지 않은 경우에는 중복 검사 생략
                     }
                 }
             }	
@@ -444,7 +457,8 @@ $('#frm').validate({
             required: true,     
             digits:	true,        	// 숫자만 입력 
             minlength: 10,			
-            maxlength: 11
+            maxlength: 11,
+            regx: /^(010|011|016)-?\d{3,4}-?\d{4}$/
         },
         user_address: {     		// 주소 필드
             required: true,     
@@ -462,7 +476,8 @@ $('#frm').validate({
         user_name: {            		
     		required: '필수 입력 항목입니다.',
     		minlength: '2글자 이상 입력해야 합니다.',		
-            maxlength: '20글자까지 입력 가능합니다.'  
+            maxlength: '20글자까지 입력 가능합니다.',
+            regx: '숫자와 특수문자는 입력할 수 없습니다.'
         },
         user_nickname: {            		
     		required: '필수 입력 항목입니다.',
@@ -474,7 +489,8 @@ $('#frm').validate({
     		required: '필수 입력 항목입니다.',
         	digits: '-없이 숫자만 입력하세요.',
     		minlength: '10글자 이상 입력해야 합니다.',		
-            maxlength: '11글자까지 입력 가능합니다.'
+            maxlength: '11글자까지 입력 가능합니다.',
+            regx: '형식에 맞게 입력해주세요. 예)01012345678'
         },
         user_address: {            		
     		required: '우편번호를 검색하세요.'
@@ -509,8 +525,6 @@ $('#frm').validate({
         return false;
     }
 });
-
-
 
 
 //다음 주소 API 사용
