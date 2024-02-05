@@ -13,7 +13,12 @@
 .featurs-item{
 	margin: 2%;
 }
-
+#mainbox{
+	height: 90% !important;
+}
+#mainI{
+	color: #000 !important;
+}
 </style>
 
 <!-- Hero Start -->
@@ -62,9 +67,9 @@
                 <div class="row g-4">
                     <div class="col-md-6 col-lg-3">
 	                    <a href="/shopmain"  class="position-relative me-4 my-auto">
-	                        <div class="featurs-item text-center rounded bg-light p-4">
+	                        <div id="mainbox" class="featurs-item text-center rounded bg-light p-4">
 	                            <div class="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
-	                                <i class="fas fa-store fa-3x text-white"></i>
+	                                <i id="mainI" class="fas fa-store fa-3x text-white"></i>
 	                            </div>
 	                            <div class="featurs-content text-center">
 	                                <h5>Shopping</h5>
@@ -74,9 +79,9 @@
                     </div>
                     <div class="col-md-6 col-lg-3">
                     	<a href="/edu/agritech"  class="position-relative me-4 my-auto">
-	                        <div class="featurs-item text-center rounded bg-light p-4">
+	                        <div  id="mainbox" class="featurs-item text-center rounded bg-light p-4">
 	                            <div class="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
-	                            	<i class="fas fa-microphone fa-3x text-white"></i>
+	                            	<i id="mainI" class="fas fa-microphone fa-3x text-white"></i>
 	                            </div>
 	                            <div class="featurs-content text-center">
 	                                <h5>Edu</h5>
@@ -86,9 +91,9 @@
                     </div>
                     <div class="col-md-6 col-lg-3">
                     	<a href="/board/list?board_category=notice"  class="position-relative me-4 my-auto">
-	                        <div class="featurs-item text-center rounded bg-light p-4">
+	                        <div  id="mainbox" class="featurs-item text-center rounded bg-light p-4">
 	                            <div class="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
-	                                <i class="fas fa-user-shield fa-3x text-white"></i>
+	                                <i id="mainI" class="fas fa-user-shield fa-3x text-white"></i>
 	                            </div>
 	                            <div class="featurs-content text-center">
 	                                <h5>Notice</h5>
@@ -98,7 +103,7 @@
                     	</a>
                     </div>
                     <div class="col-md-6 col-lg-3">
-                        <div class="featurs-item text-center rounded bg-light p-4">
+                        <div id="mainbox" class="featurs-item text-center rounded bg-light p-4">
                             <div class="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto weatherIcon">
                             </div>
                             <div class="featurs-content text-center">
