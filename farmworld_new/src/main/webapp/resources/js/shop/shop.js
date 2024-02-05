@@ -1,12 +1,14 @@
+// 리스트 파라미터를 담는 객체
+var paramData = {
+	"nowPage": "0"
+}
+
 $(document).ready(function() {
     init();
 });
 
-// 리스트 파라미터를 담는 객체
-var paramData = {}
-
 function init(){
-    getGoodList();
+    getGoodList(paramData);
 }
 
 // 검색 버튼 클릭시
@@ -24,6 +26,7 @@ $("#searchInput").on("keyup",function(key){
 // 카테고리 이름 클릭시
 $(document).on('click', '.category-btn', function(e){
     paramData.goods_category = e.target.text;
+    paramData.nowPage		 = "0";
     getGoodList(paramData);
 });
 
@@ -78,7 +81,7 @@ function getGoodList(paramData){
             var goodsForm = '<div class="col-md-6 col-lg-6 col-xl-4" onclick="shopDetail('+item.goods_num+')">\n' +
                 '                                        <div class="rounded position-relative fruite-item">\n' +
                 '                                            <div class="fruite-img">\n' +
-                '                                                <img src="/resources/'+item.image1+'" class="img-fluid w-100 rounded-top imgHeight" alt="">\n' +
+                '                                                <img src="/resources/'+item.image1+'" class="img-fluid w-100 rounded-top" alt="">\n' +
                 '                                            </div>\n' +
                 '                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">'+item.goods_category+'\n</div>\n' +
                 '                                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">\n' +
@@ -95,6 +98,25 @@ function getGoodList(paramData){
 
             goodsListContents += goodsForm;
         });
+        
+        paramData.totalCnt = reData.page.totalCnt; 
+        
+        
+        var paging =	'<div class="col-12">';
+        paging +=		'	<div class="pagination d-flex justify-content-center mt-5">';
+        paging +=		'		<a href="#none" class="rounded" onclick="goPage(\'F\')">&laquo;</a>';
+        
+        
+        for(var i=0; i<paramData.totalCnt; i++) {
+			var cls = paramData.nowPage == i ? 'active rounded' : '';
+			paging +=	'		<a href="#none" onclick="goPage(\''+ i +'\')" class="'+ cls +'">'+ Number(Number(i) + Number(1)) +'</a>';	
+		}
+        
+		paging +=		'		<a href="#none" class="rounded" onclick="goPage(\'L\')">&raquo;</a>';
+		paging +=		'	</div>';
+		paging +=		'</div>';
+		
+		goodsListContents += paging;
 
         $('#goodsList').prepend(goodsListContents);
 
@@ -118,6 +140,18 @@ function getGoodList(paramData){
 
 function convertMoney(data){
     return data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+}
+
+function goPage(state) {
+	if(state == "F") {
+		paramData.nowPage = "0";
+	} else if(state == "L") {
+		paramData.nowPage = Number(Number(paramData.totalCnt) - Number(1));
+	} else {
+		paramData.nowPage = state;
+	}
+	
+	getGoodList(paramData);
 }
 
 

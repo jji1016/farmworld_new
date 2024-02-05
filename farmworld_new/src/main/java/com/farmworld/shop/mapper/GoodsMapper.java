@@ -27,13 +27,15 @@ public interface GoodsMapper {
     int deleteGoodsImage(GoodsVO goodsVo);
 
     List<GoodsVO> getGoodsList(GoodsVO goodsVo);
+    
+    int getGoodsListCnt(GoodsVO goodsVo);
 
     GoodsVO shopDetail(GoodsVO goodsVo);
 
 
     List<Map<String, Object>> getGoodsCategoryTotalCount();
 
-  //리뷰 가져오기
+     //리뷰 가져오기
     public List<ReviewVO> getReview(int goods_num);
     public List<UserVO> getUser(int user_num);
     public List<ImageVO> getImage(int image_folder_num);
