@@ -16,12 +16,12 @@
 					<div class="col-xl-3">
 						<h1 class="mb-4 board_name" >공지사항</h1>
 					</div>
-					<div class="col-xl-8">
+					<div class="col-xl-8 ">
 					
 						<form id="searchForm" action="/board/list" method="get">
 							<input  type="hidden" name="board_category" value="${param.board_category }">
-							<div class="input-group w-100 mx-auto d-flex ">
-								<select id="type" class="board_type form-select-sm bg-light input-group-text p-3" name="type">
+							<div class="input-group w-100 mx-auto d-flex typeRap">
+								<select id="type" class="board_type form-select-sm bg-light input-group-text p-3 typeSelc" name="type">
 									<option value=""
 										<c:out value="${pageMaker.cri.type == null?'selected':''}"/>>전체</option>
 									<option value="T"
