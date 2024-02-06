@@ -95,7 +95,7 @@ public class MyPageController {
 		return "/mypage/myPageMain";
 	}
 	
-/* 정보 수정 페이지 */
+	/* 정보 수정 페이지 */
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public String getModify(HttpSession session, Model model) {
 		System.out.println("getModify 넘어옴");
@@ -110,7 +110,7 @@ public class MyPageController {
 		return "/mypage/modify";
 	}
 	
-	
+	@ResponseBody
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	public Map<String, Object> modify(@RequestParam("user_image") MultipartFile imgName, 
 			@ModelAttribute("user_num") Integer user_num, UserVO userVo, String farm_name) {

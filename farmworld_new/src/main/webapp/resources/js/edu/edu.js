@@ -46,20 +46,11 @@ function ajaxTest(num) {
 			$(xmlDoc).find("item").each(function() {
 				var item = $(this);
 				
-				var atchmnflGroupEsntlCode = item.find("atchmnflGroupEsntlCode").text();
-				var atchmnflSn = item.find("atchmnflSn").text();
-				var atchmnflStreNm = item.find("atchmnflStreNm").text();
-				var clCodeNm = item.find("clCodeNm").text();
-				var contentCnt = item.find("contentCnt").text();
 				var curationImgUrl = item.find("curationImgUrl").text();
 				var curationNm = item.find("curationNm").text();
 				var curationNo = item.find("curationNo").text();
-				var curationSumryDtl = item.find("curationSumryDtl").text();
 				var rdcnt = item.find("rdcnt").text();
-				var recomendAt = item.find("recomendAt").text();
-				var streCours = item.find("streCours").text();
 				var svcDt = item.find("svcDt").text();
-				var thumbFileNm = item.find("thumbFileNm").text();
 					
 				str += "<li class='eduLi'><a href='/edu/getDtl?curationNo="+curationNo+"'>";
 
@@ -116,8 +107,8 @@ console.log("CntntsSnnAjax실행");
 		type : "POST",
 		dataType : "json",
 		data : {
-			curationNo: curationNo,
-			cntntsSnn: selectedValue
+			curationNo: curationNo, // 컨텐츠 번호
+			cntntsSnn: selectedValue // 컨텐츠 내부 순번 
 		},
 		success : function(data) {
 			console.log("data::"+data);
