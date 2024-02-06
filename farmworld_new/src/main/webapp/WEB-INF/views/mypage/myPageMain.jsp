@@ -132,7 +132,7 @@
 											            <div class="form-row ">
 											              <div id="boxsize" class="form-group col-lg-4">
 											                <label for="farm_name">농장 이름</label>
-											                <p id="farm_name" class="form-control" ><c:out value="${vo.farm_name}"/></p>
+											                <input id="farm_name" class="form-control" placeholder="농장을 만들어주세요!"><c:out value="${vo.farm_name}"/>
 											              </div>
 											              <div id="boxsize" class="form-group col-lg-4">
 											                <label for="user_id">아이디</label>
@@ -144,7 +144,7 @@
 											              </div>
 											            </div>
 											            <div>
-											              <button id="updateBtn" type="button" class="btn btn-primary middlebutton deliveryBtn " onclick="goMod()">회원정보 수정</button>
+											              <a href="/mypage/modify"><button id="updateBtn" type="button" class="btn btn-primary middlebutton deliveryBtn " onclick="goMod()">회원정보 수정</button></a>
 											            </div>
 											          </form>
 											        </div>
@@ -207,6 +207,7 @@ function goMod() {
 	window.location.href = '/mypage/modify';
 }
 </script>
+
 
 
 

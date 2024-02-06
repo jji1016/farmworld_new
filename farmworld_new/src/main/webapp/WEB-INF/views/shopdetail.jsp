@@ -19,69 +19,68 @@
         <div class="row g-4 mb-5">
         
         <!-- 카테고리 -->
-	               <div class="col-lg-3">
-	                   <div class="row g-4">
-	                       <div class="col-lg-12">
-	                           <div class="mb-3">
-	                           
-	                               <h4>Categories</h4>
-	                               <ul id="categories" class="list-unstyled fruite-categorie">
-<%--	                                   <li>--%>
-<%--	                                       <div class="d-flex justify-content-between fruite-name">--%>
-<%--	                                           <a href="#"><i class="fas fa-apple-alt me-2"></i>전체보기</a>--%>
-<%--	                                           <span>(3)</span>--%>
-<%--	                                       </div>--%>
-<%--	                                   </li>--%>
-<%--	                                   <li>--%>
-<%--	                                       <div class="d-flex justify-content-between fruite-name">--%>
-<%--	                                           <a href="#"><i class="fas fa-apple-alt me-2"></i>과일</a>--%>
-<%--	                                           <span>(5)</span>--%>
-<%--	                                       </div>--%>
-<%--	                                   </li>--%>
-<%--	                                   <li>--%>
-<%--	                                       <div class="d-flex justify-content-between fruite-name">--%>
-<%--	                                           <a href="#"><i class="fas fa-apple-alt me-2"></i>야채</a>--%>
-<%--	                                           <span>(2)</span>--%>
-<%--	                                       </div>--%>
-<%--	                                   </li>	                                 --%>
-<%--	                                   <li>--%>
-<%--	                                       <div class="d-flex justify-content-between fruite-name">--%>
-<%--	                                           <a href="#"><i class="fas fa-apple-alt me-2"></i>견과류</a>--%>
-<%--	                                           <span>(5)</span>--%>
-<%--	                                       </div>--%>
-<%--	                                   </li>--%>
-<%--	                                   <li>--%>
-<%--	                                       <div class="d-flex justify-content-between fruite-name">--%>
-<%--	                                           <a href="#"><i class="fas fa-apple-alt me-2"></i>곡물</a>--%>
-<%--	                                           <span>(5)</span>--%>
-<%--	                                       </div>--%>
-<%--	                                   </li>--%>
-<%--	                               		<li>--%>
-<%--	                                       <div class="d-flex justify-content-between fruite-name">--%>
-<%--	                                           <a href="#"><i class="fas fa-apple-alt me-2"></i>씨앗</a>--%>
-<%--	                                           <span>(5)</span>--%>
-<%--                                            </div>--%>
-<%--                                        </li>	--%>
-<%--                                   	   <li>--%>
-<%--	                                       <div class="d-flex justify-content-between fruite-name">--%>
-<%--	                                           <a href="#"><i class="fas fa-apple-alt me-2"></i>농기구</a>--%>
-<%--	                                           <span>(5)</span>--%>
-<%--                                            </div>--%>
-<%--                                        </li>	--%>
-	                               		
-	                               </ul>
-	                           </div>
-	                       </div>
-	                   </div>
-	               </div>
-	               <!-- 카테고리 끝 -->
+            <div class="col-lg-4 col-xl-3">
+                <div class="row g-4 fruite">
+                    <div class="col-lg-12">
+                        <div class="mb-4">
+                            <h4>Categories</h4>
+                            <ul class="list-unstyled fruite-categorie">
+                                <li>
+                                    <div class="d-flex justify-content-between fruite-name">
+                                     <a href="#"><i class="fas fa-apple-alt me-2"></i>과일</a>
+                                    <span>(3)</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="d-flex justify-content-between fruite-name">
+                                    <a href="#"><i class="fas fa-apple-alt me-2"></i>야채</a>
+                                    <span>(5)</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="d-flex justify-content-between fruite-name">
+                                    <a href="#"><i class="fas fa-apple-alt me-2"></i>채소</a>
+                                    <span>(2)</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="d-flex justify-content-between fruite-name">
+                                    <a href="#"><i class="fas fa-apple-alt me-2"></i>견과류</a>
+                                    <span>(8)</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="d-flex justify-content-between fruite-name">
+                                    <a href="#"><i class="fas fa-apple-alt me-2"></i>곡물</a>
+                                    <span>(5)</span>
+                                    </div>
+                                </li>
+                               <li>
+                                <div class="d-flex justify-content-between fruite-name">
+                                    <a href="#"><i class="fas fa-apple-alt me-2"></i>씨앗</a>
+                                    <span>(5)</span>
+                                    </div>
+                                </li>   
+                                 <li>
+                                <div class="d-flex justify-content-between fruite-name">
+                                    <a href="#"><i class="fas fa-apple-alt me-2"></i>농기구</a>
+                                    <span>(5)</span>
+                                    </div>
+                                </li>   
+                            </ul>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        <!-- 카테고리 끝 -->
         
          <div class="col-lg-8 col-xl-9">
                 <div class="row g-4">
                     <div class="col-lg-6">
                         <div class="border rounded">
                             <a href="#">
-                                <img src="" class="img-fluid rounded" alt="Image" id="image1">
+                                <img src="" class="img-fluid rounded" alt="Image" id="image1" style="">
                             </a>
                         </div>
                     </div>
@@ -204,7 +203,6 @@
 
 
 <script src="/resources/js/shop/detail.js" type="text/javascript"></script>
-<script src="/resources/js/shop/shop.js" type="text/javascript"></script>
 <%@include file="includes/footer.jsp" %>
 
 <script>

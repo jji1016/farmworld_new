@@ -95,7 +95,7 @@ public class MyPageController {
 		return "/mypage/myPageMain";
 	}
 	
-/* 정보 수정 페이지 */
+	/* 정보 수정 페이지 */
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public String getModify(HttpSession session, Model model) {
 		System.out.println("getModify 넘어옴");

@@ -239,7 +239,7 @@
 	                						</tr>
                 						</table>
                 						<div class="btn-box2">
-							              <button id="updateBtn2" type="button" class="btn text-white bg-primary px-3 rounded" id="openModal"
+							              <button type="button" class="btn text-white bg-primary px-3 rounded" id="openModal"
 							              	data-bs-toggle="modal" data-bs-target="#checkPw">회원 탈퇴</button>
 							              <button id="updateBtn2" type="submit" class="btn text-white bg-primary px-3 rounded">회원 정보 수정</button>
 							          </div>
@@ -424,7 +424,8 @@ $('#frm').validate({
         user_name: {     			// 이름 필드
             required: true,     
             minlength: 2,			
-            maxlength: 20,       
+            maxlength: 20,  
+            regx: /^[a-zA-Z가-힣ㄱ-ㅎㅏ-ㅣ]*$/ //정규식
         },
         user_nickname: {     		// 닉네임 필드
             required: true,     
@@ -444,7 +445,8 @@ $('#frm').validate({
             required: true,     
             digits:	true,        	// 숫자만 입력 
             minlength: 10,			
-            maxlength: 11
+            maxlength: 11,
+            regx: /^(010|011|016)-?\d{3,4}-?\d{4}$/
         },
         user_address: {     		// 주소 필드
             required: true,     
@@ -462,7 +464,8 @@ $('#frm').validate({
         user_name: {            		
     		required: '필수 입력 항목입니다.',
     		minlength: '2글자 이상 입력해야 합니다.',		
-            maxlength: '20글자까지 입력 가능합니다.'  
+            maxlength: '20글자까지 입력 가능합니다.',
+            regx: '숫자와 특수문자는 입력할 수 없습니다.'
         },
         user_nickname: {            		
     		required: '필수 입력 항목입니다.',
@@ -474,7 +477,8 @@ $('#frm').validate({
     		required: '필수 입력 항목입니다.',
         	digits: '-없이 숫자만 입력하세요.',
     		minlength: '10글자 이상 입력해야 합니다.',		
-            maxlength: '11글자까지 입력 가능합니다.'
+            maxlength: '11글자까지 입력 가능합니다.',
+            regx: '형식에 맞게 입력해주세요. 예)01012345678'
         },
         user_address: {            		
     		required: '우편번호를 검색하세요.'
@@ -511,6 +515,10 @@ $('#frm').validate({
 });
 
 
+//정규식을 적용
+$.validator.addMethod("regx", function(value, element, regexpr) {          
+    return regexpr.test(value);
+});
 
 
 //다음 주소 API 사용
