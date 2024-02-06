@@ -20,6 +20,12 @@
     margin-top: 25px;
     justify-content: center;
 }
+.btn{
+	color: white;
+}
+.btn:hover{
+	color: black;
+}
 </style>
 <!-- login Start -->
 <div class="container-fluid py-5">
@@ -63,15 +69,15 @@
                 <div id="login_bt_box" class="col-lg-6" style="display: flex; margin-top: 25px;">
                 
                 <div id="loginbox2" class="col-4">
-                    <button class="btn btn-secondary w-100 py-3" type="button"><a href="/user/login">로그인</a></button>
+                    <a href="/user/login"><button class="btn btn-secondary w-100 py-3" type="button">로그인</button></a>
                 </div>
                 
                  <div id="loginbox2" class="col-4">
-                    <button class="btn btn-secondary w-100 py-3" type="button"><a href="/user/changePw">비밀번호 찾기</a></button>
+                    <a href="/user/changePw"><button class="btn btn-secondary w-100 py-3" type="button">비밀번호 찾기</button></a>
                 </div>
                 
                  <div id="loginbox" class="col-4">
-                    <button class="btn btn-secondary w-100 py-3" type="button"><a href="/user/join">회원가입</a></button>
+                    <a href="/user/join"><button class="btn btn-secondary w-100 py-3" type="button">회원가입</button></a>
                 </div>
             
             	</div>    
@@ -93,7 +99,7 @@
         <p></p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">닫기</button>
       </div>
     </div>
   </div>
@@ -110,6 +116,9 @@ $(document).ready(function () {
 		var user_name = $("#user_name").val();
 	    var user_phone = $("#user_phone").val();
 		
+	    document.getElementById('user_name').value = '';
+        document.getElementById('user_phone').value = '';
+	    
 	    if(user_name.trim() == "" && user_phone.trim() == ""){
 	    	$(".modal-body").text("이름 또는 번호 입력해주세요."); 
 	    }else if(user_name.trim() == ""){

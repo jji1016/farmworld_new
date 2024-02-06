@@ -23,6 +23,12 @@
 .authResult {
     margin-right: auto; /* 다른 요소와 간격을 두기 위해 auto로 설정 */
 }
+.btn{
+	color: white;
+}
+.btn:hover{
+	color: black;
+}
 </style>
 <!-- 상단 공백 추가 끝 -->
 <div class="container-fluid py-5">
@@ -78,15 +84,15 @@
                 <div id="login_bt_box" class="col-lg-7" style="display: flex; margin-top: 25px;">
                 
                 <div id="loginbox2" class="col-4">
-                    <button class="btn btn-secondary w-100 py-3" type="button"><a href="/user/login">로그인</a></button>
+                    <a href="/user/login"><button class="btn btn-secondary w-100 py-3" type="button">로그인</button></a>
                 </div>
                 
                  <div id="loginbox2" class="col-4">
-                    <button class="btn btn-secondary w-100 py-3" type="button"><a href="/user/findId">아이디 찾기</a></button>
+                    <a href="/user/findId"><button class="btn btn-secondary w-100 py-3" type="button">아이디 찾기</button></a>
                 </div>
                 
                  <div id="loginbox2" class="col-4">
-                    <button class="btn btn-secondary w-100 py-3" type="button"><a href="/user/join">회원가입</a></button>
+                    <a href="/user/join"><button class="btn btn-secondary w-100 py-3" type="button">회원가입</button></a>
                 </div>
             
             	</div>    
@@ -112,7 +118,7 @@
       
       <div class="modal-footer">
       	<p id="authResult" class="authResult" ></p>
-        <button id="authBtn" class="btn btn-primary" >인증하기</button>
+        <button id="authBtn" class="btn btn-primary">인증하기</button>
         <button id="nextBtn" class="btn btn-primary" data-bs-target="#changePw" data-bs-toggle="modal" data-bs-dismiss="modal">비밀번호 수정하기</button>
       </div>
     </div>
@@ -132,7 +138,6 @@
       
       <div class="modal-footer" id="modPwResult">
       	<p id="pwCheck" class="authResult"></p>
-        <button type="reset" class="btn btn-secondary">초기화</button>
         <button type="button" class="btn btn-primary" id="modPwBtn">수정하기</button>
       </div>
     </div>
@@ -199,8 +204,6 @@ $(document).ready(function(){
                         	.html('요청하신 아이디 ' + user_id + '로 인증번호를 전송했습니다. 아래에 인증번호를 입력하세요.'
                         			+'<br><input id="userCode" type="text">');
                 		
-                		$("#authResult, #timeOut, #authBtn").css(showStyle);
-                        
                 		//메일 전송 시작
                 		 $.ajax({
 				            url: "/user/sendMail",
@@ -210,6 +213,9 @@ $(document).ready(function(){
 				            success: function (code) { //코드 받기
 				            	console.log("메일 전송 완료: " + code);
 				                ec=code;
+				                
+				                $("#authResult, #timeOut, #authBtn").css(showStyle);
+				                
 				                //타이머 및 코드 체크 시작
 				                let timer = 180;
 				                
@@ -222,7 +228,12 @@ $(document).ready(function(){
                                         clearInterval(limiter);
                                         ec="";
                                         $("#timeOut").text("시간 초과"); 
-                                                                            
+                                        $("#authBtn, #authResult").css(style); //'인증하기' 버튼 숨기기 
+                                        
+                                        setTimeout(function () {
+                                            $('#myModal').modal('hide');
+                                            $(".modal-body").text("");
+                                        }, 3000);
                                     }
                                     
                                 }, 1000);
@@ -248,7 +259,6 @@ $(document).ready(function(){
      	// 모달 닫힐 때 내용 초기화
         $("#myModal").on("hidden.bs.modal", function () {
             clearInterval(timer);
-//          clearInterval(limiter);
             $("#sendResult").text("");
             $("#timeOut, #authResult").text("");
             $("#authBtn, #nextBtn").css(style);
@@ -266,6 +276,9 @@ $(document).ready(function(){
 	            $("#authResult").text("인증되었습니다.");
 	            $("#timeOut").css(style); //timer 안보이기
 	            
+	            clearInterval(timer);
+	            $("#timeOut").text("");
+	            
             	$("#authBtn").css(style); //'인증하기' 버튼 숨기기
                 $("#nextBtn").css(showStyle); //'비밀번호 수정하기' 버튼 표시
                 
@@ -276,7 +289,6 @@ $(document).ready(function(){
 	            });
                 
 	          //"수정하기" 버튼 누를 때마다 일치 여부 확인-----------------수정
-                
                 
 	            // 모달 닫힐 때 내용 초기화
 	            $("#changePw").on("hidden.bs.modal", function () {
@@ -310,7 +322,7 @@ $(document).ready(function(){
     	let pw = $("#pw").val();
     	let user_pw = $("#user_pw").val();
 
-        if(pw == user_pw) {
+        if(pw == user_pw && pw != "" && pw != null) {
             $("#pwCheck").text("비밀번호가 일치합니다.");
     		console.log("user_id:"+user_id+" /pw:"+pw+" /user_pw:"+user_pw);
            	$.ajax({

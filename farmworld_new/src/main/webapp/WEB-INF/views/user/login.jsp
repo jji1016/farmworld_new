@@ -15,6 +15,12 @@
     margin-top: 25px;
     justify-content: center;
 }
+.btn{
+	color: white;
+}
+.btn:hover{
+	color: black;
+}
 </style>
 <!-- 상단 공백 추가 끝 -->
 <div class="container-fluid py-5">
@@ -70,7 +76,7 @@
                 </div>
                 
                  <div id="loginbox2" class="col-3">
-                    <button class="btn btn-secondary w-100 py-3" type="button"><a href="/user/join">회원가입</a></button>
+                    <a href="/user/join"><button class="btn btn-secondary w-100 py-3" type="button">회원가입</button></a>
                 </div>
             
             	</div>    
