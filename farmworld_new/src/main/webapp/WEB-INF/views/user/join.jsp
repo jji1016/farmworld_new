@@ -36,6 +36,9 @@
     color: orangered;
     font-weight: bold;
 }
+#wrap{
+	z-index:1;
+}
 </style>
 <%@include file="../includes/header.jsp" %>
 
