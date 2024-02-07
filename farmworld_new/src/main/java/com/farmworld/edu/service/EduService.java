@@ -61,6 +61,7 @@ public class EduService {
 		data3.put("apiKey", SECURITY);
 		data3.put("srchCurationNo", String.valueOf(curationNo));
 		data3.put("srchCntntsSnn", String.valueOf(cntntsSnn));
+		data3.put("appendDomainAt", "Y");
 		headerData3.put("Content-Type", "text/xml;charset=UTF-8");
 		String result3 = EduRestApiUtilXml.ConnHttpGetType(url3, headerData3, data3);
 		System.out.println("result3::"+result3);

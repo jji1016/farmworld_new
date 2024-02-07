@@ -28,8 +28,8 @@
 	        </div>
 	
 	        <div class="mb-3">
-	            <label for="weightPrice" class="form-label">무게/가격</label>
-	            <input type="text" class="form-control" id="weightPrice" name="weightPrice" required>
+	            <label for="weightPrice" class="form-label">가격</label>
+	            <input type="text" class="form-control" id="weightPrice" name="weightPrice" required placeholder="- 1kg당 가격을 작성해주세요.">
 	        </div>
 	
 	        <div class="mb-3">
@@ -110,13 +110,13 @@ function insertGoods() {
 		    dataType : "json",
 		    data: paramData,
 		    success: function(rs) {
-		      	if(rs.imageChk == "N") {
+		    	if(rs.imageChk == "N") {
 		      		alert("이미지 저장에 실패하였습니다.");
 		      	} else if(rs.goodsChk == "N") {
 		    	  	alert("상품 등록에 실패하였습니다.");
 		      	} else {
 		      		if(!alert("상품을 성공적으로 등록하였습니다.")) {
-		      			location.href = "/";
+		      			location.href = "../shopmain";
 	      			}
 	      		}
 	    	},

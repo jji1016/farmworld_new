@@ -46,8 +46,8 @@
                     </div>
                     
                     <div class="form-item">
-                        <label class="form-label my-3">사진<sup>*</sup></label>
-                        <input type="text" id="postcode" class="form-control" readonly="readonly">
+                        <label class="form-label my-3">우편번호<sup>*</sup></label>
+                        <input type="text" id="postcode" class="form-control" >
                     </div>
                     <div class="form-item">
                         <label class="form-label my-3">핸드폰<sup>*</sup></label>
