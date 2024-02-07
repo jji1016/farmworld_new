@@ -12,37 +12,25 @@
 <!-- 페이지 왼쪽 -->        
 <div class="container-fluid fruite py-5">
 	<div class="container py-5">
-	    <h1 class="mb-4">작물샵</h1>
+	    <div class="row col-lg-12">
+	    	<div class="col-xl-3">
+	    		<h1 class="mb-4">작물샵</h1>
+    		</div>
+    		<div id="searchbox" class="col-xl-8">
+    			<div class="input-group w-100 mx-auto d-flex">
+    				<select id="type" name="type" class="border-0 form-select-sm bg-light input-group-text p-3">
+    					<option value="">전체</option>
+    					<option value="">상품명</option>
+					</select>
+					<input type='text' id="searchInput"  class="form-control p-3" placeholder="keywords"  name='keyword'>
+					<span id="searchBtn" class="input-group-text p-3"><button class="btn btn-default"><i class="fa fa-search"></i></button></span>
+				</div>	
+   			</div>
+		</div>
+		<br/>
+	    
 	    <div class="row g-4">
 	        <div class="col-lg-12">
-	            <div class="row g-4">
-	            	<!-- 검색 select -->
-	                <div class="col-xl-3">
-	                    <a href="/goods" class="btn btn-primary">상품등록하기</a>
-	                </div>
-	                <!-- 검색 select 끝 -->
-	                <!-- 검색 keywords -->
-	                <div class="col-6">
-	                	<div class="input-group w-100 mx-auto d-flex">
-	                        <input id="searchInput" type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
-	                        <a href="javascript:void(0);" id="searchBtn"><span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span></a>
-	                    </div>
-	                </div>
-	                <!-- 검색 keywords 끝 -->
-	                <!-- 정렬 -->
-	                <div class="col-xl-3">
-	                    <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">
-	                        <label for="fruits">Default Sorting:</label>
-	                        <select id="fruits" name="fruitlist" class="border-0 form-select-sm bg-light me-3" form="fruitform">
-	                            <option value="volvo">Nothing</option>
-	                            <option value="saab">Popularity</option>
-	                            <option value="opel">Organic</option>
-	                            <option value="audi">Fantastic</option>
-	                        </select>
-	                    </div>
-	                </div>
-	                <!-- 정렬 끝 -->
-	            </div>
 	            <div class="row g-4">
 	            <!-- 카테고리 -->
 	               <div class="col-lg-3">
@@ -50,61 +38,22 @@
 	                       <div class="col-lg-12">
 	                           <div class="mb-3">
 	                           
-	                               <h4>Categories</h4>
+	                               <h4>카테고리</h4>
 	                               <ul id="categories" class="list-unstyled fruite-categorie">
-<%--	                                   <li>--%>
-<%--	                                       <div class="d-flex justify-content-between fruite-name">--%>
-<%--	                                           <a href="#"><i class="fas fa-apple-alt me-2"></i>전체보기</a>--%>
-<%--	                                           <span>(3)</span>--%>
-<%--	                                       </div>--%>
-<%--	                                   </li>--%>
-<%--	                                   <li>--%>
-<%--	                                       <div class="d-flex justify-content-between fruite-name">--%>
-<%--	                                           <a href="#"><i class="fas fa-apple-alt me-2"></i>과일</a>--%>
-<%--	                                           <span>(5)</span>--%>
-<%--	                                       </div>--%>
-<%--	                                   </li>--%>
-<%--	                                   <li>--%>
-<%--	                                       <div class="d-flex justify-content-between fruite-name">--%>
-<%--	                                           <a href="#"><i class="fas fa-apple-alt me-2"></i>야채</a>--%>
-<%--	                                           <span>(2)</span>--%>
-<%--	                                       </div>--%>
-<%--	                                   </li>	                                 --%>
-<%--	                                   <li>--%>
-<%--	                                       <div class="d-flex justify-content-between fruite-name">--%>
-<%--	                                           <a href="#"><i class="fas fa-apple-alt me-2"></i>견과류</a>--%>
-<%--	                                           <span>(5)</span>--%>
-<%--	                                       </div>--%>
-<%--	                                   </li>--%>
-<%--	                                   <li>--%>
-<%--	                                       <div class="d-flex justify-content-between fruite-name">--%>
-<%--	                                           <a href="#"><i class="fas fa-apple-alt me-2"></i>곡물</a>--%>
-<%--	                                           <span>(5)</span>--%>
-<%--	                                       </div>--%>
-<%--	                                   </li>--%>
-<%--	                               		<li>--%>
-<%--	                                       <div class="d-flex justify-content-between fruite-name">--%>
-<%--	                                           <a href="#"><i class="fas fa-apple-alt me-2"></i>씨앗</a>--%>
-<%--	                                           <span>(5)</span>--%>
-<%--                                            </div>--%>
-<%--                                        </li>	--%>
-<%--                                   	   <li>--%>
-<%--	                                       <div class="d-flex justify-content-between fruite-name">--%>
-<%--	                                           <a href="#"><i class="fas fa-apple-alt me-2"></i>농기구</a>--%>
-<%--	                                           <span>(5)</span>--%>
-<%--                                            </div>--%>
-<%--                                        </li>	--%>
-	                               		
-	                               </ul>
-	                           </div>
-	                       </div>
-	                   </div>
-	               </div>
-	               <!-- 카테고리 끝 -->
+            </ul>
+                               </div>
+                           </div>
+                       </div>
+                       <!-- 상품등록하기 버튼을 카테고리가 끝나는 부분 아래로 이동 -->
+                       <div class="col-lg-12">
+                           <a href="/goods" class="btn btn-primary">상품등록하기</a>
+                       </div>
+                   </div>
+                   <!-- 카테고리 끝 -->
                     
                     <div class="col-lg-9">
                             <!-- 추천상품 -->
-                            	<h1 class="fw-bold mb-0">추천 상품</h1>
+                            	<h4 id="f">추천 상품</h4>
 				                <div class="vesitable">
 				                    <div class="owl-carousel vegetable-carousel justify-content-center">
 				                        <div class="border border-primary rounded position-relative vesitable-item">
@@ -238,3 +187,14 @@
 
 <script src="/resources/js/shop/shop.js" type="text/javascript"></script>
 <%@include file="includes/footer.jsp" %>
+<style>
+    
+    .fruite-categorie  {
+         padding-right: 70px; 
+         
+    }
+    
+	
+	
+
+</style>

@@ -14,7 +14,7 @@
     <meta content="" name="description">
 
 
-	<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
  -->
 
     <!-- Google Web Fonts -->
@@ -38,11 +38,11 @@
     <link href="/resources/css/style.css" rel="stylesheet">
     
     <!-- jQuery 변경 : 반응형 버전이 최적화 / jsp에서 jQuery 사용이 필요하므로 header에 -->
-	<!-- jQuery -->
-	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
-	
-	<!-- 카카오 우편번호 서비스 -->
-	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+   <!-- jQuery -->
+   <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+   
+   <!-- 카카오 우편번호 서비스 -->
+   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 </head>
 
@@ -106,50 +106,62 @@
 </html>
 
 <script type="text/javascript">
-	var isLoggedIn = false;
+   var isLoggedIn = false;
 
-	//로그인 상태인지 확인
-	function checkLoginStatus() {
-		$.ajax({
-			url: "/user/checkLogin",
-			type: "POST",
-			dataType: "json",
-			success: function (result) {
-				console.log(result);
-				if(result){ //user_num 있으면 로그인 상태로 간주
-					isLoggedIn = true;
-					toggleBtn();
-				}
-			},
-			error: function (e) {
-				console.log(e);
-			}
-		});
-	};
-	
-	//버튼 바꾸기
-	function toggleBtn() {
-		if (isLoggedIn) { //로그인 상태
-	        $("#loginBtn, #joinBtn").hide();
-	        $("#logoutBtn").show();
-	    } else {
-	        $("#loginBtn, #joinBtn").show();
-	        $("#logoutBtn").hide();
-	    }
-	}
+   //로그인 상태인지 확인
+   function checkLoginStatus() {
+      $.ajax({
+         url: "/user/checkLogin",
+         type: "POST",
+         dataType: "json",
+         success: function (result) {
+            console.log(result);
+            if(result){ //user_num 있으면 로그인 상태로 간주
+               isLoggedIn = true;
+               toggleBtn();
+            }
+         },
+         error: function (e) {
+            console.log(e);
+         }
+      });
+   };
+   
+   //버튼 바꾸기
+   function toggleBtn() {
+      if (isLoggedIn) { //로그인 상태
+           $("#loginBtn, #joinBtn").hide();
+           $("#logoutBtn").show();
+       } else {
+           $("#loginBtn, #joinBtn").show();
+           $("#logoutBtn").hide();
+       }
+   }
+   
+   $("#goCart").on("click", function() {
+      if(!isLoggedIn) {
+         if(!alert("로그인이 필요합니다.")) {
+            location.href = "../user/login";
+         }
+      } else {
+         location.href = "../cartMain";
+      }
+   });
+   
+   
 
-	$(document).ready(function () {
-	    // 페이지 로드 시 로그인 상태 확인
-	    checkLoginStatus();
+   $(document).ready(function () {
+       // 페이지 로드 시 로그인 상태 확인
+       checkLoginStatus();
 
-	    // 로그아웃 버튼 클릭 시 처리
-	    $("#logoutBtn").on("click", function () {
-	    	alert("로그아웃 성공");
-	        // 로그아웃이 성공하면 버튼 갱신
-	        checkLoginStatus();
-	        toggleBtn();
-	    });
-	});
+       // 로그아웃 버튼 클릭 시 처리
+       $("#logoutBtn").on("click", function () {
+          alert("로그아웃 성공");
+           // 로그아웃이 성공하면 버튼 갱신
+           checkLoginStatus();
+           toggleBtn();
+       });
+   });
 
 
 </script>
