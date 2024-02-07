@@ -23,7 +23,9 @@
                         <div class="panel-body">
                             <form action="/board/register" method="post" enctype="multipart/form-data">
                                 <select name="board_category" class="border-0 form-select-sm bg-light input-group-text p-2">
-                                    <option value="notice">공지사항</option>
+                                    <c:if test="${user_nickname =='관리자'}">
+                                    	<option value="notice">공지사항</option>
+                                    </c:if>
                                     <option value="free_board">자유게시판</option>
                                 </select>
                                 <div class="form-group">
