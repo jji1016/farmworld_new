@@ -14,7 +14,7 @@
     <meta content="" name="description">
 
 
-	<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
  -->
 
     <!-- Google Web Fonts -->
@@ -38,11 +38,11 @@
     <link href="/resources/css/style.css" rel="stylesheet">
     
     <!-- jQuery 변경 : 반응형 버전이 최적화 / jsp에서 jQuery 사용이 필요하므로 header에 -->
-	<!-- jQuery -->
-	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
-	
-	<!-- 카카오 우편번호 서비스 -->
-	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+   <!-- jQuery -->
+   <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+   
+   <!-- 카카오 우편번호 서비스 -->
+   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 </head>
 
@@ -87,7 +87,7 @@
                         </div>
                         <div class="d-flex m-3 me-0">
                             <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
-                            <a href="../cartMain" class="position-relative me-4 my-auto">
+                            <a href="#none" id="goCart" class="position-relative me-4 my-auto">
                                 <i class="fa fa-shopping-bag fa-2x"></i>
                                 <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
                             </a>
@@ -125,50 +125,62 @@
 </html>
 
 <script type="text/javascript">
-	var isLoggedIn = false;
+   var isLoggedIn = false;
 
-	//로그인 상태인지 확인
-	function checkLoginStatus() {
-		$.ajax({
-			url: "/user/checkLogin",
-			type: "POST",
-			dataType: "json",
-			success: function (result) {
-				console.log(result);
-				if(result){ //user_num 있으면 로그인 상태로 간주
-					isLoggedIn = true;
-					toggleBtn();
-				}
-			},
-			error: function (e) {
-				console.log(e);
-			}
-		});
-	};
-	
-	//버튼 바꾸기
-	function toggleBtn() {
-		if (isLoggedIn) { //로그인 상태
-	        $("#loginBtn, #joinBtn").hide();
-	        $("#logoutBtn").show();
-	    } else {
-	        $("#loginBtn, #joinBtn").show();
-	        $("#logoutBtn").hide();
-	    }
-	}
+   //로그인 상태인지 확인
+   function checkLoginStatus() {
+      $.ajax({
+         url: "/user/checkLogin",
+         type: "POST",
+         dataType: "json",
+         success: function (result) {
+            console.log(result);
+            if(result){ //user_num 있으면 로그인 상태로 간주
+               isLoggedIn = true;
+               toggleBtn();
+            }
+         },
+         error: function (e) {
+            console.log(e);
+         }
+      });
+   };
+   
+   //버튼 바꾸기
+   function toggleBtn() {
+      if (isLoggedIn) { //로그인 상태
+           $("#loginBtn, #joinBtn").hide();
+           $("#logoutBtn").show();
+       } else {
+           $("#loginBtn, #joinBtn").show();
+           $("#logoutBtn").hide();
+       }
+   }
+   
+   $("#goCart").on("click", function() {
+      if(!isLoggedIn) {
+         if(!alert("로그인이 필요합니다.")) {
+            location.href = "../user/login";
+         }
+      } else {
+         location.href = "../cartMain";
+      }
+   });
+   
+   
 
-	$(document).ready(function () {
-	    // 페이지 로드 시 로그인 상태 확인
-	    checkLoginStatus();
+   $(document).ready(function () {
+       // 페이지 로드 시 로그인 상태 확인
+       checkLoginStatus();
 
-	    // 로그아웃 버튼 클릭 시 처리
-	    $("#logoutBtn").on("click", function () {
-	    	alert("로그아웃 성공");
-	        // 로그아웃이 성공하면 버튼 갱신
-	        checkLoginStatus();
-	        toggleBtn();
-	    });
-	});
+       // 로그아웃 버튼 클릭 시 처리
+       $("#logoutBtn").on("click", function () {
+          alert("로그아웃 성공");
+           // 로그아웃이 성공하면 버튼 갱신
+           checkLoginStatus();
+           toggleBtn();
+       });
+   });
 
 
 </script>
