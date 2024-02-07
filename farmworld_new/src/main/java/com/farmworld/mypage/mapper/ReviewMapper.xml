@@ -40,10 +40,10 @@
 <!-- 	WHERE myfarmproject_db.order.buyer_num = #{user_num} -->
 
 		SELECT o.*, g.*, i.*
-    FROM myfarmproject_db.order o
-    JOIN goods g ON o.goods_num = g.goods_num
-    LEFT JOIN image i ON g.image_folder_num = i.image_folder_num
-    WHERE o.buyer_num = #{user_num};
+	    FROM myfarmproject_db.order o
+	    JOIN goods g ON o.goods_num = g.goods_num
+	    LEFT JOIN image i ON g.image_folder_num = i.image_folder_num
+	    WHERE o.buyer_num = #{user_num};
 
 	</select>
 	
