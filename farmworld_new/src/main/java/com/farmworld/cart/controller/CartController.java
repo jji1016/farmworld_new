@@ -84,7 +84,7 @@ public class CartController {
 			}
 		} catch(Exception e) {
 			log.error(e.getMessage());
-			result.put("result", "N");
+			result.put("result", "notLogin");
 		}
 		
 		return result;

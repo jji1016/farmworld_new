@@ -9,83 +9,67 @@
 <div class="container-fluid py-5">
 </div>
 <!-- 상단 공백 추가 끝 -->
-
-        <div class="container-fluid fruite py-5">
-            <div class="container py-5">
-                <h1 class="mb-4">게시판</h1>
-                <div class="row g-4">
-                    <div class="col-lg-12">
-                        <div class="row g-4">
-                            <!-- 검색 select -->
-			                <div class="col-xl-3">
-			                </div>
-			                <!-- 검색 select 끝 -->
-			                <!-- 검색 keywords -->
-			                <div class="col-6">
-			                	<div class="input-group w-100 mx-auto d-flex">
-			                        <input type="search" class="form-control p-3" id="searchKeyword" placeholder="keywords" aria-describedby="search-icon-1">
-			                        <span id="search-icon-1" class="input-group-text p-3" onclick="kewordSearch()"><i class="fa fa-search"></i></span>
-			                    </div>
-			                </div>
-			                <!-- 검색 keywords 끝 -->
-                            <div class="col-xl-3">
-                                <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">
-                                    <label for="fruits">Default Sorting:</label>
-                                    <select id="fruits" name="fruitlist" class="border-0 form-select-sm bg-light me-3" form="fruitform">
-                                        <option value="volvo">Nothing</option>
-                                        <option value="saab">Popularity</option>
-                                        <option value="opel">Organic</option>
-                                        <option value="audi">Fantastic</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row g-4">
-                        <!-- 카테고리 -->
-                            <div class="col-lg-3">
-                                <div class="row g-4">
-                                    <div class="col-lg-12">
-                                        <div class="mb-3">
-                                        
-                                            <h4>Categories</h4>
-                                            <ul class="list-unstyled fruite-categorie" id="categoryHtml">
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- 카테고리 끝 -->
-                            </div>
-                            
-                            <div class="col-lg-9">
-                            <!-- 보드 -->
-                            	<div class="table-responsive">
-				                    <table class="table">
-				                        <thead>
-				                          <tr>
-				                            <th scope="col">Products</th>
-				                            <th scope="col">Name</th>
-				                            <th scope="col">Price</th>
-				                            <th scope="col">Quantity</th>
-				                            <th scope="col">Total</th>
-				                            <th scope="col">Handle</th>
-				                          </tr>
-				                        </thead>
-				                        <tbody id="bodyHtml">
-				                        </tbody>
-				                    </table>
-				                </div>
-				                	<button class="btn btn-md bg-light border mt-4" onclick="buy()" style="margin-left: 45%;">
-				                		구매하기
-			                		</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="container-fluid fruite py-5">
+	<div class="container py-5">
+		<div class="row col-lg-12">
+	    	<div class="col-xl-3">
+	    		<h1 class="mb-4">장바구니</h1>
+    		</div>
+    		<div id="searchbox" class="col-xl-8">
+    			<div class="input-group w-100 mx-auto d-flex">
+    				<select id="type" name="type" class="border-0 form-select-sm bg-light input-group-text p-3">
+    					<option value="">전체</option>
+    					<option value="">상품명</option>
+					</select>
+					<input type="search" class="form-control p-3" id="searchKeyword" placeholder="keywords" aria-describedby="search-icon-1">
+					<span id="search-icon-1" class="input-group-text p-3" onclick="kewordSearch()"><button class="btn btn-default"><i class="fa fa-search"></i></button></span>
+				</div>	
+   			</div>
+		</div>
+		<br/>
+		
+		<div class="row g-4">
+			<div class="col-lg-12">
+				<div class="row g-4">
+					<!-- 카테고리 -->
+					<div class="col-lg-3">
+						<div class="row g-4">
+							<div class="col-lg-12">
+								<div class="mb-3">
+									<h4>Categories</h4>
+									<ul class="list-unstyled fruite-categorie" id="categoryHtml">
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- 카테고리 끝 -->
+					<div class="col-lg-9">
+						<!-- 보드 -->
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr>
+										<th scope="col">상품</th>
+										<th scope="col">이름</th>
+										<th scope="col">가격</th>
+										<th scope="col">수량</th>
+										<th scope="col">금액</th>
+										<th scope="col">상품삭제</th>
+									</tr>
+								</thead>
+								<tbody id="bodyHtml"></tbody>
+							</table>
+						</div>
+						<button class="btn btn-md bg-light border mt-4" onclick="buy()" style="margin-left: 45%;">
+							구매하기
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
     <!-- Fruits Shop End-->
     
     <script>
@@ -166,7 +150,7 @@
 				    	for(var i=0; i<rs.cntList.length; i++) {
 				    		html += '<li>';
 				    		html += '	<div class="d-flex justify-content-between fruite-name" onclick="search(\''+ rs.cntList[i].category +'\');">';
-				    		html += '		<a href="javascript:void(0);"><i class="fas fa-apple-alt me-2"></i>'+ rs.cntList[i].category +'</a>';
+				    		html += '		<a href="javascript:void(0);" class="category-btn"><i class="fas fa-apple-alt me-2"></i>'+ rs.cntList[i].category +'</a>';
 				    		html += '		<span>('+ rs.cntList[i].cnt +')</span>';
 				    		html += '	</div>';
 				    		html += '</li>';
@@ -229,3 +213,9 @@
 	    }
     </script>
 <%@include file="includes/footer.jsp" %>
+
+<style>
+    .fruite-categorie  {
+         padding-right: 70px; 
+    }
+</style>

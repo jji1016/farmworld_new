@@ -53,11 +53,11 @@ public class GoodsServiceImpl implements GoodsService {
 	public Map<String, Object> getGoodsList(GoodsVO vo) {
 		Map<String, Object> returnData = new HashMap<>();
 		
-		vo.setStartCnt(vo.getNowPage() == 0 ? 0 : vo.getNowPage() * 10);
-		vo.setEndCnt(10);
+		vo.setStartCnt(vo.getNowPage() == 0 ? 0 : vo.getNowPage() * 8);
+		vo.setEndCnt(8);
 		
 		int getCnt = mapper.getGoodsListCnt(vo);
-		vo.setTotalCnt(getCnt/10 + 1);
+		vo.setTotalCnt(getCnt/8 + 1);
 		returnData.put("page", vo);
 		returnData.put("goodsList", mapper.getGoodsList(vo));
 		returnData.put("categoryList", mapper.getGoodsCategoryTotalCount());
