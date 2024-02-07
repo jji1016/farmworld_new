@@ -15,6 +15,12 @@
     margin-top: 25px;
     justify-content: center;
 }
+.btn{
+	color: white;
+}
+.btn:hover{
+	color: black;
+}
 </style>
 <!-- 상단 공백 추가 끝 -->
 <div class="container-fluid py-5">
@@ -62,15 +68,15 @@
                 <div id="login_bt_box" class="col-lg-6" style="display: flex; margin-top: 25px;">
                 
                 <div id="loginbox2" class="col-3">
-                    <button class="btn btn-secondary w-100 py-3" type="button"><a href="/user/findId">아이디 찾기</a></button>
+                    <a href="/user/findId"><button class="btn btn-secondary w-100 py-3" type="button">아이디 찾기</button></a>
                 </div>
                 
                  <div id="loginbox2" class="col-3">
-                    <button class="btn btn-secondary w-100 py-3" type="button"><a href="/user/changePw">비밀번호 찾기</a></button>
+                    <a href="/user/changePw"><button class="btn btn-secondary w-100 py-3" type="button">비밀번호 찾기</button></a>
                 </div>
                 
                  <div id="loginbox2" class="col-3">
-                    <button class="btn btn-secondary w-100 py-3" type="button"><a href="/user/join">회원가입</a></button>
+                    <a href="/user/join"><button class="btn btn-secondary w-100 py-3" type="button">회원가입</button></a>
                 </div>
             
             	</div>    
