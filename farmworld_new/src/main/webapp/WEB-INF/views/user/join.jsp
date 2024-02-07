@@ -345,7 +345,5 @@ $.validator.addMethod("regx", function(value, element, regexpr) {
 });
 
 
-
-
 </script>
 

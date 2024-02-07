@@ -161,9 +161,11 @@
         if (sessionUserNum == inputUserNum || sessionType == 2) {
             document.querySelector('.btn-info').style.display = 'block';
             document.querySelector('.btn-danger').style.display = 'block';
+            document.querySelector('#farmModify').style.display = 'block';
         } else {
             document.querySelector('.btn-info').style.display = 'none';
             document.querySelector('.btn-danger').style.display = 'none';
+            document.querySelector('#farmModify').style.display = 'none';
         }
 
     	

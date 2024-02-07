@@ -171,7 +171,7 @@
 				    		html += '		<p class="mb-0 mt-4">'+ rs.cartList[i].goods_title +'</p>';
 				    		html += '	</td>';
 				    		html += '	<td>';
-				    		html += '		<p class="mb-0 mt-4">'+ rs.cartList[i].make_price +' $</p>';
+				    		html += '		<p class="mb-0 mt-4">'+ rs.cartList[i].make_price +' 원</p>';
 				    		html += '	</td>';
 				    		html += '	<td>';
 				    		html += '		<div class="input-group quantity mt-4" style="width: 100px;">';
