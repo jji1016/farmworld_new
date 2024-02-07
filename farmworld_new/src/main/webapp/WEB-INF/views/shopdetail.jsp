@@ -19,7 +19,10 @@
 
 <div class="container-fluid py-5 fruite">
     <div class="container py-5">
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'main' of https://github.com/jji1016/farmworld_new.git
         <div class="row g-4">
         	<div class="col-lg-12">
         		<div class="row g-4">
@@ -123,8 +126,17 @@
 		                            <div class="tab-pane" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
 			                            	<input type="hidden" id="goods_num" name="goods_num" value="${goods_num}"/>
 		<!--                                 <h3 class="text-uppercase border-start border-5 border-primary ps-3 mb-4">3개의 리뷰</h3> -->
+<<<<<<< HEAD
 
 
+=======
+		                                
+		                                	<div id="review-container">
+				                                
+		                                	</div>
+		                            </div>
+		                        <!--  리뷰 리스트 끝 -->
+>>>>>>> branch 'main' of https://github.com/jji1016/farmworld_new.git
 		                        </div>
 		                    </div>
 		                    

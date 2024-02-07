@@ -204,7 +204,6 @@ function execDaumPostcode() {
 //주소api사용 끝
 
 //유효성 검사
-
 $('#frm').validate({
 	onfocusout: false,  //포커스가 떠날 때 유효성 검사 시작
     focusCleanup: false, //잘못된 필드에 포커스가 가면 에러메세지 지우기
@@ -344,8 +343,6 @@ $('#frm').validate({
 $.validator.addMethod("regx", function(value, element, regexpr) {          
     return regexpr.test(value);
 });
-
-
 
 
 </script>

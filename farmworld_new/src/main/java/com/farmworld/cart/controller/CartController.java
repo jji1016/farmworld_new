@@ -35,6 +35,7 @@ public class CartController {
 	@GetMapping("/cartMain")
 	public String showAddProductPage(Model model, HttpSession session, HttpServletRequest request) {
 		String userNum = session.getAttribute("user_num") == null ? "" : session.getAttribute("user_num").toString();
+		System.out.println(userNum);
 		
 		if("".equals(userNum)) {
 			return "home";
