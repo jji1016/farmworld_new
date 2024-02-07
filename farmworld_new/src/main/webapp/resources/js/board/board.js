@@ -109,7 +109,6 @@ $(document).ready(function() {
     function loadComments() {
     // 게시글 번호와 카테고리 파라미터 가져오기
     var boardNum = $("#boardNum").val();
-    console.log("boardNum="+boardNum);
 
 	    // 댓글 목록 가져오기
 	    $.ajax({
@@ -127,14 +126,12 @@ $(document).ready(function() {
 	        }
 	    });
 	}
-
 	function displayComments(comments) {
 	    var commentList = $("#commentList");
 	    var commentNick = $(".commentNick").data("user-nickname");
 		console.log("세션 닉넴" + commentNick);
 
 	    commentList.empty();
-	
 	    // 댓글 목록을 표시
 	    $.each(comments, function (index, comment) {
 	    	let comment_date = new Date(comment.comment_date);
@@ -144,12 +141,11 @@ $(document).ready(function() {
 	        commentDiv.append("<input id='commentNum' type='hidden' value='"+ comment.comment_num +"'>");
 	        var commentDiv2 = $("<div class='comRap'>");
 		        commentDiv2.append("<p>" + comment.user_nickname + " | " + formatDate + "</p>");
-				if (comment.user_nickname === commentNick) {
+				if (comment.user_nickname === commentNick || commentNick ==='관리자') {
 				    commentDiv2.append("<input type='button' id='modComment' value='수정'>");
 				    commentDiv2.append("<input type='button' id='delComment' value='삭제'>");
 				}
 				commentDiv2.append("</div>");
-
 			commentDiv.append(commentDiv2);
 	        commentDiv.append("<p class='commentConP'>" + comment.comment_contents + "</p>");
 	        commentDiv.append("</div>");
@@ -324,7 +320,7 @@ $(document).ready(function() {
 		console.log("회원번호"+$("#sesUserNum").val());
 		console.log("회원번호보드"+$("#boardUserNum").val());
 		// 같은 회원 아니면 수정버튼 사라짐
-		if ($("#sesUserNum").val() != $("#boardUserNum").val()) {
+		if ($("#sesUserNum").val() != $("#boardUserNum").val() && $("#sesUserNum").val() != '1') {
 		    $("#modBtn").css("display", "none");
 		};
 		

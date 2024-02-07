@@ -13,7 +13,12 @@
 .featurs-item{
 	margin: 2%;
 }
-
+#mainbox{
+	height: 90% !important;
+}
+#mainI{
+	color: #000 !important;
+}
 </style>
 
 <!-- Hero Start -->
@@ -23,10 +28,7 @@
                     <div id="leftform" class="col-md-12 col-lg-5">
                         <h4 class="mb-3 text-secondary">100만 농부 육성 프로젝트</h4>
                         <h1 class="mb-5 display-3 text-primary">Welcome<br>Farm World</h1>
-                        <div class="position-relative mx-auto">
-                            <input class="form-control border-2 border-secondary w-75 py-3 px-4 rounded-pill" type="number" placeholder="Search">
-                            <button type="submit" class="btn btn-primary border-2 border-secondary py-3 px-4 position-absolute rounded-pill text-white h-100" style="top: 0; right: 0%;">Submit Now</button>
-                        </div>
+
                     </div>
                     <div id="rightimage" class="col-md-12 col-lg-6">
                         <div id="carouselId" class="carousel slide position-relative" data-bs-ride="carousel">
@@ -62,9 +64,9 @@
                 <div class="row g-4">
                     <div class="col-md-6 col-lg-3">
 	                    <a href="/shopmain"  class="position-relative me-4 my-auto">
-	                        <div class="featurs-item text-center rounded bg-light p-4">
+	                        <div id="mainbox" class="featurs-item text-center rounded bg-light p-4">
 	                            <div class="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
-	                                <i class="fas fa-store fa-3x text-white"></i>
+	                                <i id="mainI" class="fas fa-store fa-3x text-white"></i>
 	                            </div>
 	                            <div class="featurs-content text-center">
 	                                <h5>Shopping</h5>
@@ -74,9 +76,9 @@
                     </div>
                     <div class="col-md-6 col-lg-3">
                     	<a href="/edu/agritech"  class="position-relative me-4 my-auto">
-	                        <div class="featurs-item text-center rounded bg-light p-4">
+	                        <div  id="mainbox" class="featurs-item text-center rounded bg-light p-4">
 	                            <div class="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
-	                            	<i class="fas fa-microphone fa-3x text-white"></i>
+	                            	<i id="mainI" class="fas fa-microphone fa-3x text-white"></i>
 	                            </div>
 	                            <div class="featurs-content text-center">
 	                                <h5>Edu</h5>
@@ -86,9 +88,9 @@
                     </div>
                     <div class="col-md-6 col-lg-3">
                     	<a href="/board/list?board_category=notice"  class="position-relative me-4 my-auto">
-	                        <div class="featurs-item text-center rounded bg-light p-4">
+	                        <div  id="mainbox" class="featurs-item text-center rounded bg-light p-4">
 	                            <div class="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
-	                                <i class="fas fa-user-shield fa-3x text-white"></i>
+	                                <i id="mainI" class="fas fa-user-shield fa-3x text-white"></i>
 	                            </div>
 	                            <div class="featurs-content text-center">
 	                                <h5>Notice</h5>
@@ -98,12 +100,11 @@
                     	</a>
                     </div>
                     <div class="col-md-6 col-lg-3">
-                        <div class="featurs-item text-center rounded bg-light p-4">
-                            <div class="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
-                                <i class="fa fa-phone-alt fa-3x text-white"></i>
+                        <div id="mainbox" class="featurs-item text-center rounded bg-light p-4">
+                            <div class="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto weatherIcon">
                             </div>
                             <div class="featurs-content text-center">
-                                <h5>Weather</h5>
+                                <h5 id="temper">Weather</h5>
                                 <div id="weatherPlace"></div>
                             </div>
                         </div>
@@ -139,56 +140,53 @@
 	        dataType: "json",
 	        success: function(data) {
 	        	let html = "<p>";
+	        	let weatherIcon = "";
 	        	for (let key of data.response.body.items.item){
 	        			if(key["fcstTime"]==timeString && key["fcstDate"]==dateString){
 	        					if(key["category"] =="TMP"){	
-	        						html+="<img src='/resources/img/weatherIcon/temperature.png' style='width:10%; height:10%;'>"+"현재기온:"+key["fcstValue"];
+	        						html+="<img src='/resources/img/weatherIcon/temperature.png' style='width:10%; height:10%;'>"+"현재기온 : "+key["fcstValue"]+"°C";
 	        						html +="<br>";
 	        					}	
 	
 	        					if(key["category"] =="PCP"){	
 	        						if(key["fcstValue"] !="강수없음"){
-	        							html+="<img src='/resources/img/weatherIcon/rain.png' style='width:10%; height:10%;'>";
+	        						html+="<img src='/resources/img/weatherIcon/rain.png' style='width:10%; height:10%;'>";
 	        						html+="강수량:"+key["fcstValue"];
-	        						html +="<br>";
 	        						}
 	        					}	
 	        					if(key["category"] =="SNO"){	
 	        						if(key["fcstValue"] !="적설없음"){
-	        							html+="<img src='/resources/img/weatherIcon/snow.png' style='width:10%; height:10%;'>";
+	        						html+="<img src='/resources/img/weatherIcon/snow.png' style='width:10%; height:10%;'>";
 	        						html+="적설량:"+key["fcstValue"];
-	        						html +="<br>";
 	        						}
 	        					}    	            
 	        					if(key["category"] =="SKY"){	
 	        						if(key["fcstValue"] == "1"){
-	        						html+="<img src='/resources/img/weatherIcon/sun.png' style='width:10%; height:10%;'>";
-	        						html+="맑음";
-	        						html +="<br>";
+	        							weatherIcon+="<img src='/resources/img/weatherIcon/sun.png' style='width:70%; height:70%;'>";
+	        						$("#temper").html("맑음");
 	        					}	
 	        						if(key["fcstValue"] == "2"){
-	        							html+="<img src='/resources/img/weatherIcon/cloud.png' style='width:10%; height:10%;'>";
-	        						html+="구름조금";
-	        						html +="<br>";
+	        							weatherIcon+="<img src='/resources/img/weatherIcon/cloud.png' style='width:70%; height:70%;'>";
+	        						$("#temper").html("구름조금");
 	        					}	
 	        						if(key["fcstValue"] == "3"){
-	        							html+="<img src='/resources/img/weatherIcon/cloud.png' style='width:10%; height:10%;'>";
-	        						html+="구름많음";
-	        						html +="<br>";
+	        							weatherIcon+="<img src='/resources/img/weatherIcon/cloud.png' style='width:70%; height:70%;'>";
+	        						$("#temper").html("구름많음");
 	        					}	
 	        						if(key["fcstValue"] == "4"){
-	        							html+="<img src='/resources/img/weatherIcon/cloud.png' style='width:10%; height:10%;'>";
-	        						html+="흐림";
-	        						html +="<br>";
+	        							weatherIcon+="<img src='/resources/img/weatherIcon/cloud.png' style='width:70%; height:70%;'>";
+	        						$("#temper").html("흐림");
 	        					}	
 	        				};		
 	        	};
 	        };
 	        	html += "</p>";
+	        	$(".weatherIcon").html(weatherIcon);
 				$("#weatherPlace").html(html);
 	            
 	        },
 	        error: function(e) {
+	            console.log(e);
 	            console.log(e);
 	        }
 	    });

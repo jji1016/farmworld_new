@@ -96,9 +96,10 @@
                     </form>
                 </div>
                 
-			<!-- /.row -->
+				<!-- /.row -->
+			</div>
+			<!-- /#page-wrapper -->
 		</div>
-		<!-- /#page-wrapper -->
 	</div>
 </div>
 <script src="/resources/js/board/board.js" type="text/javascript"></script>

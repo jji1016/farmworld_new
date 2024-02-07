@@ -31,7 +31,7 @@ public class EduService {
 		return result;
 	}
 	
-	public Map<String, String> getAgritech(int curationNo, int cntntsSnn) {
+	public Map<String, String> getAgritech(int curationNo, int cntntsSnn) { //curationNo:게시글 번호, cntntsSnn:게시글 내부 컨텐츠 번호
 		System.out.println("curationNo--"+curationNo);
 		// monthFarmTechDtlGuideLst 
 		String url1 = "http://api.nongsaro.go.kr/service/monthFarmTech/monthFarmTechDtlGuideLst";
@@ -61,6 +61,7 @@ public class EduService {
 		data3.put("apiKey", SECURITY);
 		data3.put("srchCurationNo", String.valueOf(curationNo));
 		data3.put("srchCntntsSnn", String.valueOf(cntntsSnn));
+		data3.put("appendDomainAt", "Y");
 		headerData3.put("Content-Type", "text/xml;charset=UTF-8");
 		String result3 = EduRestApiUtilXml.ConnHttpGetType(url3, headerData3, data3);
 		System.out.println("result3::"+result3);
