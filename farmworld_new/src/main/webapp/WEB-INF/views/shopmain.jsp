@@ -18,7 +18,7 @@
     		</div>
     		<div id="searchbox" class="col-xl-8">
     			<div class="input-group w-100 mx-auto d-flex">
-    				<select id="type" name="type" class="border-0 form-select-sm bg-light input-group-text p-3">
+    				<select id="type" name="type" class="form-select-sm bg-light input-group-text p-3">
     					<option value="">전체</option>
     					<option value="">상품명</option>
 					</select>

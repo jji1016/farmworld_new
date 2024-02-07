@@ -132,7 +132,7 @@
 											            <div class="form-row ">
 											              <div id="boxsize" class="form-group col-lg-4">
 											                <label for="farm_name">농장 이름</label>
-											                <input id="farm_name" class="form-control" placeholder="농장을 만들어주세요!"><c:out value="${vo.farm_name}"/>
+											                <input id="farm_name" class="form-control" placeholder="짱구의 농장 마을"><c:out value="${vo.farm_name}"/>
 											              </div>
 											              <div id="boxsize" class="form-group col-lg-4">
 											                <label for="user_id">아이디</label>
