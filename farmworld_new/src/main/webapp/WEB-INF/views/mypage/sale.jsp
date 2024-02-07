@@ -126,8 +126,10 @@ $(document).ready(function () {
 		                            type: "POST",
 		                            dataType: "json",
 		                            success: function (data2) {
+		                            	console.log(data4);
 		                                // Assuming data1, data2, and data3 have the same length
 		                                for (let i = 0; i < data1.length; i++) {
+		                                	console.log(data4[i]);
 		                                    let orderdate = new Date(data1[i].order_date);
 		                                    let options = { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" };
 		                                    let formatDate = orderdate.toLocaleString("ko-KR", options);

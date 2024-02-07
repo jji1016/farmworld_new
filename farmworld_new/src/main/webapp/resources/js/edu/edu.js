@@ -1,9 +1,9 @@
 $(document).ready(function(){
-	if (window.location.href.startsWith('http://localhost:8090/edu/agritech')) {
+	if (window.location.href.startsWith('http://localhost:8070/edu/agritech')) {
 	    ajaxTest(1);
 	};
 	
-	if (window.location.href.startsWith('http://localhost:8090/edu/getDtl')) {
+	if (window.location.href.startsWith('http://localhost:8070/edu/getDtl')) {
 	    CntntsSnnAjax(1);
 	};
 	

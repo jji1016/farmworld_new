@@ -165,7 +165,8 @@ $(document).ready(function () {
                             	            let options = { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" };
                             	            let orderdate = new Date(data1[i].order_date);
                             	            let orderformatDate = orderdate.toLocaleString("ko-KR", options);
-
+											console.log("data2[i].image_folder_num : "+ data2[i].image_folder_num);
+											console.log("data2[i].image1 : "+ data2[i].image1);
                             	            let reviewdate = data[i] && data[i].review_date ? new Date(data[i].review_date) : null;
                             	            let reviewformatDate = reviewdate ? reviewdate.toLocaleString("ko-KR", options) : null;
 
@@ -175,7 +176,7 @@ $(document).ready(function () {
                             	                    stars += '<i class="fa fa-star text-secondary"></i>';
                             	                }
                             	            }
-
+										
                             	            let row = $("<tr>");
                             	            row.html(
                             	            	"<td><img id='purchaseimg' src='/resources/upload/"+ data4[i].image_folder_num +"/"+ data4[i].image1 + "'></td>" +
