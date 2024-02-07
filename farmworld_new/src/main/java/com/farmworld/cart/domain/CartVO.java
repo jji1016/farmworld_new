@@ -12,13 +12,14 @@ public class CartVO {
 	private int user_num;			// 사용자 시퀀스
 	private Timestamp insert_date;	// 기록
 	private int goods_price;		// 상품가격
-	private String image1;			// 상품 이미지 경로
+	private String image1;			// 상품 이미지 이름
 	private String goods_title;		// 상품 명
 	private String total_amt;		// 총 금액
 	private String make_price;		// 콤마 붙인 가격
 	private String keywords;		// 키워드로 검색
 	private String category;		// 카테고리로 검색
 	private String bill_amt;		// 결제화면에서 사용할 합계
+	private int image_folder_num;   // 상품이미지 경로
 	
 	public String getMake_price() {
 		return make_price;
@@ -98,4 +99,11 @@ public class CartVO {
 	public void setBill_amt(String bill_amt) {
 		this.bill_amt = bill_amt;
 	}
+	public int getImage_folder_num() {
+		return image_folder_num;
+	}
+	public void setImage_folder_num(int image_folder_num) {
+		this.image_folder_num = image_folder_num;
+	}
+	
 }

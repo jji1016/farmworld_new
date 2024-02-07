@@ -141,13 +141,17 @@ function getDetailInfo(){
     ajaxCall("shop-detail","POST", paramData, function(reData){
         console.log(reData);
         $.each(reData.shopDetail, function(key, item) {
+        
+        	console.log("fold"+reData.shopDetail.image_folder_num);
+        	console.log("name"+reData.shopDetail.image1);
+        
             // 금액일 경우 콤마 생성
             if(key === 'goods_price'){
                 item = convertMoney(item);
             }
          
             if(key === 'image_folder_num'){
-                paramData.image_folder_num = item;
+                  paramData.image_folder_num = item; // 수정된 부분
             }
             
             if(key === 'goods_inventory'){
@@ -160,7 +164,7 @@ function getDetailInfo(){
 
             // 이미지에 경우 경로 지정
             if(key === 'image1'){
-                $('#'+key).attr("src", "/resources/" + item);
+                $('#'+key).attr("src", "/resources/upload/" + reData.shopDetail.image_folder_num + '/' + reData.shopDetail.image1); // 수정된 부분
             }else{
                 $('#'+key).text(item);
             }

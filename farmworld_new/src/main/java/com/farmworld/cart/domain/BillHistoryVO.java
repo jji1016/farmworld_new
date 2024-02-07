@@ -84,4 +84,5 @@ public class BillHistoryVO {
 	public void setHistory_date(Timestamp history_date) {
 		this.history_date = history_date;
 	}
+
 }

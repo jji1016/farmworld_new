@@ -85,7 +85,7 @@ function getGoodList(paramData){
             
             var goodsForm	=  '<div class="border border-primary rounded position-relative vesitable-item" style="width: 228.75px; margin-right: 18px; margin-bottom: 15px;">';
             goodsForm		+= '	<div class="vesitable-img" onclick="shopDetail('+item.goods_num+')">';
-            goodsForm		+= '		<img src="/resources/'+item.image1+'" class="img-fluid w-100 rounded-top" alt="" style="height: 227px; width: 181px;">';
+            goodsForm += '<img src="/resources/upload/' + item.image_folder_num + '/' + item.image1 + '" class="img-fluid w-100 rounded-top" alt="" style="height: 227px; width: 181px;">';
             goodsForm		+= '	</div>';
             goodsForm		+= '	<div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">'+item.goods_category+'</div>';
             goodsForm		+= '	<div class="p-4 pb-0 rounded-bottom">';
