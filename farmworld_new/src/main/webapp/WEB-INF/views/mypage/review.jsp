@@ -161,6 +161,7 @@ $(document).ready(function () {
 
                             	        // Assuming data1, data2, and data3 have the same length
                             	        for (let i = 0; i < data1.length; i++) {
+                            	        	console.log(data4[i]);
                             	            let options = { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" };
                             	            let orderdate = new Date(data1[i].order_date);
                             	            let orderformatDate = orderdate.toLocaleString("ko-KR", options);
@@ -178,7 +179,7 @@ $(document).ready(function () {
 										
                             	            let row = $("<tr>");
                             	            row.html(
-                            	            	"<td><img id='purchaseimg' src='/resources/upload/"+ data2[i].image_folder_num +"/"+ data2[i].image1 + "'></td>" +
+                            	            	"<td><img id='purchaseimg' src='/resources/upload/"+ data4[i].image_folder_num +"/"+ data4[i].image1 + "'></td>" +
                             	                "<td>" + orderformatDate + "</td>" +
                             	                "<td>" + data1[i].order_num + "</td>" +
                             	                "<td>" + data2[i].goods_title + "</td>"
