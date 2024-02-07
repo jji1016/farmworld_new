@@ -141,7 +141,7 @@ $(document).ready(function () {
 		                                    let formatDate = orderdate.toLocaleString("ko-KR", options);
 		
 		                                    let row = $("<tr>");
-		                                    row.html("<td>"+"<img id='purchaseimg' src='/resources/upload/product/"+ data4[i].image_folder_num +"/"+ data4[i].image1 + "'></td>"+
+		                                    row.html("<td>"+"<img id='purchaseimg' src='/resources/upload/"+ data4[i].image_folder_num +"/"+ data4[i].image1 + "'></td>"+
 		                                    		"<td>" + formatDate + "</td>"+
 		                                    		"<td>" + data1[i].order_num + "</td>"+
 		                                    		"<td>" + data3[i].farm_name + "</td>"+
