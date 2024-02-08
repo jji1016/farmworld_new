@@ -126,14 +126,16 @@ $(document).ready(function () {
 		                            type: "POST",
 		                            dataType: "json",
 		                            success: function (data2) {
+		                            	console.log(data4);
 		                                // Assuming data1, data2, and data3 have the same length
 		                                for (let i = 0; i < data1.length; i++) {
+		                                	console.log(data4[i]);
 		                                    let orderdate = new Date(data1[i].order_date);
 		                                    let options = { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" };
 		                                    let formatDate = orderdate.toLocaleString("ko-KR", options);
 		
 		                                    let row = $("<tr>");
-		                                    row.html("<td>"+"<img id='saleimg' src='/resources/upload/product/"+ data4[i].image_folder_num +"/"+ data4[i].image1 + "'></td><td>" + formatDate + "</td><td>" + data1[i].order_num + "</td><td>" + data2[i].goods_title + "</td><td>" + data2[i].goods_price + "</td><td>" + data1[i].order_amount + "</td><td>" + data1[i].order_price + "</td><td><button id='salebutton' class='btn btn-primary middlebutton deliveryBtn'>배송상세</button></td>");
+		                                    row.html("<td>"+"<img id='saleimg' src='/resources/upload/"+ data4[i].image_folder_num +"/"+ data4[i].image1 + "'></td><td>" + formatDate + "</td><td>" + data1[i].order_num + "</td><td>" + data2[i].goods_title + "</td><td>" + data2[i].goods_price + "</td><td>" + data1[i].order_amount + "</td><td>" + data1[i].order_price + "</td><td><button id='salebutton' class='btn btn-primary middlebutton deliveryBtn'>배송상세</button></td>");
 		                                    console.log(row);
 		                                    $("tbody").append(row);
 		                                }

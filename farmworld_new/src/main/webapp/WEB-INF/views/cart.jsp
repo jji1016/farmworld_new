@@ -145,6 +145,8 @@
 			    dataType : "json",
 			    data: JSON.stringify(sendData),
 			    success: function(rs) {
+			    	console.log(rs);
+			    	
 			    	if(rs.result == "Y") {
 			    		var html = '';
 				    	for(var i=0; i<rs.cntList.length; i++) {
@@ -164,14 +166,14 @@
 				    		html += '<tr>';
 				    		html += '	<th scope="row">';
 				    		html += '		<div class="d-flex align-items-center">';
-				    		html += '			<img src="/resources/'+ rs.cartList[i].image1 +'" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">';
+				    		html += '<img src="/resources/upload/' + rs.cartList[i].image_folder_num + '/' + rs.cartList[i].image1 + '" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">';
 				    		html += '		</div>';
 				    		html += '	</th>';
 				    		html += '	<td>';
 				    		html += '		<p class="mb-0 mt-4">'+ rs.cartList[i].goods_title +'</p>';
 				    		html += '	</td>';
 				    		html += '	<td>';
-				    		html += '		<p class="mb-0 mt-4">'+ rs.cartList[i].make_price +' $</p>';
+				    		html += '		<p class="mb-0 mt-4">'+ rs.cartList[i].make_price +' 원</p>';
 				    		html += '	</td>';
 				    		html += '	<td>';
 				    		html += '		<div class="input-group quantity mt-4" style="width: 100px;">';

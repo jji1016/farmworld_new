@@ -142,6 +142,7 @@ public class CartController {
 			cartVo.setCategory(map.get("category"));
 			cartVo.setKeywords(map.get("keywords"));
 			
+			
 			result.put("cartList",	cartService.getMyCartList(cartVo));
 			result.put("cntList",	cartService.categoryCntList(cartVo));
 			
