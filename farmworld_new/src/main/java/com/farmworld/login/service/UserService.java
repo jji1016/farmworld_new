@@ -2,6 +2,7 @@ package com.farmworld.login.service;
 
 import com.farmworld.all.service.Generic;
 import com.farmworld.login.domain.UserVO;
+import com.farmworld.shop.domain.GoodsVO;
 
 public interface UserService extends Generic<UserVO, Integer> {
 
@@ -20,6 +21,8 @@ public interface UserService extends Generic<UserVO, Integer> {
 	public boolean isAdmin(UserVO vo);
 
 	public String infoCheckForPw(UserVO vo);
+	
+	public GoodsVO getTag(UserVO vo);
 
 
 }

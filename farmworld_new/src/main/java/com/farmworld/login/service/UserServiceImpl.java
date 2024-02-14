@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.farmworld.login.domain.UserVO;
 import com.farmworld.login.mapper.UserMapper;
+import com.farmworld.shop.domain.GoodsVO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -89,6 +90,12 @@ public class UserServiceImpl implements UserService{
 			return id;
 		}
 		return null;
+	}
+
+	@Override
+	public GoodsVO getTag(UserVO vo) {
+		GoodsVO goods = mapper.selectTag(vo);
+		return goods;
 	}
 
 

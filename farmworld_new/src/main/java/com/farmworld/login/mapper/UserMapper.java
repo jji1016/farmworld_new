@@ -1,6 +1,7 @@
 package com.farmworld.login.mapper;
 
 import com.farmworld.login.domain.UserVO;
+import com.farmworld.shop.domain.GoodsVO;
 
 public interface UserMapper {
 	
@@ -23,5 +24,7 @@ public interface UserMapper {
 	public void modPw(UserVO vo);
 
 	public void uploadImg(UserVO vo);
+	
+	public GoodsVO selectTag(UserVO vo);
 	
 }

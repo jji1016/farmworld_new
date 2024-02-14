@@ -8,9 +8,9 @@
 	<insert id="insert" parameterType="UserVO" >
 		INSERT INTO user
 		(user_id, user_pw, user_name, user_nickname, 
-			user_postCode, user_address, user_detailAddress, user_phone)
+			user_postCode, user_address, user_detailAddress, user_phone, user_tag)
 		VALUES (#{user_id},#{user_pw},#{user_name},#{user_nickname},
-				#{user_postCode},#{user_address},#{user_detailAddress},#{user_phone})
+				#{user_postCode},#{user_address},#{user_detailAddress},#{user_phone}, #{user_tag})
 	</insert>
 	
 	<select id="select" parameterType="int" resultType="UserVO">
@@ -53,4 +53,15 @@
 	<update id="uploadImg" parameterType="UserVO">
 		UPDATE user SET user_image=#{user_image} WHERE user_num=#{user_num}
 	</update>
+	
+	<select id="selectTag" parameterType="UserVO" resultType="GoodsVO">
+	    SELECT g.*
+	    FROM goods g
+	    JOIN user u ON u.user_tag IS NOT NULL AND FIND_IN_SET(g.goods_category, u.user_tag) > 0
+	    WHERE u.user_num = #{user_num}
+	    ORDER BY g.goods_num DESC LIMIT 1
+	</select>
+	
+	
+	
 </mapper>

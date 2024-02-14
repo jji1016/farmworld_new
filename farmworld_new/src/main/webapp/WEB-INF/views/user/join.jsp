@@ -129,6 +129,15 @@
                                     <input type="text" id="user_detailAddress" name="user_detailAddress" class="form-control bg-light border-0 px-4"
                                     	placeholder="  상세주소" style="height: 55px;">
                                 </div>
+                                <div class="col-12">
+                                	<label for="user_tag" class="join_label">관심사(1개 이상)</label>
+                                    <input type="checkbox" id="user_tag" name="user_tag" value="과일">과일
+                                    <input type="checkbox" id="user_tag" name="user_tag" value="야채">야채
+                                    <input type="checkbox" id="user_tag" name="user_tag" value="견과류">견과류
+                                    <input type="checkbox" id="user_tag" name="user_tag" value="곡물">곡물
+                                    <input type="checkbox" id="user_tag" name="user_tag" value="씨앗">씨앗
+                                    <input type="checkbox" id="user_tag" name="user_tag" value="농기구">농기구
+                                </div>
                                 
                                 <div style="margin-top: 4%;">
                                     <button class="btn btn-secondary w-100 py-3" type="submit" id="submitBtn">회원가입</button>

@@ -56,6 +56,7 @@
             </div>
         </div>
         <!-- Hero End -->
+        
 
 
         <!-- Featurs Section Start -->
@@ -109,6 +110,19 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-6 col-lg-3">
+	                    <a id="recommendLocation" href="/"  class="position-relative me-4 my-auto">
+	                        <div id="mainbox" class="featurs-item text-center rounded bg-light p-4">
+	                            <div class="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
+	                                <div id="recommend-img"></div>
+	                            </div>
+	                            <div class="featurs-content text-center">
+	                                <h5>추천 게시글</h5>
+	                                <div id="recommendGoods"></div>
+	                            </div>
+	                        </div>
+	                    </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -118,10 +132,40 @@
 
 <script>
 	$(document).ready(function(){
+	    // 세션에서 user_num 가져오기
+	    var userNum = <%= session.getAttribute("user_num") %>;
+
+	    // user_num이 있는 경우에만 해당 div를 보여줌
+	    if (userNum) {
+	        $("#recommendLocation").parent().show();
+	    } else {
+	        $("#recommendLocation").parent().hide();
+	    }
+		recommendTag();
 	if (window.location.href.startsWith="http://localhost:8082/weather"){
 		weatherAjax();
+		
 	}
 	});
+	
+	function recommendTag(){
+		$.ajax({
+			url:"/recommendTag",
+			type:"post",
+			dataType:"json",
+			success:function(data){
+				console.log(data);
+				$.each(data, function(index, item){
+					console.log(item);
+					$("#recommendGoods").html(item.goods_num);
+					$("#recommendLocation").attr("href", "shopdetail?detail=" + item.goods_num);
+				});
+			},
+			error:function(e){
+				console.log(e);
+			}
+		});
+	};
 	
 	function weatherAjax() {
 		$("#weatherPlace").empty();
@@ -186,7 +230,6 @@
 	            
 	        },
 	        error: function(e) {
-	            console.log(e);
 	            console.log(e);
 	        }
 	    });
